@@ -20,3 +20,5 @@ pom.xml.next
 release.properties
 
 var/
+build/
+daily_build/
