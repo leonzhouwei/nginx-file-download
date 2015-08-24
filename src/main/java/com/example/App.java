@@ -21,6 +21,8 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.MediaType;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
@@ -129,4 +131,9 @@ public class App {
 				+ AppConfig.CURRENT_WORKING_DIR + "'");
 		logger.info("----- Status Info  END  ----- ");
 	}
+}
+
+@Configuration
+@ImportResource("/spring/applicationContext.xml")
+class XmlImportingConfiguration {
 }
