@@ -21,7 +21,7 @@ mkdir $BUILD
 cp -r $CONFIG $BUILD/
 
 cp *.sh $BUILD/
-rm $BUILD/build.sh
+#rm $BUILD/build.sh
 rm $BUILD/daily_build.sh
 
 cp $TARGET/$JAR_BASE_NAME*.jar $BUILD/

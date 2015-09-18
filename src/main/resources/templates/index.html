@@ -36,6 +36,17 @@
 
 	<div class="container theme-showcase" role="main">
 		<div>
+			<h2>File Uploading</h2>
+			<hr />
+			<form enctype="multipart/form-data" action="/upload" method="post">
+				<div class="form-group">
+					<input class="form-control" type="file" name="uploadFile" />
+				</div>
+				<input class="btn btn-primary" type="submit" name="submit" value="Upload" />
+			</form>
+			<br />
+			<h2>File Downloading</h2>
+			<hr />
 			<form action="/download" method="post">
 				<div class="form-group">
 					<label for="routeText">video route</label> <input type="text"
@@ -47,7 +58,6 @@
 		</div>
 	</div>
 
-	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="../static/assets/js/jquery/2.1.4/jquery-2.1.4.min.js"
 		th:src="@{/assets/js/jquery/2.1.4/jquery-2.1.4.min.js}"></script>
 	<script src="../static/assets/css/bootstrap/3.3.5/js/bootstrap.min.js"

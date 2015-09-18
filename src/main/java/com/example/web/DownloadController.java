@@ -1,4 +1,4 @@
-package com.example.webgui;
+package com.example.web;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -21,14 +21,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.util.JsonTool;
+
 @Controller
-public class WebGuiDownloadController {
+public class DownloadController {
 
 	static String regEx = "[\u4e00-\u9fa5]";
 	static Pattern pat = Pattern.compile(regEx);
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(WebGuiDownloadController.class);
+			.getLogger(DownloadController.class);
 
 	public static boolean containChinese(String str) {
 		Matcher matcher = pat.matcher(str);
@@ -43,11 +45,11 @@ public class WebGuiDownloadController {
 	public void download(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		String route = request.getRequestURI();
-		logger.debug("route: " + route);
-		logger.debug("Host: " + request.getParameter("Host"));
-		logger.debug("X-Real-IP: " + request.getParameter("X-Real-IP"));
-		logger.debug("X-Forwarded-For: "
-				+ request.getParameter("X-Forwarded-For"));
+		logger.info("route : " + route);
+		logger.info("Host : " + request.getHeader("Host"));
+		logger.info("X-Real-IP : " + request.getHeader("X-Real-IP"));
+		logger.info("X-Forwarded-For : " + request.getHeader("X-Forwarded-For"));
+		logger.info("parameters : " + JsonTool.toJson(request.getParameterMap()));
 		//
 		String fileRoute = route.replace("/download/", "");
 		logger.debug("file route: " + fileRoute);
@@ -73,6 +75,7 @@ public class WebGuiDownloadController {
 		}
 	}
 
+//	@RequestMapping("/download/**")
 	public void get(HttpServletRequest request, HttpServletResponse response) {
 		logger.debug(request.getRequestURI());
 		logger.debug(request.getRequestURL().toString());

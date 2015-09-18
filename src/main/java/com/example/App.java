@@ -33,8 +33,6 @@ import com.google.common.io.Files;
 @EnableAutoConfiguration
 public class App {
 
-	public static final String VERSION = "0.0.2";
-
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 	private static ConfigurableApplicationContext cac;
 	private static App app;
@@ -113,7 +111,7 @@ public class App {
 
 	void logStatus() throws IOException {
 		logger.info("----- Status Info START ----- ");
-		logger.info("version: " + VERSION);
+		logger.info("version: " + Version.VERSION);
 		String pid = System.getProperty("PID");
 		String pidFilePath = AppConfig.CURRENT_WORKING_DIR
 				+ AppConfig.FILE_SEPARATOR + appConfig.getWorkDirPath()
