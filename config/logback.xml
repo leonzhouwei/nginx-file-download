@@ -12,7 +12,7 @@
 		</encoder>
 		<file>${AUTONAVI_COM_APP_LOG_FILE}</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${AUTONAVI_COM_APP_LOG_FILE}.%i</fileNamePattern>
+			<fileNamePattern>${AUTONAVI_COM_APP_LOG_FILE}.%i.gz</fileNamePattern>
 		</rollingPolicy>
 		<triggeringPolicy
 			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
@@ -27,7 +27,7 @@
 		</encoder>
 		<file>${AUTONAVI_COM_ERROR_LOG_FILE}</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${AUTONAVI_COM_ERROR_LOG_FILE}.%i</fileNamePattern>
+			<fileNamePattern>${AUTONAVI_COM_ERROR_LOG_FILE}.%i.gz</fileNamePattern>
 		</rollingPolicy>
 		<triggeringPolicy
 			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
