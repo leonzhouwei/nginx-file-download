@@ -28,7 +28,7 @@
 	</bean>
 
 	<bean id="accountRMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.example.persist.rmapper.AccountRMapper" />
+		<property name="mapperInterface" value="com.example.persist.mapper.AccountRMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 

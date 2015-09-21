@@ -1,4 +1,4 @@
-package com.example.persist.rmapper;
+package com.example.persist.mapper;
 
 import java.util.List;
 

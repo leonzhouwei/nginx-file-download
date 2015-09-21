@@ -1,4 +1,4 @@
-package com.example.persist.rmapper;
+package com.example.persist.mapper;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.App;
 import com.example.domain.Account;
+import com.example.persist.mapper.AccountRMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
