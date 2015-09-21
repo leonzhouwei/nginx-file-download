@@ -20,22 +20,8 @@ public class AppConfig {
 	@Value("${app.workDir}")
 	private String workDirPath;
 
-	// http --------------------------------------------------------------------
-	@Value("${app.server.port}")
-	private int httpPort;
-	@Value("${app.server.sessionTimeout}")
-	private int httpSessionTimeout;
-
 	public String getWorkDirPath() {
 		return workDirPath;
-	}
-
-	public int getHttpPort() {
-		return httpPort;
-	}
-
-	public int getHttpSessionTimeout() {
-		return httpSessionTimeout;
 	}
 
 	public boolean isInDevelopMode() {
