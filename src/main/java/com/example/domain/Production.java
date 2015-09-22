@@ -3,6 +3,7 @@ package com.example.domain;
 public class Production extends Base {
 	
 	private Long id;
+	private String name;
 	private String description;
 	
 	public Long getId() {
@@ -19,6 +20,14 @@ public class Production extends Base {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

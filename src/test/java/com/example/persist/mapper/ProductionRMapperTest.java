@@ -4,21 +4,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.domain.Account;
+import com.example.domain.Production;
+import com.example.util.ConsoleTool;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)
-public class AccountRMapperTest {
+public class ProductionRMapperTest {
 	
 	@Autowired
-	private AccountRMapper mapper;
+	private ProductionRMapper mapper;
 
 //	@Test
 	public void testSelectAll() {
-		List<Account> c = mapper.selectAll();
-		for (Account e : c) {
-			System.out.println(e.getId() + ", " + e.getName());
-		}
+		List<Production> c = mapper.selectAll();
+		ConsoleTool.printCollection(c);
 	}
 
 }
