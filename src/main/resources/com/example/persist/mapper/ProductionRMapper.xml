@@ -4,13 +4,12 @@
 <mapper namespace="com.example.persist.mapper.ProductionRMapper">
 
 	<resultMap type="com.example.domain.Production" id="resultMap">
-	   <result property="createdAt" column="created_at" />
-	   <result property="updatedAt" column="updated_at" />
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
-		SELECT * FROM production WHERE
-		enabled=true
+		SELECT * FROM production WHERE enabled=true
 	</select>
 
 </mapper>

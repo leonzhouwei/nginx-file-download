@@ -4,7 +4,7 @@
 <mapper namespace="com.example.persist.mapper.ProductionWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.Production">
-		<selectKey order="AFTER" keyProperty="id" resultType="long">
+        <selectKey order="AFTER" keyProperty="id" resultType="long">
 			SELECT currval('production_id_seq')
 		</selectKey>
 		INSERT INTO production
