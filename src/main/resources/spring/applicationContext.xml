@@ -40,6 +40,10 @@
         <property name="mapperInterface" value="com.example.persist.mapper.DownloadTaskRMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
+    <bean id="downloadHistoryRMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.example.persist.mapper.DownloadHistoryRMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
     
 	<bean id="productionWMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.example.persist.mapper.ProductionWMapper" />
@@ -47,6 +51,10 @@
     </bean>
     <bean id="downloadTaskWMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.example.persist.mapper.DownloadTaskWMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    <bean id="downloadHistoryWMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.example.persist.mapper.DownloadHistoryWMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
     

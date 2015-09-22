@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.persist.mapper.DownloadHistoryRMapper">
+
+	<resultMap type="com.example.domain.DownloadTask" id="resultMap">
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+		<!-- -->
+		<result property="taskId" column="production_id" />
+		<result property="clientIp" column="client_ip" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="resultMap">
+		SELECT * FROM download_history
+		WHERE enabled=true
+	</select>
+
+</mapper>
