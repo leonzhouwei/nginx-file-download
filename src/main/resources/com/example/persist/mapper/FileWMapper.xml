@@ -5,9 +5,9 @@
 
 	<insert id="insert" parameterType="com.example.domain.File">
 	   INSERT INTO file
-	   (id, created_at, updated_at, enabled, production_id, dir, name, size)
+	   (id, created_at, updated_at, enabled, dir, name, size)
 	   VALUES
-	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{productionId}, #{dir}, #{name}, #{size})
+	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{dir}, #{name}, #{size})
 	</insert>
 
 </mapper>

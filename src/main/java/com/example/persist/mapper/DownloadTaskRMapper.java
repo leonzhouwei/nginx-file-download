@@ -7,5 +7,7 @@ import com.example.domain.DownloadTask;
 public interface DownloadTaskRMapper {
 	
 	public List<DownloadTask> selectAll();
+	
+	public DownloadTask selectById(long id);
 
 }

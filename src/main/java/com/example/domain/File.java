@@ -3,18 +3,9 @@ package com.example.domain;
 public class File extends Base {
 
 	private Long id;
-	private Long productionId;
 	private String dir;
 	private String name;
 	private Long size;
-
-	public Long getProductionId() {
-		return productionId;
-	}
-
-	public void setProductionId(Long productionId) {
-		this.productionId = productionId;
-	}
 
 	public Long getId() {
 		return id;

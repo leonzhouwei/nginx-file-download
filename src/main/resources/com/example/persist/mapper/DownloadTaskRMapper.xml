@@ -15,5 +15,9 @@
 	<select id="selectAll" resultMap="resultMap">
 		SELECT * FROM download_task WHERE enabled=true
 	</select>
+	
+	<select id="selectById" parameterType="long" resultMap="resultMap">
+	   SELECT * FROM download_task WHERE id=#{id} AND enabled=true
+	</select>
 
 </mapper>

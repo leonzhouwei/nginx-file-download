@@ -15,7 +15,6 @@ public class FileWMapperTest {
 	public void testInsert() {
 		File e = new File();
 		e.reset();
-		e.setProductionId(6L);
 		e.setDir("test");
 		e.setName("test");
 		e.setSize(50L);

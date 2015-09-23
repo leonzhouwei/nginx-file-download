@@ -19,6 +19,8 @@ public class AppConfig {
 	private String runMode;
 	@Value("${app.workDir}")
 	private String workDirPath;
+	@Value("${app.disableDownloadAuth}")
+	private Boolean disableDownloadAuth;
 
 	public String getWorkDirPath() {
 		return workDirPath;
@@ -40,6 +42,13 @@ public class AppConfig {
 
 	public String getRunMode() {
 		return runMode;
+	}
+
+	public Boolean getDisableDownloadAuth() {
+		if (disableDownloadAuth == null) {
+			return false;
+		}
+		return disableDownloadAuth;
 	}
 
 }
