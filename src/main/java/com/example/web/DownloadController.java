@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
 import com.example.domain.File;
 import com.example.persist.mapper.DownloadHistoryWMapper;
@@ -85,7 +86,8 @@ public class DownloadController {
 		String route = request.getRequestURI();
 		logger.info("route : " + route);
 		logger.info("Host : " + request.getHeader("Host"));
-		logger.info("X-Real-IP : " + request.getHeader("X-Real-IP"));
+		final String clientIp = request.getHeader("X-Real-IP");
+		logger.info("X-Real-IP : " + clientIp);
 		logger.info("X-Forwarded-For : " + request.getHeader("X-Forwarded-For"));
 		logger.info("request parameters : "
 				+ JsonTool.toJson(request.getParameterMap()));
@@ -111,6 +113,11 @@ public class DownloadController {
 		response.setHeader("X-Accel-Redirect", xAccelRedirect);
 		response.addHeader("Content-Disposition", "attachment;filename="
 				+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
+		DownloadHistory history = new DownloadHistory();
+		history.reset();
+		history.setTaskId(taskId);
+		history.setClientIp(clientIp);
+		historyWMapper.insert(history);
 	}
 
 	public void download(HttpServletRequest request,
