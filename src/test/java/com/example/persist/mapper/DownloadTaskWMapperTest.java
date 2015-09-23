@@ -16,9 +16,7 @@ public class DownloadTaskWMapperTest {
 		DownloadTask e = new DownloadTask();
 		e.reset();
 		e.setProductionId(6L);
-		e.setFileDir("1");
-		e.setFileName("test");
-		e.setFileSize(50L);
+		e.setFileId(1L);
 		e.setClientIp("42.42.42.42");
 		mapper.insert(e);
 	}
