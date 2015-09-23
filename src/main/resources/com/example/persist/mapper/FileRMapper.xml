@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.persist.mapper.FileRMapper">
+
+	<resultMap type="com.example.domain.File" id="resultMap">
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+		<!-- -->
+		<result property="productionId" column="production_id" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="resultMap">
+		SELECT * FROM file WHERE enabled=true
+	</select>
+
+</mapper>
