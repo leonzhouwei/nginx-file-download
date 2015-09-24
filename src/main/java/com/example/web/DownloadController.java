@@ -10,7 +10,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -98,10 +97,7 @@ public class DownloadController {
 			// TODO
 		}
 		final long taskId = Long.parseLong(taskIdStr);
-		final DownloadTask queryCondition = new DownloadTask();
-		queryCondition.setId(taskId);
-		queryCondition.setCreatedAt(new Date());
-		DownloadTask task = taskRMapper.selectById(queryCondition);
+		DownloadTask task = taskRMapper.selectById(taskId);
 		if (task == null) {
 			// TODO
 		}

@@ -8,6 +8,6 @@ public interface DownloadTaskRMapper {
 	
 	public List<DownloadTask> selectAll();
 	
-	public DownloadTask selectById(DownloadTask e);
+	public DownloadTask selectById(long id);
 
 }

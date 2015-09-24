@@ -11,12 +11,14 @@ public class DownloadTask extends Base {
 	private Long fileId;
 	private String clientIp;
 	private Date expiredAt;
+	private Long timeCostMillis;
 	
 	public void reset() {
 		super.reset();
 		DateTime dateTime = new DateTime(getCreatedAt());
 		DateTime expiredAt = dateTime.plusDays(7);
 		setExpiredAt(expiredAt.toDate());
+		setTimeCostMillis(-1L);
 	}
 
 	public Long getProductionId() {
@@ -57,6 +59,14 @@ public class DownloadTask extends Base {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getTimeCostMillis() {
+		return timeCostMillis;
+	}
+
+	public void setTimeCostMillis(Long timeCostMillis) {
+		this.timeCostMillis = timeCostMillis;
 	}
 
 }

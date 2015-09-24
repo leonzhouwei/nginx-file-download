@@ -11,17 +11,15 @@
 		<result property="fileId" column="file_id" />
 		<result property="clientIp" column="client_ip" />
 		<result property="expiredAt" column="expired_at" />
-		<result property="webServerHost" column="web_server_host" />
-		<result property="appServerThreadId" column="app_server_thread_id" />
-		<result property="appServerThreadName" column="app_server_thread_name" />
+		<result property="timeCostMillis" column="time_cost_millis" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
 		SELECT * FROM download_task WHERE enabled=true
 	</select>
 	
-	<select id="selectById" parameterType="com.example.domain.DownloadTask" resultMap="resultMap">
-	   SELECT * FROM download_task WHERE id=#{id} AND expired_at>=#{createdAt} AND enabled=true
+	<select id="selectById" parameterType="long" resultMap="resultMap">
+	   SELECT * FROM download_task WHERE id=#{id} AND enabled=true
 	</select>
 
 </mapper>

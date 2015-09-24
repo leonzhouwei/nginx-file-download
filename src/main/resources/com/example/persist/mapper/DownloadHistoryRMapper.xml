@@ -3,18 +3,26 @@
 
 <mapper namespace="com.example.persist.mapper.DownloadHistoryRMapper">
 
-	<resultMap type="com.example.domain.DownloadTask" id="resultMap">
+	<resultMap type="com.example.domain.DownloadHistory" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
-		<result property="taskId" column="production_id" />
+		<result property="taskId" column="task_id" />
 		<result property="clientIp" column="client_ip" />
+		<result property="webServerHost" column="web_server_host" />
+        <result property="appServerThreadId" column="app_server_thread_id" />
+        <result property="appServerThreadName" column="app_server_thread_name" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
 		SELECT * FROM download_history
 		WHERE enabled=true
 		ORDER BY task_id, created_at
+	</select>
+	
+	<select id="selectByTaskId" parameterType="long" resultMap="resultMap">
+	   SELECT * FROM download_history
+        WHERE task_id=#{taskId} AND enabled=true
 	</select>
 
 </mapper>
