@@ -5,9 +5,9 @@
 
 	<insert id="insert" parameterType="com.example.domain.DownloadTask">
 	   INSERT INTO download_task
-	   (id, created_at, updated_at, enabled, production_id, file_id, client_ip)
+	   (id, created_at, updated_at, enabled, production_id, file_id, client_ip, expired_at)
 	   VALUES
-	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{productionId}, #{fileId}, #{clientIp})
+	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{productionId}, #{fileId}, #{clientIp}, #{expiredAt})
 	</insert>
 
 </mapper>

@@ -14,6 +14,7 @@
 	<select id="selectAll" resultMap="resultMap">
 		SELECT * FROM download_history
 		WHERE enabled=true
+		ORDER BY task_id, created_at
 	</select>
 
 </mapper>

@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -83,8 +84,9 @@ public class DownloadController {
 	@RequestMapping("/download/**")
 	public void downloadWithAuth(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
-		String route = request.getRequestURI();
+		final String route = request.getRequestURI();
 		logger.info("route : " + route);
+		final String host = request.getHeader("Host");
 		logger.info("Host : " + request.getHeader("Host"));
 		final String clientIp = request.getHeader("X-Real-IP");
 		logger.info("X-Real-IP : " + clientIp);
@@ -96,7 +98,10 @@ public class DownloadController {
 			// TODO
 		}
 		final long taskId = Long.parseLong(taskIdStr);
-		DownloadTask task = taskRMapper.selectById(taskId);
+		final DownloadTask queryCondition = new DownloadTask();
+		queryCondition.setId(taskId);
+		queryCondition.setCreatedAt(new Date());
+		DownloadTask task = taskRMapper.selectById(queryCondition);
 		if (task == null) {
 			// TODO
 		}
@@ -117,6 +122,7 @@ public class DownloadController {
 		history.reset();
 		history.setTaskId(taskId);
 		history.setClientIp(clientIp);
+		history.setWebServerHost(host);
 		historyWMapper.insert(history);
 	}
 
