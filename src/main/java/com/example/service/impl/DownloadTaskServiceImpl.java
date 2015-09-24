@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.service.impl;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,6 +12,7 @@ import com.example.domain.DownloadTask;
 import com.example.persist.mapper.DownloadHistoryRMapper;
 import com.example.persist.mapper.DownloadTaskRMapper;
 import com.example.persist.mapper.DownloadTaskWMapper;
+import com.example.service.DownloadTaskService;
 import com.google.common.collect.Lists;
 
 @Component

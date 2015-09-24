@@ -1,6 +1,8 @@
-package com.example.service;
+package com.example.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.service.impl.DownloadTaskServiceImpl;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)
