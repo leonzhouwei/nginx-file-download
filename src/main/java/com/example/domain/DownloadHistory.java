@@ -7,12 +7,16 @@ public class DownloadHistory extends Base {
 	private String webServerHost;
 	private Long appServerThreadId;
 	private String appServerThreadName;
+	private String requestRoute;
+	private String requestParameters;
 	
 	public void reset() {
 		super.reset();
-		setWebServerHost("");
+		setWebServerHost(EMPTY_STRING);
 		setAppServerThreadId(Thread.currentThread().getId());
 		setAppServerThreadName(Thread.currentThread().getName());
+		setRequestRoute(EMPTY_STRING);
+		setRequestParameters(EMPTY_STRING);
 	}
 
 	public Long getTaskId() {
@@ -28,6 +32,9 @@ public class DownloadHistory extends Base {
 	}
 
 	public void setClientIp(String clientIp) {
+		if (clientIp == null) {
+			clientIp = EMPTY_STRING;
+		}
 		this.clientIp = clientIp;
 	}
 
@@ -36,6 +43,9 @@ public class DownloadHistory extends Base {
 	}
 
 	public void setWebServerHost(String webServerHost) {
+		if (webServerHost == null) {
+			webServerHost = EMPTY_STRING;
+		}
 		this.webServerHost = webServerHost;
 	}
 
@@ -53,6 +63,22 @@ public class DownloadHistory extends Base {
 
 	public void setAppServerThreadId(Long appServerThreadId) {
 		this.appServerThreadId = appServerThreadId;
+	}
+
+	public String getRequestRoute() {
+		return requestRoute;
+	}
+
+	public void setRequestRoute(String requestRoute) {
+		this.requestRoute = requestRoute;
+	}
+
+	public String getRequestParameters() {
+		return requestParameters;
+	}
+
+	public void setRequestParameters(String requestParameters) {
+		this.requestParameters = requestParameters;
 	}
 
 }

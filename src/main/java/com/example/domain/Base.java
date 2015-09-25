@@ -3,6 +3,8 @@ package com.example.domain;
 import java.util.Date;
 
 public class Base {
+	
+	static final String EMPTY_STRING = "";
 
 	private Date createdAt;
 	private Date updatedAt;

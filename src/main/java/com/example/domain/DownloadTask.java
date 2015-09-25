@@ -34,6 +34,9 @@ public class DownloadTask extends Base {
 	}
 
 	public void setClientIp(String clientIp) {
+		if (clientIp == null) {
+			clientIp = EMPTY_STRING;
+		}
 		this.clientIp = clientIp;
 	}
 

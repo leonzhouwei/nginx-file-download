@@ -119,6 +119,8 @@ public class DownloadController {
 		history.setTaskId(taskId);
 		history.setClientIp(clientIp);
 		history.setWebServerHost(host);
+		history.setRequestRoute(route);
+		history.setRequestParameters(JsonTool.toJson(request.getParameterMap()));
 		historyWMapper.insert(history);
 	}
 
