@@ -18,7 +18,7 @@ public class DownloadTask extends Base {
 		DateTime dateTime = new DateTime(getCreatedAt());
 		DateTime expiredAt = dateTime.plusDays(7);
 		setExpiredAt(expiredAt.toDate());
-		setTimeCostMillis(-1L);
+		setTimeCostMillis(0L);
 	}
 
 	public Long getProductionId() {
