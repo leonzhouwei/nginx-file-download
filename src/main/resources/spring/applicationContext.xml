@@ -48,6 +48,10 @@
         <property name="mapperInterface" value="com.example.persist.mapper.FileRMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
+    <bean id="sdCardOrderRMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.example.persist.mapper.SdCardOrderRMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
     
 	<bean id="productionWMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.example.persist.mapper.ProductionWMapper" />
