@@ -5,9 +5,9 @@
 
 	<insert id="insert" parameterType="com.example.domain.DownloadHistory">
 	   INSERT INTO download_history
-	   (id, created_at, updated_at, enabled, task_id, client_ip, web_server_host, app_server_thread_id, app_server_thread_name, req_route, req_params)
+	   (id, created_at, updated_at, enabled, task_id, client_ip, web_server_host, app_server_uuid, app_server_thread_id, app_server_thread_name, req_route, req_params)
 	   VALUES
-	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{taskId}, #{clientIp}, #{webServerHost}, #{appServerThreadId}, #{appServerThreadName}, #{requestRoute}, #{requestParameters})
+	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{taskId}, #{clientIp}, #{webServerHost}, #{appServerUuid}, #{appServerThreadId}, #{appServerThreadName}, #{requestRoute}, #{requestParameters})
 	</insert>
 
 </mapper>

@@ -1,10 +1,13 @@
 package com.example.domain;
 
+import com.example.config.AppConfig;
+
 public class DownloadHistory extends Base {
 
 	private Long taskId;
 	private String clientIp;
 	private String webServerHost;
+	private String appServerUuid;
 	private Long appServerThreadId;
 	private String appServerThreadName;
 	private String requestRoute;
@@ -13,6 +16,7 @@ public class DownloadHistory extends Base {
 	public void reset() {
 		super.reset();
 		setWebServerHost(EMPTY_STRING);
+		setAppServerUuid(AppConfig.APP_UUID);
 		setAppServerThreadId(Thread.currentThread().getId());
 		setAppServerThreadName(Thread.currentThread().getName());
 		setRequestRoute(EMPTY_STRING);
@@ -79,6 +83,14 @@ public class DownloadHistory extends Base {
 
 	public void setRequestParameters(String requestParameters) {
 		this.requestParameters = requestParameters;
+	}
+
+	public String getAppServerUuid() {
+		return appServerUuid;
+	}
+
+	public void setAppServerUuid(String appServerUuid) {
+		this.appServerUuid = appServerUuid;
 	}
 
 }

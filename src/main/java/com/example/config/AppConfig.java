@@ -1,10 +1,15 @@
 package com.example.config;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AppConfig {
+
+	public static final String APP_UUID = UUID.randomUUID().toString()
+			.toLowerCase();
 
 	public static final String CURRENT_WORKING_DIR = System
 			.getProperty("user.dir");

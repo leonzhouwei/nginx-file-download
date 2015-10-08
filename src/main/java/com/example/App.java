@@ -50,6 +50,7 @@ public class App {
 			pidFile.mkdirs();
 		}
 		Files.write(pid, pidFile, StandardCharsets.UTF_8);
+		logger.info("uuid: " + AppConfig.APP_UUID);
 		logger.info("process id: " + pid);
 		logger.info("current working directory: '"
 				+ AppConfig.CURRENT_WORKING_DIR + "'");
