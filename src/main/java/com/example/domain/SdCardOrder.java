@@ -16,8 +16,11 @@ public class SdCardOrder extends Base {
 	public void reset() {
 		super.reset();
 		setStatus(STATUS_WAITING);
+		setUsername(EMPTY_STRING);
+		setUserAddr(EMPTY_STRING);
 		setUserMobile(EMPTY_STRING);
 		setUserEmail(EMPTY_STRING);
+		setUserZipCode(EMPTY_STRING);
 	}
 
 	public Long getId() {

@@ -4,6 +4,6 @@ import com.example.domain.Production;
 
 public interface ProductionWMapper {
 	
-	public Integer insert(Production p);
+	public void insert(Production p);
 
 }
