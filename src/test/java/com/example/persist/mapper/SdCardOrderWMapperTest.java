@@ -16,6 +16,7 @@ public class SdCardOrderWMapperTest {
 		SdCardOrder e = new SdCardOrder();
 		e.reset();
 		e.setFileId(1L);
+		e.setPrice(30*100L);
 		mapper.insert(e);
 		System.out.println(e.getId());
 	}

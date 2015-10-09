@@ -12,6 +12,8 @@ public class SdCardOrder extends Base {
 	private String userZipCode;
 	private String userMobile;
 	private String userEmail;
+	// price in RMB fen
+	private Long price;
 	
 	public void reset() {
 		super.reset();
@@ -85,6 +87,24 @@ public class SdCardOrder extends Base {
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+
+	/**
+	 * get price in RMB fen
+	 * 
+	 * @return
+	 */
+	public Long getPrice() {
+		return price;
+	}
+
+	/**
+	 * set price in RMB fen
+	 * 
+	 * @param price
+	 */
+	public void setPrice(Long price) {
+		this.price = price;
 	}
 
 }
