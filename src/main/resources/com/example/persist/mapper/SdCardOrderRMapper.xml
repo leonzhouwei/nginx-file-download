@@ -6,6 +6,7 @@
     <resultMap type="com.example.domain.SdCardOrder" id="resultMap">
         <result property="createdAt" column="created_at" />
         <result property="updatedAt" column="updated_at" />
+        <result property="priceFen" column="price_fen" />
     </resultMap>
 
     <select id="selectAll" resultMap="resultMap">

@@ -13,7 +13,7 @@ public class SdCardOrder extends Base {
 	private String userMobile;
 	private String userEmail;
 	// price in RMB fen
-	private Long price;
+	private Long priceFen;
 	
 	public void reset() {
 		super.reset();
@@ -94,8 +94,8 @@ public class SdCardOrder extends Base {
 	 * 
 	 * @return
 	 */
-	public Long getPrice() {
-		return price;
+	public Long getPriceFen() {
+		return priceFen;
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class SdCardOrder extends Base {
 	 * 
 	 * @param price
 	 */
-	public void setPrice(Long price) {
-		this.price = price;
+	public void setPriceFen(Long price) {
+		this.priceFen = price;
 	}
 
 }
