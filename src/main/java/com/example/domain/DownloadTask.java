@@ -85,5 +85,9 @@ public class DownloadTask extends Base {
 	public void resetLastDldededAt() {
 		setLastDldedAt(new Date());
 	}
+	
+	public void resetTimeCostMillis() {
+		setTimeCostMillis(lastDldedAt.getTime() - getCreatedAt().getTime());
+	}
 
 }
