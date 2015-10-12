@@ -12,8 +12,14 @@
 	
 	<update id="updateTimeCostMillis" parameterType="com.example.domain.DownloadTask">
 	   UPDATE download_task 
-	   SET time_cost_millis=#{timeCostMillis} 
+	   SET updated_at=#{updatedAt}, time_cost_millis=#{timeCostMillis} 
 	   WHERE id=#{id}
 	</update>
+	
+	<update id="updateLastDldedAt" parameterType="com.example.domain.DownloadTask">
+       UPDATE download_task 
+       SET updated_at=#{updatedAt}, last_dlded_at=#{lastDldededAt} 
+       WHERE id=#{id}
+    </update>
 
 </mapper>
