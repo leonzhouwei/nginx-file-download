@@ -12,7 +12,7 @@ public class DownloadTask extends Base {
 	private String clientIp;
 	private Date expiredAt;
 	private Long timeCostMillis;
-	private Date lastDldededAt;
+	private Date lastDldedAt;
 	
 	public void reset() {
 		super.reset();
@@ -20,7 +20,7 @@ public class DownloadTask extends Base {
 		DateTime expiredAt = dateTime.plusDays(7);
 		setExpiredAt(expiredAt.toDate());
 		setTimeCostMillis(0L);
-		setLastDldededAt(getCreatedAt());
+		setLastDldedAt(getCreatedAt());
 	}
 
 	public Long getProductionId() {
@@ -74,16 +74,16 @@ public class DownloadTask extends Base {
 		this.timeCostMillis = timeCostMillis;
 	}
 
-	public Date getLastDldededAt() {
-		return lastDldededAt;
+	public Date getLastDldedAt() {
+		return lastDldedAt;
 	}
 
-	public void setLastDldededAt(Date lastDldededAt) {
-		this.lastDldededAt = lastDldededAt;
+	public void setLastDldedAt(Date lastDldedAt) {
+		this.lastDldedAt = lastDldedAt;
 	}
 	
 	public void resetLastDldededAt() {
-		setLastDldededAt(new Date());
+		setLastDldedAt(new Date());
 	}
 
 }

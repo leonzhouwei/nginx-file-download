@@ -12,7 +12,7 @@
 		<result property="clientIp" column="client_ip" />
 		<result property="expiredAt" column="expired_at" />
 		<result property="timeCostMillis" column="time_cost_millis" />
-		<result property="lastDldededAt" column="last_dlded_at" />
+		<result property="lastDldedAt" column="last_dlded_at" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">

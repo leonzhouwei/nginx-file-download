@@ -18,7 +18,7 @@
 	
 	<update id="updateLastDldedAt" parameterType="com.example.domain.DownloadTask">
        UPDATE download_task 
-       SET updated_at=#{updatedAt}, last_dlded_at=#{lastDldededAt} 
+       SET updated_at=#{updatedAt}, last_dlded_at=#{lastDldedAt} 
        WHERE id=#{id}
     </update>
 
