@@ -26,6 +26,20 @@ public class AppConfig {
 	private String workDirPath;
 	@Value("${app.disableDownloadAuth}")
 	private Boolean disableDownloadAuth;
+	
+	// ssdb --------------------------------------------------------------------
+	@Value("${app.ssdb.timeout}")
+	private int ssdbTimeoutMillis;
+	@Value("${app.ssdb.maxActive}")
+	private int ssdbMaxActive;
+	@Value("${app.ssdb.testWhileIdle}")
+	private boolean ssdbTestWhileIdle;
+	@Value("${app.ssdb.host}")
+	private String ssdbHost;
+	@Value("${app.ssdb.port}")
+	private int ssdbPort;
+	@Value("${app.ssdb.auth}")
+	private String ssdbAuth;
 
 	public String getWorkDirPath() {
 		return workDirPath;
@@ -54,6 +68,30 @@ public class AppConfig {
 			return false;
 		}
 		return disableDownloadAuth;
+	}
+
+	public int getSsdbTimeoutMillis() {
+		return ssdbTimeoutMillis;
+	}
+
+	public int getSsdbMaxActive() {
+		return ssdbMaxActive;
+	}
+
+	public boolean isSsdbTestWhileIdle() {
+		return ssdbTestWhileIdle;
+	}
+
+	public String getSsdbHost() {
+		return ssdbHost;
+	}
+
+	public int getSsdbPort() {
+		return ssdbPort;
+	}
+
+	public String getSsdbAuth() {
+		return ssdbAuth;
 	}
 
 }

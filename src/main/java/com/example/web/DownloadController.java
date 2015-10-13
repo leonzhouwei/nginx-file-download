@@ -86,7 +86,7 @@ public class DownloadController {
 		final String route = request.getRequestURI();
 		logger.info("route : " + route);
 		final String host = request.getHeader("Host");
-		logger.info("Host : " + request.getHeader("Host"));
+		logger.info("Host : " + host);
 		final String clientIp = request.getHeader("X-Real-IP");
 		logger.info("X-Real-IP : " + clientIp);
 		logger.info("X-Forwarded-For : " + request.getHeader("X-Forwarded-For"));
