@@ -2,10 +2,12 @@ package com.example.init;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.example.config.AppConfig;
 import com.example.persist.ssdb.driver.impl.SsdbConnPoolConfigImpl;
 
+@Component
 public class SsdbConnPoolConfigBean extends SsdbConnPoolConfigImpl
 		implements InitializingBean {
 

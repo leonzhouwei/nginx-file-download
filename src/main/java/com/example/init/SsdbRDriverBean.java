@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.example.persist.ssdb.driver.impl.SsdbRDriverImpl;
 
+@Component
 public class SsdbRDriverBean extends SsdbRDriverImpl implements
 		InitializingBean, DisposableBean {
 
