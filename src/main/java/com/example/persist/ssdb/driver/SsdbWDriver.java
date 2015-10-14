@@ -1,6 +1,6 @@
 package com.example.persist.ssdb.driver;
 
-public interface SsdbRwDriver extends SsdbRDriver {
+public interface SsdbWDriver {
 
 	// string ------------------------------------------------------------------
 

@@ -8,13 +8,13 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.persist.ssdb.driver.impl.SsdbRwDriverImpl;
+import com.example.persist.ssdb.driver.impl.SsdbRDriverImpl;
 
-public class SsdbRwDriverBean extends SsdbRwDriverImpl implements
+public class SsdbRDriverBean extends SsdbRDriverImpl implements
 		InitializingBean, DisposableBean {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(SsdbRwDriverBean.class);
+			.getLogger(SsdbRDriverBean.class);
 
 	@Autowired
 	private SsdbConnPoolConfigBean ssdbConnPoolConfig;
