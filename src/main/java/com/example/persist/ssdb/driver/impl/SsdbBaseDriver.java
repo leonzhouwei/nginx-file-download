@@ -64,7 +64,8 @@ public abstract class SsdbBaseDriver {
 		this.ssdb = ssdb;
 	}
 	
-	public final void init(SsdbConnPoolConfig config) {
+	public final void init(SsdbConnPoolConfig config) throws IOException {
+		closeSsdb();
 		setConfig(config);
 		ssdb = PooledSsdbProvider.newPooledSsdb(config);
 	}
