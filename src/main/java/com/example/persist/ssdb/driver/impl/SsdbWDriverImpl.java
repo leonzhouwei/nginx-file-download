@@ -1,10 +1,15 @@
 package com.example.persist.ssdb.driver.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.nutz.ssdb4j.spi.Response;
 
 import com.example.persist.ssdb.driver.SsdbWDriver;
 
 public class SsdbWDriverImpl extends SsdbBaseDriver implements SsdbWDriver {
+
+	static final int MAX = 5000;
 
 	// write string ------------------------------------------------------------
 	@Override
@@ -43,6 +48,25 @@ public class SsdbWDriverImpl extends SsdbBaseDriver implements SsdbWDriver {
 	public String qpop(String key) {
 		Response response = ssdb.qpop(key);
 		return extractString(response);
+	}
+
+	// write hash --------------------------------------------------------------
+	@Override
+	public void hset(String key, Long field, String value) {
+		hset(key, field.toString(), value);
+	}
+
+	@Override
+	public void hset(String key, String field, String value) {
+		ssdb.hset(key, field, value);
+	}
+
+	@Override
+	public void multiHset(String key, Map<String, String> map) {
+		List<Map<String, String>> list = SplitTool.split(map, MAX);
+		for (Map<String, String> e : list) {
+			ssdb.multi_hset(key, e);
+		}
 	}
 
 }

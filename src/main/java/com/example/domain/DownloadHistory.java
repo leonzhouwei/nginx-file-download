@@ -4,6 +4,7 @@ import com.example.config.AppConfig;
 
 public class DownloadHistory extends Base {
 
+	private Long id;
 	private Long taskId;
 	private String clientIp;
 	private String webServerHost;
@@ -91,6 +92,14 @@ public class DownloadHistory extends Base {
 
 	public void setAppServerUuid(String appServerUuid) {
 		this.appServerUuid = appServerUuid;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
