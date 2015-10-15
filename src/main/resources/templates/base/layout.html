@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>index.html</title>
+<link
+	href="../../static/assets/css/bootstrap/3.3.5/css/bootstrap.min.css"
+	rel="stylesheet"
+	th:href="@{/assets/css/bootstrap/3.3.5/css/bootstrap.min.css}" />
+<link
+	href="../../static/assets/css/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+	rel="stylesheet"
+	th:href="@{/assets/css/bootstrap/3.3.5/css/bootstrap-theme.min.css}" />
+<link href="../../static/assets/css/theme.css" rel="stylesheet"
+	th:href="@{/assets/css/theme.css}" />
+</head>
+
+<body role="document">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Bootstrap theme</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container theme-showcase" role="main"
+		layout:fragment="content"></div>
+
+	<script src="../../static/assets/js/jquery/2.1.4/jquery-2.1.4.min.js"
+		th:src="@{/assets/js/jquery/2.1.4/jquery-2.1.4.min.js}"></script>
+	<script
+		src="../../static/assets/css/bootstrap/3.3.5/js/bootstrap.min.js"
+		th:src="@{/assets/css/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
