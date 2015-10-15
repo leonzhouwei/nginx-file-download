@@ -24,7 +24,7 @@ public class SsdbDownloadHistoryWMapperImplTest {
 		DownloadHistory e = new DownloadHistory();
 		e.reset();
 		e.setTaskId(1L);
-		String key = SsdbDownloadHistoryWMapperImpl.keyFor(e);
+		String key = SsdbDownloadHistoryRMapperImpl.keyFor(e);
 		System.out.println(key);
 		System.out.println(JsonTool.toJson(e));
 	}
