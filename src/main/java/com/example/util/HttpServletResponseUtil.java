@@ -131,7 +131,7 @@ public final class HttpServletResponseUtil {
 		try {
 			if (imageFile.exists() == false) {
 				// image file does not exist
-				response.setStatus(HttpStatus.NOT_FOUND.value());
+				setStatusAsNotFound(response);
 				return;
 			}
 			is = new FileInputStream(imageFile);
