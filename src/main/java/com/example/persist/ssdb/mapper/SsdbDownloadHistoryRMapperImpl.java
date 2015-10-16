@@ -1,8 +1,9 @@
 package com.example.persist.ssdb.mapper;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,25 +35,24 @@ public class SsdbDownloadHistoryRMapperImpl implements DownloadHistoryRMapper {
 	static String idGenKeyFor(DownloadHistory e) {
 		return idGenKeyFor(e.getTaskId());
 	}
-	
+
 	static String keyFor(long taskId) {
 		StringBuilder sb = new StringBuilder();
 		Joiner.on(SsdbDefine.SEGMENT_SEPARATOR).appendTo(sb, SsdbDefine.TASK,
 				taskId, SsdbDefine.DOWNLOAD_HISTORY);
 		return sb.toString();
 	}
-	
+
 	static String keyFor(DownloadHistory e) {
 		return keyFor(e.getTaskId());
 	}
-	
+
 	static List<DownloadHistory> parseList(Map<String, String> map) {
 		List<DownloadHistory> ret = Lists.newArrayList();
-		Set<String> set = map.keySet();
-		for (String e : set) {
-			String json = map.get(e);
-			DownloadHistory obj = JsonTool.parse(json,
-					DownloadHistory.class);
+		Iterator<Entry<String, String>> it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			String json = it.next().getValue();
+			DownloadHistory obj = JsonTool.parse(json, DownloadHistory.class);
 			ret.add(obj);
 		}
 		return ret;
