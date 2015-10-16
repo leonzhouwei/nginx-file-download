@@ -26,6 +26,8 @@ public class AppConfig {
 	private String workDirPath;
 	@Value("${app.disableDownloadAuth}")
 	private Boolean disableDownloadAuth;
+	@Value("${app.imageDirPath}")
+	private String imageDirPath;
 	
 	// ssdb --------------------------------------------------------------------
 	@Value("${app.ssdb.timeout}")
@@ -92,6 +94,10 @@ public class AppConfig {
 
 	public String getSsdbAuth() {
 		return ssdbAuth;
+	}
+
+	public String getImageDirPath() {
+		return imageDirPath;
 	}
 
 }

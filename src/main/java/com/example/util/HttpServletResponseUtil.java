@@ -1,7 +1,12 @@
 package com.example.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +21,9 @@ import com.example.Version;
 public final class HttpServletResponseUtil {
 
 	static final String EMPTY = "";
+	
+	private static final String IMAGE_CONTENT_TYPE = "image";
+	private static final int bufferSize = 1024;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(HttpServletResponseUtil.class);
@@ -115,6 +123,47 @@ public final class HttpServletResponseUtil {
 	public static void writeInternalServerError(HttpServletResponse response) {
 		writeInternalServerError(response, null,
 				HttpStatus.INTERNAL_SERVER_ERROR.toString(), null);
+	}
+	
+	public static void writeImage(HttpServletResponse response, File imageFile)
+			throws IOException {
+		InputStream is = null;
+		try {
+			if (imageFile.exists() == false) {
+				// image file does not exist
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+				return;
+			}
+			is = new FileInputStream(imageFile);
+			writeImage(response, is);
+		} finally {
+			if (is != null) {
+				is.close();
+			}
+		}
+	}
+
+	public static void writeImage(HttpServletResponse response, InputStream is)
+			throws IOException {
+		ServletOutputStream gos = null;
+		try {
+			gos = response.getOutputStream();
+			int count = -1;
+			byte data[] = new byte[bufferSize];
+			while ((count = is.read(data, 0, bufferSize)) != -1) {
+				gos.write(data, 0, count);
+			}
+			gos.flush();
+			response.setContentType(IMAGE_CONTENT_TYPE);
+		} finally {
+			if (gos != null) {
+				gos.close();
+			}
+		}
+	}
+	
+	public static void setStatusAsNotFound(HttpServletResponse response) {
+		response.setStatus(HttpStatus.NOT_FOUND.value());
 	}
 
 }
