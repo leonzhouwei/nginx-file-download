@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.example.dto.ServerErrorDto;
+import com.example.common.ServerErrorDto;
 
 public class GlobalControllerExceptionHandler {
 

@@ -1,4 +1,4 @@
-package com.example.util;
+package com.example.common;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ public class ResponseDto<T> {
 
 	private T content;
 
-	private ServerError error;
+	private ServerErrorDto error;
 
 	private Map<String, Object> extra = Maps.newHashMap();
 
@@ -32,11 +32,11 @@ public class ResponseDto<T> {
 		this.content = content;
 	}
 
-	public ServerError getError() {
+	public ServerErrorDto getError() {
 		return error;
 	}
 
-	public void setError(ServerError error) {
+	public void setError(ServerErrorDto error) {
 		this.error = error;
 	}
 	

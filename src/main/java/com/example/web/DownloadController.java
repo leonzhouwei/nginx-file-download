@@ -22,13 +22,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.common.JsonTool;
 import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
 import com.example.domain.File;
 import com.example.persist.mapper.DownloadHistoryWMapper;
 import com.example.persist.mapper.DownloadTaskRMapper;
 import com.example.persist.mapper.FileRMapper;
-import com.example.util.JsonTool;
 import com.google.common.base.Strings;
 
 @Controller

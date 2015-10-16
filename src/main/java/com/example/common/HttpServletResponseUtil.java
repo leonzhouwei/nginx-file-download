@@ -1,4 +1,4 @@
-package com.example.util;
+package com.example.common;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,10 +82,10 @@ public final class HttpServletResponseUtil {
 	}
 
 	public static void writeError(HttpServletResponse response,
-			HttpStatus status, ServerError error) {
+			HttpStatus status, ServerErrorDto error) {
 		try {
 			response.setStatus(status.value());
-			ResponseDto<ServerError> responseDto = new ResponseDto<ServerError>();
+			ResponseDto<ServerErrorDto> responseDto = new ResponseDto<ServerErrorDto>();
 			responseDto.setInnerVersion(Version.VERSION);
 			responseDto.setError(error);
 			String json = JSON.toJSONString(responseDto,
@@ -99,13 +99,13 @@ public final class HttpServletResponseUtil {
 	}
 
 	public static void writeInternalServerError(HttpServletResponse response,
-			ServerError error) {
+			ServerErrorDto error) {
 		writeError(response, HttpStatus.INTERNAL_SERVER_ERROR, error);
 	}
 
 	public static void writeInternalServerError(HttpServletResponse response,
 			String id, String message, String url) {
-		ServerError error = new ServerError();
+		ServerErrorDto error = new ServerErrorDto();
 		error.setMessage(message);
 		writeError(response, HttpStatus.INTERNAL_SERVER_ERROR, error);
 	}

@@ -2,8 +2,8 @@ package com.example.persist.ssdb.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.common.JsonTool;
 import com.example.domain.DownloadHistory;
-import com.example.util.JsonTool;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

@@ -1,15 +1,15 @@
-package com.example.util;
+package com.example.common;
 
-public class ServerError {
+public class ServerErrorDto {
 
 	private String id;
 	private String message;
 	private String url;
 	
-	public ServerError() {
+	public ServerErrorDto() {
 	}
 	
-	public ServerError(String id, String message, String url) {
+	public ServerErrorDto(String id, String message, String url) {
 		this.id = id;
 		this.message = message;
 		this.url = url;

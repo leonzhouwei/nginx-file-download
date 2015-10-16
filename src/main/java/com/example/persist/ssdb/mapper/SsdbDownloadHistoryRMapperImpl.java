@@ -8,12 +8,12 @@ import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.common.JsonTool;
 import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
 import com.example.persist.mapper.DownloadHistoryRMapper;
 import com.example.persist.mapper.DownloadTaskRMapper;
 import com.example.persist.ssdb.driver.SsdbRDriver;
-import com.example.util.JsonTool;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
