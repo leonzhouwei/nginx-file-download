@@ -16,10 +16,11 @@ public class SsdbDownloadHistoryWMapperImpl implements DownloadHistoryWMapper {
 
 	@Override
 	public void insert(DownloadHistory e) {
-		String key = SsdbDownloadHistoryRMapperImpl.keyFor(e);
-		Long id = driver.incrByOne(key);
+		String idGenKey = SsdbDownloadHistoryRMapperImpl.idGenKeyFor(e);
+		Long id = driver.incrByOne(idGenKey);
 		e.setId(id);
 		String json = JsonTool.toJson(e);
+		String key = SsdbDownloadHistoryRMapperImpl.keyFor(e);
 		driver.hset(key, id, json);
 	}
 

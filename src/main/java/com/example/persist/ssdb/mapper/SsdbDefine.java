@@ -7,6 +7,7 @@ public final class SsdbDefine {
 	
 	static final String SEGMENT_SEPARATOR = ":";
 	static final String INNER_SEGMENT_SEPARATOR = "_";
+	static final String ID_GEN = "id_gen";
 	
 	static final String DOWNLOAD_HISTORY = "dld_history";
 	

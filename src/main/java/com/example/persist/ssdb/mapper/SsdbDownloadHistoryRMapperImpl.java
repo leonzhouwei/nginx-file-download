@@ -24,13 +24,24 @@ public class SsdbDownloadHistoryRMapperImpl implements DownloadHistoryRMapper {
 	@Autowired
 	private SsdbRDriver driver;
 
+	static String idGenKeyFor(long taskId) {
+		StringBuilder sb = new StringBuilder();
+		Joiner.on(SsdbDefine.SEGMENT_SEPARATOR).appendTo(sb, SsdbDefine.TASK,
+				taskId, SsdbDefine.DOWNLOAD_HISTORY, SsdbDefine.ID_GEN);
+		return sb.toString();
+	}
+
+	static String idGenKeyFor(DownloadHistory e) {
+		return idGenKeyFor(e.getTaskId());
+	}
+	
 	static String keyFor(long taskId) {
 		StringBuilder sb = new StringBuilder();
 		Joiner.on(SsdbDefine.SEGMENT_SEPARATOR).appendTo(sb, SsdbDefine.TASK,
 				taskId, SsdbDefine.DOWNLOAD_HISTORY);
 		return sb.toString();
 	}
-
+	
 	static String keyFor(DownloadHistory e) {
 		return keyFor(e.getTaskId());
 	}
