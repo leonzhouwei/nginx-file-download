@@ -1,10 +1,10 @@
 $(function() {
 	$.get("/api/files", function(result) {
-		renderNewRows(result['content']);
+		initTable(result['content']);
 	});
 });
 
-function renderNewRows(result) {
+function initTable(result) {
 	for (var i = 0, len = result.length; i < len; ++i) {
 		var elem = result[i];
 		var table = $('#table');
