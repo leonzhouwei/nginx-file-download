@@ -20,7 +20,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 public final class HttpServletResponseUtil {
 
 	static final String EMPTY = "";
-	
+
 	private static final String IMAGE_CONTENT_TYPE = "image";
 	private static final int bufferSize = 1024;
 
@@ -50,7 +50,8 @@ public final class HttpServletResponseUtil {
 	public static <T> void writeResponse(HttpServletResponse response,
 			ResponseDto<T> responseDto) {
 		try {
-			String json = responseDto.toJson();
+			String json = JSON.toJSONString(responseDto,
+					SerializerFeature.UseISO8601DateFormat);
 			setDefaultContentType(response);
 			PrintWriter pw = response.getWriter();
 			pw.write(json);
@@ -122,7 +123,7 @@ public final class HttpServletResponseUtil {
 		writeInternalServerError(response, null,
 				HttpStatus.INTERNAL_SERVER_ERROR.toString(), null);
 	}
-	
+
 	public static void writeImage(HttpServletResponse response, File imageFile)
 			throws IOException {
 		InputStream is = null;
@@ -159,7 +160,7 @@ public final class HttpServletResponseUtil {
 			}
 		}
 	}
-	
+
 	public static void setStatusAsNotFound(HttpServletResponse response) {
 		response.setStatus(HttpStatus.NOT_FOUND.value());
 	}

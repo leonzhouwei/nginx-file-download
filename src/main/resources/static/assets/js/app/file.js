@@ -16,6 +16,7 @@ function appendNewRows(result) {
 		}
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
+		buffer.push('<td>', elem['dir'], '</td>');
 		buffer.push('/<tr>');
 		var newRow = buffer.join('');
 		$('#table tr:last').after(newRow);
