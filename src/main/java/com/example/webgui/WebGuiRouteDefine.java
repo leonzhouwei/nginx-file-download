@@ -7,6 +7,6 @@ public final class WebGuiRouteDefine {
 	
 	public static final String ROOT = "/";
 	
-	public static final String FILE = ROOT + "file";
+	public static final String FILES = ROOT + "files";
 
 }
