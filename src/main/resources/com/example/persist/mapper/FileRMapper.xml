@@ -9,7 +9,7 @@
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
-		SELECT * FROM file WHERE enabled=true
+		SELECT * FROM file WHERE enabled=true ORDER BY created_at DESC
 	</select>
 	
 	<select id="selectById" parameterType="long" resultMap="resultMap">
