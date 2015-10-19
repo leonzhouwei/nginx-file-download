@@ -9,7 +9,11 @@ function appendNewRows(result) {
 		var elem = result[i];
 		var table = $('#table');
 		var buffer = [];
-		buffer.push('<tr>');
+		if (i % 2 == 0) {
+			buffer.push('<tr class="active">');
+		} else {
+			buffer.push('<tr>');
+		}
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('/<tr>');
