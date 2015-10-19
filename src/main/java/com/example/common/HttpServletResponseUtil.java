@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.example.Version;
 
 public final class HttpServletResponseUtil {
 
@@ -86,7 +85,6 @@ public final class HttpServletResponseUtil {
 		try {
 			response.setStatus(status.value());
 			ResponseDto<ServerErrorDto> responseDto = new ResponseDto<ServerErrorDto>();
-			responseDto.setInnerVersion(Version.VERSION);
 			responseDto.setError(error);
 			String json = JSON.toJSONString(responseDto,
 					SerializerFeature.UseISO8601DateFormat);

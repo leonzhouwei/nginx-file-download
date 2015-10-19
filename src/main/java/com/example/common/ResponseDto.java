@@ -1,19 +1,12 @@
 package com.example.common;
 
-import java.util.Map;
-
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Maps;
 
 public class ResponseDto<T> {
-
-	private String innerVersion;
 
 	private T content;
 
 	private ServerErrorDto error;
-
-	private Map<String, Object> extra = Maps.newHashMap();
 
 	public static <T> String toJson(ResponseDto<T> r) {
 		String json = JSON.toJSONString(r);
@@ -40,24 +33,4 @@ public class ResponseDto<T> {
 		this.error = error;
 	}
 	
-	public void addExtra(String key, Object o) {
-		extra.put(key, o);
-	}
-
-	public Map<String, Object> getExtra() {
-		return extra;
-	}
-
-	public void setExtra(Map<String, Object> extra) {
-		this.extra = extra;
-	}
-
-	public String getInnerVersion() {
-		return innerVersion;
-	}
-
-	public void setInnerVersion(String innerVersion) {
-		this.innerVersion = innerVersion;
-	}
-
 }
