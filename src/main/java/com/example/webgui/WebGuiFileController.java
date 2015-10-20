@@ -30,7 +30,7 @@ public class WebGuiFileController {
 			@PathVariable String id, HttpServletResponse response) {
 		File file = rMapper.selectById(Long.parseLong(id));
 		if (file == null) {
-			return WebGuiNotFoundController.newModelAndView();
+			return WebGuiNotFoundController.newModelAndView(response);
 		}
 		ModelAndView ret = new ModelAndView("file/file_detail");
 		ret.getModel().put("id", file.getId());
