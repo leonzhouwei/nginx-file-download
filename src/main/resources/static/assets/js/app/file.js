@@ -16,8 +16,8 @@ function initTable(result) {
 		}
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
+		buffer.push('<td>', elem['createdAt'], '</td>');
 		buffer.push('<td style="text-align: right;">', elem['size'], '</td>');
-		buffer.push('<td style="text-align: right;">', elem['createdAt'], '</td>');
 		buffer.push('/<tr>');
 		var newRow = buffer.join('');
 		$('#table tr:last').after(newRow);
