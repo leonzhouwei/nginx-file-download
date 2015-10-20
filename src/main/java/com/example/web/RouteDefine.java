@@ -9,6 +9,7 @@ public final class RouteDefine {
 	
 	public static final String API = ROOT + "api";
 	public static final String API_FILES = API + "/files";
+	public static final String API_DOWNLOAD_TASKS = API + "/dld-tasks";
 	
 	public static final String ASSETS = ROOT + "assets";
 	public static final String ASSETS_IMAGES = ASSETS + "/images";
