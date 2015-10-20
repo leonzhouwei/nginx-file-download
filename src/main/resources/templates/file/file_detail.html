@@ -10,22 +10,28 @@
 
 <body>
 	<div class="container" layout:fragment="content">
+		<h4>地图数据文件</h4>
+		<hr />
 		<div class="form-group">
-			<label for="idText">编号：</label> <input id="idText" class="form-control" type="text"
-				disabled="disabled" th:value="${id}"></input>
+			<label for="idText">编号：</label> <input id="idText"
+				class="form-control" type="text" readonly="readonly"
+				th:value="${id}"></input>
 		</div>
-        <div class="form-group">
-            <label for="nameText">名称：</label> <input id="nameText" class="form-control" type="text"
-                disabled="disabled" th:value="${name}"></input>
-        </div>
-        <div class="form-group">
-            <label for="sizeText">大小 (Byte)：</label> <input id="sizeText" class="form-control" type="text"
-                disabled="disabled" th:value="${size}"></input>
-        </div>
-        <div class="form-group">
-            <label for="createdAtText">创建时间：</label> <input id="createdAtText" class="form-control" type="text"
-                disabled="disabled" th:value="${createdAt}"></input>
-        </div>
+		<div class="form-group">
+			<label for="nameText">名称：</label> <input id="nameText"
+				class="form-control" type="text" readonly="readonly"
+				th:value="${name}"></input>
+		</div>
+		<div class="form-group">
+			<label for="sizeText">大小 (Byte)：</label> <input id="sizeText"
+				class="form-control" type="text" readonly="readonly"
+				th:value="${size}"></input>
+		</div>
+		<div class="form-group">
+			<label for="createdAtText">创建时间：</label> <input id="createdAtText"
+				class="form-control" type="text" readonly="readonly"
+				th:value="${createdAt}"></input>
+		</div>
 	</div>
 </body>
 

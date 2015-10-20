@@ -16,7 +16,7 @@ function initTable(result) {
 		}
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>');
-		buffer.push('<a href="/api/files/' + elem['fileId'] + '" target="_blank">',
+		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
 				elem['fileId'], '</a>');
 		buffer.push('</td>');
 		buffer.push('<td style="text-align: right;">', elem['createdAt'],
