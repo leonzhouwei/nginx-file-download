@@ -1,5 +1,5 @@
 $(function() {
-	$.get("/api/dld-tasks", function(result) {
+	$.get("/admin/api/dld-tasks", function(result) {
 		initTable(result['content']);
 	});
 });

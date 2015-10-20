@@ -6,7 +6,13 @@
     <resultMap type="com.example.domain.SdCardOrder" id="resultMap">
         <result property="createdAt" column="created_at" />
         <result property="updatedAt" column="updated_at" />
+        
+        <result property="fileId" column="file_id" />
         <result property="priceFen" column="price_fen" />
+        <result property="userAddr" column="user_addr" />
+        <result property="userZipCode" column="user_zip_code" />
+        <result property="userMobile" column="user_mobile" />
+        <result property="userEmail" column="user_email" />
     </resultMap>
 
     <select id="selectAll" resultMap="resultMap">
