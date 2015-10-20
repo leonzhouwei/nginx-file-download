@@ -19,9 +19,21 @@ function initTable(result) {
 		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
 				elem['fileId'], '</a>');
 		buffer.push('</td>');
+		buffer.push('<td>', elem['clientIp'], '</td>');
 		buffer.push('<td style="text-align: right;">', elem['createdAt'],
-				'</a>');
-		buffer.push('</td>');
+				'</td>');
+		var timeCostSeconds = parseInt(elem['timeCostMillis'] / 1000);
+		var hours = parseInt(timeCostSeconds / 3600);
+		var minutes = parseInt((timeCostSeconds - 3600 * hours) / 60);
+		if (minutes < 10) {
+			minutes = '0' + minutes;	
+		}
+		var seconds = parseInt(timeCostSeconds - 3600 * hours - 60 * minutes);
+		if (seconds < 10) {
+			seconds = '0' + seconds;	
+		}
+		buffer.push('<td style="text-align: right;">', hours, 'h ', minutes,
+				'm ', seconds, 's', '</td>');
 		buffer.push('/<tr>');
 		var newRow = buffer.join('');
 		$('#table tr:last').after(newRow);
