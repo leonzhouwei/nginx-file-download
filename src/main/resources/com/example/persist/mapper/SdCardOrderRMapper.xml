@@ -10,7 +10,7 @@
     </resultMap>
 
     <select id="selectAll" resultMap="resultMap">
-        SELECT * FROM sd_order WHERE enabled=true ORDER BY id DESC
+        SELECT * FROM sd_order WHERE enabled=true ORDER BY created_at DESC
     </select>
 
 </mapper>

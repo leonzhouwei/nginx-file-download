@@ -10,5 +10,7 @@ public final class WebGuiRouteDefine {
 	public static final String FILES = ROOT + "files";
 	
 	public static final String DOWNLOAD_TASKS = ROOT + "dld-tasks";
+	
+	public static final String SD_CARD_ORDERS = ROOT + "sd-card-orders";
 
 }
