@@ -30,8 +30,8 @@ public class FileController {
 	@RequestMapping(value = RouteDefine.API_FILES + "/{id}", method = RequestMethod.GET)
 	public void getById(HttpServletRequest request, @PathVariable String id,
 			HttpServletResponse response) {
-		File list = rMapper.selectById(Long.parseLong(id));
-		HttpServletResponseUtil.writeResponse(response, list);
+		File file = rMapper.selectById(Long.parseLong(id));
+		HttpServletResponseUtil.writeResponse(response, file);
 	}
 
 }
