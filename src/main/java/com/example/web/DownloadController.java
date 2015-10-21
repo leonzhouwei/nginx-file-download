@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.common.JsonTool;
+import com.example.config.AppConfig;
 import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
 import com.example.domain.File;
@@ -40,6 +41,8 @@ public class DownloadController {
 	static final String UTF_8_CHARSET_NAME = StandardCharsets.UTF_8.name();
 
 	@Autowired
+	private AppConfig appConfig;
+	@Autowired
 	private DownloadTaskRMapper taskRMapper;
 	@Autowired
 	private FileRMapper fileRMapper;
@@ -49,10 +52,10 @@ public class DownloadController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DownloadController.class);
 
-	static final String xAccelRedirect(DownloadTask task, File file)
-			throws UnsupportedEncodingException {
+	static final String xAccelRedirect(String routePrefix, DownloadTask task,
+			File file) throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
-		sb.append("/protected");
+		sb.append(routePrefix);
 		sb.append(FILE_SEPARATOR);
 		sb.append(task.getProductionId());
 		sb.append(FILE_SEPARATOR);
@@ -109,7 +112,8 @@ public class DownloadController {
 		String fileName = file.getName();
 		// respond
 		response.setContentType("application/octet-stream");
-		String xAccelRedirect = xAccelRedirect(task, file);
+		String xAccelRoutePrefix = appConfig.getNginxXAccelRoutePrefix();
+		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, task, file);
 		logger.info("X-Accel-Redirect: " + xAccelRedirect);
 		response.setHeader("X-Accel-Redirect", xAccelRedirect);
 		response.addHeader("Content-Disposition", "attachment;filename="
