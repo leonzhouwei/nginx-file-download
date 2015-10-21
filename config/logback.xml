@@ -2,17 +2,17 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
-	<property name="AUTONAVI_COM_APP_LOG_FILE" value="var/log/app.log" />
-	<property name="AUTONAVI_COM_ERROR_LOG_FILE" value="var/log/error.log" />
+	<property name="EXAMPLE_COM_APP_LOG_FILE" value="var/log/app.log" />
+	<property name="EXAMPLE_COM_ERROR_LOG_FILE" value="var/log/error.log" />
 
-	<appender name="AUTONAVI_COM_APP_LOG_FILE_APPENDER"
+	<appender name="EXAMPLE_COM_APP_LOG_FILE_APPENDER"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<encoder>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [%t] --- %-40.40logger{39} [%file:%line] : %msg%n</pattern>
 		</encoder>
-		<file>${AUTONAVI_COM_APP_LOG_FILE}</file>
+		<file>${EXAMPLE_COM_APP_LOG_FILE}</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${AUTONAVI_COM_APP_LOG_FILE}.%i.gz</fileNamePattern>
+			<fileNamePattern>${EXAMPLE_COM_APP_LOG_FILE}.%i.gz</fileNamePattern>
 		</rollingPolicy>
 		<triggeringPolicy
 			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
@@ -20,14 +20,14 @@
 		</triggeringPolicy>
 	</appender>
 
-	<appender name="AUTONAVI_COM_ERROR_LOG_FILE_APPENDER"
+	<appender name="EXAMPLE_COM_ERROR_LOG_FILE_APPENDER"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<encoder>
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [%t] --- %-40.40logger{39} [%file:%line] : %msg%n</pattern>
 		</encoder>
-		<file>${AUTONAVI_COM_ERROR_LOG_FILE}</file>
+		<file>${EXAMPLE_COM_ERROR_LOG_FILE}</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${AUTONAVI_COM_ERROR_LOG_FILE}.%i.gz</fileNamePattern>
+			<fileNamePattern>${EXAMPLE_COM_ERROR_LOG_FILE}.%i.gz</fileNamePattern>
 		</rollingPolicy>
 		<triggeringPolicy
 			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
@@ -41,8 +41,8 @@
 	</appender>
 
 	<logger name="com.example" level="DEBUG">
-		<appender-ref ref="AUTONAVI_COM_APP_LOG_FILE_APPENDER" />
-		<appender-ref ref="AUTONAVI_COM_ERROR_LOG_FILE_APPENDER" />
+		<appender-ref ref="EXAMPLE_COM_APP_LOG_FILE_APPENDER" />
+		<appender-ref ref="EXAMPLE_COM_ERROR_LOG_FILE_APPENDER" />
 	</logger>
 
 </configuration>

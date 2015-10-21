@@ -27,5 +27,3 @@ rm $BUILD/daily_build.sh
 cp $TARGET/$JAR_BASE_NAME*.jar $BUILD/
 
 exit 0
-
-# scp -r daily_build sh@192.168.1.130:/home/sh/sh/run/nginx_file_download/
