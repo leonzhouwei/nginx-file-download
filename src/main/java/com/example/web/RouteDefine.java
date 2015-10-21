@@ -11,7 +11,7 @@ public final class RouteDefine {
 
 	public static final String API = ROOT + "api";
 
-	public static final String ADMIN_API = ROOT + ADMIN + "/api";
+	public static final String ADMIN_API = API + "/" + ADMIN;
 	public static final String ADMIN_API_DOWNLOAD_TASKS = ADMIN_API
 			+ "/dld-tasks";
 	public static final String ADMIN_API_SD_CARD_ORDERS = ADMIN_API

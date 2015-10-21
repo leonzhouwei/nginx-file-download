@@ -1,5 +1,5 @@
 $(function() {
-	$.get("/admin/api/sd-card-orders", function(result) {
+	$.get("/api/admin/sd-card-orders", function(result) {
 		initTable(result['content']);
 	});
 });
