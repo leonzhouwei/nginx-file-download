@@ -41,6 +41,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 		Long ret = (Long) request.getSession().getAttribute(SEESION_ID);
 		return ret;
 	}
+	
+	public static boolean sessionIdExist(HttpServletRequest request) {
+		Long sessionId = getSessionId(request);
+		return sessionId != null;
+	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
