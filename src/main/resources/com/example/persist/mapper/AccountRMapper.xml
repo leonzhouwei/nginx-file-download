@@ -3,8 +3,22 @@
 
 <mapper namespace="com.example.persist.mapper.AccountRMapper">
 
-	<select id="selectAll" resultType="com.example.domain.Account">
-		SELECT * FROM account ORDER BY id
+	<resultMap type="com.example.domain.Account" id="resultMap">
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="resultMap">
+		SELECT * FROM account ORDER BY id DESC
+	</select>
+
+	<select id="selectById" parameterType="long" resultMap="resultMap">
+		SELECT * FROM account WHERE id=#{id}
+	</select>
+
+	<select id="selectByNameAndPassword" parameterType="com.example.domain.Account"
+		resultType="com.example.domain.Account">
+		SELECT * FROM account WHERE name=#{name} AND password=#{password}
 	</select>
 
 </mapper>

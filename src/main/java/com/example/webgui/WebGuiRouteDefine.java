@@ -13,4 +13,6 @@ public final class WebGuiRouteDefine {
 	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
 	public static final String ADMIN_SD_CARD_ORDERS = ADMIN + "/sd-card-orders";
 
+	public static final String LOGIN = ROOT + "login";
+
 }
