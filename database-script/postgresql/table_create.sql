@@ -1,3 +1,18 @@
+-- Table: account
+
+-- DROP TABLE account;
+
+CREATE TABLE account
+(
+  name character varying,
+  id bigserial NOT NULL,
+  enabled boolean NOT NULL DEFAULT false,
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone,
+  password character varying NOT NULL DEFAULT ''::character varying,
+  CONSTRAINT account_pkey PRIMARY KEY (id)
+)
+
 -- Table: download_history
 
 -- DROP TABLE download_history;
