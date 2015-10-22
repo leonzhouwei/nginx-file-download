@@ -55,7 +55,9 @@ public class DownloadController {
 	static final String xAccelRedirect(String routePrefix, DownloadTask task,
 			File file) throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
-		sb.append(routePrefix);
+		if (!routePrefix.endsWith("/")) {
+			sb.append(routePrefix);
+		}
 		sb.append(FILE_SEPARATOR);
 		sb.append(task.getProductionId());
 		sb.append(FILE_SEPARATOR);
