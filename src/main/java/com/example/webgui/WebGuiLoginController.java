@@ -56,4 +56,14 @@ public class WebGuiLoginController {
 		logger.info(username + " signed in OK");
 		response.sendRedirect("/files");
 	}
+
+	@RequestMapping(value = WebGuiRouteDefine.LOGOUT)
+	public void logout(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		if (LoginInterceptor.sessionIdExist(request)) {
+			LoginInterceptor.removeSessionId(request);
+		}
+		response.sendRedirect("/");
+	}
+
 }

@@ -14,5 +14,6 @@ public final class WebGuiRouteDefine {
 	public static final String ADMIN_SD_CARD_ORDERS = ADMIN + "/sd-card-orders";
 
 	public static final String LOGIN = ROOT + "login";
+	public static final String LOGOUT = ROOT + "logout";
 
 }
