@@ -50,6 +50,7 @@ CREATE TABLE download_task
   expired_at timestamp with time zone NOT NULL,
   time_cost_millis bigint NOT NULL DEFAULT 0,
   last_dlded_at timestamp with time zone,
+  user_id bigint NOT NULL,
   CONSTRAINT download_task_pkey PRIMARY KEY (id),
   CONSTRAINT download_task_id_key UNIQUE (id)
 )
