@@ -20,6 +20,7 @@ public class WebMvcInterceptorKeeper extends WebMvcConfigurerAdapter {
 			return;
 		}
 		registry.addInterceptor(new LoginInterceptor());
+		registry.addInterceptor(new ApiAuthInterceptor());
 	}
 
 }

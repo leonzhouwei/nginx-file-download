@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +13,6 @@ import com.example.web.RouteDefine;
 import com.example.webgui.WebGuiRouteDefine;
 import com.google.common.collect.Sets;
 
-@Component
 public class LoginInterceptor implements HandlerInterceptor {
 
 	public static final String PREFIX = "example.com/";

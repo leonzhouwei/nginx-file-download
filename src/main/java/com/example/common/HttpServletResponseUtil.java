@@ -164,5 +164,9 @@ public final class HttpServletResponseUtil {
 	public static void setStatusAsNotFound(HttpServletResponse response) {
 		response.setStatus(HttpStatus.NOT_FOUND.value());
 	}
+	
+	public static void setStatusAsUnauthorized(HttpServletResponse response) {
+		response.setStatus(HttpStatus.UNAUTHORIZED.value());
+	}
 
 }
