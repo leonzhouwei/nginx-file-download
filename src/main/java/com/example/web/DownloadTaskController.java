@@ -23,7 +23,7 @@ public class DownloadTaskController {
 
 	@RequestMapping(value = RouteDefine.API_DOWNLOAD_TASKS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
-		Long userId = LoginInterceptor.getUserId(request);
+		Long userId = LoginInterceptor.getAccountId(request);
 		List<DownloadTask> tasks = rMapper.selectByUserId(userId);
 		HttpServletResponseUtil.writeResponse(response, tasks);
 	}

@@ -9,27 +9,29 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.domain.Account;
+import com.example.persist.mapper.AccountRMapper;
 import com.example.web.RouteDefine;
-import com.example.webgui.WebGuiRouteDefine;
 import com.google.common.collect.Sets;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
 	public static final String PREFIX = "example.com/";
 	public static final String SEESION_ID = PREFIX + "sessionId";
-
-	private static final Set<String> unrestrictedRoutePatterns = Sets
+	
+	static final Set<String> unrestrictedRoutePatterns = Sets
 			.newHashSet();
 	static {
 		unrestrictedRoutePatterns.add("/");
-		unrestrictedRoutePatterns.add(WebGuiRouteDefine.LOGIN + ".*");
-		unrestrictedRoutePatterns.add(RouteDefine.API + "/.*");
+		unrestrictedRoutePatterns.add(RouteDefine.LOGIN + ".*");
 		unrestrictedRoutePatterns.add(RouteDefine.ASSETS + "/.*");
 	}
+	
+	private AccountRMapper accountRMapper;
 
 	public static void redirectToLogin(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		response.sendRedirect(WebGuiRouteDefine.LOGIN);
+		response.sendRedirect(RouteDefine.LOGIN);
 	}
 
 	public static void setSessionId(HttpServletRequest request, Long userId) {
@@ -53,10 +55,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 		request.getSession().removeAttribute(SEESION_ID);
 	}
 	
-	public static Long getUserId(HttpServletRequest request) {
+	public static Long getAccountId(HttpServletRequest request) {
 		return getSessionId(request);
 	}
-
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
@@ -66,8 +68,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 				return true;
 			}
 		}
-		Long sessionId = getSessionId(request);
-		if (sessionId != null) {
+		Long id = getAccountId(request);
+		if (id == null) {
+			redirectToLogin(request, response);
+			return false;
+		}
+		Account account = accountRMapper.selectById(id);
+		if (Account.isValidAccount(account)) {
 			return true;
 		} 
 		redirectToLogin(request, response);
@@ -86,6 +93,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// no operations
+	}
+
+	public AccountRMapper getAccountRMapper() {
+		return accountRMapper;
+	}
+
+	public void setAccountRMapper(AccountRMapper accountRMapper) {
+		this.accountRMapper = accountRMapper;
 	}
 
 }

@@ -5,6 +5,14 @@ public class Account extends Base {
 	private Long id;
 	private String name;
 	private String password;
+	private Boolean isAdmin;
+	
+	public static boolean isValidAccount(Account account) {
+		if (account == null || !account.getEnabled()) {
+			return false;
+		}
+		return true;
+	}
 
 	public Long getId() {
 		return id;
@@ -28,6 +36,14 @@ public class Account extends Base {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 }

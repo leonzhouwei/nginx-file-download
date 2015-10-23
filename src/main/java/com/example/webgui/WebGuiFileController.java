@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.common.DateTimeTool;
 import com.example.domain.File;
 import com.example.persist.mapper.FileRMapper;
+import com.example.web.RouteDefine;
 
 @Controller
 public class WebGuiFileController {
@@ -20,12 +21,12 @@ public class WebGuiFileController {
 	@Autowired
 	private FileRMapper rMapper;
 
-	@RequestMapping(value = WebGuiRouteDefine.FILES, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.FILES, method = RequestMethod.GET)
 	public String list() {
 		return "file/file_list";
 	}
 
-	@RequestMapping(value = WebGuiRouteDefine.FILES + "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.FILES + "/{id}", method = RequestMethod.GET)
 	public ModelAndView getById(HttpServletRequest request,
 			@PathVariable String id, HttpServletResponse response) {
 		File file = rMapper.selectById(Long.parseLong(id));

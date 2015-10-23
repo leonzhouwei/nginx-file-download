@@ -17,6 +17,7 @@ import com.example.common.Sha2Encoder;
 import com.example.domain.Account;
 import com.example.filter.LoginInterceptor;
 import com.example.persist.mapper.AccountRMapper;
+import com.example.web.RouteDefine;
 
 @Controller
 public class WebGuiLoginController {
@@ -27,12 +28,12 @@ public class WebGuiLoginController {
 	@Autowired
 	private AccountRMapper rMapper;
 
-	@RequestMapping(value = WebGuiRouteDefine.LOGIN, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.GET)
 	public ModelAndView gotoLoginPage() {
 		return new ModelAndView("index");
 	}
 
-	@RequestMapping(value = WebGuiRouteDefine.LOGIN, method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.POST)
 	public void login(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		if (LoginInterceptor.sessionIdExist(request)) {
@@ -48,7 +49,7 @@ public class WebGuiLoginController {
 		e.setName(username);
 		e.setPassword(cypher);
 		Account account = rMapper.selectByNameAndPassword(e);
-		if (account == null) {
+		if (!Account.isValidAccount(account)) {
 			response.sendRedirect("/");
 			return;
 		}
@@ -57,7 +58,7 @@ public class WebGuiLoginController {
 		response.sendRedirect("/files");
 	}
 
-	@RequestMapping(value = WebGuiRouteDefine.LOGOUT)
+	@RequestMapping(value = RouteDefine.LOGOUT)
 	public void logout(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		if (LoginInterceptor.sessionIdExist(request)) {

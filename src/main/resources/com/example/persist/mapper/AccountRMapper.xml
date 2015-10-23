@@ -6,6 +6,8 @@
 	<resultMap type="com.example.domain.Account" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
+		<!--  -->
+		<result property="isAdmin" column="is_admin" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
