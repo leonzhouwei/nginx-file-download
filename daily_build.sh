@@ -2,6 +2,7 @@
 
 ################################################################################
 # editable variables
+CUSTOM=custom
 CONFIG=config
 BUILD=daily_build
 TARGET=target
@@ -19,6 +20,7 @@ rm -rf $BUILD
 mkdir $BUILD
 
 cp -r $CONFIG $BUILD/
+cp -r $CUSTOM $BUILD/
 
 cp *.sh $BUILD/
 #rm $BUILD/build.sh
