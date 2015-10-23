@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 public class DownloadTask extends Base {
 
 	private Long id;
+	private Long userId;
 	private Long productionId;
 	private Long fileId;
 	private String clientIp;
@@ -88,6 +89,14 @@ public class DownloadTask extends Base {
 	
 	public void resetTimeCostMillis() {
 		setTimeCostMillis(lastDldedAt.getTime() - getCreatedAt().getTime());
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }

@@ -5,9 +5,9 @@
 
 	<insert id="insert" parameterType="com.example.domain.DownloadTask">
 	   INSERT INTO download_task
-	   (id, created_at, updated_at, enabled, production_id, file_id, client_ip, expired_at, time_cost_millis)
+	   (id, created_at, updated_at, enabled, user_id, production_id, file_id, client_ip, expired_at, time_cost_millis)
 	   VALUES
-	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{productionId}, #{fileId}, #{clientIp}, #{expiredAt}, #{timeCostMillis})
+	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{userId}, #{productionId}, #{fileId}, #{clientIp}, #{expiredAt}, #{timeCostMillis})
 	</insert>
 	
 	<update id="updateTimeCostMillis" parameterType="com.example.domain.DownloadTask">

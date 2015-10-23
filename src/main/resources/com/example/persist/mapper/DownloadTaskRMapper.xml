@@ -7,6 +7,7 @@
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
+		<result property="userId" column="user_id" />
 		<result property="productionId" column="production_id" />
 		<result property="fileId" column="file_id" />
 		<result property="clientIp" column="client_ip" />
@@ -22,5 +23,11 @@
 	<select id="selectById" parameterType="long" resultMap="resultMap">
 	   SELECT * FROM download_task WHERE id=#{id} AND enabled=true
 	</select>
+	
+	<select id="selectByUserId" parameterType="long" resultMap="resultMap">
+       SELECT * FROM download_task 
+       WHERE user_id=#{userId} AND enabled=true
+       ORDER BY created_at DESC
+    </select>
 
 </mapper>
