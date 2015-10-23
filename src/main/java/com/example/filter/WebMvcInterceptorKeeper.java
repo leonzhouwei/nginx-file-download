@@ -28,7 +28,7 @@ public class WebMvcInterceptorKeeper extends WebMvcConfigurerAdapter implements
 			return;
 		}
 		registry.addInterceptor(loginInterceptor);
-//		registry.addInterceptor(accountPrevillegeInterceptor);
+		registry.addInterceptor(accountPrevillegeInterceptor);
 	}
 
 	@Override

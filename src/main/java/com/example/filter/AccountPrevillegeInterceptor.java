@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.common.HttpServletResponseUtil;
 import com.example.domain.Account;
 import com.example.persist.mapper.AccountRMapper;
 import com.example.web.RouteDefine;
@@ -32,11 +33,12 @@ public class AccountPrevillegeInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		if (uri.startsWith(RouteDefine.ADMIN)) {
-			if (account.getIsAdmin()) {
-				return true;
+			if (!account.getIsAdmin()) {
+				HttpServletResponseUtil.setStatusAsUnauthorized(response);
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override
