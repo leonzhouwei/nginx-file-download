@@ -24,10 +24,10 @@ public class AppConfig {
 	private String runMode;
 	@Value("${app.workDir}")
 	private String workDirPath;
-	@Value("${app.disableDownloadAuth}")
-	private Boolean disableDownloadAuth;
 	@Value("${app.imageDirPath}")
 	private String imageDirPath;
+	@Value("${app.ignoreInterceptors}")
+	private Boolean ignoreCustomizedInterceptors;
 	
 	// ssdb --------------------------------------------------------------------
 	@Value("${app.ssdb.timeout}")
@@ -69,13 +69,6 @@ public class AppConfig {
 		return runMode;
 	}
 
-	public Boolean getDisableDownloadAuth() {
-		if (disableDownloadAuth == null) {
-			return false;
-		}
-		return disableDownloadAuth;
-	}
-
 	public int getSsdbTimeoutMillis() {
 		return ssdbTimeoutMillis;
 	}
@@ -106,6 +99,10 @@ public class AppConfig {
 
 	public String getNginxXAccelRoutePrefix() {
 		return nginxXAccelRoutePrefix;
+	}
+
+	public Boolean getIgnoreCustomizedInterceptors() {
+		return ignoreCustomizedInterceptors;
 	}
 
 }
