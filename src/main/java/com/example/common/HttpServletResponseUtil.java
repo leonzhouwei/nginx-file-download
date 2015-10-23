@@ -162,11 +162,17 @@ public final class HttpServletResponseUtil {
 	}
 
 	public static void setStatusAsNotFound(HttpServletResponse response) {
-		response.setStatus(HttpStatus.NOT_FOUND.value());
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		ServerErrorDto error = new ServerErrorDto();
+		error.setMessage(status.name());
+		writeError(response, status, error);
 	}
 	
 	public static void setStatusAsUnauthorized(HttpServletResponse response) {
-		response.setStatus(HttpStatus.UNAUTHORIZED.value());
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		ServerErrorDto error = new ServerErrorDto();
+		error.setMessage(status.name());
+		writeError(response, status, error);
 	}
 
 }
