@@ -22,7 +22,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 	static final Set<String> unrestrictedRoutePatterns = Sets
 			.newHashSet();
 	static {
-		unrestrictedRoutePatterns.add("/");
 		unrestrictedRoutePatterns.add(RouteDefine.LOGIN + ".*");
 		unrestrictedRoutePatterns.add(RouteDefine.ASSETS + "/.*");
 	}
@@ -102,5 +101,5 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void setAccountRMapper(AccountRMapper accountRMapper) {
 		this.accountRMapper = accountRMapper;
 	}
-
+	
 }

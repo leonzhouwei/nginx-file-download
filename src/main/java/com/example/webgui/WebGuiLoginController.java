@@ -30,7 +30,7 @@ public class WebGuiLoginController {
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.GET)
 	public ModelAndView gotoLoginPage() {
-		return new ModelAndView("index");
+		return new ModelAndView("login");
 	}
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.POST)
@@ -55,7 +55,7 @@ public class WebGuiLoginController {
 		}
 		LoginInterceptor.setSessionId(request, account.getId());
 		logger.info(username + " signed in OK");
-		response.sendRedirect("/files");
+		response.sendRedirect("/");
 	}
 
 	@RequestMapping(value = RouteDefine.LOGOUT)
@@ -64,7 +64,7 @@ public class WebGuiLoginController {
 		if (LoginInterceptor.sessionIdExist(request)) {
 			LoginInterceptor.removeSessionId(request);
 		}
-		response.sendRedirect("/");
+		response.sendRedirect("/login");
 	}
 
 }
