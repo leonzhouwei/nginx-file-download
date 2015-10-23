@@ -6,9 +6,10 @@
     <resultMap type="com.example.domain.SdCardOrder" id="resultMap">
         <result property="createdAt" column="created_at" />
         <result property="updatedAt" column="updated_at" />
-        
+        <!--  -->
         <result property="fileId" column="file_id" />
         <result property="priceFen" column="price_fen" />
+        <result property="userId" column="user_id" />
         <result property="userAddr" column="user_addr" />
         <result property="userZipCode" column="user_zip_code" />
         <result property="userMobile" column="user_mobile" />
@@ -17,6 +18,12 @@
 
     <select id="selectAll" resultMap="resultMap">
         SELECT * FROM sd_order WHERE enabled=true ORDER BY created_at DESC
+    </select>
+    
+    <select id="selectByUserId" parameterType="long" resultMap="resultMap">
+        SELECT * FROM sd_order 
+        WHERE user_id=#{userId} AND enabled=true 
+        ORDER BY created_at DESC
     </select>
 
 </mapper>

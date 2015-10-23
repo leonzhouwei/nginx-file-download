@@ -21,7 +21,7 @@ public class DownloadTaskController {
 	@Autowired
 	private DownloadTaskRMapper rMapper;
 
-	@RequestMapping(value = RouteDefine.API_DOWNLOAD_TASKS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API_I_DOWNLOAD_TASKS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		Long userId = LoginInterceptor.getAccountId(request);
 		List<DownloadTask> tasks = rMapper.selectByUserId(userId);

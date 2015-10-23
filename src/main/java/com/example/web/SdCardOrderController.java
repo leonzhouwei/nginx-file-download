@@ -1,4 +1,4 @@
-package com.example.web.admin;
+package com.example.web;
 
 import java.util.List;
 
@@ -12,18 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpServletResponseUtil;
 import com.example.domain.SdCardOrder;
+import com.example.filter.LoginInterceptor;
 import com.example.persist.mapper.SdCardOrderRMapper;
-import com.example.web.RouteDefine;
 
 @RestController
-public class AdminSdCardOrderController {
+public class SdCardOrderController {
 
 	@Autowired
 	private SdCardOrderRMapper rMapper;
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_SD_CARD_ORDERS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API_I_SD_CARD_ORDERS, method = RequestMethod.GET)
 	public void list(HttpServletRequest request, HttpServletResponse response) {
-		List<SdCardOrder> list = rMapper.selectAll();
+		Long id = LoginInterceptor.getAccountId(request);
+		List<SdCardOrder> list = rMapper.selectByUserId(id);
 		HttpServletResponseUtil.writeResponse(response, list);
 	}
 

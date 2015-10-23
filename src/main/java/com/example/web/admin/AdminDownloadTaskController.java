@@ -21,7 +21,7 @@ public class AdminDownloadTaskController {
 	@Autowired
 	private DownloadTaskRMapper rMapper;
 
-	@RequestMapping(value = RouteDefine.ADMIN_API_DOWNLOAD_TASKS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		List<DownloadTask> tasks = rMapper.selectAll();
 		HttpServletResponseUtil.writeResponse(response, tasks);

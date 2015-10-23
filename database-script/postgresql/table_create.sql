@@ -99,6 +99,7 @@ CREATE TABLE sd_order
   updated_at timestamp with time zone NOT NULL,
   file_id bigint NOT NULL,
   status integer NOT NULL DEFAULT 0,
+  user_id bigint NOT NULL,
   username character varying NOT NULL,
   user_addr character varying NOT NULL,
   user_zip_code character varying NOT NULL,
