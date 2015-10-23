@@ -26,6 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		unrestrictedRoutePatterns.add("/");
 		unrestrictedRoutePatterns.add(WebGuiRouteDefine.LOGIN + ".*");
 		unrestrictedRoutePatterns.add(RouteDefine.API + "/.*");
+		unrestrictedRoutePatterns.add(RouteDefine.ASSETS + "/.*");
 	}
 
 	public static void redirectToLogin(HttpServletRequest request,

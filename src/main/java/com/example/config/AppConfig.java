@@ -1,12 +1,17 @@
 package com.example.config;
 
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 import java.util.UUID;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AppConfig {
+public class AppConfig implements InitializingBean {
 
 	public static final String APP_UUID = UUID.randomUUID().toString()
 			.toLowerCase();
@@ -24,11 +29,11 @@ public class AppConfig {
 	private String runMode;
 	@Value("${app.workDir}")
 	private String workDirPath;
-	@Value("${app.imageDirPath}")
-	private String imageDirPath;
-	@Value("${app.ignoreInterceptors}")
+	@Value("${app.ignoreCustomizedInterceptors}")
 	private Boolean ignoreCustomizedInterceptors;
 	
+	private String imageDirPath;
+
 	// ssdb --------------------------------------------------------------------
 	@Value("${app.ssdb.timeout}")
 	private int ssdbTimeoutMillis;
@@ -42,7 +47,7 @@ public class AppConfig {
 	private int ssdbPort;
 	@Value("${app.ssdb.auth}")
 	private String ssdbAuth;
-	
+
 	// NginX -------------------------------------------------------------------
 	@Value("${app.nginx.xAccel.route.prefix}")
 	private String nginxXAccelRoutePrefix;
@@ -103,6 +108,16 @@ public class AppConfig {
 
 	public Boolean getIgnoreCustomizedInterceptors() {
 		return ignoreCustomizedInterceptors;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		Properties props = new Properties();
+		InputStreamReader isr = new InputStreamReader(new FileInputStream(
+				"custom/config/application.properties"), StandardCharsets.UTF_8);
+		props.load(isr);
+		imageDirPath = props.getProperty("app.imageDirPath");
+		isr.close();
 	}
 
 }
