@@ -6,6 +6,7 @@ public class File extends Base {
 	private String dir;
 	private String name;
 	private Long size;
+	private Long productionId;
 
 	public Long getId() {
 		return id;
@@ -37,6 +38,14 @@ public class File extends Base {
 
 	public void setSize(Long size) {
 		this.size = size;
+	}
+
+	public Long getProductionId() {
+		return productionId;
+	}
+
+	public void setProductionId(Long productionId) {
+		this.productionId = productionId;
 	}
 
 }

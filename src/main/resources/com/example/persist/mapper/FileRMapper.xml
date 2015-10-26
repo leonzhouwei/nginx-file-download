@@ -6,6 +6,8 @@
 	<resultMap type="com.example.domain.File" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
+		<!--  -->
+		<result property="productionId" column="production_id" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">

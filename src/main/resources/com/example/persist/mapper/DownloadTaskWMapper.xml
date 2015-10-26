@@ -4,6 +4,9 @@
 <mapper namespace="com.example.persist.mapper.DownloadTaskWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.DownloadTask">
+	   <selectKey order="AFTER" keyProperty="id" resultType="long">
+            SELECT currval('download_task_id_seq')
+       </selectKey>
 	   INSERT INTO download_task
 	   (id, created_at, updated_at, enabled, user_id, production_id, file_id, client_ip, expired_at, time_cost_millis)
 	   VALUES

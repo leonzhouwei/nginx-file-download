@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.common.HttpServletRequestTool;
+import com.example.common.HttpServletResponseUtil;
 import com.example.common.JsonTool;
 import com.example.config.AppConfig;
 import com.example.domain.DownloadHistory;
@@ -34,12 +36,12 @@ import com.google.common.base.Strings;
 
 @Controller
 public class DownloadController {
-
+	
 	static String FILE_SEPARATOR = "/";
 	static String regEx = "[\u4e00-\u9fa5]";
 	static Pattern pat = Pattern.compile(regEx);
 	static final String UTF_8_CHARSET_NAME = StandardCharsets.UTF_8.name();
-
+	
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
@@ -92,24 +94,27 @@ public class DownloadController {
 		logger.info("route : " + route);
 		final String host = request.getHeader("Host");
 		logger.info("Host : " + host);
-		final String clientIp = request.getHeader("X-Real-IP");
+		final String clientIp = HttpServletRequestTool.getClientIp(request);
 		logger.info("X-Real-IP : " + clientIp);
 		logger.info("X-Forwarded-For : " + request.getHeader("X-Forwarded-For"));
 		logger.info("request parameters : "
 				+ JsonTool.toJson(request.getParameterMap()));
 		String taskIdStr = request.getParameter("taskId");
 		if (Strings.isNullOrEmpty(taskIdStr)) {
-			// TODO
+			HttpServletResponseUtil.setStatusAsNotFound(response);
+			return;
 		}
 		final long taskId = Long.parseLong(taskIdStr);
 		DownloadTask task = taskRMapper.selectById(taskId);
 		if (task == null) {
-			// TODO
+			HttpServletResponseUtil.setStatusAsNotFound(response);
+			return;
 		}
 		final long fileId = task.getFileId();
 		File file = fileRMapper.selectById(fileId);
 		if (file == null) {
-			// TODO
+			HttpServletResponseUtil.setStatusAsNotFound(response);
+			return;
 		}
 		String fileName = file.getName();
 		// respond
