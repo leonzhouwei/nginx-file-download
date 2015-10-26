@@ -85,7 +85,7 @@ public class DownloadController {
 		return flg;
 	}
 
-	@RequestMapping("/download/**")
+	@RequestMapping(RouteDefine.DOWNLOAD + "/**")
 	public void downloadWithAuth(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		final String route = request.getRequestURI();

@@ -27,6 +27,8 @@ public final class RouteDefine {
 
 	public static final String ASSETS = ROOT + "assets";
 	public static final String ASSETS_IMAGES = ASSETS + "/images";
+	
+	public static final String DOWNLOAD = "/download";
 
 	public static final String FILES = ROOT + "files";
 
