@@ -62,3 +62,14 @@ public class App {
 @ImportResource("/spring/applicationContext.xml")
 class XmlImportingConfiguration {
 }
+
+// public EmbeddedServletContainerFactory servletContainer()
+// throws UnknownHostException {
+// TomcatEmbeddedServletContainerFactory factory = new
+// TomcatEmbeddedServletContainerFactory();
+// factory.setPort(appConfig.getHttpPort());
+// factory.setSessionTimeout(appConfig.getHttpSessionTimeout(),
+// TimeUnit.SECONDS);
+// factory.setUriEncoding(AppConfig.getCharsetName());
+// return factory;
+// }
