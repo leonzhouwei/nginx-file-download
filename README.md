@@ -1,4 +1,4 @@
-# Nginx-based File Download Service
+# Nginx-based Large File Download Service
 
 ## Tech. Choices
 - Web Server: [Nginx](http://nginx.org/)
