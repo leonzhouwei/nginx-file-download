@@ -7,6 +7,15 @@ public class File extends Base {
 	private String name;
 	private Long size;
 	private Long productionId;
+	
+	public void resetBy(File another) {
+		super.resetBy(another);
+		setId(another.getId());
+		setDir(another.getDir());
+		setName(another.getName());
+		setSize(another.getSize());
+		setProductionId(another.getProductionId());
+	}
 
 	public Long getId() {
 		return id;

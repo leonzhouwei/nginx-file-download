@@ -14,6 +14,7 @@ public class DownloadTask extends Base {
 	private Date expiredAt;
 	private Long timeCostMillis;
 	private Date lastDldedAt;
+	private String uuid;
 	
 	public void reset() {
 		super.reset();
@@ -99,4 +100,12 @@ public class DownloadTask extends Base {
 		this.userId = userId;
 	}
 
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	
 }

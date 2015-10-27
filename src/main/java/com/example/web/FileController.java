@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpServletResponseUtil;
 import com.example.domain.File;
+import com.example.dto.FileDto;
 import com.example.persist.mapper.FileRMapper;
 
 @RestController
@@ -24,7 +25,8 @@ public class FileController {
 	@RequestMapping(value = RouteDefine.API_FILES, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		List<File> list = rMapper.selectAll();
-		HttpServletResponseUtil.writeResponse(response, list);
+		List<FileDto> dtos = FileDto.toList(list);
+		HttpServletResponseUtil.writeResponse(response, dtos);
 	}
 
 	@RequestMapping(value = RouteDefine.API_FILES + "/{id}", method = RequestMethod.GET)

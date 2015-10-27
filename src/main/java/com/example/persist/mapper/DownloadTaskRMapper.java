@@ -11,5 +11,7 @@ public interface DownloadTaskRMapper {
 	public DownloadTask selectById(long id);
 	
 	public List<DownloadTask> selectByUserId(long userId);
+	
+	public DownloadTask selectByUuid(String uuid);
 
 }

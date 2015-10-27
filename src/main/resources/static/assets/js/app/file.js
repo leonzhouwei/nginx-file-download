@@ -19,20 +19,10 @@ function initTable(result) {
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('<td>', elem['createdAt'], '</td>');
 		buffer.push('<td style="text-align: right;">', elem['size'], '</td>');
-		buffer.push('<td><a href="javascript:download(', id,
-				')" class="btn btn-primary btn-xs">下载</a></td>');
+		buffer.push('<td><a href="/download/?fileId=' + id + '&uuid=', elem['uuid'],
+				'" class="btn btn-primary btn-xs">下载</a></td>');
 		buffer.push('/<tr>');
 		var newRow = buffer.join('');
 		$('#table tr:last').after(newRow);
 	}
-}
-
-function download(fileId) {
-	var url = '/api/i/dld-tasks';
-	var data = {
-		id : fileId
-	};
-	$.post(url, data).done(function(data) {
-		console.log(data['content']);
-	});
 }

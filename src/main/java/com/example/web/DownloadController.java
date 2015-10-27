@@ -29,8 +29,10 @@ import com.example.config.AppConfig;
 import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
 import com.example.domain.File;
+import com.example.filter.LoginInterceptor;
 import com.example.persist.mapper.DownloadHistoryWMapper;
 import com.example.persist.mapper.DownloadTaskRMapper;
+import com.example.persist.mapper.DownloadTaskWMapper;
 import com.example.persist.mapper.FileRMapper;
 import com.google.common.base.Strings;
 
@@ -46,6 +48,8 @@ public class DownloadController {
 	private AppConfig appConfig;
 	@Autowired
 	private DownloadTaskRMapper taskRMapper;
+	@Autowired
+	private DownloadTaskWMapper taskWMapper;
 	@Autowired
 	private FileRMapper fileRMapper;
 	@Autowired
@@ -99,22 +103,40 @@ public class DownloadController {
 		logger.info("X-Forwarded-For : " + request.getHeader("X-Forwarded-For"));
 		logger.info("request parameters : "
 				+ JsonTool.toJson(request.getParameterMap()));
-		String taskIdStr = request.getParameter("taskId");
-		if (Strings.isNullOrEmpty(taskIdStr)) {
+		// 
+		String fileIdStr = request.getParameter("fileId");
+		if (Strings.isNullOrEmpty(fileIdStr)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
 			return;
 		}
-		final long taskId = Long.parseLong(taskIdStr);
-		DownloadTask task = taskRMapper.selectById(taskId);
-		if (task == null) {
+		String uuid = request.getParameter("uuid");
+		if (Strings.isNullOrEmpty(uuid)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
 			return;
 		}
-		final long fileId = task.getFileId();
+		// find the file by id
+		final long fileId = Long.parseLong(fileIdStr);
 		File file = fileRMapper.selectById(fileId);
 		if (file == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
 			return;
+		}
+		// try to find the download task by uuid
+		DownloadTask task = taskRMapper.selectByUuid(uuid);
+		if (task == null) {
+			if (LoginInterceptor.getAccountId(request) == null) {
+				HttpServletResponseUtil.setStatusAsUnauthorized(response);
+				return;
+			}
+			// not found, create a new one
+			task = new DownloadTask();
+			task.reset();
+			task.setFileId(fileId);
+			task.setClientIp(clientIp);
+			task.setProductionId(file.getId());
+			task.setUserId(LoginInterceptor.getAccountId(request));
+			task.setUuid(uuid);
+			taskWMapper.insert(task);
 		}
 		String fileName = file.getName();
 		// respond
@@ -127,7 +149,7 @@ public class DownloadController {
 				+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
 		DownloadHistory history = new DownloadHistory();
 		history.reset();
-		history.setTaskId(taskId);
+		history.setTaskId(task.getId());
 		history.setClientIp(clientIp);
 		history.setWebServerHost(host);
 		history.setRequestRoute(route);
