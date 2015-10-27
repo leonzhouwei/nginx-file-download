@@ -12,7 +12,7 @@ CREATE TABLE account
   password character varying NOT NULL DEFAULT ''::character varying,
   is_admin boolean NOT NULL DEFAULT false,
   CONSTRAINT account_pkey PRIMARY KEY (id)
-)
+);
 
 -- Table: download_history
 
@@ -21,7 +21,7 @@ CREATE TABLE account
 CREATE TABLE download_history
 (
   id bigserial NOT NULL,
-  task_id bigint NOT NULL DEFAULT (-1),
+  task_id bigint NOT NULL,
   created_at timestamp with time zone NOT NULL,
   updated_at timestamp with time zone NOT NULL,
   enabled boolean NOT NULL DEFAULT false,
@@ -33,7 +33,7 @@ CREATE TABLE download_history
   req_params character varying NOT NULL DEFAULT ''::character varying,
   app_server_uuid character varying NOT NULL DEFAULT ''::character varying,
   CONSTRAINT download_histroy_pkey PRIMARY KEY (id)
-)
+);
 
 -- Table: download_task
 
@@ -45,16 +45,18 @@ CREATE TABLE download_task
   created_at timestamp with time zone NOT NULL,
   updated_at timestamp with time zone NOT NULL,
   enabled boolean NOT NULL DEFAULT false,
-  production_id bigint NOT NULL DEFAULT (-1),
+  production_id bigint NOT NULL,
   client_ip character varying NOT NULL DEFAULT ''::character varying,
-  file_id bigint NOT NULL DEFAULT (-1),
+  file_id bigint NOT NULL,
   expired_at timestamp with time zone NOT NULL,
-  time_cost_millis bigint NOT NULL DEFAULT 0,
+  time_cost_millis bigint NOT NULL,
   last_dlded_at timestamp with time zone,
   user_id bigint NOT NULL,
+  uuid character varying NOT NULL,
   CONSTRAINT download_task_pkey PRIMARY KEY (id),
-  CONSTRAINT download_task_id_key UNIQUE (id)
-)
+  CONSTRAINT download_task_id_key UNIQUE (id),
+  CONSTRAINT download_task_uuid_key UNIQUE (uuid)
+);
 
 -- Table: file
 
@@ -69,8 +71,9 @@ CREATE TABLE file
   updated_at timestamp with time zone NOT NULL,
   enabled boolean NOT NULL DEFAULT false,
   name character varying NOT NULL,
+  production_id bigint NOT NULL,
   CONSTRAINT file_pkey PRIMARY KEY (id)
-)
+);
 
 -- Table: production
 
@@ -86,7 +89,7 @@ CREATE TABLE production
   name character varying NOT NULL,
   CONSTRAINT prod_pkey PRIMARY KEY (id),
   CONSTRAINT production_id_key UNIQUE (id)
-)
+);
 
 -- Table: sd_order
 
@@ -98,14 +101,14 @@ CREATE TABLE sd_order
   created_at timestamp with time zone NOT NULL,
   updated_at timestamp with time zone NOT NULL,
   file_id bigint NOT NULL,
-  status integer NOT NULL DEFAULT 0,
-  user_id bigint NOT NULL,
+  status integer NOT NULL,
   username character varying NOT NULL,
   user_addr character varying NOT NULL,
   user_zip_code character varying NOT NULL,
   user_mobile character varying NOT NULL DEFAULT ''::character varying,
   user_email character varying NOT NULL DEFAULT ''::character varying,
   enabled boolean NOT NULL DEFAULT false,
-  price_fen bigint NOT NULL DEFAULT 0,
+  price_fen bigint NOT NULL,
+  user_id bigint NOT NULL,
   CONSTRAINT sd_order_pkey PRIMARY KEY (id)
-)
+);
