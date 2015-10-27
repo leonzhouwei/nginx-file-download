@@ -15,11 +15,13 @@ function initTable(result) {
 			buffer.push('<tr>');
 		}
 		var id = elem['id'];
+		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('<td>', elem['createdAt'], '</td>');
-		buffer.push('<td style="text-align: right;">', elem['size'], '</td>');
-		buffer.push('<td><a href="/download/?fileId=' + id + '&uuid=', elem['uuid'],
+		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
+		buffer.push('<td><a href="/download/' + elem['name'] + '?fileId=' + id
+				+ '&uuid=', elem['uuid'],
 				'" class="btn btn-primary btn-xs">下载</a></td>');
 		buffer.push('/<tr>');
 		var newRow = buffer.join('');
