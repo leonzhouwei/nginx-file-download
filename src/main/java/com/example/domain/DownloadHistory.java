@@ -51,6 +51,10 @@ public class DownloadHistory extends Base {
 		if (webServerHost == null) {
 			webServerHost = EMPTY_STRING;
 		}
+		int index = webServerHost.indexOf(":");
+		if (index > 0) {
+			webServerHost = webServerHost.substring(0, index);
+		}
 		this.webServerHost = webServerHost;
 	}
 
