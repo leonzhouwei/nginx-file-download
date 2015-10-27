@@ -37,6 +37,7 @@ public class WebGuiFileController {
 		ret.getModel().put("id", file.getId());
 		ret.getModel().put("name", file.getName());
 		ret.getModel().put("size", file.getSize());
+		ret.getModel().put("sizeMb", file.getSize() / 1024 / 1024);
 		ret.getModel().put("createdAt",
 				DateTimeTool.toLocal(file.getCreatedAt()));
 		return ret;
