@@ -17,13 +17,17 @@ import com.example.web.RouteDefine;
 
 @Controller
 public class WebGuiFileController {
+	
+	static final String FILE = "file/";
+	static final String FILE_LIST = FILE + "file_list";
+	static final String FILE_DETAIL = FILE + "file_detail";
 
 	@Autowired
 	private FileRMapper rMapper;
 
 	@RequestMapping(value = RouteDefine.FILES, method = RequestMethod.GET)
 	public String list() {
-		return "file/file_list";
+		return FILE_LIST;
 	}
 
 	@RequestMapping(value = RouteDefine.FILES + "/{id}", method = RequestMethod.GET)
@@ -33,7 +37,7 @@ public class WebGuiFileController {
 		if (file == null) {
 			return WebGuiNotFoundController.newModelAndView(response);
 		}
-		ModelAndView ret = new ModelAndView("file/file_detail");
+		ModelAndView ret = new ModelAndView(FILE_DETAIL);
 		ret.getModel().put("id", file.getId());
 		ret.getModel().put("name", file.getName());
 		ret.getModel().put("size", file.getSize());

@@ -21,6 +21,8 @@ import com.example.web.RouteDefine;
 
 @Controller
 public class WebGuiLoginController {
+	
+	static final String LOGIN = "login";
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(WebGuiLoginController.class);
@@ -30,14 +32,14 @@ public class WebGuiLoginController {
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.GET)
 	public ModelAndView gotoLoginPage() {
-		return new ModelAndView("login");
+		return new ModelAndView(LOGIN);
 	}
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.POST)
 	public void login(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		if (LoginInterceptor.sessionIdExist(request)) {
-			response.sendRedirect("/files");
+			response.sendRedirect(RouteDefine.FILES);
 			logger.info(LoginInterceptor.getSessionId(request)
 					+ " has already signed in");
 			return;
@@ -64,7 +66,7 @@ public class WebGuiLoginController {
 		if (LoginInterceptor.sessionIdExist(request)) {
 			LoginInterceptor.removeSessionId(request);
 		}
-		response.sendRedirect("/login");
+		response.sendRedirect(RouteDefine.LOGIN);
 	}
 
 }

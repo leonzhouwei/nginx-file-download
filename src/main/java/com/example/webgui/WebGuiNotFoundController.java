@@ -8,8 +8,10 @@ import com.example.common.HttpServletResponseUtil;
 
 public class WebGuiNotFoundController {
 	
+	static final String COMMON_404 = "common/404";
+	
 	static ModelAndView newModelAndView() {
-		return new ModelAndView("common/404");
+		return new ModelAndView(COMMON_404);
 	}
 	
 	static ModelAndView newModelAndView(HttpServletResponse response) {

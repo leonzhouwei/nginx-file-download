@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+
+<head>
+<title>创建订单</title>
+<meta charset="utf-8" />
+</head>
+
+<body>
+	<div class="container" layout:fragment="content">
+		<h4>新建地图数据 SD 卡订单</h4>
+		<hr />
+		<form action="/i/sd-card-orders" method="post">
+			<div class="form-group">
+				<label for="fileIdText">文件编号</label> <input class="form-control"
+					id="fileIdText" name="fileId" type="text" readonly="readonly"
+					th:value="${fileId}" />
+			</div>
+			<div class="form-group">
+				<label for="fileNameText">文件名称</label> <input
+					class="form-control" id="fileNameText" type="text"
+					readonly="readonly" th:value="${fileName}" />
+			</div>
+			<div class="form-group">
+                <label for="priceText">价格 (元)</label> <input
+                    class="form-control" id="priceText" type="text"
+                    readonly="readonly" th:value="${price}" />
+            </div>
+            <button type="submit" class="btn btn-primary">确认购买</button>
+		</form>
+	</div>
+</body>
+
+</html>

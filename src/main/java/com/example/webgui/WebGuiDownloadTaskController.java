@@ -9,9 +9,12 @@ import com.example.web.RouteDefine;
 @Controller
 public class WebGuiDownloadTaskController {
 
+	static final String TASK = "dld_task/";
+	static final String TASK_LIST = TASK + "dld_task_list";
+
 	@RequestMapping(value = RouteDefine.I_DOWNLOAD_TASKS, method = RequestMethod.GET)
 	public String get() {
-		return "dld_task/dld_task_list";
+		return TASK_LIST;
 	}
 
 }

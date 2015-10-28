@@ -23,6 +23,8 @@ function initTable(result) {
 		buffer.push('<td><a href="/download/' + elem['name'] + '?fileId=' + id
 				+ '&uuid=', elem['uuid'],
 				'" class="btn btn-primary btn-xs">下载</a></td>');
+		buffer.push('<td><a href="/i/sd-card-orders/new?fileId=' + id,
+				'" class="btn btn-primary btn-xs">下单</a></td>');
 		buffer.push('/<tr>');
 		var newRow = buffer.join('');
 		$('#table tr:last').after(newRow);

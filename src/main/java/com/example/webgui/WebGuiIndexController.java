@@ -14,6 +14,9 @@ import com.example.persist.mapper.AccountRMapper;
 @Controller
 public class WebGuiIndexController {
 	
+	static final String INDEX = "index";
+	static final String ADMIN_INDEX = "admin/" + INDEX;
+	
 	@Autowired
 	private AccountRMapper accoutRMapper;
 
@@ -22,9 +25,9 @@ public class WebGuiIndexController {
 		Long id = LoginInterceptor.getAccountId(request);
 		Account account = accoutRMapper.selectById(id);
 		if (account.getIsAdmin()) {
-			return "admin/index";
+			return ADMIN_INDEX;
 		}
-		return "index";
+		return INDEX;
 	}
 
 }
