@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8" />
@@ -9,16 +8,11 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>index.html</title>
-<link
-	href="../../static/assets/css/bootstrap/3.3.5/css/bootstrap.min.css"
-	rel="stylesheet"
+<link rel="stylesheet"
 	th:href="@{/assets/css/bootstrap/3.3.5/css/bootstrap.min.css}" />
-<link
-	href="../../static/assets/css/bootstrap/3.3.5/css/bootstrap-theme.min.css"
-	rel="stylesheet"
+<link rel="stylesheet"
 	th:href="@{/assets/css/bootstrap/3.3.5/css/bootstrap-theme.min.css}" />
-<link href="../../static/assets/css/theme.css" rel="stylesheet"
-	th:href="@{/assets/css/theme.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/theme.css}" />
 </head>
 
 <body role="document">
@@ -74,10 +68,8 @@
 		</form>
 	</div>
 
-	<script src="../static/assets/js/jquery/2.1.4/jquery-2.1.4.min.js"
-		th:src="@{/assets/js/jquery/2.1.4/jquery-2.1.4.min.js}"></script>
-	<script src="../static/assets/css/bootstrap/3.3.5/js/bootstrap.min.js"
-		th:src="@{/assets/css/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/jquery/2.1.4/jquery-2.1.4.min.js}"></script>
+	<script th:src="@{/assets/css/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
 </body>
 
 </html>
