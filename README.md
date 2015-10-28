@@ -1,4 +1,4 @@
-# Nginx-based Large File Download Service
+# Nginx-based Large Files Downloading Service
 
 ## Tech. Choices
 - Web Server: [Nginx](http://nginx.org/) v1.8.0
