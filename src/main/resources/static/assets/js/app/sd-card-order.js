@@ -15,9 +15,10 @@ function initTable(result) {
 			buffer.push('<tr>');
 		}
 		var createdAt = iso8601ToHuman(elem['createdAt']);
+		var statusHuman = toStatusHuman(elem['status']);
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>', createdAt, '</td>');
-		buffer.push('<td>', elem['status'], '</td>');
+		buffer.push('<td>', statusHuman, '</td>');
 		buffer.push('<td><a href="/files/' + elem['fileId'] + '" target="_blank">',
 				elem['fileId'], '</a></td>');
 		buffer.push('<td style="text-align: right;">', elem['priceFen'] / 100, '</td>');
@@ -30,4 +31,22 @@ function initTable(result) {
 		var newRow = buffer.join('');
 		$('#table tr:last').after(newRow);
 	}
+}
+
+function toStatusHuman(status) {
+	var ret = '?';
+	switch (status) {
+	case 1: {
+		ret = "等待接单";
+		break;
+	}
+	case 2: {
+		ret = "订单已接";
+		break;
+	}
+	default: {
+		ret = '?';
+	}
+	}
+	return ret;
 }
