@@ -9,7 +9,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.persist.ssdb.driver.impl.SsdbWDriverImpl;
+import com.example.persist.nosql.ssdb.driver.impl.SsdbWDriverImpl;
 
 @Component
 public class SsdbWDriverBean extends SsdbWDriverImpl implements

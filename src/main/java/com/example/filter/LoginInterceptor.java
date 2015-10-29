@@ -10,8 +10,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.domain.Account;
-import com.example.persist.mapper.AccountRMapper;
-import com.example.web.RouteDefine;
+import com.example.persist.mapper.rdbms.AccountRMapper;
+import com.example.webapi.RouteDefine;
 import com.google.common.collect.Sets;
 
 public class LoginInterceptor implements HandlerInterceptor {

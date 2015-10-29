@@ -3,6 +3,7 @@ package com.example.persist.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.domain.Production;
+import com.example.persist.mapper.rdbms.ProductionWMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

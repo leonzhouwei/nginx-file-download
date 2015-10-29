@@ -3,6 +3,7 @@ package com.example.persist.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.domain.DownloadHistory;
+import com.example.persist.mapper.nosql.DownloadHistoryWMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Account;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.mapper.AccountRMapper;
+import com.example.persist.mapper.rdbms.AccountRMapper;
 
 @Controller
 public class WebGuiIndexController {
