@@ -10,7 +10,7 @@ import com.google.common.collect.Lists;
 public class FileDto extends File {
 	
 	// uuid: for downloading
-	public String uuid = UuidTool.newUuid();
+	public String dldUuid = UuidTool.newUuid();
 	
 	public static FileDto toDto(File e) {
 		FileDto ret = new FileDto();

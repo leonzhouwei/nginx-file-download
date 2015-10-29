@@ -21,7 +21,7 @@ function initTable(result) {
 		buffer.push('<td>', elem['createdAt'], '</td>');
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td><a href="/download/' + elem['name'] + '?fileId=' + id
-				+ '&uuid=', elem['uuid'],
+				+ '&uuid=', elem['dldUuid'],
 				'" class="btn btn-primary btn-xs">下载</a></td>');
 		buffer.push('<td><a href="/i/sd-card-orders/new?fileId=' + id,
 				'" class="btn btn-primary btn-xs">下单</a></td>');
