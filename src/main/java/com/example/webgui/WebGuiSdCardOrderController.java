@@ -14,8 +14,8 @@ import com.example.common.UuidTool;
 import com.example.domain.File;
 import com.example.domain.SdCardOrder;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.mapper.rdbms.FileRMapper;
-import com.example.persist.mapper.rdbms.SdCardOrderWMapper;
+import com.example.persist.rdbms.FileRMapper;
+import com.example.persist.rdbms.SdCardOrderWMapper;
 import com.example.webapi.RouteDefine;
 import com.google.common.base.Strings;
 

@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.HttpServletResponseUtil;
 import com.example.domain.Account;
-import com.example.persist.mapper.rdbms.AccountRMapper;
+import com.example.persist.rdbms.AccountRMapper;
 import com.example.webapi.RouteDefine;
 
 public class AccountPrevillegeInterceptor implements HandlerInterceptor {

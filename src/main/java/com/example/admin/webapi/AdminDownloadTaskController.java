@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpServletResponseUtil;
 import com.example.domain.DownloadTask;
-import com.example.persist.mapper.rdbms.DownloadTaskRMapper;
+import com.example.persist.rdbms.DownloadTaskRMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController

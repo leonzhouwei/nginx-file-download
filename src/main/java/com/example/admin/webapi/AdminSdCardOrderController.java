@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpServletResponseUtil;
 import com.example.domain.SdCardOrder;
-import com.example.persist.mapper.rdbms.SdCardOrderRMapper;
+import com.example.persist.rdbms.SdCardOrderRMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController

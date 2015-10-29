@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.persist.rdbms.SdCardOrderWMapper">
+
+	<insert id="insert" parameterType="com.example.domain.SdCardOrder">
+        <selectKey order="AFTER" keyProperty="id" resultType="long">
+			SELECT currval('sd_order_id_seq')
+		</selectKey>
+		INSERT INTO sd_order
+		(id, uuid, created_at, updated_at, enabled, status, file_id, user_id, username, user_addr, user_zip_code, user_mobile, user_email, price_fen)
+		VALUES
+		(default, #{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{status}, #{fileId}, #{userId}, #{username}, #{userAddr}, #{userZipCode}, #{userMobile}, #{userEmail}, #{priceFen})
+	</insert>
+
+</mapper>

@@ -15,9 +15,9 @@ import com.example.common.HttpServletResponseUtil;
 import com.example.domain.DownloadTask;
 import com.example.domain.File;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.mapper.rdbms.DownloadTaskRMapper;
-import com.example.persist.mapper.rdbms.DownloadTaskWMapper;
-import com.example.persist.mapper.rdbms.FileRMapper;
+import com.example.persist.rdbms.DownloadTaskRMapper;
+import com.example.persist.rdbms.DownloadTaskWMapper;
+import com.example.persist.rdbms.FileRMapper;
 
 @RestController
 public class DownloadTaskController {

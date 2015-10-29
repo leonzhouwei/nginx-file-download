@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.common.Sha2Encoder;
 import com.example.domain.Account;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.mapper.rdbms.AccountRMapper;
+import com.example.persist.rdbms.AccountRMapper;
 import com.example.webapi.RouteDefine;
 
 @Controller

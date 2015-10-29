@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.common.HttpServletResponseUtil;
 import com.example.domain.SdCardOrder;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.mapper.rdbms.SdCardOrderRMapper;
+import com.example.persist.rdbms.SdCardOrderRMapper;
 
 @RestController
 public class SdCardOrderController {

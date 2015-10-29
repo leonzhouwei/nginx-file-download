@@ -30,10 +30,10 @@ import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
 import com.example.domain.File;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.mapper.nosql.DownloadHistoryWMapper;
-import com.example.persist.mapper.rdbms.DownloadTaskRMapper;
-import com.example.persist.mapper.rdbms.DownloadTaskWMapper;
-import com.example.persist.mapper.rdbms.FileRMapper;
+import com.example.persist.nosql.DownloadHistoryWMapper;
+import com.example.persist.rdbms.DownloadTaskRMapper;
+import com.example.persist.rdbms.DownloadTaskWMapper;
+import com.example.persist.rdbms.FileRMapper;
 import com.google.common.base.Strings;
 
 @Controller
