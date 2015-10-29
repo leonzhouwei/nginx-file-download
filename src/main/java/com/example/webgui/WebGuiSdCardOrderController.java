@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.common.HttpServletResponseUtil;
+import com.example.common.UuidTool;
 import com.example.domain.File;
 import com.example.domain.SdCardOrder;
 import com.example.filter.LoginInterceptor;
@@ -49,6 +51,7 @@ public class WebGuiSdCardOrderController {
 		}
 		ModelAndView ret = new ModelAndView(SD_CARD_ORDER_NEW);
 		ret.getModel().put("fileId", fileIdStr);
+		ret.getModel().put("uuid", UuidTool.newUuid());
 		ret.getModel().put("fileName", file.getName());
 		ret.getModel().put("price", file.getSdCardPriceFen() / 100);
 		return ret;
@@ -61,12 +64,19 @@ public class WebGuiSdCardOrderController {
 		if (Strings.isNullOrEmpty(fileIdStr)) {
 			return WebGuiNotFoundController.newModelAndView(response);
 		}
+		String uuid = request.getParameter("uuid");
+		if (Strings.isNullOrEmpty(uuid)) {
+			HttpServletResponseUtil.setStatusAsNotFound(response);
+			return WebGuiNotFoundController.newModelAndView(response);
+		}
 		final long fileId = Long.parseLong(fileIdStr);
 		File file = fileRMapper.selectById(fileId);
 		if (file == null) {
 			return WebGuiNotFoundController.newModelAndView(response);
 		}
+		uuid = uuid.toLowerCase();
 		SdCardOrder order = new SdCardOrder();
+		order.setUuid(uuid);
 		order.reset();
 		order.setFileId(Long.parseLong(fileIdStr));
 		order.setPriceFen(file.getSdCardPriceFen());

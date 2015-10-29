@@ -8,9 +8,9 @@
 			SELECT currval('sd_order_id_seq')
 		</selectKey>
 		INSERT INTO sd_order
-		(id, created_at, updated_at, enabled, status, file_id, user_id, username, user_addr, user_zip_code, user_mobile, user_email, price_fen)
+		(id, uuid, created_at, updated_at, enabled, status, file_id, user_id, username, user_addr, user_zip_code, user_mobile, user_email, price_fen)
 		VALUES
-		(default, #{createdAt}, #{updatedAt}, #{enabled}, #{status}, #{fileId}, #{userId}, #{username}, #{userAddr}, #{userZipCode}, #{userMobile}, #{userEmail}, #{priceFen})
+		(default, #{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{status}, #{fileId}, #{userId}, #{username}, #{userAddr}, #{userZipCode}, #{userMobile}, #{userEmail}, #{priceFen})
 	</insert>
 
 </mapper>

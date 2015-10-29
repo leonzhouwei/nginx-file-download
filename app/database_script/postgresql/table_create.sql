@@ -111,5 +111,7 @@ CREATE TABLE sd_order
   enabled boolean NOT NULL DEFAULT false,
   price_fen bigint NOT NULL,
   user_id bigint NOT NULL,
-  CONSTRAINT sd_order_pkey PRIMARY KEY (id)
+  uuid character varying NOT NULL,
+  CONSTRAINT sd_order_pkey PRIMARY KEY (id),
+  CONSTRAINT sd_order_uuid_key UNIQUE (uuid)
 );

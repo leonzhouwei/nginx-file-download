@@ -1,5 +1,6 @@
 package com.example.domain;
 
+
 public class SdCardOrder extends Base {
 	
 	static final int STATUS_WAITING = 1;
@@ -15,6 +16,7 @@ public class SdCardOrder extends Base {
 	private String userEmail;
 	// price in RMB fen
 	private Long priceFen;
+	private String uuid;
 	
 	public void reset() {
 		super.reset();
@@ -116,4 +118,12 @@ public class SdCardOrder extends Base {
 		this.userId = userId;
 	}
 
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid.toLowerCase();
+	}
+	
 }
