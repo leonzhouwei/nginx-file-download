@@ -1,4 +1,4 @@
-package com.example.admin.webapi;
+package com.example.webapi.admin;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.admin.webgui;
+package com.example.webgui.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
