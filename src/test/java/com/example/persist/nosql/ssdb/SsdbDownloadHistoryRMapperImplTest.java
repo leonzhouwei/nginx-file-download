@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.common.ConsoleTool;
 import com.example.domain.DownloadHistory;
-import com.example.persist.nosql.ssdb.SsdbDownloadHistoryRMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)
