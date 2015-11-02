@@ -26,7 +26,6 @@ public class AssetsCssController {
 			throws IOException {
 		String uri = request.getRequestURI();
 		String path = appConfig.getDataDir() + uri;
-		System.out.println("oops: " + path);
 		File file = new File(path);
 		HttpServletResponseUtil.writeCss(response, file);
 	}
