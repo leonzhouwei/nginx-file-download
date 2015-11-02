@@ -38,12 +38,12 @@ import com.google.common.base.Strings;
 
 @Controller
 public class DownloadController {
-	
+
 	static String FILE_SEPARATOR = "/";
 	static String regEx = "[\u4e00-\u9fa5]";
 	static Pattern pat = Pattern.compile(regEx);
 	static final String UTF_8_CHARSET_NAME = StandardCharsets.UTF_8.name();
-	
+
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
@@ -58,14 +58,14 @@ public class DownloadController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DownloadController.class);
 
-	static final String xAccelRedirect(String routePrefix, DownloadTask task,
-			File file) throws UnsupportedEncodingException {
+	static final String xAccelRedirect(String routePrefix, File file)
+			throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
 		if (!routePrefix.endsWith("/")) {
 			sb.append(routePrefix);
 		}
 		sb.append(FILE_SEPARATOR);
-		sb.append(task.getProductionId());
+		sb.append(file.getProductionId());
 		sb.append(FILE_SEPARATOR);
 		String fileDir = file.getDir();
 		if (!Strings.isNullOrEmpty(fileDir)) {
@@ -103,7 +103,7 @@ public class DownloadController {
 		logger.info("X-Forwarded-For : " + request.getHeader("X-Forwarded-For"));
 		logger.info("request parameters : "
 				+ JsonTool.toJson(request.getParameterMap()));
-		// 
+		//
 		String fileIdStr = request.getParameter("fileId");
 		if (Strings.isNullOrEmpty(fileIdStr)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
@@ -133,7 +133,7 @@ public class DownloadController {
 			task.reset();
 			task.setFileId(fileId);
 			task.setClientIp(clientIp);
-			task.setProductionId(file.getId());
+			task.setProductionId(file.getProductionId());
 			task.setUserId(LoginInterceptor.getAccountId(request));
 			task.setUuid(uuid);
 			taskWMapper.insert(task);
@@ -142,7 +142,7 @@ public class DownloadController {
 		// respond
 		response.setContentType("application/octet-stream");
 		String xAccelRoutePrefix = appConfig.getNginxXAccelRoutePrefix();
-		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, task, file);
+		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, file);
 		logger.info("X-Accel-Redirect: " + xAccelRedirect);
 		response.setHeader("X-Accel-Redirect", xAccelRedirect);
 		response.addHeader("Content-Disposition", "attachment;filename="
