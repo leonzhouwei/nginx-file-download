@@ -127,41 +127,9 @@ public final class HttpServletResponseUtil {
 				HttpStatus.INTERNAL_SERVER_ERROR.toString(), null);
 	}
 
-	public static void writeImage(HttpServletResponse response, File imageFile)
+	public static void writeImage(HttpServletResponse response, File file)
 			throws IOException {
-		InputStream is = null;
-		try {
-			if (imageFile.exists() == false) {
-				// image file does not exist
-				setStatusAsNotFound(response);
-				return;
-			}
-			is = new FileInputStream(imageFile);
-			writeImage(response, is);
-		} finally {
-			if (is != null) {
-				is.close();
-			}
-		}
-	}
-
-	public static void writeImage(HttpServletResponse response, InputStream is)
-			throws IOException {
-		ServletOutputStream gos = null;
-		try {
-			gos = response.getOutputStream();
-			int count = -1;
-			byte data[] = new byte[bufferSize];
-			while ((count = is.read(data, 0, bufferSize)) != -1) {
-				gos.write(data, 0, count);
-			}
-			gos.flush();
-			response.setContentType(IMAGE_CONTENT_TYPE);
-		} finally {
-			if (gos != null) {
-				gos.close();
-			}
-		}
+		writeFile(IMAGE_CONTENT_TYPE, response, file);
 	}
 
 	public static void setStatusAsNotFound(HttpServletResponse response) {
@@ -178,7 +146,7 @@ public final class HttpServletResponseUtil {
 		writeError(response, status, error);
 	}
 
-	public static void writeFile(String contentType,
+	public static void writeFromInputStream(String contentType,
 			HttpServletResponse response, InputStream is) throws IOException {
 		ServletOutputStream gos = null;
 		try {
@@ -197,22 +165,26 @@ public final class HttpServletResponseUtil {
 		}
 	}
 
-	public static void writeCss(HttpServletResponse response, File file)
-			throws IOException {
+	public static void writeFile(String contentType,
+			HttpServletResponse response, File file) throws IOException {
 		InputStream is = null;
 		try {
 			if (file.exists() == false) {
-				// image file does not exist
 				setStatusAsNotFound(response);
 				return;
 			}
 			is = new FileInputStream(file);
-			writeFile(CSS_CONTENT_TYPE, response, is);
+			writeFromInputStream(IMAGE_CONTENT_TYPE, response, is);
 		} finally {
 			if (is != null) {
 				is.close();
 			}
 		}
+	}
+
+	public static void writeCss(HttpServletResponse response, File file)
+			throws IOException {
+		writeFile(CSS_CONTENT_TYPE, response, file);
 	}
 
 }
