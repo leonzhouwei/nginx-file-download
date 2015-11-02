@@ -14,27 +14,6 @@ CREATE TABLE account
   CONSTRAINT account_pkey PRIMARY KEY (id)
 );
 
--- Table: download_history
-
--- DROP TABLE download_history;
-
-CREATE TABLE download_history
-(
-  id bigserial NOT NULL,
-  task_id bigint NOT NULL,
-  created_at timestamp with time zone NOT NULL,
-  updated_at timestamp with time zone NOT NULL,
-  enabled boolean NOT NULL DEFAULT false,
-  client_ip character varying NOT NULL DEFAULT ''::character varying,
-  web_server_host character varying NOT NULL DEFAULT ''::character varying,
-  app_server_thread_name character varying NOT NULL DEFAULT ''::character varying,
-  app_server_thread_id bigint NOT NULL,
-  req_route character varying NOT NULL DEFAULT ''::character varying,
-  req_params character varying NOT NULL DEFAULT ''::character varying,
-  app_server_uuid character varying NOT NULL DEFAULT ''::character varying,
-  CONSTRAINT download_histroy_pkey PRIMARY KEY (id)
-);
-
 -- Table: download_task
 
 -- DROP TABLE download_task;
