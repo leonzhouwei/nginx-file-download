@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.common.FilePathTool;
 import com.example.common.HttpServletResponseUtil;
 import com.example.config.AppConfig;
 import com.example.webapi.RouteDefine;
@@ -25,10 +26,9 @@ public class AssetsImageController {
 	public void get(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String uri = request.getRequestURI();
-		String imageFilePath = appConfig.getImageDirPath()
-				+ uri.substring(RouteDefine.ASSETS_IMAGES.length());
+		String imageFilePath = FilePathTool.join(appConfig.getImageDirPath(),
+				uri);
 		File file = new File(imageFilePath);
 		HttpServletResponseUtil.writeImage(response, file);
 	}
-
 }

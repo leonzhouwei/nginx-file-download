@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.common.FilePathTool;
 import com.example.common.HttpServletResponseUtil;
 import com.example.config.AppConfig;
 import com.example.webapi.RouteDefine;
@@ -25,7 +26,7 @@ public class AssetsCssController {
 	public void get(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String uri = request.getRequestURI();
-		String path = appConfig.getDataDir() + uri;
+		String path = FilePathTool.join(appConfig.getDataDir(), uri);
 		File file = new File(path);
 		HttpServletResponseUtil.writeCss(response, file);
 	}
