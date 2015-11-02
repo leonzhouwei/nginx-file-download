@@ -10,6 +10,7 @@ JAR_BASE_NAME=nginx-file-download
 
 ################################################################################
 #################### !! DO NOT EDIT THE STATEMENTS BELOW !! ####################
+APP=app
 base_path=$(cd `dirname $0`; pwd)
 cd $base_path
 
@@ -17,8 +18,9 @@ mvn clean
 mvn package -Dmaven.test.skip=true
 
 rm -rf $BUILD
-mkdir $BUILD
+mkdir -p $BUILD/$APP
 
+cp -r $APP/data $BUILD/$APP/
 cp -r $CONFIG $BUILD/
 cp -r $CUSTOM $BUILD/
 
