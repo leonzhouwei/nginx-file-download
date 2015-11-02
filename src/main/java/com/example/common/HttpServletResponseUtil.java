@@ -21,7 +21,10 @@ public final class HttpServletResponseUtil {
 
 	static final String EMPTY = "";
 
-	private static final String IMAGE_CONTENT_TYPE = "image";
+	static final String CSS_CONTENT_TYPE = "text/css";
+	static final String JAVASCRIPT_CONTENT_TYPE = "text/javascript";
+	static final String IMAGE_CONTENT_TYPE = "image";
+
 	private static final int bufferSize = 1024;
 
 	private static final Logger logger = LoggerFactory
@@ -167,12 +170,49 @@ public final class HttpServletResponseUtil {
 		error.setMessage(status.name());
 		writeError(response, status, error);
 	}
-	
+
 	public static void setStatusAsUnauthorized(HttpServletResponse response) {
 		HttpStatus status = HttpStatus.UNAUTHORIZED;
 		ServerErrorDto error = new ServerErrorDto();
 		error.setMessage(status.name());
 		writeError(response, status, error);
+	}
+
+	public static void writeFile(String contentType,
+			HttpServletResponse response, InputStream is) throws IOException {
+		ServletOutputStream gos = null;
+		try {
+			gos = response.getOutputStream();
+			int count = -1;
+			byte data[] = new byte[bufferSize];
+			while ((count = is.read(data, 0, bufferSize)) != -1) {
+				gos.write(data, 0, count);
+			}
+			gos.flush();
+			response.setContentType(contentType);
+		} finally {
+			if (gos != null) {
+				gos.close();
+			}
+		}
+	}
+
+	public static void writeCss(HttpServletResponse response, File file)
+			throws IOException {
+		InputStream is = null;
+		try {
+			if (file.exists() == false) {
+				// image file does not exist
+				setStatusAsNotFound(response);
+				return;
+			}
+			is = new FileInputStream(file);
+			writeFile(CSS_CONTENT_TYPE, response, is);
+		} finally {
+			if (is != null) {
+				is.close();
+			}
+		}
 	}
 
 }

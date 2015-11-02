@@ -25,8 +25,11 @@ public final class RouteDefine {
 	public static final String API_I_DOWNLOAD_TASKS = API_I + "/dld-tasks";
 	public static final String API_I_SD_CARD_ORDERS = API_I + "/sd-card-orders";
 
-	public static final String ASSETS = ROOT + "assets";
+	public static final String BASE_ASSETS = ROOT + "assets";
+	public static final String ASSETS = BASE_ASSETS + "/{version}";
 	public static final String ASSETS_IMAGES = ASSETS + "/images";
+	public static final String ASSETS_CSS = ASSETS + "/css";
+	public static final String ASSETS_JAVASCRIPT = ASSETS + "/js";
 	
 	public static final String DOWNLOAD = "/download";
 

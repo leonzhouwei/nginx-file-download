@@ -22,8 +22,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	static final Set<String> unrestrictedRoutePatterns = Sets
 			.newHashSet();
 	static {
+		unrestrictedRoutePatterns.add(RouteDefine.BASE_ASSETS + ".*");
 		unrestrictedRoutePatterns.add(RouteDefine.LOGIN + ".*");
-		unrestrictedRoutePatterns.add(RouteDefine.ASSETS + "/.*");
 		unrestrictedRoutePatterns.add(RouteDefine.DOWNLOAD + "/.*");
 	}
 	

@@ -31,6 +31,8 @@ public class AppConfig implements InitializingBean {
 	private String workDirPath;
 	@Value("${app.ignoreCustomizedInterceptors}")
 	private Boolean ignoreCustomizedInterceptors;
+	@Value("${app.data.dir}")
+	private String dataDir;
 	
 	private String imageDirPath;
 
@@ -118,6 +120,10 @@ public class AppConfig implements InitializingBean {
 		props.load(isr);
 		imageDirPath = props.getProperty("app.imageDirPath");
 		isr.close();
+	}
+
+	public String getDataDir() {
+		return dataDir;
 	}
 
 }

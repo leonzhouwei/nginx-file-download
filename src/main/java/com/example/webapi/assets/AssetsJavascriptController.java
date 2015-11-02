@@ -1,4 +1,4 @@
-package com.example.webapi;
+package com.example.webapi.assets;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpServletResponseUtil;
 import com.example.config.AppConfig;
+import com.example.webapi.RouteDefine;
 
 @RestController
-public class ImageController {
+public class AssetsJavascriptController {
 
 	@Autowired
 	private AppConfig appConfig;
 
-	@RequestMapping(value = RouteDefine.ASSETS_IMAGES + "/**", method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ASSETS_JAVASCRIPT + "/**", method = RequestMethod.GET)
 	public void get(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String uri = request.getRequestURI();
-		String imageFilePath = appConfig.getImageDirPath()
-				+ uri.substring(RouteDefine.ASSETS_IMAGES.length());
-		File file = new File(imageFilePath);
-		HttpServletResponseUtil.writeImage(response, file);
+		String path = appConfig.getDataDir() + uri;
+		File file = new File(path);
+		HttpServletResponseUtil.writeCss(response, file);
 	}
 
 }
