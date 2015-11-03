@@ -1,0 +1,15 @@
+# mongodb 禁用 security.authorization 
+# ./mongod -f conf/mongod.conf
+# ./mongo
+use admin
+db.createUser({user: "admin", pwd: "424242", roles: [{ role: "userAdminAnyDatabase", db: "admin" } ]})
+db.shutdownServer()
+
+# mongodb 开启 security.authorization
+# ./mongod -f conf/mongod.conf
+# ./mongo
+use test
+db.createUser({user: "test", pwd: "123456", roles: [{ role: "readWrite", db: "test" }]})
+
+use mydb
+db.createUser({user: "test", pwd: "123456", roles: [{ role: "readWrite", db: "mydb" }]})
