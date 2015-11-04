@@ -52,6 +52,7 @@ CREATE TABLE file
   name character varying NOT NULL,
   production_id bigint NOT NULL,
   sd_card_price_fen bigint NOT NULL,
+  md character varying NOT NULL,
   CONSTRAINT file_pkey PRIMARY KEY (id)
 );
 

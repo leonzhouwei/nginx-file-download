@@ -8,6 +8,7 @@ public class File extends Base {
 	private Long size;
 	private Long productionId;
 	private Long sdCardPriceFen;
+	private String md;
 	
 	public void resetBy(File another) {
 		super.resetBy(another);
@@ -64,6 +65,14 @@ public class File extends Base {
 
 	public void setSdCardPriceFen(Long sdCardPriceFen) {
 		this.sdCardPriceFen = sdCardPriceFen;
+	}
+
+	public String getMd() {
+		return md;
+	}
+
+	public void setMd(String md) {
+		this.md = md;
 	}
 
 }

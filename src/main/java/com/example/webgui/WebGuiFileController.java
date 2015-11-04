@@ -1,5 +1,7 @@
 package com.example.webgui;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,12 +40,14 @@ public class WebGuiFileController {
 			return WebGuiNotFoundController.newModelAndView(response);
 		}
 		ModelAndView ret = new ModelAndView(FILE_DETAIL);
-		ret.getModel().put("id", file.getId());
-		ret.getModel().put("name", file.getName());
-		ret.getModel().put("size", file.getSize());
-		ret.getModel().put("sizeMb", file.getSize() / 1024 / 1024);
-		ret.getModel().put("createdAt",
+		Map<String, Object> model = ret.getModel();
+		model.put("id", file.getId());
+		model.put("name", file.getName());
+		model.put("size", file.getSize());
+		model.put("sizeMb", file.getSize() / 1024 / 1024);
+		model.put("createdAt",
 				DateTimeTool.toLocal(file.getCreatedAt()));
+		model.put("md", file.getMd());
 		return ret;
 	}
 

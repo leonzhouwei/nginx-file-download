@@ -20,6 +20,7 @@ function initTable(result) {
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('<td>', elem['createdAt'], '</td>');
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
+		buffer.push('<td>', elem['md'], '</td>');
 		buffer.push('<td><a href="/download/' + elem['name'] + '?fileId=' + id
 				+ '&uuid=', UUID.generate(),
 				'" class="btn btn-primary btn-xs">下载</a></td>');
