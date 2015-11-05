@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.webapi.RouteDefine;
 
 @Controller
-public class AdminWebGuiSdCardOrderController {
-	
-	static final String LIST = "admin/sd_card_order_list";
+public class AdminWebGuiProductionController {
 
-	@RequestMapping(value = RouteDefine.ADMIN_SD_CARD_ORDERS, method = RequestMethod.GET)
+	static final String LIST = "admin/prod_list";
+
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public String list() {
 		return LIST;
 	}
-
 }

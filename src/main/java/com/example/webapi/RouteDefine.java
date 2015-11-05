@@ -11,21 +11,7 @@ public final class RouteDefine {
 
 	public static final String API = ROOT + "api";
 
-	public static final String API_ADMIN = API + ADMIN;
-	public static final String API_ADMIN_DOWNLOAD_TASKS = API_ADMIN
-			+ "/dld-tasks";
-	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN
-			+ "/sd-card-orders";
-	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
-	public static final String ADMIN_SD_CARD_ORDERS = ADMIN + "/sd-card-orders";
-
-	public static final String API_FILES = API + "/files";
-	public static final String API_PRODUCTIONS = API + "/productions";
-
-	public static final String API_I = API + "/i";
-	public static final String API_I_DOWNLOAD_TASKS = API_I + "/dld-tasks";
-	public static final String API_I_SD_CARD_ORDERS = API_I + "/sd-card-orders";
-
+	// -------------------------------------------------------------------------
 	public static final String BASE_ASSETS = ROOT + "assets";
 	public static final String ASSETS_VERSION = BASE_ASSETS + "/{version}";
 	public static final String ASSETS_VERSION_IMAGES = ASSETS_VERSION
@@ -34,6 +20,29 @@ public final class RouteDefine {
 	public static final String ASSETS_VERSION_JAVASCRIPT = ASSETS_VERSION
 			+ "/js";
 
+	// -------------------------------------------------------------------------
+	public static final String API_ADMIN = API + ADMIN;
+	public static final String API_ADMIN_DOWNLOAD_TASKS = API_ADMIN
+			+ "/dld-tasks";
+	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN
+			+ "/sd-card-orders";
+	public static final String API_ADMIN_PRODUCTIONS = API_ADMIN
+			+ "/productions";
+
+	// -------------------------------------------------------------------------
+	public static final String API_FILES = API + "/files";
+
+	// -------------------------------------------------------------------------
+	public static final String API_I = API + "/i";
+	public static final String API_I_DOWNLOAD_TASKS = API_I + "/dld-tasks";
+	public static final String API_I_SD_CARD_ORDERS = API_I + "/sd-card-orders";
+	
+	// -------------------------------------------------------------------------
+	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
+	public static final String ADMIN_SD_CARD_ORDERS = ADMIN + "/sd-card-orders";
+	public static final String ADMIN_PRODUCTIONS = ADMIN + "/productions";
+
+	// -------------------------------------------------------------------------
 	public static final String DOWNLOAD = "/download";
 
 	public static final String FILES = ROOT + "files";

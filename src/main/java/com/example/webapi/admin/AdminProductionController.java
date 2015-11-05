@@ -1,4 +1,4 @@
-package com.example.webapi;
+package com.example.webapi.admin;
 
 import java.util.List;
 
@@ -14,20 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.common.HttpServletResponseUtil;
 import com.example.domain.Production;
 import com.example.persist.rdbms.ProductionRMapper;
+import com.example.webapi.RouteDefine;
 
 @RestController
-public class ProductionController {
+public class AdminProductionController {
 
 	@Autowired
 	private ProductionRMapper rMapper;
 
-	@RequestMapping(value = RouteDefine.API_PRODUCTIONS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		List<Production> list = rMapper.selectAll();
 		HttpServletResponseUtil.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_PRODUCTIONS + "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}", method = RequestMethod.GET)
 	public void getById(HttpServletRequest request, @PathVariable String id,
 			HttpServletResponse response) {
 		Production e = rMapper.selectById(Long.parseLong(id));
