@@ -3,20 +3,30 @@
 
 <mapper namespace="com.example.persist.rdbms.FileRMapper">
 
+	<sql id="columns">created_at, updated_at, enabled, id, production_id,
+		name,
+		size,
+		sd_card_price_fen, md
+	</sql>
+
 	<resultMap type="com.example.domain.File" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
-		<!-- ****************************************** -->
+		<!-- -->
 		<result property="productionId" column="production_id" />
 		<result property="sdCardPriceFen" column="sd_card_price_fen" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
-		SELECT * FROM file WHERE enabled=true ORDER BY created_at DESC
+		SELECT
+		<include refid="columns"></include>
+		FROM file WHERE enabled=true ORDER BY created_at DESC
 	</select>
-	
+
 	<select id="selectById" parameterType="long" resultMap="resultMap">
-       SELECT * FROM file WHERE id=#{id} AND enabled=true
-    </select>
+		SELECT
+		<include refid="columns"></include>
+		FROM file WHERE id=#{id} AND enabled=true
+	</select>
 
 </mapper>

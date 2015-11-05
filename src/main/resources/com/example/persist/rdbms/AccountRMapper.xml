@@ -3,24 +3,36 @@
 
 <mapper namespace="com.example.persist.rdbms.AccountRMapper">
 
+	<sql id="columns">created_at, updated_at, enabled, id, name, password,
+		is_admin
+	</sql>
+
 	<resultMap type="com.example.domain.Account" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
-		<!--  -->
+		<!-- -->
 		<result property="isAdmin" column="is_admin" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
-		SELECT * FROM account ORDER BY id DESC
+		SELECT
+		<include refid="columns"></include>
+		FROM account ORDER BY
+		id DESC
 	</select>
 
 	<select id="selectById" parameterType="long" resultMap="resultMap">
-		SELECT * FROM account WHERE id=#{id}
+		SELECT
+		<include refid="columns"></include>
+		FROM account WHERE id=#{id}
 	</select>
 
 	<select id="selectByNameAndPassword" parameterType="com.example.domain.Account"
 		resultType="com.example.domain.Account">
-		SELECT * FROM account WHERE name=#{name} AND password=#{password}
+		SELECT
+		<include refid="columns"></include>
+		FROM account WHERE name=#{name} AND
+		password=#{password}
 	</select>
 
 </mapper>

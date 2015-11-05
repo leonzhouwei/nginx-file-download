@@ -3,6 +3,10 @@
 
 <mapper namespace="com.example.persist.rdbms.DownloadTaskRMapper">
 
+	<sql id="columns">created_at, updated_at, enabled, uuid, id, production_id,
+		file_id, client_ip, time_cost_millis, user_id
+	</sql>
+
 	<resultMap type="com.example.domain.DownloadTask" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
@@ -17,23 +21,34 @@
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
-		SELECT * FROM download_task WHERE enabled=true ORDER BY created_at DESC
+		SELECT
+		<include refid="columns"></include>
+		FROM download_task
+		WHERE enabled=true ORDER BY created_at DESC
 	</select>
-	
+
 	<select id="selectById" parameterType="long" resultMap="resultMap">
-	   SELECT * FROM download_task WHERE id=#{id} AND enabled=true
+		SELECT
+		<include refid="columns"></include>
+		FROM download_task WHERE id=#{id} AND enabled=true
 	</select>
-	
+
 	<select id="selectByUserId" parameterType="long" resultMap="resultMap">
-       SELECT * FROM download_task 
-       WHERE user_id=#{userId} AND enabled=true
-       ORDER BY created_at DESC
-    </select>
-    
-    <select id="selectByUuid" parameterType="string" resultMap="resultMap">
-       SELECT * FROM download_task 
-       WHERE uuid=#{uuid} AND enabled=true
-       ORDER BY created_at DESC
-    </select>
+		SELECT
+		<include refid="columns"></include>
+		FROM download_task
+		WHERE user_id=#{userId} AND enabled=true
+		ORDER BY
+		created_at DESC
+	</select>
+
+	<select id="selectByUuid" parameterType="string" resultMap="resultMap">
+		SELECT
+		<include refid="columns"></include>
+		FROM download_task
+		WHERE uuid=#{uuid} AND enabled=true
+		ORDER BY
+		created_at DESC
+	</select>
 
 </mapper>

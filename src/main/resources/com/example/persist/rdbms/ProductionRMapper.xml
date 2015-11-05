@@ -9,6 +9,7 @@
 	<resultMap type="com.example.domain.Production" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
+		<!-- -->
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
@@ -17,12 +18,12 @@
 		FROM production
 		WHERE enabled=true
 	</select>
-	
+
 	<select id="selectById" parameterType="long" resultMap="resultMap">
-        SELECT
-        <include refid="columns"></include>
-        FROM production
-        WHERE id=#{id} AND enabled=true
-    </select>
+		SELECT
+		<include refid="columns"></include>
+		FROM production
+		WHERE id=#{id} AND enabled=true
+	</select>
 
 </mapper>
