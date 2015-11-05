@@ -3,13 +3,26 @@
 
 <mapper namespace="com.example.persist.rdbms.ProductionRMapper">
 
+	<sql id="columns">created_at, updated_at, enabled, id, name, description
+	</sql>
+
 	<resultMap type="com.example.domain.Production" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
-		SELECT * FROM production WHERE enabled=true
+		SELECT
+		<include refid="columns"></include>
+		FROM production
+		WHERE enabled=true
 	</select>
+	
+	<select id="selectById" parameterType="long" resultMap="resultMap">
+        SELECT
+        <include refid="columns"></include>
+        FROM production
+        WHERE id=#{id} AND enabled=true
+    </select>
 
 </mapper>

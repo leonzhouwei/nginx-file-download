@@ -63,6 +63,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		String uri = request.getRequestURI();
+		System.out.println("oops: " + uri);
 		for (String e : unrestrictedRoutePatterns) {
 			if (uri.matches(e)) {
 				return true;

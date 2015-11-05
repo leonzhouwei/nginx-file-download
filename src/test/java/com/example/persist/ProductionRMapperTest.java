@@ -16,6 +16,11 @@ public class ProductionRMapperTest {
 	private ProductionRMapper mapper;
 
 //	@Test
+	public void testSelectById() {
+		Production e = mapper.selectById(1);
+		ConsoleTool.print(e);
+	}
+	
 	public void testSelectAll() {
 		List<Production> c = mapper.selectAll();
 		ConsoleTool.printCollection(c);

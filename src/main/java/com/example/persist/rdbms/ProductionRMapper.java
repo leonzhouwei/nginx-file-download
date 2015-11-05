@@ -7,5 +7,7 @@ import com.example.domain.Production;
 public interface ProductionRMapper {
 	
 	public List<Production> selectAll();
+	
+	public Production selectById(long id);
 
 }
