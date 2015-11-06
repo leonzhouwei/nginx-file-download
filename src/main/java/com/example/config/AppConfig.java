@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.google.common.collect.Lists;
 
 @Component
 public class AppConfig implements InitializingBean {
@@ -24,6 +27,7 @@ public class AppConfig implements InitializingBean {
 
 	static final String DEV_MODE = "dev";
 	static final String PROD_MODE = "prod";
+	static final String ASSETS_DIR = "app/data/assets";
 
 	// app ---------------------------------------------------------------------
 	@Value("${app.runMode}")
@@ -34,7 +38,7 @@ public class AppConfig implements InitializingBean {
 	private Boolean ignoreCustomizedInterceptors;
 	@Value("${app.data.dir}")
 	private String dataDir;
-	
+
 	private String imageDirPath;
 	private String assetsHome;
 
@@ -124,16 +128,25 @@ public class AppConfig implements InitializingBean {
 		imageDirPath = props.getProperty("app.imageDirPath");
 		isr.close();
 		//
-		File dir = new File("app/data/assets");
-		String version = "v1";
+		File dir = new File(ASSETS_DIR);
+		List<String> list = Lists.newArrayList();
 		String[] children = dir.list();
 		for (String e : children) {
-			if (e.startsWith("v")) {
-				version = e;
-				break;
+			if (e.matches("v\\d+")) {
+				list.add(e);
 			}
 		}
-		assetsHome = "/assets/" + version;
+		if (list.isEmpty()) {
+			throw new RuntimeException(
+					"versioned static resources directory not found under '"
+							+ ASSETS_DIR + "'");
+		}
+		if (list.size() > 1) {
+			throw new RuntimeException(
+					"multiple versioned static resources directories have been found under '"
+							+ ASSETS_DIR + "'");
+		}
+		assetsHome = "/assets/" + list.get(0);
 	}
 
 	public String getDataDir() {
