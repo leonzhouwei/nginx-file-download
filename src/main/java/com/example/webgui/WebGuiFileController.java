@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.DateTimeTool;
+import com.example.common.ModelAndViewTool;
+import com.example.config.AppConfig;
 import com.example.domain.File;
 import com.example.persist.rdbms.FileRMapper;
 import com.example.webapi.RouteDefine;
@@ -25,11 +27,13 @@ public class WebGuiFileController {
 	static final String FILE_DETAIL = FILE + "file_detail";
 
 	@Autowired
+	private AppConfig appConfig;
+	@Autowired
 	private FileRMapper rMapper;
 
 	@RequestMapping(value = RouteDefine.FILES, method = RequestMethod.GET)
-	public String list() {
-		return FILE_LIST;
+	public ModelAndView list() {
+		return ModelAndViewTool.newModelAndView(appConfig, FILE_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.FILES + "/{id}", method = RequestMethod.GET)
@@ -37,9 +41,9 @@ public class WebGuiFileController {
 			@PathVariable String id, HttpServletResponse response) {
 		File file = rMapper.selectById(Long.parseLong(id));
 		if (file == null) {
-			return WebGuiNotFoundController.newModelAndView(response);
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = new ModelAndView(FILE_DETAIL);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, FILE_DETAIL);
 		Map<String, Object> model = ret.getModel();
 		model.put("id", file.getId());
 		model.put("name", file.getName());

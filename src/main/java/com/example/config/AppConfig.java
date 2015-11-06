@@ -33,8 +33,11 @@ public class AppConfig implements InitializingBean {
 	private Boolean ignoreCustomizedInterceptors;
 	@Value("${app.data.dir}")
 	private String dataDir;
+	@Value("${app.assets.version}")
+	private Integer assetsVersion;
 	
 	private String imageDirPath;
+	private String assetsHome;
 
 	// ssdb --------------------------------------------------------------------
 	@Value("${app.ssdb.timeout}")
@@ -114,16 +117,27 @@ public class AppConfig implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		//
 		Properties props = new Properties();
 		InputStreamReader isr = new InputStreamReader(new FileInputStream(
 				"custom/config/application.properties"), StandardCharsets.UTF_8);
 		props.load(isr);
 		imageDirPath = props.getProperty("app.imageDirPath");
 		isr.close();
+		//
+		assetsHome = "/assets/v" + assetsVersion;
 	}
 
 	public String getDataDir() {
 		return dataDir;
+	}
+
+	public Integer getAssetsVersion() {
+		return assetsVersion;
+	}
+
+	public String getAssetsHome() {
+		return assetsHome;
 	}
 
 }

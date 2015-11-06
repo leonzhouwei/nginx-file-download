@@ -10,11 +10,11 @@
 <meta name="author" content="" />
 <title>Large Files Downloading Service</title>
 <link rel="stylesheet"
-	href="/assets/v1/css/bootstrap/3.3.5/css/bootstrap.min.css" />
+	th:href="@{${APP_ASSETS_HOME} + '/css/bootstrap/3.3.5/css/bootstrap.min.css'}" />
 <link rel="stylesheet"
-	href="/assets/v1/css/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" href="/assets/v1/css/theme.css" />
-<link rel="icon" type="image/png" href="/assets/v1/images/favicon.ico" />
+	th:href="@{${APP_ASSETS_HOME} + '/css/bootstrap/3.3.5/css/bootstrap-theme.min.css'}" />
+<link rel="stylesheet" th:href="@{${APP_ASSETS_HOME} + '/css/theme.css'}" />
+<link rel="icon" type="image/png" th:href="@{${APP_ASSETS_HOME} + '/images/favicon.ico'}" />
 </head>
 
 <body role="document">
@@ -58,8 +58,8 @@
 
 	<div class="container" layout:fragment="content"></div>
 
-	<script src="/assets/v1/js/jquery/2.1.4/jquery-2.1.4.min.js"></script>
-	<script src="/assets/v1/css/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
+	<script th:src="@{${APP_ASSETS_HOME} + '/css/bootstrap/3.3.5/js/bootstrap.min.js'}"></script>
 </body>
 
 </html>

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.common.ModelAndViewTool;
 import com.example.common.Sha2Encoder;
+import com.example.config.AppConfig;
 import com.example.domain.Account;
 import com.example.filter.LoginInterceptor;
 import com.example.persist.rdbms.AccountRMapper;
@@ -28,11 +30,13 @@ public class WebGuiLoginController {
 			.getLogger(WebGuiLoginController.class);
 
 	@Autowired
+	private AppConfig appConfig;
+	@Autowired
 	private AccountRMapper rMapper;
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.GET)
 	public ModelAndView gotoLoginPage() {
-		return new ModelAndView(LOGIN);
+		return ModelAndViewTool.newModelAndView(appConfig, LOGIN);
 	}
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.POST)
