@@ -8,9 +8,9 @@
 			SELECT currval('production_id_seq')
 		</selectKey>
 		INSERT INTO production
-		(id, created_at, updated_at, enabled, description)
+		(id, created_at, updated_at, enabled, name, description)
 		VALUES
-		(default, #{createdAt}, #{updatedAt}, #{enabled}, #{description})
+		(default, #{createdAt}, #{updatedAt}, #{enabled}, #{name}, #{description})
 	</insert>
 
 </mapper>

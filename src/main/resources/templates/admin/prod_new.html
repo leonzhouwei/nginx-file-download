@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+
+<head>
+<title>新建产品</title>
+<meta charset="utf-8" />
+</head>
+
+<body>
+	<div class="container" layout:fragment="content">
+		<h4>新建产品</h4>
+		<hr />
+		<form action="/admin/productions" method="post">
+			<div class="form-group">
+				<label for="productionNameText">产品名称</label> <input type="text"
+					class="form-control" name="name" />
+			</div>
+			<div class="form-group">
+				<label for="descriptionText">描述</label> <input type="text"
+					class="form-control" name="description" />
+			</div>
+			<button type="submit" class="btn btn-primary">确认</button>
+		</form>
+	</div>
+</body>
+
+</html>
