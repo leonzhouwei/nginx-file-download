@@ -14,14 +14,15 @@
 
 	<select id="selectAll" resultMap="resultMap">
 		SELECT
-		<include refid="columns"></include>
+		<include refid="columns" />
 		FROM production
 		WHERE enabled=true
+		ORDER BY created_at DESC
 	</select>
 
 	<select id="selectById" parameterType="long" resultMap="resultMap">
 		SELECT
-		<include refid="columns"></include>
+		<include refid="columns" />
 		FROM production
 		WHERE id=#{id} AND enabled=true
 	</select>

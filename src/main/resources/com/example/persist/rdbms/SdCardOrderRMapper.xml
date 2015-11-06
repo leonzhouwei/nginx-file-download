@@ -3,7 +3,9 @@
 
 <mapper namespace="com.example.persist.rdbms.SdCardOrderRMapper">
 
-	<sql id="columns">created_at, updated_at, enabled, uuid, id, file_id, status, user_id, username, user_addr, user_zip_code, user_mobile, user_email, price_fen
+	<sql id="columns">created_at, updated_at, enabled, uuid, id, file_id, status,
+		user_id, username, user_addr, user_zip_code, user_mobile, user_email,
+		price_fen
 	</sql>
 
 	<resultMap type="com.example.domain.SdCardOrder" id="resultMap">
@@ -21,13 +23,15 @@
 
 	<select id="selectAll" resultMap="resultMap">
 		SELECT
-		<include refid="columns"></include>
-		FROM sd_order WHERE enabled=true ORDER BY created_at DESC
+		<include refid="columns" />
+		FROM sd_order
+		WHERE enabled=true
+		ORDER BY created_at DESC
 	</select>
 
 	<select id="selectByUserId" parameterType="long" resultMap="resultMap">
 		SELECT
-		<include refid="columns"></include>
+		<include refid="columns" />
 		FROM sd_order
 		WHERE user_id=#{userId} AND enabled=true
 		ORDER BY created_at DESC
