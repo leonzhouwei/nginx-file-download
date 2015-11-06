@@ -5,7 +5,8 @@ $(function() {
 });
 
 function initTable(result) {
-	for (var i = 0, len = result.length; i < len; ++i) {
+	const len = result.length;
+	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var table = $('#table');
 		var buffer = [];
