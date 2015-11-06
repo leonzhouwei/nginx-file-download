@@ -41,6 +41,7 @@ public class App {
 	void logStatus() throws IOException {
 		logger.info("----- Status Info START ----- ");
 		logger.info("version: " + Version.VERSION);
+		logger.info("static assests home: " + appConfig.getAssetsHome());
 		String pid = System.getProperty("PID");
 		String pidFilePath = AppConfig.CURRENT_WORKING_DIR
 				+ AppConfig.FILE_SEPARATOR + appConfig.getWorkDirPath()

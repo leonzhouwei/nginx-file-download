@@ -1,5 +1,6 @@
 package com.example.config;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -33,8 +34,6 @@ public class AppConfig implements InitializingBean {
 	private Boolean ignoreCustomizedInterceptors;
 	@Value("${app.data.dir}")
 	private String dataDir;
-	@Value("${app.assets.version}")
-	private Integer assetsVersion;
 	
 	private String imageDirPath;
 	private String assetsHome;
@@ -125,15 +124,20 @@ public class AppConfig implements InitializingBean {
 		imageDirPath = props.getProperty("app.imageDirPath");
 		isr.close();
 		//
-		assetsHome = "/assets/v" + assetsVersion;
+		File dir = new File("app/data/assets");
+		String version = "v1";
+		String[] children = dir.list();
+		for (String e : children) {
+			if (e.startsWith("v")) {
+				version = e;
+				break;
+			}
+		}
+		assetsHome = "/assets/" + version;
 	}
 
 	public String getDataDir() {
 		return dataDir;
-	}
-
-	public Integer getAssetsVersion() {
-		return assetsVersion;
 	}
 
 	public String getAssetsHome() {
