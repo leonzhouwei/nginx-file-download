@@ -26,9 +26,6 @@ function initTable(result) {
 		buffer.push('<a href="/admin/productions/edit?id=' + id,
 				'" class="btn btn-primary btn-xs">编辑</a>');
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
-		buffer.push('<a href="/admin/productions/disable?id=' + id,
-				'" class="btn btn-warning btn-xs">停用</a>');
-		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		buffer.push('<a href="/admin/productions/delete?id=' + id,
 				'" class="btn btn-danger btn-xs">删除</a>');
 		buffer.push('</td>');
