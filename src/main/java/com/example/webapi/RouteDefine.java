@@ -42,6 +42,7 @@ public final class RouteDefine {
 	public static final String ADMIN_SD_CARD_ORDERS = ADMIN + "/sd-card-orders";
 	public static final String ADMIN_PRODUCTIONS = ADMIN + "/productions";
 	public static final String ADMIN_PRODUCTIONS_DELETE = ADMIN_PRODUCTIONS + "/delete";
+	public static final String ADMIN_PRODUCTIONS_EDIT = ADMIN_PRODUCTIONS + "/edit";
 	public static final String ADMIN_PRODUCTIONS_NEW = ADMIN_PRODUCTIONS + "/new";
 
 	// -------------------------------------------------------------------------

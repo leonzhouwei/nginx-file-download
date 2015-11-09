@@ -21,6 +21,11 @@ public class Production extends Base {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public void resetDescription(String description) {
+		setDescription(description);
+		resetUpdatedAt();
+	}
 
 	public String getName() {
 		return name;
@@ -28,6 +33,11 @@ public class Production extends Base {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void resetName(String name) {
+		setName(name);
+		resetUpdatedAt();
 	}
 
 }

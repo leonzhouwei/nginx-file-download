@@ -19,11 +19,13 @@ import com.example.domain.Production;
 import com.example.persist.rdbms.ProductionRMapper;
 import com.example.persist.rdbms.ProductionWMapper;
 import com.example.webapi.RouteDefine;
+import com.google.common.base.Strings;
 
 @Controller
 public class AdminWebGuiProductionController {
 
 	static final String DELETE = "admin/prod_delete";
+	static final String EDIT = "admin/prod_edit";
 	static final String LIST = "admin/prod_list";
 	static final String NEW = "admin/prod_new";
 
@@ -61,13 +63,57 @@ public class AdminWebGuiProductionController {
 		wMapper.insert(e);
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}
+	
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.GET)
+	public ModelAndView gotoEdit(HttpServletRequest request,
+			HttpServletResponse response) {
+		String idStr = request.getParameter("id");
+		final long id = Long.parseLong(idStr);
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
+		if (e == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, EDIT);
+		Map<String, Object> model = ret.getModel();
+		model.put("id", e.getId());
+		model.put("name", e.getName());
+		model.put("description", e.getDescription());
+		model.put("enabled", e.getEnabled());
+		return ret;
+	}
+	
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.POST)
+	public ModelAndView edit(HttpServletRequest request,
+			HttpServletResponse response) {
+		String idStr = request.getParameter("id");
+		final long id = Long.parseLong(idStr);
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
+		if (e == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		String name = request.getParameter("name");
+		if (!Strings.isNullOrEmpty(name)) {
+			e.setName(name);
+		}
+		String description = request.getParameter("description");
+		if (!Strings.isNullOrEmpty(description)) {
+			e.setDescription(description);
+		}
+		String enabledStr = request.getParameter("enabled");
+		if (!Strings.isNullOrEmpty(enabledStr)) {
+			e.setEnabled(Boolean.valueOf(enabledStr));
+		}
+		e.resetUpdatedAt();
+		wMapper.updateById(e);
+		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DELETE, method = RequestMethod.GET)
 	public ModelAndView gotoDelete(HttpServletRequest request,
 			HttpServletResponse response) {
 		String idStr = request.getParameter("id");
 		final long id = Long.parseLong(idStr);
-		Production e = rMapper.selectById(id);
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -84,7 +130,7 @@ public class AdminWebGuiProductionController {
 			HttpServletResponse response) {
 		String idStr = request.getParameter("id");
 		final long id = Long.parseLong(idStr);
-		Production e = rMapper.selectById(id);
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}

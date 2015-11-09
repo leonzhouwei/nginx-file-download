@@ -7,9 +7,12 @@ import com.example.domain.Production;
 public interface ProductionRMapper {
 	
 	public List<Production> selectAll();
+
+	public List<Production> selectAllIgnoreEnabled();
 	
 	public Production selectById(long id);
 	
-	public List<Production> selectAllIgnoreEnabled();
+	public Production selectByIdIgnoreEnabled(long id);
+	
 
 }

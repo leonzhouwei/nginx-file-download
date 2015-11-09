@@ -33,5 +33,12 @@
 		FROM production
 		WHERE id=#{id} AND enabled=true
 	</select>
+	
+	<select id="selectByIdIgnoreEnabled" parameterType="long" resultMap="resultMap">
+        SELECT
+        <include refid="columns" />
+        FROM production
+        WHERE id=#{id}
+    </select>
 
 </mapper>
