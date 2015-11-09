@@ -1,5 +1,7 @@
 package com.example.webgui.admin;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,12 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
 import com.example.domain.Production;
+import com.example.persist.rdbms.ProductionRMapper;
 import com.example.persist.rdbms.ProductionWMapper;
 import com.example.webapi.RouteDefine;
 
 @Controller
 public class AdminWebGuiProductionController {
 
+	static final String DELETE = "admin/prod_delete";
 	static final String LIST = "admin/prod_list";
 	static final String NEW = "admin/prod_new";
 
@@ -29,6 +33,8 @@ public class AdminWebGuiProductionController {
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
+	private ProductionRMapper rMapper;
+	@Autowired
 	private ProductionWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.GET)
@@ -37,7 +43,7 @@ public class AdminWebGuiProductionController {
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_NEW, method = RequestMethod.GET)
-	public ModelAndView gotoNewProductionPage() {
+	public ModelAndView gotoNew() {
 		return ModelAndViewTool.newModelAndView(appConfig, NEW);
 	}
 
@@ -55,5 +61,36 @@ public class AdminWebGuiProductionController {
 		wMapper.insert(e);
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}
+
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DELETE, method = RequestMethod.GET)
+	public ModelAndView gotoDelete(HttpServletRequest request,
+			HttpServletResponse response) {
+		String idStr = request.getParameter("id");
+		final long id = Long.parseLong(idStr);
+		Production e = rMapper.selectById(id);
+		if (e == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, DELETE);
+		Map<String, Object> model = ret.getModel();
+		model.put("id", e.getId());
+		model.put("name", e.getName());
+		model.put("description", e.getDescription());
+		return ret;
+	}
 	
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DELETE, method = RequestMethod.POST)
+	public ModelAndView delete(HttpServletRequest request,
+			HttpServletResponse response) {
+		String idStr = request.getParameter("id");
+		final long id = Long.parseLong(idStr);
+		Production e = rMapper.selectById(id);
+		if (e == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		e.disable();
+		wMapper.updateById(e);
+		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+	}
+
 }

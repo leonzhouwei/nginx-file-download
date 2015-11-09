@@ -4,13 +4,24 @@
 <mapper namespace="com.example.persist.rdbms.ProductionWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.Production">
-        <selectKey order="AFTER" keyProperty="id" resultType="long">
-			SELECT currval('production_id_seq')
+		<selectKey order="AFTER" keyProperty="id" resultType="long">
+			SELECT
+			currval('production_id_seq')
 		</selectKey>
 		INSERT INTO production
-		(id, created_at, updated_at, enabled, name, description)
+		(id, created_at, updated_at, enabled, name,
+		description)
 		VALUES
-		(default, #{createdAt}, #{updatedAt}, #{enabled}, #{name}, #{description})
+		(default, #{createdAt}, #{updatedAt}, #{enabled},
+		#{name}, #{description})
 	</insert>
+
+	<update id="updateById" parameterType="com.example.domain.Production">
+		UPDATE production
+		SET
+		name=#{name}, description=#{description}, enabled=#{enabled},
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
 
 </mapper>

@@ -24,7 +24,7 @@ public class AdminProductionController {
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
-		List<Production> list = rMapper.selectAll();
+		List<Production> list = rMapper.selectAllIgnoreEnabled();
 		HttpServletResponseUtil.writeResponse(response, list);
 	}
 

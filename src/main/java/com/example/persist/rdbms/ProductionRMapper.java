@@ -9,5 +9,7 @@ public interface ProductionRMapper {
 	public List<Production> selectAll();
 	
 	public Production selectById(long id);
+	
+	public List<Production> selectAllIgnoreEnabled();
 
 }

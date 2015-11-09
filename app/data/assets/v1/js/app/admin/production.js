@@ -21,6 +21,8 @@ function initTable(result) {
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('<td>', elem['description'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
+		buffer.push('<td>', elem['enabled'], '</td>');
 		// ----------
 		buffer.push('<td>');
 		buffer.push('<a href="/admin/productions/edit?id=' + id,

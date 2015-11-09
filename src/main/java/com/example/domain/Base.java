@@ -58,4 +58,14 @@ public class Base {
 		this.enabled = enabled;
 	}
 	
+	public final void enable() {
+		setEnabled(true);
+		resetUpdatedAt();
+	}
+	
+	public final void disable() {
+		setEnabled(false);
+		resetUpdatedAt();
+	}
+	
 }
