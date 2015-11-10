@@ -19,7 +19,7 @@ function initTable(result) {
 		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
-		buffer.push('<td>', elem['createdAt'], '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td>', elem['md'], '</td>');
 		buffer.push('<td><a href="/download/' + elem['name'] + '?fileId=' + id

@@ -21,7 +21,7 @@ function initTable(result) {
 				elem['fileId'], '</a>');
 		buffer.push('</td>');
 		buffer.push('<td>', elem['clientIp'], '</td>');
-		buffer.push('<td>', elem['createdAt'],
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']),
 				'</td>');
 		var timeCostSeconds = parseInt(elem['timeCostMillis'] / 1000);
 		var hours = parseInt(timeCostSeconds / 3600);
