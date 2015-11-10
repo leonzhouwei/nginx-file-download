@@ -3,7 +3,7 @@ package com.example.persist;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.domain.File;
-import com.example.persist.rdbms.FileWMapper;
+import com.example.persist.must.FileWMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

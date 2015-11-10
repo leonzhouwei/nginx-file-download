@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.common.ConsoleTool;
 import com.example.domain.DownloadTask;
-import com.example.persist.rdbms.DownloadTaskRMapper;
+import com.example.persist.must.DownloadTaskRMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

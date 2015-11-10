@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.persist.must.ProductionRMapper">
+
+	<sql id="columns">created_at, updated_at, enabled, id, name, description
+	</sql>
+
+	<resultMap type="com.example.domain.Production" id="resultMap">
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+		<!-- -->
+	</resultMap>
+
+	<select id="selectAll" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM production
+		WHERE enabled=true
+		ORDER BY created_at DESC
+	</select>
+	
+	<select id="selectAllIgnoreEnabled" resultMap="resultMap">
+        SELECT
+        <include refid="columns" />
+        FROM production
+        ORDER BY created_at DESC
+    </select>
+
+	<select id="selectById" parameterType="long" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM production
+		WHERE id=#{id} AND enabled=true
+	</select>
+	
+	<select id="selectByIdIgnoreEnabled" parameterType="long" resultMap="resultMap">
+        SELECT
+        <include refid="columns" />
+        FROM production
+        WHERE id=#{id}
+    </select>
+
+</mapper>

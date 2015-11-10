@@ -3,8 +3,8 @@ package com.example.persist;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.domain.DownloadTask;
-import com.example.persist.rdbms.DownloadTaskRMapper;
-import com.example.persist.rdbms.DownloadTaskWMapper;
+import com.example.persist.must.DownloadTaskRMapper;
+import com.example.persist.must.DownloadTaskWMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

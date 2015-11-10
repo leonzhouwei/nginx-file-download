@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.DisposableBean;
 
-import com.example.persist.nosql.ssdb.driver.impl.SsdbRDriverImpl;
+import com.example.persist.assist.ssdb.driver.impl.SsdbRDriverImpl;
 
 public class SsdbRDriverBean extends SsdbRDriverImpl implements DisposableBean {
 

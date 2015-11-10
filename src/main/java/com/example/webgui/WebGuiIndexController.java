@@ -12,7 +12,7 @@ import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
 import com.example.domain.Account;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.rdbms.AccountRMapper;
+import com.example.persist.must.AccountRMapper;
 
 @Controller
 public class WebGuiIndexController {

@@ -3,7 +3,7 @@ package com.example.persist;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.domain.SdCardOrder;
-import com.example.persist.rdbms.SdCardOrderWMapper;
+import com.example.persist.must.SdCardOrderWMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

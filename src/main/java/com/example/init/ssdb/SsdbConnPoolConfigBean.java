@@ -1,7 +1,7 @@
 package com.example.init.ssdb;
 
 import com.example.config.AppConfig;
-import com.example.persist.nosql.ssdb.driver.impl.SsdbConnPoolConfigImpl;
+import com.example.persist.assist.ssdb.driver.impl.SsdbConnPoolConfigImpl;
 
 public class SsdbConnPoolConfigBean extends SsdbConnPoolConfigImpl {
 	

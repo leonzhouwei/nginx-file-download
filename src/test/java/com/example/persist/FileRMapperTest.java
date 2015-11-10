@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.common.ConsoleTool;
 import com.example.domain.File;
-import com.example.persist.rdbms.FileRMapper;
+import com.example.persist.must.FileRMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

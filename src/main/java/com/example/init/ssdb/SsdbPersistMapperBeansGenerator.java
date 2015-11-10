@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import com.example.config.AppConfig;
 import com.example.init.PersistMapperBeansGenerator;
-import com.example.persist.nosql.DownloadHistoryRMapper;
-import com.example.persist.nosql.DownloadHistoryWMapper;
-import com.example.persist.nosql.ssdb.SsdbDownloadHistoryRMapper;
-import com.example.persist.nosql.ssdb.SsdbDownloadHistoryWMapper;
-import com.example.persist.rdbms.DownloadTaskRMapper;
-import com.example.persist.rdbms.DownloadTaskWMapper;
+import com.example.persist.assist.DownloadHistoryRMapper;
+import com.example.persist.assist.DownloadHistoryWMapper;
+import com.example.persist.assist.ssdb.SsdbDownloadHistoryRMapper;
+import com.example.persist.assist.ssdb.SsdbDownloadHistoryWMapper;
+import com.example.persist.must.DownloadTaskRMapper;
+import com.example.persist.must.DownloadTaskWMapper;
 
 public class SsdbPersistMapperBeansGenerator implements
 		PersistMapperBeansGenerator {

@@ -18,7 +18,7 @@ import com.example.common.Sha2Encoder;
 import com.example.config.AppConfig;
 import com.example.domain.Account;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.rdbms.AccountRMapper;
+import com.example.persist.must.AccountRMapper;
 import com.example.webapi.RouteDefine;
 
 @Controller

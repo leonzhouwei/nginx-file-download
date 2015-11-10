@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.common.ConsoleTool;
 import com.example.domain.SdCardOrder;
-import com.example.persist.rdbms.SdCardOrderRMapper;
+import com.example.persist.must.SdCardOrderRMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)

@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
 
-import com.example.persist.nosql.ssdb.driver.impl.SsdbWDriverImpl;
+import com.example.persist.assist.ssdb.driver.impl.SsdbWDriverImpl;
 
 @Component
 public class SsdbWDriverBean extends SsdbWDriverImpl implements DisposableBean {

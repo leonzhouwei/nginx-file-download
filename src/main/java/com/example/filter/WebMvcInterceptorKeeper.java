@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.example.config.AppConfig;
-import com.example.persist.rdbms.AccountRMapper;
+import com.example.persist.must.AccountRMapper;
 
 @Component
 public class WebMvcInterceptorKeeper extends WebMvcConfigurerAdapter implements

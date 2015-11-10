@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 
 import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
-import com.example.persist.nosql.DownloadHistoryRMapper;
-import com.example.persist.rdbms.DownloadTaskRMapper;
-import com.example.persist.rdbms.DownloadTaskWMapper;
+import com.example.persist.assist.DownloadHistoryRMapper;
+import com.example.persist.must.DownloadTaskRMapper;
+import com.example.persist.must.DownloadTaskWMapper;
 import com.example.service.DownloadTaskService;
 import com.google.common.collect.Lists;
 
