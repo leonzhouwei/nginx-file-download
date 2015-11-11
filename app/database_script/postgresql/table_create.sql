@@ -24,7 +24,6 @@ CREATE TABLE download_task
   created_at timestamp with time zone NOT NULL,
   updated_at timestamp with time zone NOT NULL,
   enabled boolean NOT NULL DEFAULT false,
-  production_id bigint NOT NULL,
   client_ip character varying NOT NULL DEFAULT ''::character varying,
   file_id bigint NOT NULL,
   expired_at timestamp with time zone NOT NULL,
