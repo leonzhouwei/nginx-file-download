@@ -18,6 +18,7 @@ import com.example.config.AppConfig;
 import com.example.domain.File;
 import com.example.persist.must.FileRMapper;
 import com.example.webapi.RouteDefine;
+import com.google.common.collect.Maps;
 
 @Controller
 public class WebGuiFileController {
@@ -30,6 +31,22 @@ public class WebGuiFileController {
 	private AppConfig appConfig;
 	@Autowired
 	private FileRMapper rMapper;
+	
+	static Map<String, Object> toMap(File file) {
+		Map<String, Object> ret = Maps.newHashMap();
+		ret.put("id", file.getId());
+		ret.put("name", file.getName());
+		ret.put("size", file.getSize());
+		ret.put("sizeMb", file.getSize() / 1024 / 1024);
+		ret.put("createdAt",
+				DateTimeTool.toLocal(file.getCreatedAt()));
+		ret.put("md", file.getMd());
+		return ret;
+	}
+	
+	static void addAllObjects(ModelAndView mav, File e) {
+		mav.addAllObjects(toMap(e));
+	}
 
 	@RequestMapping(value = RouteDefine.FILES, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -44,14 +61,7 @@ public class WebGuiFileController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, FILE_DETAIL);
-		Map<String, Object> model = ret.getModel();
-		model.put("id", file.getId());
-		model.put("name", file.getName());
-		model.put("size", file.getSize());
-		model.put("sizeMb", file.getSize() / 1024 / 1024);
-		model.put("createdAt",
-				DateTimeTool.toLocal(file.getCreatedAt()));
-		model.put("md", file.getMd());
+		addAllObjects(ret, file);
 		return ret;
 	}
 

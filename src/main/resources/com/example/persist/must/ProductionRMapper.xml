@@ -17,14 +17,14 @@
 		<include refid="columns" />
 		FROM production
 		WHERE enabled=true
-		ORDER BY created_at DESC
+		ORDER BY created_at DESC, id DESC
 	</select>
 	
 	<select id="selectAllIgnoreEnabled" resultMap="resultMap">
         SELECT
         <include refid="columns" />
         FROM production
-        ORDER BY created_at DESC
+        ORDER BY created_at DESC, id DESC
     </select>
 
 	<select id="selectById" parameterType="long" resultMap="resultMap">

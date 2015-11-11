@@ -6,6 +6,10 @@ public interface ProductionWMapper {
 	
 	public void insert(Production p);
 	
-	public void updateById(Production p);
+	public void update(Production p);
+	
+	public void enable(Production p);
+	
+	public void disable(Production p);
 
 }

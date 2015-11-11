@@ -13,7 +13,8 @@ import com.example.webapi.RouteDefine;
 @Controller
 public class AdminWebGuiDownloadTaskController {
 
-	static final String LIST = RouteDefine.STRING_ADMIN + "/dld_task_list";
+	static final String LIST = RouteDefine.STRING_ADMIN
+			+ "/dld_task/dld_task_list";
 
 	@Autowired
 	private AppConfig appConfig;

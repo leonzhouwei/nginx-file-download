@@ -9,5 +9,27 @@
 	   VALUES
 	   (default, #{createdAt}, #{updatedAt}, #{enabled}, #{dir}, #{name}, #{size}, #{productionId})
 	</insert>
+	
+	<update id="update" parameterType="com.example.domain.File">
+        UPDATE file
+        SET
+        name=#{name}, enabled=#{enabled},
+        updated_at=#{updatedAt}
+        WHERE id=#{id}
+    </update>
+	
+	<update id="enable" parameterType="com.example.domain.File">
+        UPDATE file
+        SET enabled=true,
+        updated_at=#{updatedAt}
+        WHERE id=#{id}
+    </update>
+    
+    <update id="disable" parameterType="com.example.domain.File">
+        UPDATE file
+        SET enabled=false,
+        updated_at=#{updatedAt}
+        WHERE id=#{id}
+    </update>
 
 </mapper>

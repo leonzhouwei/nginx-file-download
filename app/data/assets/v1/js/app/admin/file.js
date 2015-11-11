@@ -25,14 +25,23 @@ function initTable(result) {
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td>', elem['md'], '</td>');
-		buffer.push('<td>', elem['enabled'], '</td>');
+		var enabled = elem['enabled'];
+		buffer.push('<td>', enabled, '</td>');
 		// ----------
 		buffer.push('<td>');
 		buffer.push('<a href="/admin/files/edit?id=' + id,
 				'" class="btn btn-primary btn-xs">编辑</a>');
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
-		buffer.push('<a href="/admin/files/disable?id=' + id,
-				'" class="btn btn-warning btn-xs">停用</a>');
+		// ----------
+		if (enabled == true) {
+			buffer.push('<a href="/admin/files/disable?id=' + id,
+			'" class="btn btn-warning btn-xs">停用</a>');
+		} else {
+			buffer.push('<a href="/admin/files/enable?id=' + id,
+					'" class="btn btn-success btn-xs">启用</a>');
+		}
+		buffer.push('</td>');
+		// ----------
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		buffer.push('<a href="/download/' + elem['name'] + '?fileId=' + id
 				+ '&uuid=', UUID.generate(),

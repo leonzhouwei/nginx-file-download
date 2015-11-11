@@ -16,12 +16,26 @@
 		#{name}, #{description})
 	</insert>
 
-	<update id="updateById" parameterType="com.example.domain.Production">
+	<update id="update" parameterType="com.example.domain.Production">
 		UPDATE production
 		SET
 		name=#{name}, description=#{description}, enabled=#{enabled},
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
+
+	<update id="enable" parameterType="com.example.domain.Production">
+		UPDATE production
+		SET enabled=true,
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
+	
+	<update id="disable" parameterType="com.example.domain.Production">
+        UPDATE production
+        SET enabled=false,
+        updated_at=#{updatedAt}
+        WHERE id=#{id}
+    </update>
 
 </mapper>

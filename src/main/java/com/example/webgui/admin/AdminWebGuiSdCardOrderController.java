@@ -12,8 +12,10 @@ import com.example.webapi.RouteDefine;
 
 @Controller
 public class AdminWebGuiSdCardOrderController {
-	
-	static final String LIST = "admin/sd_card_order_list";
+
+	static final String PREFIX = RouteDefine.STRING_ADMIN
+			+ "/sd_card_order/sd_card_order_";
+	static final String LIST = PREFIX + "list";
 
 	@Autowired
 	private AppConfig appConfig;

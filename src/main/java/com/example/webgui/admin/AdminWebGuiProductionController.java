@@ -20,15 +20,17 @@ import com.example.persist.must.ProductionRMapper;
 import com.example.persist.must.ProductionWMapper;
 import com.example.webapi.RouteDefine;
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 @Controller
 public class AdminWebGuiProductionController {
 
-	static final String ENABLE = "admin/prod_enable";
-	static final String DISABLE = "admin/prod_disable";
-	static final String EDIT = "admin/prod_edit";
-	static final String LIST = "admin/prod_list";
-	static final String NEW = "admin/prod_new";
+	static final String PREFIX = RouteDefine.STRING_ADMIN + "/production/prod_";
+	static final String DISABLE = PREFIX + "disable";
+	static final String EDIT = PREFIX + "edit";
+	static final String ENABLE = PREFIX + "enable";
+	static final String LIST = PREFIX + "list";
+	static final String NEW = PREFIX + "new";
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(AdminWebGuiProductionController.class);
@@ -39,6 +41,19 @@ public class AdminWebGuiProductionController {
 	private ProductionRMapper rMapper;
 	@Autowired
 	private ProductionWMapper wMapper;
+
+	static Map<String, Object> toMap(Production e) {
+		Map<String, Object> ret = Maps.newHashMap();
+		ret.put("id", e.getId());
+		ret.put("name", e.getName());
+		ret.put("description", e.getDescription());
+		ret.put("enabled", e.getEnabled());
+		return ret;
+	}
+
+	static void addAllObjects(ModelAndView mav, Production e) {
+		mav.addAllObjects(toMap(e));
+	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -64,7 +79,7 @@ public class AdminWebGuiProductionController {
 		wMapper.insert(e);
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}
-	
+
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -75,14 +90,10 @@ public class AdminWebGuiProductionController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, EDIT);
-		Map<String, Object> model = ret.getModel();
-		model.put("id", e.getId());
-		model.put("name", e.getName());
-		model.put("description", e.getDescription());
-		model.put("enabled", e.getEnabled());
+		addAllObjects(ret, e);
 		return ret;
 	}
-	
+
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -105,7 +116,7 @@ public class AdminWebGuiProductionController {
 			e.setEnabled(Boolean.valueOf(enabledStr));
 		}
 		e.resetUpdatedAt();
-		wMapper.updateById(e);
+		wMapper.update(e);
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}
 
@@ -119,13 +130,10 @@ public class AdminWebGuiProductionController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, DISABLE);
-		Map<String, Object> model = ret.getModel();
-		model.put("id", e.getId());
-		model.put("name", e.getName());
-		model.put("description", e.getDescription());
+		addAllObjects(ret, e);
 		return ret;
 	}
-	
+
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.POST)
 	public ModelAndView disable(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -136,10 +144,10 @@ public class AdminWebGuiProductionController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		e.disable();
-		wMapper.updateById(e);
+		wMapper.disable(e);
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}
-	
+
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.GET)
 	public ModelAndView gotoEnable(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -150,13 +158,10 @@ public class AdminWebGuiProductionController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, ENABLE);
-		Map<String, Object> model = ret.getModel();
-		model.put("id", e.getId());
-		model.put("name", e.getName());
-		model.put("description", e.getDescription());
+		addAllObjects(ret, e);
 		return ret;
 	}
-	
+
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.POST)
 	public ModelAndView enable(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -167,7 +172,7 @@ public class AdminWebGuiProductionController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		e.enable();
-		wMapper.updateById(e);
+		wMapper.enable(e);
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}
 

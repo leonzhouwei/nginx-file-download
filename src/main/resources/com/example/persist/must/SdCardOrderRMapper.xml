@@ -26,7 +26,7 @@
 		<include refid="columns" />
 		FROM sd_order
 		WHERE enabled=true
-		ORDER BY created_at DESC
+		ORDER BY created_at DESC, id DESC
 	</select>
 
 	<select id="selectByUserId" parameterType="long" resultMap="resultMap">
@@ -34,7 +34,6 @@
 		<include refid="columns" />
 		FROM sd_order
 		WHERE user_id=#{userId} AND enabled=true
-		ORDER BY created_at DESC
 	</select>
 
 </mapper>

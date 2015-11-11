@@ -3,6 +3,10 @@ body {
 	padding-top: 70px;
 }
 
+table tr {
+	white-space: nowrap;
+}
+
 .theme-dropdown .dropdown-menu {
 	position: static;
 	display: block;

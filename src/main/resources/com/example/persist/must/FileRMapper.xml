@@ -22,21 +22,29 @@
 		<include refid="columns" />
 		FROM file
 		WHERE enabled=true
-		ORDER BY created_at DESC
+		ORDER BY created_at DESC, id DESC
 	</select>
-	
+
 	<select id="selectAllIgnoreEnabled" resultMap="resultMap">
-        SELECT
-        <include refid="columns" />
-        FROM file
-        ORDER BY created_at DESC
-    </select>
+		SELECT
+		<include refid="columns" />
+		FROM file
+		ORDER BY created_at DESC, id DESC
+	</select>
 
 	<select id="selectById" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file
 		WHERE id=#{id} AND enabled=true
+	</select>
+
+	<select id="selectByIdIgnoreEnabled" parameterType="long"
+		resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM file
+		WHERE id=#{id}
 	</select>
 
 </mapper>

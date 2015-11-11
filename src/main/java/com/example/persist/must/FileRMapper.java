@@ -11,5 +11,7 @@ public interface FileRMapper {
 	public List<File> selectAllIgnoreEnabled();
 	
 	public File selectById(long id);
+	
+	public File selectByIdIgnoreEnabled(long id);
 
 }
