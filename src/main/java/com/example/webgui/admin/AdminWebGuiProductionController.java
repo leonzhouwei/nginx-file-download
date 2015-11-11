@@ -24,6 +24,7 @@ import com.google.common.base.Strings;
 @Controller
 public class AdminWebGuiProductionController {
 
+	static final String ENABLE = "admin/prod_enable";
 	static final String DISABLE = "admin/prod_disable";
 	static final String EDIT = "admin/prod_edit";
 	static final String LIST = "admin/prod_list";
@@ -135,6 +136,37 @@ public class AdminWebGuiProductionController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		e.disable();
+		wMapper.updateById(e);
+		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+	}
+	
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.GET)
+	public ModelAndView gotoEnable(HttpServletRequest request,
+			HttpServletResponse response) {
+		String idStr = request.getParameter("id");
+		final long id = Long.parseLong(idStr);
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
+		if (e == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, ENABLE);
+		Map<String, Object> model = ret.getModel();
+		model.put("id", e.getId());
+		model.put("name", e.getName());
+		model.put("description", e.getDescription());
+		return ret;
+	}
+	
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.POST)
+	public ModelAndView enable(HttpServletRequest request,
+			HttpServletResponse response) {
+		String idStr = request.getParameter("id");
+		final long id = Long.parseLong(idStr);
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
+		if (e == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		e.enable();
 		wMapper.updateById(e);
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}

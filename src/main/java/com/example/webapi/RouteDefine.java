@@ -50,6 +50,7 @@ public final class RouteDefine {
 	public static final String ADMIN_PRODUCTIONS = ADMIN + "/productions";
 	public static final String ADMIN_PRODUCTIONS_DISABLE = ADMIN_PRODUCTIONS + "/disable";
 	public static final String ADMIN_PRODUCTIONS_EDIT = ADMIN_PRODUCTIONS + "/edit";
+	public static final String ADMIN_PRODUCTIONS_ENABLE = ADMIN_PRODUCTIONS + "/enable";
 	public static final String ADMIN_PRODUCTIONS_NEW = ADMIN_PRODUCTIONS + "/new";
 
 	// -------------------------------------------------------------------------
