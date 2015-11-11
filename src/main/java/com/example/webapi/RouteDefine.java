@@ -4,7 +4,11 @@ public final class RouteDefine {
 
 	private RouteDefine() {
 	}
-
+	
+	// -------------------------------------------------------------------------
+	public static final String STRING_ADMIN = "admin";
+	
+	// -------------------------------------------------------------------------
 	public static final String ROOT = "/";
 
 	public static final String ADMIN = ROOT + "admin";
@@ -24,6 +28,8 @@ public final class RouteDefine {
 	public static final String API_ADMIN = API + ADMIN;
 	public static final String API_ADMIN_DOWNLOAD_TASKS = API_ADMIN
 			+ "/dld-tasks";
+	public static final String API_ADMIN_FILES = API_ADMIN
+			+ "/files";
 	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN
 			+ "/sd-card-orders";
 	public static final String API_ADMIN_PRODUCTIONS = API_ADMIN
@@ -39,6 +45,7 @@ public final class RouteDefine {
 	
 	// -------------------------------------------------------------------------
 	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
+	public static final String ADMIN_FILES = ADMIN + "/files";
 	public static final String ADMIN_SD_CARD_ORDERS = ADMIN + "/sd-card-orders";
 	public static final String ADMIN_PRODUCTIONS = ADMIN + "/productions";
 	public static final String ADMIN_PRODUCTIONS_DELETE = ADMIN_PRODUCTIONS + "/delete";

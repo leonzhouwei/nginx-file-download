@@ -3,8 +3,9 @@
 
 <mapper namespace="com.example.persist.must.DownloadTaskRMapper">
 
-	<sql id="columns">created_at, updated_at, enabled, uuid, id, production_id,
-		file_id, client_ip, time_cost_millis, user_id
+	<sql id="columns">created_at, updated_at, enabled, uuid, id,
+		file_id,
+		client_ip, time_cost_millis, user_id
 	</sql>
 
 	<resultMap type="com.example.domain.DownloadTask" id="resultMap">
@@ -12,7 +13,6 @@
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
 		<result property="userId" column="user_id" />
-		<result property="productionId" column="production_id" />
 		<result property="fileId" column="file_id" />
 		<result property="clientIp" column="client_ip" />
 		<result property="expiredAt" column="expired_at" />

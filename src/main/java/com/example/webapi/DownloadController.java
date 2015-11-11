@@ -133,7 +133,6 @@ public class DownloadController {
 			task.reset();
 			task.setFileId(fileId);
 			task.setClientIp(clientIp);
-			task.setProductionId(file.getProductionId());
 			task.setUserId(LoginInterceptor.getAccountId(request));
 			task.setUuid(uuid);
 			taskWMapper.insert(task);

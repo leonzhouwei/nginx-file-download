@@ -8,7 +8,6 @@ public class DownloadTask extends Base {
 
 	private Long id;
 	private Long userId;
-	private Long productionId;
 	private Long fileId;
 	private String clientIp;
 	private Date expiredAt;
@@ -23,14 +22,6 @@ public class DownloadTask extends Base {
 		setExpiredAt(expiredAt.toDate());
 		setTimeCostMillis(0L);
 		setLastDldedAt(getCreatedAt());
-	}
-
-	public Long getProductionId() {
-		return productionId;
-	}
-
-	public void setProductionId(Long productionId) {
-		this.productionId = productionId;
 	}
 
 	public String getClientIp() {

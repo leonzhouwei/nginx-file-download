@@ -8,19 +8,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
+import com.example.persist.must.FileRMapper;
 import com.example.webapi.RouteDefine;
 
 @Controller
-public class AdminWebGuiDownloadTaskController {
-
-	static final String LIST = RouteDefine.STRING_ADMIN + "/dld_task_list";
+public class AdminWebGuiFileController {
+	
+	static final String FILE = "admin/";
+	static final String FILE_LIST = FILE + "file_list";
+	static final String FILE_DETAIL = FILE + "file_detail";
 
 	@Autowired
 	private AppConfig appConfig;
+	@Autowired
+	private FileRMapper rMapper;
 
-	@RequestMapping(value = RouteDefine.ADMIN_DOWNLOAD_TASKS, method = RequestMethod.GET)
-	public ModelAndView get() {
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+	@RequestMapping(value = RouteDefine.ADMIN_FILES, method = RequestMethod.GET)
+	public ModelAndView list() {
+		return ModelAndViewTool.newModelAndView(appConfig, FILE_LIST);
 	}
+
 
 }

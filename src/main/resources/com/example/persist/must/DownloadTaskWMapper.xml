@@ -8,9 +8,9 @@
             SELECT currval('download_task_id_seq')
        </selectKey>
 	   INSERT INTO download_task
-	   (id, uuid, created_at, updated_at, enabled, user_id, production_id, file_id, client_ip, expired_at, time_cost_millis)
+	   (id, uuid, created_at, updated_at, enabled, user_id, file_id, client_ip, expired_at, time_cost_millis)
 	   VALUES
-	   (default, #{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{userId}, #{productionId}, #{fileId}, #{clientIp}, #{expiredAt}, #{timeCostMillis})
+	   (default, #{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{userId}, #{fileId}, #{clientIp}, #{expiredAt}, #{timeCostMillis})
 	</insert>
 	
 	<update id="updateTimeCostMillis" parameterType="com.example.domain.DownloadTask">

@@ -24,6 +24,13 @@
 		WHERE enabled=true
 		ORDER BY created_at DESC
 	</select>
+	
+	<select id="selectAllIgnoreEnabled" resultMap="resultMap">
+        SELECT
+        <include refid="columns" />
+        FROM file
+        ORDER BY created_at DESC
+    </select>
 
 	<select id="selectById" parameterType="long" resultMap="resultMap">
 		SELECT

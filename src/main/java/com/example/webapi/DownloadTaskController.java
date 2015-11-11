@@ -49,7 +49,6 @@ public class DownloadTaskController {
 		task.reset();
 		task.setClientIp(HttpServletRequestTool.getClientIpNullToEmpty(request));
 		task.setFileId(fileId);
-		task.setProductionId(file.getProductionId());
 		task.setUserId(LoginInterceptor.getAccountId(request));
 		wMapper.insert(task);
 		HttpServletResponseUtil.writeResponse(response, task);
