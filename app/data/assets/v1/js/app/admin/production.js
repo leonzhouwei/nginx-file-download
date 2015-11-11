@@ -5,7 +5,8 @@ $(function() {
 });
 
 function initTable(result) {
-	const len = result.length;
+	const
+	len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var table = $('#table');
@@ -22,14 +23,21 @@ function initTable(result) {
 		buffer.push('<td>', elem['description'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
-		buffer.push('<td>', elem['enabled'], '</td>');
+		var enabled = elem['enabled'];
+		buffer.push('<td>', enabled, '</td>');
 		// ----------
 		buffer.push('<td>');
 		buffer.push('<a href="/admin/productions/edit?id=' + id,
 				'" class="btn btn-primary btn-xs">编辑</a>');
+		// ----------
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
-		buffer.push('<a href="/admin/productions/disable?id=' + id,
-				'" class="btn btn-warning btn-xs">停用</a>');
+		if (enabled == true) {
+			buffer.push('<a href="/admin/productions/disable?id=' + id,
+					'" class="btn btn-warning btn-xs">停用</a>');
+		} else {
+			buffer.push('<a href="/admin/productions/enable?id=' + id,
+					'" class="btn btn-success btn-xs">启用</a>');
+		}
 		buffer.push('</td>');
 		// ----------
 		buffer.push('/<tr>');
