@@ -24,7 +24,7 @@ import com.google.common.base.Strings;
 @Controller
 public class AdminWebGuiProductionController {
 
-	static final String DELETE = "admin/prod_delete";
+	static final String DISABLE = "admin/prod_disable";
 	static final String EDIT = "admin/prod_edit";
 	static final String LIST = "admin/prod_list";
 	static final String NEW = "admin/prod_new";
@@ -108,8 +108,8 @@ public class AdminWebGuiProductionController {
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DELETE, method = RequestMethod.GET)
-	public ModelAndView gotoDelete(HttpServletRequest request,
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.GET)
+	public ModelAndView gotoDisable(HttpServletRequest request,
 			HttpServletResponse response) {
 		String idStr = request.getParameter("id");
 		final long id = Long.parseLong(idStr);
@@ -117,7 +117,7 @@ public class AdminWebGuiProductionController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, DELETE);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, DISABLE);
 		Map<String, Object> model = ret.getModel();
 		model.put("id", e.getId());
 		model.put("name", e.getName());
@@ -125,8 +125,8 @@ public class AdminWebGuiProductionController {
 		return ret;
 	}
 	
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DELETE, method = RequestMethod.POST)
-	public ModelAndView delete(HttpServletRequest request,
+	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.POST)
+	public ModelAndView disable(HttpServletRequest request,
 			HttpServletResponse response) {
 		String idStr = request.getParameter("id");
 		final long id = Long.parseLong(idStr);

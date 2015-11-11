@@ -4,15 +4,15 @@
 	layout:decorator="base/layout">
 
 <head>
-<title>删除产品</title>
+<title>停用产品</title>
 <meta charset="utf-8" />
 </head>
 
 <body>
 	<div class="container" layout:fragment="content">
-		<h4>删除产品</h4>
+		<h4>停用产品</h4>
 		<hr />
-		<form action="/admin/productions/delete" method="post">
+		<form action="/admin/productions/disable" method="post">
 			<div class="form-group">
 				<label for="productionNameText">编号</label> <input type="text"
 					class="form-control" name="id" th:value="${id}" readonly="readonly" />
@@ -27,7 +27,7 @@
 					class="form-control" name="description" th:value="${description}"
 					readonly="readonly" />
 			</div>
-			<button type="submit" class="btn btn-danger">确认删除</button>
+			<button type="submit" class="btn btn-warning">确认停用</button>
 		</form>
 	</div>
 </body>

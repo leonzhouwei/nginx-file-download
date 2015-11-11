@@ -22,10 +22,12 @@ function initTable(result) {
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('<td>', elem['productionId'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td>', elem['md'], '</td>');
-		buffer.push('<td>');
+		buffer.push('<td>', elem['enabled'], '</td>');
 		// ----------
+		buffer.push('<td>');
 		buffer.push('<a href="/admin/files/edit?id=' + id,
 				'" class="btn btn-primary btn-xs">编辑</a>');
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
