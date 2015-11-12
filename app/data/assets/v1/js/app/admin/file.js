@@ -27,6 +27,7 @@ function initTable(result) {
 		buffer.push('<td>', elem['md'], '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>', enabled, '</td>');
+		buffer.push('<td>', elem['fileServiceGroupId'], '</td>');
 		// ----------
 		buffer.push('<td>');
 		buffer.push('<a href="/admin/files/edit?id=' + id,

@@ -9,6 +9,7 @@ public class File extends Base {
 	private Long productionId;
 	private Long sdCardPriceFen;
 	private String md;
+	private Long fileServiceGroupId;
 	
 	public void resetBy(File another) {
 		super.resetBy(another);
@@ -73,6 +74,14 @@ public class File extends Base {
 
 	public void setMd(String md) {
 		this.md = md;
+	}
+
+	public Long getFileServiceGroupId() {
+		return fileServiceGroupId;
+	}
+
+	public void setFileServiceGroupId(Long fileServiceGroupId) {
+		this.fileServiceGroupId = fileServiceGroupId;
 	}
 
 }

@@ -4,10 +4,10 @@
 <mapper namespace="com.example.persist.must.FileRMapper">
 
 	<sql id="columns">
-	created_at, updated_at, enabled, id, production_id,
-	name,
-	size,
-	sd_card_price_fen, md, file_service_group_id
+		created_at, updated_at, enabled, id, production_id,
+		name,
+		size,
+		sd_card_price_fen, md, file_service_group_id
 	</sql>
 
 	<resultMap type="com.example.domain.File" id="resultMap">
@@ -16,7 +16,7 @@
 		<!-- -->
 		<result property="productionId" column="production_id" />
 		<result property="sdCardPriceFen" column="sd_card_price_fen" />
-		<result property="file_service_group_id" column="fileServiceGroupId" />
+		<result property="fileServiceGroupId" column="file_service_group_id" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
