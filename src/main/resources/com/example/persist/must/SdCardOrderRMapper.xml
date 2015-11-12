@@ -34,6 +34,7 @@
 		<include refid="columns" />
 		FROM sd_order
 		WHERE user_id=#{userId} AND enabled=true
+		ORDER BY created_at DESC, id DESC
 	</select>
 
 </mapper>

@@ -24,6 +24,11 @@ import com.google.common.collect.Maps;
 
 @Controller
 public class AdminWebGuiProductionController {
+	
+	static final String ID = "id";
+	static final String ENABLED = "enabled";
+	static final String DESCRIPTION = "description";
+	static final String NAME = "name";
 
 	static final String PREFIX = RouteDefine.STRING_ADMIN + "/production/prod_";
 	static final String DISABLE = PREFIX + "disable";
@@ -44,10 +49,10 @@ public class AdminWebGuiProductionController {
 
 	static Map<String, Object> toMap(Production e) {
 		Map<String, Object> ret = Maps.newHashMap();
-		ret.put("id", e.getId());
-		ret.put("name", e.getName());
-		ret.put("description", e.getDescription());
-		ret.put("enabled", e.getEnabled());
+		ret.put(ID, e.getId());
+		ret.put(NAME, e.getName());
+		ret.put(DESCRIPTION, e.getDescription());
+		ret.put(ENABLED, e.getEnabled());
 		return ret;
 	}
 
@@ -68,9 +73,9 @@ public class AdminWebGuiProductionController {
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.POST)
 	public ModelAndView newProduction(HttpServletRequest request,
 			HttpServletResponse response) {
-		String name = request.getParameter("name");
+		String name = request.getParameter(NAME);
 		logger.debug("name: " + name);
-		String description = request.getParameter("description");
+		String description = request.getParameter(DESCRIPTION);
 		logger.debug("description: " + description);
 		Production e = new Production();
 		e.reset();
@@ -83,7 +88,7 @@ public class AdminWebGuiProductionController {
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
@@ -97,21 +102,21 @@ public class AdminWebGuiProductionController {
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		String name = request.getParameter("name");
+		String name = request.getParameter(NAME);
 		if (!Strings.isNullOrEmpty(name)) {
 			e.setName(name);
 		}
-		String description = request.getParameter("description");
+		String description = request.getParameter(DESCRIPTION);
 		if (!Strings.isNullOrEmpty(description)) {
 			e.setDescription(description);
 		}
-		String enabledStr = request.getParameter("enabled");
+		String enabledStr = request.getParameter(ENABLED);
 		if (!Strings.isNullOrEmpty(enabledStr)) {
 			e.setEnabled(Boolean.valueOf(enabledStr));
 		}
@@ -123,7 +128,7 @@ public class AdminWebGuiProductionController {
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.GET)
 	public ModelAndView gotoDisable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
@@ -137,7 +142,7 @@ public class AdminWebGuiProductionController {
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.POST)
 	public ModelAndView disable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
@@ -151,7 +156,7 @@ public class AdminWebGuiProductionController {
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.GET)
 	public ModelAndView gotoEnable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
@@ -165,7 +170,7 @@ public class AdminWebGuiProductionController {
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.POST)
 	public ModelAndView enable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {

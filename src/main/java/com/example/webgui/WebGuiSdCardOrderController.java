@@ -23,6 +23,11 @@ import com.google.common.base.Strings;
 
 @Controller
 public class WebGuiSdCardOrderController {
+	
+	static final String FILE_ID = "fileId";
+	static final String UUID = "uuid";
+	static final String FILE_NAME = "fileName";
+	static final String PRICE = "price";
 
 	static final String SD_CARD_ORDER = "sd_card_order/";
 	static final String SD_CARD_ORDER_LIST = SD_CARD_ORDER
@@ -44,7 +49,7 @@ public class WebGuiSdCardOrderController {
 	@RequestMapping(value = RouteDefine.I_SD_CARD_ORDERS_NEW, method = RequestMethod.GET)
 	public ModelAndView gotoNewOrderPage(HttpServletRequest request,
 			HttpServletResponse response) {
-		String fileIdStr = request.getParameter("fileId");
+		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -54,21 +59,23 @@ public class WebGuiSdCardOrderController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, SD_CARD_ORDER_NEW);
-		ret.getModel().put("fileId", fileIdStr);
-		ret.getModel().put("uuid", UuidTool.newUuid());
-		ret.getModel().put("fileName", file.getName());
-		ret.getModel().put("price", file.getSdCardPriceFen() / 100);
+		ret.getModel().put(FILE_ID, fileIdStr);
+		ret.getModel().put(UUID, UuidTool.newUuid());
+		ret.getModel().put(FILE_NAME, file.getName());
+		Double price = new Double(file.getSdCardPriceFen());;
+		price /= 100;
+		ret.getModel().put(PRICE, price);
 		return ret;
 	}
 
 	@RequestMapping(value = RouteDefine.I_SD_CARD_ORDERS, method = RequestMethod.POST)
 	public ModelAndView newOrder(HttpServletRequest request,
 			HttpServletResponse response) {
-		String fileIdStr = request.getParameter("fileId");
+		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		String uuid = request.getParameter("uuid");
+		String uuid = request.getParameter(UUID);
 		if (Strings.isNullOrEmpty(uuid)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);

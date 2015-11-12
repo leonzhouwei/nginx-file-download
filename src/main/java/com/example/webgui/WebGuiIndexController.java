@@ -17,6 +17,8 @@ import com.example.persist.must.AccountRMapper;
 @Controller
 public class WebGuiIndexController {
 	
+	static final String ASSETS_VERSION = "ASSETS_VERSION";
+	
 	static final String INDEX = "index";
 	static final String ADMIN_INDEX = "admin/" + INDEX;
 
@@ -33,7 +35,6 @@ public class WebGuiIndexController {
 			return ModelAndViewTool.newModelAndView(appConfig, ADMIN_INDEX);
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, INDEX);
-		ret.getModel().put("ASSETS_VERSION", "v1");
 		return ret;
 	}
 

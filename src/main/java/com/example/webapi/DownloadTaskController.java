@@ -1,5 +1,6 @@
 package com.example.webapi;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ import com.example.persist.must.FileRMapper;
 @RestController
 public class DownloadTaskController {
 
+	static final String ID = "id";
+
 	@Autowired
 	private DownloadTaskRMapper rMapper;
 	@Autowired
@@ -35,10 +38,11 @@ public class DownloadTaskController {
 		List<DownloadTask> tasks = rMapper.selectByUserId(userId);
 		HttpServletResponseUtil.writeResponse(response, tasks);
 	}
-	
+
 	@RequestMapping(value = RouteDefine.API_I_DOWNLOAD_TASKS, method = RequestMethod.POST)
-	public void post(HttpServletRequest request, HttpServletResponse response) {
-		String fileIdStr = request.getParameter("id");
+	public void post(HttpServletRequest request, HttpServletResponse response)
+			throws UnknownHostException {
+		String fileIdStr = request.getParameter(ID);
 		final long fileId = Long.parseLong(fileIdStr);
 		File file = fileRMapper.selectById(fileId);
 		if (file == null) {

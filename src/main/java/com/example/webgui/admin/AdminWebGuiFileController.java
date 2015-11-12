@@ -22,6 +22,10 @@ import com.google.common.collect.Maps;
 
 @Controller
 public class AdminWebGuiFileController {
+	
+	static final String ID = "id";
+	static final String NAME = "name";
+	static final String ENABLED = "enabled";
 
 	static final String PREFIX = RouteDefine.STRING_ADMIN + "/file/file_";
 	static final String DISABLE = PREFIX + "disable";
@@ -39,9 +43,9 @@ public class AdminWebGuiFileController {
 
 	static Map<String, Object> toMap(File e) {
 		Map<String, Object> ret = Maps.newHashMap();
-		ret.put("id", e.getId());
-		ret.put("name", e.getName());
-		ret.put("enabled", e.getEnabled());
+		ret.put(ID, e.getId());
+		ret.put(NAME, e.getName());
+		ret.put(ENABLED, e.getEnabled());
 		return ret;
 	}
 
@@ -57,7 +61,7 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
@@ -71,17 +75,17 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		String name = request.getParameter("name");
+		String name = request.getParameter(NAME);
 		if (!Strings.isNullOrEmpty(name)) {
 			e.setName(name);
 		}
-		String enabledStr = request.getParameter("enabled");
+		String enabledStr = request.getParameter(ENABLED);
 		if (!Strings.isNullOrEmpty(enabledStr)) {
 			e.setEnabled(Boolean.valueOf(enabledStr));
 		}
@@ -93,7 +97,7 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.GET)
 	public ModelAndView gotoDisable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
@@ -107,7 +111,7 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.POST)
 	public ModelAndView disable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
@@ -121,7 +125,7 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.GET)
 	public ModelAndView gotoEnable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
@@ -135,7 +139,7 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.POST)
 	public ModelAndView enable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter("id");
+		String idStr = request.getParameter(ID);
 		final long id = Long.parseLong(idStr);
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {

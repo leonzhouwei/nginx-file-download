@@ -21,7 +21,7 @@ function initTable(result) {
 		buffer.push('<td><a href="/files/' + elem['fileId'] + '" target="_blank">',
 				elem['fileId'], '</a></td>');
 		buffer.push('<td style="text-align: right;">', elem['priceFen'] / 100, '</td>');
-		buffer.push('<td>', elem['username'], '</td>');
+		buffer.push('<td>', elem['userId'], '</td>');
 		buffer.push('<td>', elem['userAddr'], '</td>');
 		buffer.push('<td>', elem['userZipCode'], '</td>');
 		buffer.push('<td>', elem['userMobile'], '</td>');

@@ -20,6 +20,7 @@ function initTable(result) {
 		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
 				elem['fileId'], '</a>');
 		buffer.push('</td>');
+		buffer.push('<td>', elem['userId'], '</td>');
 		buffer.push('<td>', elem['clientIp'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']),
 				'</td>');

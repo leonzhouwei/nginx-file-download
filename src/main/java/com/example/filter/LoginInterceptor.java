@@ -18,15 +18,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	public static final String PREFIX = "example.com/";
 	public static final String SEESION_ID = PREFIX + "sessionId";
-	
-	static final Set<String> unrestrictedRoutePatterns = Sets
-			.newHashSet();
+
+	static final Set<String> unrestrictedRoutePatterns = Sets.newHashSet();
 	static {
 		unrestrictedRoutePatterns.add(RouteDefine.BASE_ASSETS + ".*");
 		unrestrictedRoutePatterns.add(RouteDefine.LOGIN + ".*");
 		unrestrictedRoutePatterns.add(RouteDefine.DOWNLOAD + "/.*");
 	}
-	
+
 	private AccountRMapper accountRMapper;
 
 	public static void redirectToLogin(HttpServletRequest request,
@@ -42,23 +41,23 @@ public class LoginInterceptor implements HandlerInterceptor {
 		Long ret = (Long) request.getSession().getAttribute(SEESION_ID);
 		return ret;
 	}
-	
+
 	public static boolean sessionIdExist(HttpServletRequest request) {
 		Long sessionId = getSessionId(request);
 		return sessionId != null;
 	}
-	
+
 	public static void removeSessionId(HttpServletRequest request) {
 		if (!sessionIdExist(request)) {
 			return;
 		}
 		request.getSession().removeAttribute(SEESION_ID);
 	}
-	
+
 	public static Long getAccountId(HttpServletRequest request) {
 		return getSessionId(request);
 	}
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
@@ -76,7 +75,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		Account account = accountRMapper.selectById(id);
 		if (Account.isValidAccount(account)) {
 			return true;
-		} 
+		}
 		redirectToLogin(request, response);
 		return false;
 	}
@@ -102,5 +101,5 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void setAccountRMapper(AccountRMapper accountRMapper) {
 		this.accountRMapper = accountRMapper;
 	}
-	
+
 }

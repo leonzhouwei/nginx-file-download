@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.common.HttpDefine;
 import com.example.common.HttpServletRequestTool;
 import com.example.common.HttpServletResponseUtil;
 import com.example.common.JsonTool;
@@ -39,10 +41,15 @@ import com.google.common.base.Strings;
 @Controller
 public class DownloadController {
 
-	static String FILE_SEPARATOR = "/";
-	static String regEx = "[\u4e00-\u9fa5]";
-	static Pattern pat = Pattern.compile(regEx);
+	static final String HOST = "Host";
+	static final String SLASH = "/";
+	static final String FILE_SEPARATOR = "/";
+	static final String regEx = "[\u4e00-\u9fa5]";
+	static final Pattern pat = Pattern.compile(regEx);
 	static final String UTF_8_CHARSET_NAME = StandardCharsets.UTF_8.name();
+
+	static final String FILE_ID = "fileId";
+	static final String UUID = "uuid";
 
 	@Autowired
 	private AppConfig appConfig;
@@ -61,7 +68,7 @@ public class DownloadController {
 	static final String xAccelRedirect(String routePrefix, File file)
 			throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
-		if (!routePrefix.endsWith("/")) {
+		if (!routePrefix.endsWith(SLASH)) {
 			sb.append(routePrefix);
 		}
 		sb.append(FILE_SEPARATOR);
@@ -93,23 +100,24 @@ public class DownloadController {
 
 	@RequestMapping(RouteDefine.DOWNLOAD + "/**")
 	public void downloadWithAuth(HttpServletRequest request,
-			HttpServletResponse response) throws UnsupportedEncodingException {
+			HttpServletResponse response) throws UnsupportedEncodingException,
+			UnknownHostException {
 		final String route = request.getRequestURI();
 		logger.info("route : " + route);
-		final String host = request.getHeader("Host");
+		final String host = request.getHeader(HOST);
 		logger.info("Host : " + host);
 		final String clientIp = HttpServletRequestTool.getClientIp(request);
 		logger.info("X-Real-IP : " + clientIp);
-		logger.info("X-Forwarded-For : " + request.getHeader("X-Forwarded-For"));
+		logger.info("X-Forwarded-For : " + request.getHeader(HttpDefine.XFF));
 		logger.info("request parameters : "
 				+ JsonTool.toJson(request.getParameterMap()));
 		//
-		String fileIdStr = request.getParameter("fileId");
+		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
 			return;
 		}
-		String uuid = request.getParameter("uuid");
+		String uuid = request.getParameter(UUID);
 		if (Strings.isNullOrEmpty(uuid)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
 			return;
@@ -139,13 +147,15 @@ public class DownloadController {
 		}
 		String fileName = file.getName();
 		// respond
-		response.setContentType("application/octet-stream");
+		response.setContentType(HttpDefine.CONTENT_TYPE_VALUE_APP_OCTETSTREAM);
 		String xAccelRoutePrefix = appConfig.getNginxXAccelRoutePrefix();
 		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, file);
 		logger.info("X-Accel-Redirect: " + xAccelRedirect);
 		response.setHeader("X-Accel-Redirect", xAccelRedirect);
-		response.addHeader("Content-Disposition", "attachment;filename="
-				+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
+		response.addHeader(
+				HttpDefine.CONTENT_DISPOSITION,
+				"attachment;filename="
+						+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
 		DownloadHistory history = new DownloadHistory();
 		history.reset();
 		history.setTaskId(task.getId());

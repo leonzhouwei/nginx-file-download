@@ -40,6 +40,7 @@
 		<include refid="columns" />
 		FROM download_task
 		WHERE user_id=#{userId} AND enabled=true
+        ORDER BY created_at DESC, id DESC
 	</select>
 
 	<select id="selectByUuid" parameterType="string" resultMap="resultMap">

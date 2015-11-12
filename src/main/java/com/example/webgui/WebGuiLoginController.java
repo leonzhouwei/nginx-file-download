@@ -25,6 +25,8 @@ import com.example.webapi.RouteDefine;
 public class WebGuiLoginController {
 	
 	static final String LOGIN = "login";
+	static final String PASSWORD = "username";
+	static final String USERNAME = "password";
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(WebGuiLoginController.class);
@@ -48,20 +50,20 @@ public class WebGuiLoginController {
 					+ " has already signed in");
 			return;
 		}
-		String username = request.getParameter("username");
-		String plain = request.getParameter("password");
+		String username = request.getParameter(USERNAME);
+		String plain = request.getParameter(PASSWORD);
 		String cypher = Sha2Encoder.encode(plain);
 		Account e = new Account();
 		e.setName(username);
 		e.setPassword(cypher);
 		Account account = rMapper.selectByNameAndPassword(e);
 		if (!Account.isValidAccount(account)) {
-			response.sendRedirect("/");
+			response.sendRedirect(RouteDefine.ROOT);
 			return;
 		}
 		LoginInterceptor.setSessionId(request, account.getId());
 		logger.info(username + " signed in OK");
-		response.sendRedirect("/");
+		response.sendRedirect(RouteDefine.ROOT);
 	}
 
 	@RequestMapping(value = RouteDefine.LOGOUT)
