@@ -19,11 +19,6 @@ public final class HttpServletRequestTool {
 		return ipAddr;
 	}
 
-	public static final String getHost(HttpServletRequest request)
-			throws UnknownHostException {
-		return toEntireIp(request.getRemoteAddr());
-	}
-
 	public static String getClientIp(HttpServletRequest request)
 			throws UnknownHostException {
 		String xff = request.getHeader(HttpDefine.XFF);

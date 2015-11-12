@@ -76,10 +76,10 @@ public class DownloadController {
 	static final String xAccelRedirect(String routePrefix, File file)
 			throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
+		sb.append(routePrefix);
 		if (!routePrefix.endsWith(SLASH)) {
-			sb.append(routePrefix);
+			sb.append(FILE_SEPARATOR);
 		}
-		sb.append(FILE_SEPARATOR);
 		sb.append(file.getProductionId());
 		sb.append(FILE_SEPARATOR);
 		String fileDir = file.getDir();
@@ -113,7 +113,7 @@ public class DownloadController {
 			UnknownHostException {
 		final String route = request.getRequestURI();
 		logger.info("route: " + route);
-		final String host = HttpServletRequestTool.getHost(request);
+		final String host = request.getHeader(HOST);
 		logger.info("Host: " + host);
 		final int port = request.getRemotePort();
 		logger.info("port: " + port);
@@ -154,14 +154,8 @@ public class DownloadController {
 		FileService params = new FileService();
 		params.setGroupId(fsg.getId());
 		params.setHost(host);
-		params.setPort(port);
 		FileService fileService = null;
-		if (appConfig.isInDevelopMode()) {
-			fileService = fileServiceRMapper.selectByGroupIdAndHost(params);
-		} else {
-			fileService = fileServiceRMapper
-					.selectByGroupIdAndHostAndPort(params);
-		}
+		fileService = fileServiceRMapper.selectByGroupIdAndHost(params);
 		logger.info("file service: " + JsonTool.toJson(fileService));
 		if (fileService == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
