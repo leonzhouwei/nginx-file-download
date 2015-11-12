@@ -7,5 +7,7 @@ import com.example.domain.FileServiceGroup;
 public interface FileServiceGroupRMapper {
 	
 	public List<FileServiceGroup> selectAll();
+	
+	public FileServiceGroup selectById(long id);
 
 }

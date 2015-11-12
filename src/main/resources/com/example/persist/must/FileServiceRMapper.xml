@@ -20,4 +20,21 @@
 		ORDER BY created_at DESC, id DESC
 	</select>
 
+	<select id="selectByGroupIdAndHost" parameterType="com.example.domain.FileService"
+		resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM file_service
+		WHERE group_id=#{groupId} AND host=#{host} AND enabled=true
+	</select>
+
+	<select id="selectByGroupIdAndHostAndPort" parameterType="com.example.domain.FileService"
+		resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM file_service
+		WHERE group_id=#{groupId} AND host=#{host} AND
+		port=#{port} AND enabled=true
+	</select>
+
 </mapper>

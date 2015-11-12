@@ -31,11 +31,15 @@ import com.example.config.AppConfig;
 import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
 import com.example.domain.File;
+import com.example.domain.FileService;
+import com.example.domain.FileServiceGroup;
 import com.example.filter.LoginInterceptor;
 import com.example.persist.assist.DownloadHistoryWMapper;
 import com.example.persist.must.DownloadTaskRMapper;
 import com.example.persist.must.DownloadTaskWMapper;
 import com.example.persist.must.FileRMapper;
+import com.example.persist.must.FileServiceGroupRMapper;
+import com.example.persist.must.FileServiceRMapper;
 import com.google.common.base.Strings;
 
 @Controller
@@ -61,6 +65,10 @@ public class DownloadController {
 	private FileRMapper fileRMapper;
 	@Autowired
 	private DownloadHistoryWMapper historyWMapper;
+	@Autowired
+	private FileServiceGroupRMapper fileServiceGroupRMapper;
+	@Autowired
+	private FileServiceRMapper fileServiceRMapper;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(DownloadController.class);
@@ -98,18 +106,21 @@ public class DownloadController {
 		return flg;
 	}
 
-	@RequestMapping(RouteDefine.DOWNLOAD + "/**")
+	@RequestMapping(RouteDefine.FILE_SERVICE_GROUPS
+			+ "/{fsGroupId}/download/**")
 	public void downloadWithAuth(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException,
 			UnknownHostException {
 		final String route = request.getRequestURI();
-		logger.info("route : " + route);
-		final String host = request.getHeader(HOST);
-		logger.info("Host : " + host);
+		logger.info("route: " + route);
+		final String host = HttpServletRequestTool.getHost(request);
+		logger.info("Host: " + host);
+		final int port = request.getRemotePort();
+		logger.info("port: " + port);
 		final String clientIp = HttpServletRequestTool.getClientIp(request);
-		logger.info("X-Real-IP : " + clientIp);
-		logger.info("X-Forwarded-For : " + request.getHeader(HttpDefine.XFF));
-		logger.info("request parameters : "
+		logger.info("client IP: " + clientIp);
+		logger.info("X-Forwarded-For: " + request.getHeader(HttpDefine.XFF));
+		logger.info("request parameters: "
 				+ JsonTool.toJson(request.getParameterMap()));
 		//
 		String fileIdStr = request.getParameter(FILE_ID);
@@ -126,6 +137,33 @@ public class DownloadController {
 		final long fileId = Long.parseLong(fileIdStr);
 		File file = fileRMapper.selectById(fileId);
 		if (file == null) {
+			HttpServletResponseUtil.setStatusAsNotFound(response);
+			return;
+		}
+		// check the file service group
+		final long fileServiceGroupId = file.getFileServiceGroupId();
+		logger.info("file service group id: " + fileServiceGroupId);
+		FileServiceGroup fsg = fileServiceGroupRMapper
+				.selectById(fileServiceGroupId);
+		logger.info("file service group: " + JsonTool.toJson(fsg));
+		if (fsg == null) {
+			HttpServletResponseUtil.setStatusAsNotFound(response);
+			return;
+		}
+		// check the file service
+		FileService params = new FileService();
+		params.setGroupId(fsg.getId());
+		params.setHost(host);
+		params.setPort(port);
+		FileService fileService = null;
+		if (appConfig.isInDevelopMode()) {
+			fileService = fileServiceRMapper.selectByGroupIdAndHost(params);
+		} else {
+			fileService = fileServiceRMapper
+					.selectByGroupIdAndHostAndPort(params);
+		}
+		logger.info("file service: " + JsonTool.toJson(fileService));
+		if (fileService == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
 			return;
 		}
@@ -169,12 +207,11 @@ public class DownloadController {
 	public void download(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		String route = request.getRequestURI();
-		logger.info("route : " + route);
-		logger.info("Host : " + request.getHeader("Host"));
-		logger.info("X-Real-IP : " + request.getHeader("X-Real-IP"));
-		logger.info("X-Forwarded-For : " + request.getHeader("X-Forwarded-For"));
-		logger.info("parameters : "
-				+ JsonTool.toJson(request.getParameterMap()));
+		logger.info("route: " + route);
+		logger.info("Host: " + request.getHeader("Host"));
+		logger.info("X-Real-IP: " + request.getHeader("X-Real-IP"));
+		logger.info("X-Forwarded-For: " + request.getHeader("X-Forwarded-For"));
+		logger.info("parameters: " + JsonTool.toJson(request.getParameterMap()));
 		//
 		String fileRoute = route.replace("/download/", "");
 		logger.debug("file route: " + fileRoute);

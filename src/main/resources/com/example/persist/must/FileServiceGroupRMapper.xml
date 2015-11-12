@@ -15,7 +15,15 @@
 		SELECT
 		<include refid="columns" />
 		FROM file_service_group
+		WHERE enabled=true
 		ORDER BY created_at DESC, id DESC
 	</select>
+	
+	<select id="selectById" parameterType="long" resultMap="resultMap">
+        SELECT
+        <include refid="columns" />
+        FROM file_service_group
+        WHERE id=#{id} AND enabled=true
+    </select>
 
 </mapper>

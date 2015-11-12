@@ -57,7 +57,7 @@ public final class RouteDefine {
 	public static final String ADMIN_PRODUCTIONS_NEW = ADMIN_PRODUCTIONS + "/new";
 
 	// -------------------------------------------------------------------------
-	public static final String DOWNLOAD = "/download";
+	public static final String FILE_SERVICE_GROUPS = "/fsgroups";
 
 	public static final String FILES = ROOT + "files";
 
