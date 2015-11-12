@@ -6,12 +6,19 @@ import com.google.common.base.Strings;
 
 public final class HttpServletRequestTool {
 	
+	static final String XFF_SEPARATOR = ",";
+	
 	private HttpServletRequestTool() {
 	}
 	
 	public static String getClientIp(HttpServletRequest request) {
-		final String clientIp = request.getHeader("X-Real-IP");
-		return clientIp;
+		String xff = request.getHeader("X-Forwarded-For");
+		String[] split = xff.split(XFF_SEPARATOR);
+		if (split.length < 1) {
+			return null;
+		}
+		String ret = split[0].trim();
+		return ret;
 	}
 	
 	public static String getClientIpNullToEmpty(HttpServletRequest request) {
