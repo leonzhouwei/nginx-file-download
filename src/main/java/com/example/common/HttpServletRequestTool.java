@@ -13,6 +13,9 @@ public final class HttpServletRequestTool {
 	
 	public static String getClientIp(HttpServletRequest request) {
 		String xff = request.getHeader("X-Forwarded-For");
+		if (Strings.isNullOrEmpty(xff)) {
+			return null;
+		}
 		String[] split = xff.split(XFF_SEPARATOR);
 		if (split.length < 1) {
 			return null;
