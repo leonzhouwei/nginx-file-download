@@ -1,23 +1,22 @@
-package com.example.persist;
+package com.example.persist.must;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.common.ConsoleTool;
-import com.example.domain.SdCardOrder;
-import com.example.persist.must.SdCardOrderRMapper;
+import com.example.domain.FileService;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)
-public class SdCardOrderRMapperTest {
+public class FileServiceRMapperTest {
 	
 	@Autowired
-	private SdCardOrderRMapper mapper;
+	private FileServiceRMapper mapper;
 
 //	@Test
 	public void testSelectAll() {
-		List<SdCardOrder> c = mapper.selectAll();
+		List<FileService> c = mapper.selectAll();
 		ConsoleTool.printCollection(c);
 	}
 

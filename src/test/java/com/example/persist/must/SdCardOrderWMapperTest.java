@@ -1,4 +1,4 @@
-package com.example.persist;
+package com.example.persist.must;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
