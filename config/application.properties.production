@@ -3,7 +3,6 @@
 # run mode: dev | prod
 app.runMode=prod
 app.workDir=./var
-app.nginx.xAccel.route.prefix=/protected
 app.data.dir=./app/data
 
 ################################################################################

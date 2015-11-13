@@ -1,17 +1,9 @@
 package com.example.domain;
 
 public class FileServiceGroup extends Base {
-	
+
 	private Long id;
-	private String namespace;
-
-	public String getNamespace() {
-		return namespace;
-	}
-
-	public void setNamespace(String namespace) {
-		this.namespace = namespace;
-	}
+	private String xAccelPrefix;
 
 	public Long getId() {
 		return id;
@@ -19,6 +11,14 @@ public class FileServiceGroup extends Base {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getxAccelPrefix() {
+		return xAccelPrefix;
+	}
+
+	public void setxAccelPrefix(String xAccelPrefix) {
+		this.xAccelPrefix = xAccelPrefix;
 	}
 
 }

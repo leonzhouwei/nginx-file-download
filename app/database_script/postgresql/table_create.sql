@@ -52,7 +52,37 @@ CREATE TABLE file
   production_id bigint NOT NULL,
   sd_card_price_fen bigint NOT NULL,
   md character varying NOT NULL,
+  file_service_group_id bigint DEFAULT 1,
   CONSTRAINT file_pkey PRIMARY KEY (id)
+);
+
+-- Table: file_service
+
+-- DROP TABLE file_service;
+
+CREATE TABLE file_service
+(
+  id bigserial NOT NULL,
+  created_at timestamp with time zone NOT NULL,
+  updated_at timestamp with time zone NOT NULL,
+  enabled boolean NOT NULL,
+  group_id bigint NOT NULL,
+  host character varying NOT NULL,
+  CONSTRAINT file_service_pkey PRIMARY KEY (id)
+);
+
+-- Table: file_service_group
+
+-- DROP TABLE file_service_group;
+
+CREATE TABLE file_service_group
+(
+  id bigserial NOT NULL,
+  created_at timestamp with time zone NOT NULL,
+  updated_at timestamp with time zone NOT NULL,
+  enabled boolean NOT NULL,
+  x_accel_prefix character varying NOT NULL,
+  CONSTRAINT file_service_group_pkey PRIMARY KEY (id)
 );
 
 -- Table: production

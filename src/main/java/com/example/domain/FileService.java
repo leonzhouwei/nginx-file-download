@@ -4,7 +4,6 @@ public class FileService extends Base {
 	
 	private Long id;
 	private String host;
-	private Integer port;
 	private Long groupId;
 
 	public Long getId() {
@@ -21,14 +20,6 @@ public class FileService extends Base {
 
 	public void setHost(String host) {
 		this.host = host;
-	}
-
-	public Integer getPort() {
-		return port;
-	}
-
-	public void setPort(Integer port) {
-		this.port = port;
 	}
 
 	public Long getGroupId() {

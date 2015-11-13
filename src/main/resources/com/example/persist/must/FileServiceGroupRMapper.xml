@@ -3,12 +3,14 @@
 
 <mapper namespace="com.example.persist.must.FileServiceGroupRMapper">
 
-	<sql id="columns">created_at, updated_at, enabled, id, namespace
+	<sql id="columns">created_at, updated_at, enabled, id, x_accel_prefix
 	</sql>
 
 	<resultMap type="com.example.domain.FileServiceGroup" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
+		<!-- ********** -->
+		<result property="xAccelPrefix" column="x_accel_prefix" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">

@@ -10,6 +10,4 @@ public interface FileServiceRMapper {
 	
 	public FileService selectByGroupIdAndHost(FileService params);
 	
-	public FileService selectByGroupIdAndHostAndPort(FileService params);
-	
 }

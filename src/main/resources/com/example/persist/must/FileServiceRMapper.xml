@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.persist.must.FileServiceRMapper">
 
-	<sql id="columns">created_at, updated_at, enabled, id, host, port, group_id
+	<sql id="columns">created_at, updated_at, enabled, id, host, group_id
 	</sql>
 
 	<resultMap type="com.example.domain.FileService" id="resultMap">
@@ -26,15 +26,6 @@
 		<include refid="columns" />
 		FROM file_service
 		WHERE group_id=#{groupId} AND host=#{host} AND enabled=true
-	</select>
-
-	<select id="selectByGroupIdAndHostAndPort" parameterType="com.example.domain.FileService"
-		resultMap="resultMap">
-		SELECT
-		<include refid="columns" />
-		FROM file_service
-		WHERE group_id=#{groupId} AND host=#{host} AND
-		port=#{port} AND enabled=true
 	</select>
 
 </mapper>

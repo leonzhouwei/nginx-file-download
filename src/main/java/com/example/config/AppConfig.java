@@ -56,10 +56,6 @@ public class AppConfig implements InitializingBean {
 	@Value("${app.ssdb.auth}")
 	private String ssdbAuth;
 
-	// NginX -------------------------------------------------------------------
-	@Value("${app.nginx.xAccel.route.prefix}")
-	private String nginxXAccelRoutePrefix;
-
 	public String getWorkDirPath() {
 		return workDirPath;
 	}
@@ -108,10 +104,6 @@ public class AppConfig implements InitializingBean {
 
 	public String getImageDirPath() {
 		return imageDirPath;
-	}
-
-	public String getNginxXAccelRoutePrefix() {
-		return nginxXAccelRoutePrefix;
 	}
 
 	public Boolean getIgnoreCustomizedInterceptors() {

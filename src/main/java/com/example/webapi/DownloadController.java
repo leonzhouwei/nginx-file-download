@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
@@ -45,15 +44,30 @@ import com.google.common.base.Strings;
 @Controller
 public class DownloadController {
 
-	static final String HOST = "Host";
+	static final String WEB_SERVER_HOST = "Host";
+	static final String WEB_SERVER_X_ACCEL = "X-Accel-Redirect";
+	static final String ATACHMENT_FILENAME = "attachment;filename=";
+
+	static final String COLON = ":";
 	static final String SLASH = "/";
 	static final String FILE_SEPARATOR = "/";
 	static final String regEx = "[\u4e00-\u9fa5]";
 	static final Pattern pat = Pattern.compile(regEx);
 	static final String UTF_8_CHARSET_NAME = StandardCharsets.UTF_8.name();
-
+	static final String LOCALHOST_IPV4 = "127.0.0.1";
+	
 	static final String FILE_ID = "fileId";
 	static final String UUID = "uuid";
+	
+	private static class Result {
+		public boolean ok = false;
+		public String clientIp;
+		public String webServerHost;
+		public String requestRoute;
+		public String taskUuid;
+		public File file;
+		public FileServiceGroup fileServiceGroup;
+	}
 
 	@Autowired
 	private AppConfig appConfig;
@@ -111,12 +125,57 @@ public class DownloadController {
 	public void downloadWithAuth(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException,
 			UnknownHostException {
+		Result result = logAndCheck(request, response);
+		if (!result.ok) {
+			return;
+		}
+		// try to find the download task by uuid
+		DownloadTask task = taskRMapper.selectByUuid(result.taskUuid);
+		if (task == null) {
+			if (LoginInterceptor.getAccountId(request) == null) {
+				HttpServletResponseUtil.setStatusAsUnauthorized(response);
+				return;
+			}
+			// not found, create a new one
+			task = new DownloadTask();
+			task.reset();
+			task.setFileId(result.file.getId());
+			task.setClientIp(result.clientIp);
+			task.setUserId(LoginInterceptor.getAccountId(request));
+			task.setUuid(result.taskUuid);
+			taskWMapper.insert(task);
+		}
+		String fileName = result.file.getName();
+		// respond
+		response.setContentType(HttpDefine.CONTENT_TYPE_VALUE_APP_OCTETSTREAM);
+		String xAccelRoutePrefix = result.fileServiceGroup.getxAccelPrefix();
+		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, result.file);
+		logger.info(WEB_SERVER_X_ACCEL + ": " + xAccelRedirect);
+		response.setHeader(WEB_SERVER_X_ACCEL, xAccelRedirect);
+		response.addHeader(HttpDefine.CONTENT_DISPOSITION, ATACHMENT_FILENAME
+				+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
+		// record this download request
+		DownloadHistory history = new DownloadHistory();
+		history.reset();
+		history.setTaskId(task.getId());
+		history.setClientIp(result.clientIp);
+		history.setWebServerHost(result.webServerHost);
+		history.setRequestRoute(result.requestRoute);
+		history.setRequestParameters(JsonTool.toJson(request.getParameterMap()));
+		historyWMapper.insert(history);
+	}
+	
+	Result logAndCheck(HttpServletRequest request,
+			HttpServletResponse response) throws UnknownHostException {
 		final String route = request.getRequestURI();
 		logger.info("route: " + route);
-		final String host = request.getHeader(HOST);
-		logger.info("Host: " + host);
-		final int port = request.getRemotePort();
-		logger.info("port: " + port);
+		String tempHost = request.getHeader(WEB_SERVER_HOST);
+		final int indexOfColon = tempHost.indexOf(COLON);
+		if (indexOfColon > 0) {
+			tempHost = tempHost.substring(0, indexOfColon);
+		}
+		final String host = tempHost;
+		logger.info("web server host: " + host);
 		final String clientIp = HttpServletRequestTool.getClientIp(request);
 		logger.info("client IP: " + clientIp);
 		logger.info("X-Forwarded-For: " + request.getHeader(HttpDefine.XFF));
@@ -126,19 +185,19 @@ public class DownloadController {
 		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return;
+			return new Result();
 		}
 		String uuid = request.getParameter(UUID);
 		if (Strings.isNullOrEmpty(uuid)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return;
+			return new Result();
 		}
 		// find the file by id
 		final long fileId = Long.parseLong(fileIdStr);
 		File file = fileRMapper.selectById(fileId);
 		if (file == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return;
+			return new Result();
 		}
 		// check the file service group
 		final long fileServiceGroupId = file.getFileServiceGroupId();
@@ -148,91 +207,33 @@ public class DownloadController {
 		logger.info("file service group: " + JsonTool.toJson(fsg));
 		if (fsg == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return;
+			return new Result();
 		}
 		// check the file service
 		FileService params = new FileService();
 		params.setGroupId(fsg.getId());
 		params.setHost(host);
-		FileService fileService = null;
-		fileService = fileServiceRMapper.selectByGroupIdAndHost(params);
+		FileService fileService = fileServiceRMapper
+				.selectByGroupIdAndHost(params);
 		logger.info("file service: " + JsonTool.toJson(fileService));
 		if (fileService == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return;
+			return new Result();
 		}
-		// try to find the download task by uuid
-		DownloadTask task = taskRMapper.selectByUuid(uuid);
-		if (task == null) {
-			if (LoginInterceptor.getAccountId(request) == null) {
-				HttpServletResponseUtil.setStatusAsUnauthorized(response);
-				return;
-			}
-			// not found, create a new one
-			task = new DownloadTask();
-			task.reset();
-			task.setFileId(fileId);
-			task.setClientIp(clientIp);
-			task.setUserId(LoginInterceptor.getAccountId(request));
-			task.setUuid(uuid);
-			taskWMapper.insert(task);
-		}
-		String fileName = file.getName();
-		// respond
-		response.setContentType(HttpDefine.CONTENT_TYPE_VALUE_APP_OCTETSTREAM);
-		String xAccelRoutePrefix = appConfig.getNginxXAccelRoutePrefix();
-		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, file);
-		logger.info("X-Accel-Redirect: " + xAccelRedirect);
-		response.setHeader("X-Accel-Redirect", xAccelRedirect);
-		response.addHeader(
-				HttpDefine.CONTENT_DISPOSITION,
-				"attachment;filename="
-						+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
-		DownloadHistory history = new DownloadHistory();
-		history.reset();
-		history.setTaskId(task.getId());
-		history.setClientIp(clientIp);
-		history.setWebServerHost(host);
-		history.setRequestRoute(route);
-		history.setRequestParameters(JsonTool.toJson(request.getParameterMap()));
-		historyWMapper.insert(history);
+		// success
+		Result ret = new Result();
+		ret.ok = true;
+		ret.clientIp = clientIp;
+		ret.webServerHost = host;
+		ret.requestRoute = route;
+		ret.taskUuid = uuid;
+		ret.file = file;
+		ret.fileServiceGroup = fsg;
+		return ret;
 	}
 
-	public void download(HttpServletRequest request,
-			HttpServletResponse response) throws UnsupportedEncodingException {
-		String route = request.getRequestURI();
-		logger.info("route: " + route);
-		logger.info("Host: " + request.getHeader("Host"));
-		logger.info("X-Real-IP: " + request.getHeader("X-Real-IP"));
-		logger.info("X-Forwarded-For: " + request.getHeader("X-Forwarded-For"));
-		logger.info("parameters: " + JsonTool.toJson(request.getParameterMap()));
-		//
-		String fileRoute = route.replace("/download/", "");
-		logger.debug("file route: " + fileRoute);
-		String fileBaseName = fileRoute.substring(
-				fileRoute.lastIndexOf("/") + 1, fileRoute.length());
-		logger.debug("file base name: " + fileBaseName);
-		response.setContentType("application/octet-stream");
-		// 设置response的Header
-		String xAccelRedirect = "/protected/" + fileRoute;
-		logger.debug("X-Accel-Redirect: " + xAccelRedirect);
-		response.setHeader("X-Accel-Redirect", xAccelRedirect);
-		String decoded = URLDecoder.decode(fileBaseName,
-				StandardCharsets.UTF_8.name());
-		logger.debug("decoded: " + decoded);
-		if (containChinese(decoded)) {
-			logger.debug("file name contains chinese");
-			response.addHeader("Content-Disposition",
-					"attachment;filename*=utf-8'zh_cn'" + decoded);
-		} else {
-			logger.debug("file name does not contain chinese");
-			response.addHeader("Content-Disposition", "attachment;filename="
-					+ fileBaseName);
-		}
-	}
-
-	// @RequestMapping("/download/**")
-	public void get(HttpServletRequest request, HttpServletResponse response) {
+	void downloadLocalFile(HttpServletRequest request,
+			HttpServletResponse response) {
 		logger.debug(request.getRequestURI());
 		logger.debug(request.getRequestURL().toString());
 		try {
