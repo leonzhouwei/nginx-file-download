@@ -1,4 +1,5 @@
 # Nginx-based Large Files Downloading Service
+This is a large files downloading service based on Nginx, Spring Boot, PostgreSQL and SSDB. Dynamically adding more Files and more nginx nodes are supportive, which simply requireds some registration job on the administraion Web pages.
 
 ## Technology Selections
 - Web Server: [Nginx](http://nginx.org/) v1.8.0
