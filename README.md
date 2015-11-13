@@ -9,3 +9,17 @@ This is a large files downloading service based on Nginx, Spring Boot, PostgreSQ
 - Download History Data Storage: [SSDB](https://www.github.com/ideawu/ssdb/)  v1.8.2
 	- About 30 download history records per GB
 - Other Data Storage (users, large Files for downloading, download tasks, etc.): [PostgreSQL](http://www.postgresql.org/)  v9.2
+
+## Some Screenshots of the Admistrations
+### main
+![](doc/readme/images/admin_index.png)
+### file list
+![](doc/readme/images/file_list.png)
+### file service group list
+![](doc/readme/images/file_service_group_list.png)
+### file service list
+![](doc/readme/images/file_service_list.png)
+### download task list
+![](doc/readme/images/download_task_list.png)
+
+
