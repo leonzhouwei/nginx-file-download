@@ -11,15 +11,15 @@ This is a large files downloading service based on Nginx, Spring Boot, PostgreSQ
 - Other Data Storage (users, large Files for downloading, download tasks, etc.): [PostgreSQL](http://www.postgresql.org/)  v9.2
 
 ## Some Screenshots of the Administrations
-### main
+### Main
 ![](doc/readme/images/admin_index.png)
-### file list
+### File list
 ![](doc/readme/images/file_list.png)
-### file service group list
+### File service group list
 ![](doc/readme/images/file_service_group_list.png)
-### file service list
+### File service list
 ![](doc/readme/images/file_service_list.png)
-### download task list
+### Download task list
 ![](doc/readme/images/download_task_list.png)
 
 
