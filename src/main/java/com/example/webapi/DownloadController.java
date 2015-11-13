@@ -148,7 +148,7 @@ public class DownloadController {
 		String fileName = result.file.getName();
 		// respond
 		response.setContentType(HttpDefine.CONTENT_TYPE_VALUE_APP_OCTETSTREAM);
-		String xAccelRoutePrefix = result.fileServiceGroup.getxAccelPrefix();
+		String xAccelRoutePrefix = result.fileServiceGroup.getXAccelPrefix();
 		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, result.file);
 		logger.info(WEB_SERVER_X_ACCEL + ": " + xAccelRedirect);
 		response.setHeader(WEB_SERVER_X_ACCEL, xAccelRedirect);

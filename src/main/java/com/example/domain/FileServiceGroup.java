@@ -13,11 +13,11 @@ public class FileServiceGroup extends Base {
 		this.id = id;
 	}
 
-	public String getxAccelPrefix() {
+	public String getXAccelPrefix() {
 		return xAccelPrefix;
 	}
 
-	public void setxAccelPrefix(String xAccelPrefix) {
+	public void setXAccelPrefix(String xAccelPrefix) {
 		this.xAccelPrefix = xAccelPrefix;
 	}
 
