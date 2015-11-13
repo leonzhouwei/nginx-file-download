@@ -7,7 +7,7 @@ public final class RouteDefine {
 
 	// -------------------------------------------------------------------------
 	public static final String STRING_ADMIN = "admin";
-	
+
 	public static final String FILE_SERVICE_GROUPS = "/fsgroups";
 
 	// -------------------------------------------------------------------------
@@ -16,7 +16,7 @@ public final class RouteDefine {
 	public static final String ADMIN = ROOT + "admin";
 
 	public static final String API = ROOT + "api";
-	
+
 	public static final String FILES = ROOT + "files";
 
 	// -------------------------------------------------------------------------
@@ -33,6 +33,8 @@ public final class RouteDefine {
 	public static final String API_ADMIN_DOWNLOAD_TASKS = API_ADMIN
 			+ "/dld-tasks";
 	public static final String API_ADMIN_FILES = API_ADMIN + "/files";
+	public static final String API_ADMIN_FILE_SERVICES = API_ADMIN
+			+ "/file-services";
 	public static final String API_ADMIN_FILE_SERVICE_GROUPS = API_ADMIN
 			+ FILE_SERVICE_GROUPS;
 	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN
