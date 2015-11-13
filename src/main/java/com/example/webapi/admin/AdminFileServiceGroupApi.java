@@ -1,4 +1,4 @@
-package com.example.webapi;
+package com.example.webapi.admin;
 
 import java.util.List;
 
@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.common.HttpServletResponseUtil;
 import com.example.domain.FileServiceGroup;
 import com.example.persist.must.FileServiceGroupRMapper;
+import com.example.webapi.RouteDefine;
 
 @RestController
-public class FileServiceGroupApi {
+public class AdminFileServiceGroupApi {
 
 	@Autowired
 	private FileServiceGroupRMapper rMapper;

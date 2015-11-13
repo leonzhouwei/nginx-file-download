@@ -1,5 +1,5 @@
 $(function() {
-	$.get("/api/admin/file-service-groups", function(result) {
+	$.get("/api/admin/fsgroups", function(result) {
 		initTable(result['content']);
 	});
 });
