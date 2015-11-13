@@ -5,6 +5,7 @@
 
 	<sql id="columns">
 		created_at, updated_at, enabled, id, production_id,
+		dir,
 		name,
 		size,
 		sd_card_price_fen, md, file_service_group_id

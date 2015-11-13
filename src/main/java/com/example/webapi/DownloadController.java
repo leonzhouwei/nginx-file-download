@@ -93,8 +93,6 @@ public class DownloadController {
 		if (!routePrefix.endsWith(SLASH)) {
 			sb.append(FILE_SEPARATOR);
 		}
-		sb.append(file.getProductionId());
-		sb.append(FILE_SEPARATOR);
 		String fileDir = file.getDir();
 		if (!Strings.isNullOrEmpty(fileDir)) {
 			if (fileDir.startsWith(FILE_SEPARATOR)) {
