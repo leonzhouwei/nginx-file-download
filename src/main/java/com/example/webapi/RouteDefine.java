@@ -30,6 +30,8 @@ public final class RouteDefine {
 			+ "/dld-tasks";
 	public static final String API_ADMIN_FILES = API_ADMIN
 			+ "/files";
+	public static final String API_ADMIN_FILE_SERVICE_GROUPS = API_ADMIN
+			+ "/file-service-groups";
 	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN
 			+ "/sd-card-orders";
 	public static final String API_ADMIN_PRODUCTIONS = API_ADMIN
