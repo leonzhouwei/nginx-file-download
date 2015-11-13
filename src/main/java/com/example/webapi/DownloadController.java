@@ -54,7 +54,6 @@ public class DownloadController {
 	static final String regEx = "[\u4e00-\u9fa5]";
 	static final Pattern pat = Pattern.compile(regEx);
 	static final String UTF_8_CHARSET_NAME = StandardCharsets.UTF_8.name();
-	static final String LOCALHOST_IPV4 = "127.0.0.1";
 	
 	static final String FILE_ID = "fileId";
 	static final String UUID = "uuid";
