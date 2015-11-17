@@ -1,4 +1,4 @@
-# Nginx-based Large Files Downloading Service
+ei# Nginx-based Large Files Downloading Service
 This is a large files downloading service based on Nginx, Spring Boot, PostgreSQL and SSDB. Dynamically adding more files and more Nginx nodes are supportive, which simply requireds some registration steps on the administraion Web pages.
 
 ## Technology Selections
@@ -10,17 +10,28 @@ This is a large files downloading service based on Nginx, Spring Boot, PostgreSQ
 	- About 30 download history records per GB
 - Other Data Storage (users, large Files for downloading, download tasks, etc.): [PostgreSQL](http://www.postgresql.org/)  v9.2
 
-## Some Screenshots of the Administrations
+## Some Screenshots of the Ordinary User
 ### Main
-![](doc/readme/images/admin_index.png)
+![](doc/readme/images/ordinary/main.png)
 ### File list
-![](doc/readme/images/file_list.png)
-### File service group list
-![](doc/readme/images/file_service_group_list.png)
-### File service list
-![](doc/readme/images/file_service_list.png)
+![](doc/readme/images/ordinary/file_list.png)
 ### Download task list
-![](doc/readme/images/download_task_list.png)
+![](doc/readme/images/ordinary/download_task_list.png)
+
+## Some Screenshots of the Administrator
+### Main
+![](doc/readme/images/admin/main.png)
+### Production list
+![](doc/readme/images/admin/production_list.png)
+### File list
+![](doc/readme/images/admin/file_list_1.png)
+![](doc/readme/images/admin/file_list_2.png)
+### Download task list
+![](doc/readme/images/admin/download_task_list.png)
+### File service group list
+![](doc/readme/images/admin/file_service_group_list.png)
+### File service list
+![](doc/readme/images/admin/file_service_list.png)
 
 
 

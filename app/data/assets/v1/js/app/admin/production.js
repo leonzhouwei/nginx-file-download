@@ -20,6 +20,7 @@ function initTable(result) {
 		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
+		buffer.push('<td>', elem['dir'], '</td>');
 		buffer.push('<td>', elem['description'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');

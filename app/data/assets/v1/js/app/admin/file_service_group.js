@@ -22,7 +22,6 @@ function initTable(result) {
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>', enabled, '</td>');
-		buffer.push('<td>', elem['xAccelPrefix'], '</td>');
 		// ----------
 		buffer.push('/<tr>');
 		var newRow = buffer.join('');
