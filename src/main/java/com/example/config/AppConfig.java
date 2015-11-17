@@ -38,6 +38,8 @@ public class AppConfig implements InitializingBean {
 	private Boolean ignoreCustomizedInterceptors;
 	@Value("${app.data.dir}")
 	private String dataDir;
+	@Value("${app.download.history.disable}")
+	private Boolean disableDownloadHistory;
 
 	private String imageDirPath;
 	private String assetsHome;
@@ -155,6 +157,10 @@ public class AppConfig implements InitializingBean {
 
 	public String getXAccelPrefix() {
 		return xAccelPrefix;
+	}
+
+	public Boolean getDisableDownloadHistory() {
+		return disableDownloadHistory;
 	}
 
 }

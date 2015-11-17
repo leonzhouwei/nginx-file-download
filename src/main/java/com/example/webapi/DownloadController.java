@@ -50,6 +50,7 @@ public class DownloadController {
 	static final String WEB_SERVER_X_ACCEL = "X-Accel-Redirect";
 	static final String ATACHMENT_FILENAME = "attachment;filename=";
 
+	static final String EMPTY = "";
 	static final String COLON = ":";
 	static final String SLASH = "/";
 	static final String FILE_SEPARATOR = "/";
@@ -59,13 +60,13 @@ public class DownloadController {
 
 	static final String FILE_ID = "fileId";
 	static final String UUID = "uuid";
-	
+
 	static Result newStatusNgResult() {
 		Result ret = new Result();
 		ret.ok = false;
 		return ret;
 	}
-	
+
 	static Result newStatusOkResult() {
 		Result ret = new Result();
 		ret.ok = true;
@@ -174,15 +175,8 @@ public class DownloadController {
 		response.setHeader(WEB_SERVER_X_ACCEL, xAccelRedirect);
 		response.addHeader(HttpDefine.CONTENT_DISPOSITION, ATACHMENT_FILENAME
 				+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
-		// record this download request
-		DownloadHistory history = new DownloadHistory();
-		history.reset();
-		history.setTaskId(task.getId());
-		history.setClientIp(result.clientIp);
-		history.setWebServerHost(result.webServerHost);
-		history.setRequestRoute(result.requestRoute);
-		history.setRequestParameters(JsonTool.toJson(request.getParameterMap()));
-		historyWMapper.insert(history);
+		// save current download behavior
+		recordHistory(request, task, result);
 	}
 
 	Result logAndCheck(HttpServletRequest request, HttpServletResponse response)
@@ -288,6 +282,29 @@ public class DownloadController {
 			toClient.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
+		}
+	}
+
+	void recordHistory(HttpServletRequest request, DownloadTask task,
+			Result result) {
+		try {
+			if (appConfig.getDisableDownloadHistory()) {
+				logger.info("download history disabled");
+				return;
+			}
+			DownloadHistory history = new DownloadHistory();
+			history.reset();
+			history.setTaskId(task.getId());
+			history.setClientIp(result.clientIp);
+			history.setWebServerHost(result.webServerHost);
+			history.setRequestRoute(result.requestRoute);
+			history.setRequestParameters(JsonTool.toJson(request
+					.getParameterMap()));
+			historyWMapper.insert(history);
+			logger.info("download history saved (" + JsonTool.toJson(history)
+					+ ")");
+		} catch (Exception e) {
+			logger.warn(EMPTY, e);
 		}
 	}
 
