@@ -81,7 +81,6 @@ CREATE TABLE file_service_group
   created_at timestamp with time zone NOT NULL,
   updated_at timestamp with time zone NOT NULL,
   enabled boolean NOT NULL,
-  x_accel_prefix character varying NOT NULL,
   CONSTRAINT file_service_group_pkey PRIMARY KEY (id)
 );
 
@@ -97,7 +96,9 @@ CREATE TABLE production
   updated_at timestamp with time zone NOT NULL,
   enabled boolean NOT NULL DEFAULT false,
   name character varying NOT NULL,
+  dir character varying NOT NULL,
   CONSTRAINT prod_pkey PRIMARY KEY (id),
+  CONSTRAINT production_dir_key UNIQUE (dir),
   CONSTRAINT production_id_key UNIQUE (id)
 );
 
