@@ -4,7 +4,7 @@ public class FileServiceGroup extends Base {
 
 	private Long id;
 	private String name;
-
+	
 	public Long getId() {
 		return id;
 	}

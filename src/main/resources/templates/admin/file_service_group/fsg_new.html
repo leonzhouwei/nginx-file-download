@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+
+<head>
+<title>新建 File Service Group</title>
+<meta charset="utf-8" />
+</head>
+
+<body>
+	<div class="container" layout:fragment="content">
+		<h4>新建 File Service Group</h4>
+		<hr />
+		<form action="/admin/fsgroups" method="post">
+			<div class="form-group">
+				<label for="productionNameText">名称</label> <input type="text"
+					class="form-control" name="name" />
+			</div>
+			<button type="submit" class="btn btn-primary">确认</button>
+		</form>
+	</div>
+</body>
+
+</html>
