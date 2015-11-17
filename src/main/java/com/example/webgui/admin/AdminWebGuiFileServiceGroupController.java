@@ -1,7 +1,5 @@
 package com.example.webgui.admin;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,12 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
-import com.example.domain.File;
 import com.example.domain.FileServiceGroup;
 import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileServiceGroupWMapper;
 import com.example.webapi.RouteDefine;
-import com.google.common.collect.Maps;
 
 @Controller
 public class AdminWebGuiFileServiceGroupController {
@@ -48,17 +44,6 @@ public class AdminWebGuiFileServiceGroupController {
 	private FileServiceGroupRMapper rMapper;
 	@Autowired
 	private FileServiceGroupWMapper wMapper;
-
-	static Map<String, Object> toMap(File e) {
-		Map<String, Object> ret = Maps.newHashMap();
-		ret.put(ID, e.getId());
-		ret.put(ENABLED, e.getEnabled());
-		return ret;
-	}
-
-	static void addAllObjects(ModelAndView mav, File e) {
-		mav.addAllObjects(toMap(e));
-	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.GET)
 	public ModelAndView list() {

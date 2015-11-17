@@ -10,7 +10,10 @@
 
 <body>
 	<div class="container" layout:fragment="content">
-		<h4>File Service 列表</h4>
+		<h4>
+			File Service 列表&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/file-services/new"
+				class="btn btn-primary btn-info">新建</a>
+		</h4>
 		<hr />
 		<table id="table"
 			class="table table-striped table-bordered table-condensed">
@@ -32,7 +35,8 @@
 		<script
 			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
 		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/time-util.js'}"></script>
-		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file_service.js'}"></script>
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file_service.js'}"></script>
 	</div>
 </body>
 

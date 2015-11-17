@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.persist.must.FileServiceWMapper">
+
+	<insert id="insert" parameterType="com.example.domain.FileService">
+		INSERT INTO file_service
+		(created_at, updated_at, enabled, id, host, group_id)
+        VALUES
+        (#{createdAt}, #{updatedAt}, #{enabled}, default, #{host}, #{groupId})
+	</insert>
+
+</mapper>

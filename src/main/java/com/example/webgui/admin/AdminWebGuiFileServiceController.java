@@ -1,7 +1,10 @@
 package com.example.webgui.admin;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
-import com.example.domain.File;
-import com.example.persist.must.FileRMapper;
-import com.example.persist.must.FileWMapper;
+import com.example.domain.FileService;
+import com.example.persist.must.FileServiceGroupRMapper;
+import com.example.persist.must.FileServiceRMapper;
+import com.example.persist.must.FileServiceWMapper;
 import com.example.webapi.RouteDefine;
-import com.google.common.collect.Maps;
 
 @Controller
 public class AdminWebGuiFileServiceController {
@@ -23,6 +26,9 @@ public class AdminWebGuiFileServiceController {
 	static final String CREATED_AT = "createdAt";
 	static final String UPDATED_AT = "updatedAt";
 	static final String ID = "id";
+	static final String GROUPS = "groups";
+	static final String HOST = "host";
+	static final String GROUP_ID = "groupId";
 
 	static final String PREFIX = RouteDefine.STRING_ADMIN + "/file_service/fs_";
 	static final String DISABLE = PREFIX + "disable";
@@ -31,26 +37,40 @@ public class AdminWebGuiFileServiceController {
 	static final String LIST = PREFIX + "list";
 	static final String NEW = PREFIX + "new";
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(AdminWebGuiFileServiceController.class);
+
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
-	private FileRMapper rMapper;
+	private FileServiceRMapper rMapper;
 	@Autowired
-	private FileWMapper wMapper;
-
-	static Map<String, Object> toMap(File e) {
-		Map<String, Object> ret = Maps.newHashMap();
-		ret.put(ID, e.getId());
-		ret.put(ENABLED, e.getEnabled());
-		return ret;
-	}
-
-	static void addAllObjects(ModelAndView mav, File e) {
-		mav.addAllObjects(toMap(e));
-	}
+	private FileServiceWMapper wMapper;
+	@Autowired
+	private FileServiceGroupRMapper fsgRMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.GET)
 	public ModelAndView list() {
+		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+	}
+
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_NEW, method = RequestMethod.GET)
+	public ModelAndView gotoNew() {
+		return ModelAndViewTool.newModelAndView(appConfig, NEW);
+	}
+
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.POST)
+	public ModelAndView newOne(HttpServletRequest request,
+			HttpServletResponse response) {
+		String host = request.getParameter(HOST);
+		logger.debug("host: " + host);
+		String groupIdStr = request.getParameter(GROUP_ID);
+		logger.debug("group id: " + groupIdStr);
+		FileService e = new FileService();
+		e.reset();
+		e.setHost(host);
+		e.setGroupId(Long.parseLong(groupIdStr));
+		wMapper.insert(e);
 		return ModelAndViewTool.newModelAndView(appConfig, LIST);
 	}
 
