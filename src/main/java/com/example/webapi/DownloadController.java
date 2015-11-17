@@ -32,6 +32,7 @@ import com.example.domain.DownloadTask;
 import com.example.domain.File;
 import com.example.domain.FileService;
 import com.example.domain.FileServiceGroup;
+import com.example.domain.Production;
 import com.example.filter.LoginInterceptor;
 import com.example.persist.assist.DownloadHistoryWMapper;
 import com.example.persist.must.DownloadTaskRMapper;
@@ -39,6 +40,7 @@ import com.example.persist.must.DownloadTaskWMapper;
 import com.example.persist.must.FileRMapper;
 import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileServiceRMapper;
+import com.example.persist.must.ProductionRMapper;
 import com.google.common.base.Strings;
 
 @Controller
@@ -54,18 +56,30 @@ public class DownloadController {
 	static final String regEx = "[\u4e00-\u9fa5]";
 	static final Pattern pat = Pattern.compile(regEx);
 	static final String UTF_8_CHARSET_NAME = StandardCharsets.UTF_8.name();
-	
+
 	static final String FILE_ID = "fileId";
 	static final String UUID = "uuid";
 	
+	static Result newStatusNgResult() {
+		Result ret = new Result();
+		ret.ok = false;
+		return ret;
+	}
+	
+	static Result newStatusOkResult() {
+		Result ret = new Result();
+		ret.ok = true;
+		return ret;
+	}
+
 	private static class Result {
 		public boolean ok = false;
 		public String clientIp;
 		public String webServerHost;
 		public String requestRoute;
 		public String taskUuid;
+		public Production production;
 		public File file;
-		public FileServiceGroup fileServiceGroup;
 	}
 
 	@Autowired
@@ -74,6 +88,8 @@ public class DownloadController {
 	private DownloadTaskRMapper taskRMapper;
 	@Autowired
 	private DownloadTaskWMapper taskWMapper;
+	@Autowired
+	private ProductionRMapper productionRMapper;
 	@Autowired
 	private FileRMapper fileRMapper;
 	@Autowired
@@ -86,23 +102,29 @@ public class DownloadController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(DownloadController.class);
 
-	static final String xAccelRedirect(String routePrefix, File file)
+	static final String xAccelRedirect(final String routePrefix,
+			Production production, File file)
 			throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
 		sb.append(routePrefix);
 		if (!routePrefix.endsWith(SLASH)) {
 			sb.append(FILE_SEPARATOR);
 		}
-		String fileDir = file.getDir();
-		if (!Strings.isNullOrEmpty(fileDir)) {
-			if (fileDir.startsWith(FILE_SEPARATOR)) {
-				fileDir = fileDir.substring(1);
-			}
-			if (fileDir.endsWith(FILE_SEPARATOR)) {
-				fileDir = fileDir.substring(0, fileDir.length() - 1);
-			}
-			sb.append(fileDir);
+		final String prodDir = production.getDir();
+		if (prodDir.startsWith(SLASH)) {
+			sb.append(prodDir.substring(1));
+		}
+		if (!prodDir.endsWith(SLASH)) {
 			sb.append(FILE_SEPARATOR);
+		}
+		final String fileDir = file.getDir();
+		if (!Strings.isNullOrEmpty(fileDir)) {
+			if (fileDir.startsWith(SLASH)) {
+				sb.append(fileDir.substring(1));
+			}
+			if (!fileDir.endsWith(SLASH)) {
+				sb.append(FILE_SEPARATOR);
+			}
 		}
 		sb.append(URLEncoder.encode(file.getName(), UTF_8_CHARSET_NAME));
 		return sb.toString();
@@ -145,8 +167,9 @@ public class DownloadController {
 		String fileName = result.file.getName();
 		// respond
 		response.setContentType(HttpDefine.CONTENT_TYPE_VALUE_APP_OCTETSTREAM);
-		String xAccelRoutePrefix = result.fileServiceGroup.getXAccelPrefix();
-		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, result.file);
+		String xAccelRoutePrefix = appConfig.getXAccelPrefix();
+		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix,
+				result.production, result.file);
 		logger.info(WEB_SERVER_X_ACCEL + ": " + xAccelRedirect);
 		response.setHeader(WEB_SERVER_X_ACCEL, xAccelRedirect);
 		response.addHeader(HttpDefine.CONTENT_DISPOSITION, ATACHMENT_FILENAME
@@ -161,9 +184,9 @@ public class DownloadController {
 		history.setRequestParameters(JsonTool.toJson(request.getParameterMap()));
 		historyWMapper.insert(history);
 	}
-	
-	Result logAndCheck(HttpServletRequest request,
-			HttpServletResponse response) throws UnknownHostException {
+
+	Result logAndCheck(HttpServletRequest request, HttpServletResponse response)
+			throws UnknownHostException {
 		final String route = request.getRequestURI();
 		logger.info("route: " + route);
 		String tempHost = request.getHeader(WEB_SERVER_HOST);
@@ -182,19 +205,26 @@ public class DownloadController {
 		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return new Result();
+			return newStatusNgResult();
 		}
 		String uuid = request.getParameter(UUID);
 		if (Strings.isNullOrEmpty(uuid)) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return new Result();
+			return newStatusNgResult();
 		}
 		// find the file by id
 		final long fileId = Long.parseLong(fileIdStr);
 		File file = fileRMapper.selectById(fileId);
 		if (file == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return new Result();
+			return newStatusNgResult();
+		}
+		// check the production
+		Production production = productionRMapper.selectById(file
+				.getProductionId());
+		if (production == null) {
+			HttpServletResponseUtil.setStatusAsNotFound(response);
+			return newStatusNgResult();
 		}
 		// check the file service group
 		final long fileServiceGroupId = file.getFileServiceGroupId();
@@ -204,7 +234,7 @@ public class DownloadController {
 		logger.info("file service group: " + JsonTool.toJson(fsg));
 		if (fsg == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return new Result();
+			return newStatusNgResult();
 		}
 		// check the file service
 		FileService params = new FileService();
@@ -215,17 +245,16 @@ public class DownloadController {
 		logger.info("file service: " + JsonTool.toJson(fileService));
 		if (fileService == null) {
 			HttpServletResponseUtil.setStatusAsNotFound(response);
-			return new Result();
+			return newStatusNgResult();
 		}
 		// success
-		Result ret = new Result();
-		ret.ok = true;
+		Result ret = newStatusOkResult();
 		ret.clientIp = clientIp;
 		ret.webServerHost = host;
 		ret.requestRoute = route;
 		ret.taskUuid = uuid;
 		ret.file = file;
-		ret.fileServiceGroup = fsg;
+		ret.production = production;
 		return ret;
 	}
 

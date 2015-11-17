@@ -10,17 +10,17 @@
 		</selectKey>
 		INSERT INTO production
 		(id, created_at, updated_at, enabled, name,
-		description)
+		description, dir)
 		VALUES
 		(default, #{createdAt}, #{updatedAt}, #{enabled},
-		#{name}, #{description})
+		#{name}, #{description}, #{dir})
 	</insert>
 
 	<update id="update" parameterType="com.example.domain.Production">
 		UPDATE production
 		SET
 		name=#{name}, description=#{description}, enabled=#{enabled},
-		updated_at=#{updatedAt}
+		dir=#{dir}, updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
 

@@ -5,6 +5,7 @@ public class Production extends Base {
 	private Long id;
 	private String name;
 	private String description;
+	private String dir;
 	
 	public Long getId() {
 		return id;
@@ -38,6 +39,14 @@ public class Production extends Base {
 	public void resetName(String name) {
 		setName(name);
 		resetUpdatedAt();
+	}
+
+	public String getDir() {
+		return dir;
+	}
+
+	public void setDir(String dir) {
+		this.dir = dir;
 	}
 
 }

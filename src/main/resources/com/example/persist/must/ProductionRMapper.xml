@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.persist.must.ProductionRMapper">
 
-	<sql id="columns">created_at, updated_at, enabled, id, name, description
+	<sql id="columns">created_at, updated_at, enabled, id, name, description, dir
 	</sql>
 
 	<resultMap type="com.example.domain.Production" id="resultMap">

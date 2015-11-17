@@ -55,6 +55,10 @@ public class AppConfig implements InitializingBean {
 	private int ssdbPort;
 	@Value("${app.ssdb.auth}")
 	private String ssdbAuth;
+	
+	// nginx -------------------------------------------------------------------
+	@Value("${app.nginx.xAccelPrefix}")
+	private String xAccelPrefix;
 
 	public String getWorkDirPath() {
 		return workDirPath;
@@ -147,6 +151,10 @@ public class AppConfig implements InitializingBean {
 
 	public String getAssetsHome() {
 		return assetsHome;
+	}
+
+	public String getXAccelPrefix() {
+		return xAccelPrefix;
 	}
 
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.common.ConsoleTool;
 import com.example.domain.Production;
-import com.example.persist.must.ProductionRMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)
@@ -21,6 +20,7 @@ public class ProductionRMapperTest {
 		ConsoleTool.print(e);
 	}
 	
+//	@Test
 	public void testSelectAll() {
 		List<Production> c = mapper.selectAll();
 		ConsoleTool.printCollection(c);
