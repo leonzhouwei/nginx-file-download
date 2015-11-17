@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.persist.must.FileServiceGroupRMapper">
 
-	<sql id="columns">created_at, updated_at, enabled, id
+	<sql id="columns">created_at, updated_at, enabled, id, name
 	</sql>
 
 	<resultMap type="com.example.domain.FileServiceGroup" id="resultMap">
