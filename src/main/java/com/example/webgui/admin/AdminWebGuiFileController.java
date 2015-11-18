@@ -25,11 +25,15 @@ import com.google.common.collect.Maps;
 public class AdminWebGuiFileController {
 
 	static final String ID = "id";
+	static final String DIR = "dir";
 	static final String NAME = "name";
+	static final String PRODUCTION = "production";
+	static final String SIZE = "size";
+	static final String MD = "md";
 	static final String ENABLED = "enabled";
+	static final String FSG = "fsg";
 
-	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
-			+ "/file/";
+	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/file/";
 	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
 			+ WebGuiDefine.DISABLE;
 	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
@@ -65,6 +69,13 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_NEW, method = RequestMethod.GET)
 	public ModelAndView gotoNew() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
+	}
+
+	@RequestMapping(value = RouteDefine.ADMIN_FILES, method = RequestMethod.POST)
+	public ModelAndView newOne(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.GET)
@@ -160,6 +171,34 @@ public class AdminWebGuiFileController {
 		e.enable();
 		wMapper.enable(e);
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+	}
+
+	Long extractId(HttpServletRequest request) {
+		return Long.valueOf(request.getParameter(ID));
+	}
+	
+	String extractDir(HttpServletRequest request) {
+		return request.getParameter(DIR);
+	}
+	
+	Long extractProductionId(HttpServletRequest request) {
+		return Long.valueOf(request.getParameter(PRODUCTION));
+	}
+	
+	Long extractSize(HttpServletRequest request) {
+		return Long.valueOf(request.getParameter(SIZE));
+	}
+	
+	String extractMd(HttpServletRequest request) {
+		return request.getParameter(MD);
+	}
+	
+	Boolean extractEnabled(HttpServletRequest request) {
+		return Boolean.valueOf(request.getParameter(ENABLED));
+	}
+	
+	Long extractFileServiceGroupId(HttpServletRequest request) {
+		return Long.valueOf(request.getParameter(FSG));
 	}
 
 }
