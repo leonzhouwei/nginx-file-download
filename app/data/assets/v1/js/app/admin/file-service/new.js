@@ -5,7 +5,6 @@ $(function() {
 });
 
 function initSelect(data) {
-	console.log(data);
 	const
 	len = data.length;
 	var groupIdSelect = $('#groupIdSelect');

@@ -14,11 +14,43 @@
 		<hr />
 		<form action="/admin/files" method="post">
 			<div class="form-group">
-				<label for="productionNameText">名称</label> <input type="text"
-					class="form-control" name="name" />
+				<label for="dirText">目录</label> <input type="text"
+					class="form-control" id="dirText" name="dir" />
+			</div>
+			<div class="form-group">
+				<label for="nameText">名称</label> <input type="text"
+					class="form-control" id="nameText" name="name" />
+			</div>
+			<div class="form-group">
+				<label for="productionSelect">产品</label> <select
+					class="form-control" id="productionSelect" name="production"></select>
+			</div>
+			<div class="form-group">
+				<label for="sizeText">大小 (MB)</label> <input type="text"
+					class="form-control" id="sizeText" name="size" />
+			</div>
+			<div class="form-group">
+				<label for="mdText">消息摘要</label> <input type="text"
+					class="form-control" id="mdText" name="md" />
+			</div>
+			<div class="form-group">
+				<label for="enabledSelect">是否启用</label> <select class="form-control"
+					id="enabledSelect" name="enabled">
+					<option value="true" selected="selected">启用</option>
+					<option value="false">禁用</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="fsgSelect">文件服务组</label> <select class="form-control"
+					id="fsgSelect" name="fsg">
+				</select>
 			</div>
 			<button type="submit" class="btn btn-primary">确认</button>
 		</form>
+
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file/new.js'}"></script>
 	</div>
 </body>
 
