@@ -17,22 +17,26 @@ import com.example.domain.File;
 import com.example.persist.must.FileRMapper;
 import com.example.persist.must.FileWMapper;
 import com.example.webapi.RouteDefine;
+import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
 @Controller
 public class AdminWebGuiFileController {
-	
+
 	static final String ID = "id";
 	static final String NAME = "name";
 	static final String ENABLED = "enabled";
 
-	static final String PREFIX = RouteDefine.STRING_ADMIN + "/file/file_";
-	static final String DISABLE = PREFIX + "disable";
-	static final String EDIT = PREFIX + "edit";
-	static final String ENABLE = PREFIX + "enable";
-	static final String LIST = PREFIX + "list";
-	static final String NEW = PREFIX + "new";
+	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
+			+ "/file/";
+	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
+			+ WebGuiDefine.DISABLE;
+	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
+	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX
+			+ WebGuiDefine.ENABLE;
+	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
+	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
 	@Autowired
 	private AppConfig appConfig;
@@ -55,7 +59,12 @@ public class AdminWebGuiFileController {
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES, method = RequestMethod.GET)
 	public ModelAndView list() {
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+	}
+
+	@RequestMapping(value = RouteDefine.ADMIN_FILES_NEW, method = RequestMethod.GET)
+	public ModelAndView gotoNew() {
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.GET)
@@ -67,7 +76,8 @@ public class AdminWebGuiFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, EDIT);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
+				VIEW_NAME_EDIT);
 		addAllObjects(ret, e);
 		return ret;
 	}
@@ -91,7 +101,7 @@ public class AdminWebGuiFileController {
 		}
 		e.resetUpdatedAt();
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.GET)
@@ -103,7 +113,8 @@ public class AdminWebGuiFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, DISABLE);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
+				VIEW_NAME_DISABLE);
 		addAllObjects(ret, e);
 		return ret;
 	}
@@ -119,7 +130,7 @@ public class AdminWebGuiFileController {
 		}
 		e.disable();
 		wMapper.disable(e);
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.GET)
@@ -131,7 +142,8 @@ public class AdminWebGuiFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, ENABLE);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
+				VIEW_NAME_ENABLE);
 		addAllObjects(ret, e);
 		return ret;
 	}
@@ -147,7 +159,7 @@ public class AdminWebGuiFileController {
 		}
 		e.enable();
 		wMapper.enable(e);
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 }

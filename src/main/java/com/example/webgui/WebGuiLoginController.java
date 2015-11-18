@@ -23,10 +23,11 @@ import com.example.webapi.RouteDefine;
 
 @Controller
 public class WebGuiLoginController {
-	
-	static final String LOGIN = "login";
+
 	static final String PASSWORD = "username";
 	static final String USERNAME = "password";
+
+	static final String VIEW_NAME_LOGIN = "login";
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(WebGuiLoginController.class);
@@ -38,7 +39,7 @@ public class WebGuiLoginController {
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.GET)
 	public ModelAndView gotoLoginPage() {
-		return ModelAndViewTool.newModelAndView(appConfig, LOGIN);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LOGIN);
 	}
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.POST)

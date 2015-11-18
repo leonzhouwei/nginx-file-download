@@ -13,15 +13,15 @@ import com.example.webapi.RouteDefine;
 @Controller
 public class WebGuiDownloadTaskController {
 
-	static final String TASK = "dld_task/";
-	static final String TASK_LIST = TASK + "dld_task_list";
-	
+	static final String VIEW_NAME_PREFIX = "dld-task/";
+	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
+
 	@Autowired
 	private AppConfig appConfig;
 
 	@RequestMapping(value = RouteDefine.I_DOWNLOAD_TASKS, method = RequestMethod.GET)
 	public ModelAndView ModelAndView() {
-		return ModelAndViewTool.newModelAndView(appConfig, TASK_LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 }

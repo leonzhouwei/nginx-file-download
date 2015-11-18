@@ -22,35 +22,35 @@ import com.google.common.collect.Maps;
 
 @Controller
 public class WebGuiFileController {
-	
-	static final String FILE = "file/";
-	static final String FILE_LIST = FILE + "file_list";
-	static final String FILE_DETAIL = FILE + "file_detail";
+
+	static final String VIEW_NAME_PREFIX = "file/";
+	static final String VIEW_NAME_DETAIL = VIEW_NAME_PREFIX
+			+ WebGuiDefine.DETAIL;
+	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
 	private FileRMapper rMapper;
-	
+
 	static Map<String, Object> toMap(File file) {
 		Map<String, Object> ret = Maps.newHashMap();
 		ret.put("id", file.getId());
 		ret.put("name", file.getName());
 		ret.put("size", file.getSize());
 		ret.put("sizeMb", file.getSize() / 1024 / 1024);
-		ret.put("createdAt",
-				DateTimeTool.toLocal(file.getCreatedAt()));
+		ret.put("createdAt", DateTimeTool.toLocal(file.getCreatedAt()));
 		ret.put("md", file.getMd());
 		return ret;
 	}
-	
+
 	static void addAllObjects(ModelAndView mav, File e) {
 		mav.addAllObjects(toMap(e));
 	}
 
 	@RequestMapping(value = RouteDefine.FILES, method = RequestMethod.GET)
 	public ModelAndView list() {
-		return ModelAndViewTool.newModelAndView(appConfig, FILE_LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.FILES + "/{id}", method = RequestMethod.GET)
@@ -60,7 +60,8 @@ public class WebGuiFileController {
 		if (file == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, FILE_DETAIL);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
+				VIEW_NAME_DETAIL);
 		addAllObjects(ret, file);
 		return ret;
 	}

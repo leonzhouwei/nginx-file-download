@@ -23,16 +23,15 @@ import com.google.common.base.Strings;
 
 @Controller
 public class WebGuiSdCardOrderController {
-	
+
 	static final String FILE_ID = "fileId";
 	static final String UUID = "uuid";
 	static final String FILE_NAME = "fileName";
 	static final String PRICE = "price";
 
-	static final String SD_CARD_ORDER = "sd_card_order/";
-	static final String SD_CARD_ORDER_LIST = SD_CARD_ORDER
-			+ "sd_card_order_list";
-	static final String SD_CARD_ORDER_NEW = SD_CARD_ORDER + "sd_card_order_new";
+	static final String VIEW_NAME_PREFIX = "sd-card-order/";
+	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
+	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
 	@Autowired
 	private AppConfig appConfig;
@@ -40,10 +39,10 @@ public class WebGuiSdCardOrderController {
 	private FileRMapper fileRMapper;
 	@Autowired
 	private SdCardOrderWMapper sdCardOrderWMapper;
-	
+
 	@RequestMapping(value = RouteDefine.I_SD_CARD_ORDERS, method = RequestMethod.GET)
 	public ModelAndView list() {
-		return ModelAndViewTool.newModelAndView(appConfig, SD_CARD_ORDER_LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.I_SD_CARD_ORDERS_NEW, method = RequestMethod.GET)
@@ -58,11 +57,13 @@ public class WebGuiSdCardOrderController {
 		if (file == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, SD_CARD_ORDER_NEW);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
+				VIEW_NAME_NEW);
 		ret.getModel().put(FILE_ID, fileIdStr);
 		ret.getModel().put(UUID, UuidTool.newUuid());
 		ret.getModel().put(FILE_NAME, file.getName());
-		Double price = new Double(file.getSdCardPriceFen());;
+		Double price = new Double(file.getSdCardPriceFen());
+		;
 		price /= 100;
 		ret.getModel().put(PRICE, price);
 		return ret;
@@ -93,7 +94,7 @@ public class WebGuiSdCardOrderController {
 		order.setPriceFen(file.getSdCardPriceFen());
 		order.setUserId(LoginInterceptor.getAccountId(request));
 		sdCardOrderWMapper.insert(order);
-		return ModelAndViewTool.newModelAndView(appConfig, SD_CARD_ORDER_LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 }

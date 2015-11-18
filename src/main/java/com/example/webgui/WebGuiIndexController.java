@@ -19,8 +19,8 @@ public class WebGuiIndexController {
 	
 	static final String ASSETS_VERSION = "ASSETS_VERSION";
 	
-	static final String INDEX = "index";
-	static final String ADMIN_INDEX = "admin/" + INDEX;
+	static final String VIEW_NAME_INDEX = "index";
+	static final String VIEW_NAME_ADMIN_INDEX = "admin/" + VIEW_NAME_INDEX;
 
 	@Autowired
 	private AppConfig appConfig;
@@ -32,9 +32,9 @@ public class WebGuiIndexController {
 		Long id = LoginInterceptor.getAccountId(request);
 		Account account = accoutRMapper.selectById(id);
 		if (account.getIsAdmin()) {
-			return ModelAndViewTool.newModelAndView(appConfig, ADMIN_INDEX);
+			return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_INDEX);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, INDEX);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_INDEX);
 		return ret;
 	}
 

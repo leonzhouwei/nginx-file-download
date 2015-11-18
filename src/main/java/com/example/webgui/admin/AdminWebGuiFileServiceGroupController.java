@@ -17,6 +17,7 @@ import com.example.domain.FileServiceGroup;
 import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileServiceGroupWMapper;
 import com.example.webapi.RouteDefine;
+import com.example.webgui.WebGuiDefine;
 
 @Controller
 public class AdminWebGuiFileServiceGroupController {
@@ -27,13 +28,15 @@ public class AdminWebGuiFileServiceGroupController {
 	static final String ID = "id";
 	static final String NAME = "name";
 
-	static final String PREFIX = RouteDefine.STRING_ADMIN
-			+ "/file_service_group/fsg_";
-	static final String DISABLE = PREFIX + "disable";
-	static final String EDIT = PREFIX + "edit";
-	static final String ENABLE = PREFIX + "enable";
-	static final String LIST = PREFIX + "list";
-	static final String NEW = PREFIX + "new";
+	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
+			+ "/file-service-group/";
+	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
+			+ WebGuiDefine.DISABLE;
+	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
+	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX
+			+ WebGuiDefine.ENABLE;
+	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
+	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(AdminWebGuiFileServiceGroupController.class);
@@ -47,12 +50,12 @@ public class AdminWebGuiFileServiceGroupController {
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.GET)
 	public ModelAndView list() {
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_NEW, method = RequestMethod.GET)
 	public ModelAndView gotoNew() {
-		return ModelAndViewTool.newModelAndView(appConfig, NEW);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.POST)
@@ -64,7 +67,7 @@ public class AdminWebGuiFileServiceGroupController {
 		e.reset();
 		e.setName(name);
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 }

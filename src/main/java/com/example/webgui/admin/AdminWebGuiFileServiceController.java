@@ -18,6 +18,7 @@ import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileServiceRMapper;
 import com.example.persist.must.FileServiceWMapper;
 import com.example.webapi.RouteDefine;
+import com.example.webgui.WebGuiDefine;
 
 @Controller
 public class AdminWebGuiFileServiceController {
@@ -30,12 +31,15 @@ public class AdminWebGuiFileServiceController {
 	static final String HOST = "host";
 	static final String GROUP_ID = "groupId";
 
-	static final String PREFIX = RouteDefine.STRING_ADMIN + "/file_service/fs_";
-	static final String DISABLE = PREFIX + "disable";
-	static final String EDIT = PREFIX + "edit";
-	static final String ENABLE = PREFIX + "enable";
-	static final String LIST = PREFIX + "list";
-	static final String NEW = PREFIX + "new";
+	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
+			+ "/file-service/";
+	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
+			+ WebGuiDefine.DISABLE;
+	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
+	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX
+			+ WebGuiDefine.ENABLE;
+	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
+	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(AdminWebGuiFileServiceController.class);
@@ -51,12 +55,12 @@ public class AdminWebGuiFileServiceController {
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.GET)
 	public ModelAndView list() {
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_NEW, method = RequestMethod.GET)
 	public ModelAndView gotoNew() {
-		return ModelAndViewTool.newModelAndView(appConfig, NEW);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.POST)
@@ -71,7 +75,7 @@ public class AdminWebGuiFileServiceController {
 		e.setHost(host);
 		e.setGroupId(Long.parseLong(groupIdStr));
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndView(appConfig, LIST);
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 }

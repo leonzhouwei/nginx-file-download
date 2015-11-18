@@ -4,14 +4,14 @@
 	layout:decorator="base/layout">
 
 <head>
-<title>File Service 列表</title>
+<title>文件列表</title>
 <meta charset="utf-8" />
 </head>
 
 <body>
 	<div class="container" layout:fragment="content">
 		<h4>
-			File Service 列表&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/file-services/new"
+			文件列表&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/files/new"
 				class="btn btn-primary btn-info">新建</a>
 		</h4>
 		<hr />
@@ -21,11 +21,16 @@
 			<thead>
 				<tr>
 					<th>编号</th>
+					<th>目录</th>
+					<th>名称</th>
+					<th>产品编号</th>
 					<th>创建时间</th>
 					<th>上次修改时间</th>
+					<th>大小 (MB)</th>
+					<th>消息摘要</th>
 					<th>已经启用</th>
-					<th>File Service Group ID</th>
-					<th>Host</th>
+					<th>文件服务组编号</th>
+					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,8 +40,8 @@
 		<script
 			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
 		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/time-util.js'}"></script>
-		<script
-			th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file_service.js'}"></script>
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/uuid.js'}"></script>
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file.js'}"></script>
 	</div>
 </body>
 

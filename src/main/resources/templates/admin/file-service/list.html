@@ -4,15 +4,15 @@
 	layout:decorator="base/layout">
 
 <head>
-<title>File Service Group 列表</title>
+<title>File Service 列表</title>
 <meta charset="utf-8" />
 </head>
 
 <body>
 	<div class="container" layout:fragment="content">
 		<h4>
-			File Service Group 列表&nbsp;&nbsp;&nbsp;&nbsp;<a
-				href="/admin/fsgroups/new" class="btn btn-primary btn-info">新建</a>
+			File Service 列表&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/file-services/new"
+				class="btn btn-primary btn-info">新建</a>
 		</h4>
 		<hr />
 		<table id="table"
@@ -21,10 +21,11 @@
 			<thead>
 				<tr>
 					<th>编号</th>
-					<th>名称</th>
 					<th>创建时间</th>
 					<th>上次修改时间</th>
 					<th>已经启用</th>
+					<th>File Service Group ID</th>
+					<th>Host</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,7 +36,7 @@
 			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
 		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/time-util.js'}"></script>
 		<script
-			th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file_service_group.js'}"></script>
+			th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file-service.js'}"></script>
 	</div>
 </body>
 
