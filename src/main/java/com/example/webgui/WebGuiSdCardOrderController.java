@@ -69,7 +69,7 @@ public class WebGuiSdCardOrderController {
 	}
 
 	@RequestMapping(value = RouteDefine.I_SD_CARD_ORDERS, method = RequestMethod.POST)
-	public ModelAndView newOrder(HttpServletRequest request,
+	public ModelAndView newOne(HttpServletRequest request,
 			HttpServletResponse response) {
 		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {

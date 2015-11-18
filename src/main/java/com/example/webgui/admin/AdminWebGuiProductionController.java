@@ -71,7 +71,7 @@ public class AdminWebGuiProductionController {
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.POST)
-	public ModelAndView newProduction(HttpServletRequest request,
+	public ModelAndView newOne(HttpServletRequest request,
 			HttpServletResponse response) {
 		String name = request.getParameter(NAME);
 		logger.debug("name: " + name);
