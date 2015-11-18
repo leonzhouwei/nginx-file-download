@@ -17,7 +17,7 @@ import com.example.persist.must.ProductionRMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController
-public class AdminProductionController {
+public class AdminProductionApi {
 
 	@Autowired
 	private ProductionRMapper rMapper;

@@ -16,7 +16,7 @@ import com.example.domain.File;
 import com.example.persist.must.FileRMapper;
 
 @RestController
-public class FileController {
+public class FileApi {
 
 	@Autowired
 	private FileRMapper rMapper;

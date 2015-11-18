@@ -21,7 +21,7 @@ import com.example.persist.must.DownloadTaskWMapper;
 import com.example.persist.must.FileRMapper;
 
 @RestController
-public class DownloadTaskController {
+public class DownloadTaskApi {
 
 	static final String ID = "id";
 

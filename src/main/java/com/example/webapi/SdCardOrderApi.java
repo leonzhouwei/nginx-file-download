@@ -16,7 +16,7 @@ import com.example.filter.LoginInterceptor;
 import com.example.persist.must.SdCardOrderRMapper;
 
 @RestController
-public class SdCardOrderController {
+public class SdCardOrderApi {
 
 	@Autowired
 	private SdCardOrderRMapper rMapper;

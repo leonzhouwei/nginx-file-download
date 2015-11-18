@@ -16,7 +16,7 @@ import com.example.persist.must.SdCardOrderRMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController
-public class AdminSdCardOrderController {
+public class AdminSdCardOrderApi {
 
 	@Autowired
 	private SdCardOrderRMapper rMapper;

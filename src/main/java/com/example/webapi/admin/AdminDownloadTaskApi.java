@@ -16,7 +16,7 @@ import com.example.persist.must.DownloadTaskRMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController
-public class AdminDownloadTaskController {
+public class AdminDownloadTaskApi {
 
 	@Autowired
 	private DownloadTaskRMapper rMapper;

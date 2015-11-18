@@ -3,14 +3,14 @@ package com.example.webapi;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.config.AppConfig;
+import com.example.Version;
 
 @RestController
-public class UuidController {
+public class AppVersionApi {
 	
-	@RequestMapping(RouteDefine.SYSTEM_UUID)
+	@RequestMapping(RouteDefine.APP_VERSION)
 	public String get() {
-		return AppConfig.APP_UUID;
+		return Version.VERSION;
 	}
 
 }

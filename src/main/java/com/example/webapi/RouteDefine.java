@@ -84,8 +84,8 @@ public final class RouteDefine {
 	public static final String LOGIN = ROOT + "login";
 	public static final String LOGOUT = ROOT + "logout";
 
-	public static final String SYSTEM = ROOT + "system";
-	public static final String SYSTEM_UUID = SYSTEM + "/uuid";
-	public static final String SYSTEM_VERSION = SYSTEM + "/version";
+	public static final String APP = ROOT + "app";
+	public static final String APP_UUID = APP + "/uuid";
+	public static final String APP_VERSION = APP + "/version";
 
 }

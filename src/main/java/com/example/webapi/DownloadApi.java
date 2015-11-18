@@ -44,7 +44,7 @@ import com.example.persist.must.ProductionRMapper;
 import com.google.common.base.Strings;
 
 @Controller
-public class DownloadController {
+public class DownloadApi {
 
 	static final String WEB_SERVER_HOST = "Host";
 	static final String WEB_SERVER_X_ACCEL = "X-Accel-Redirect";
@@ -101,7 +101,7 @@ public class DownloadController {
 	private FileServiceRMapper fileServiceRMapper;
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(DownloadController.class);
+			.getLogger(DownloadApi.class);
 
 	static final String xAccelRedirect(final String routePrefix,
 			Production production, File file)
