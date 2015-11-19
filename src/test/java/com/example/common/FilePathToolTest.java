@@ -1,6 +1,6 @@
 package com.example.common;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class FilePathToolTest {
@@ -9,21 +9,21 @@ public class FilePathToolTest {
 	public void testJoin_1() {
 		final String expected = "/a";
 		final String actual = FilePathTool.join("/", "a");
-		Assert.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void testJoin_2() {
 		final String expected = "/a";
 		final String actual = FilePathTool.join("/", "/a");
-		Assert.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void testJoin_3() {
 		final String expected = "/a";
 		final String actual = FilePathTool.join("/a");
-		Assert.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 }

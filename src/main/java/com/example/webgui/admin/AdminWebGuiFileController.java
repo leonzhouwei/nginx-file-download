@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.ModelAndViewTool;
+import com.example.common.MoneyTool;
 import com.example.config.AppConfig;
 import com.example.domain.File;
+import com.example.domain.FileServiceGroup;
+import com.example.domain.Production;
 import com.example.persist.must.FileRMapper;
+import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileWMapper;
+import com.example.persist.must.ProductionRMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
@@ -32,6 +37,7 @@ public class AdminWebGuiFileController {
 	static final String MD = "md";
 	static final String ENABLED = "enabled";
 	static final String FSG = "fsg";
+	static final String PRICE = "price";
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/file/";
 	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
@@ -48,6 +54,10 @@ public class AdminWebGuiFileController {
 	private FileRMapper rMapper;
 	@Autowired
 	private FileWMapper wMapper;
+	@Autowired
+	private ProductionRMapper productionRMapper;
+	@Autowired
+	private FileServiceGroupRMapper fsgRMapper;
 
 	static Map<String, Object> toMap(File e) {
 		Map<String, Object> ret = Maps.newHashMap();
@@ -59,6 +69,43 @@ public class AdminWebGuiFileController {
 
 	static void addAllObjects(ModelAndView mav, File e) {
 		mav.addAllObjects(toMap(e));
+	}
+
+	static Long extractId(HttpServletRequest request) {
+		return Long.valueOf(request.getParameter(ID));
+	}
+
+	static String extractDir(HttpServletRequest request) {
+		return request.getParameter(DIR);
+	}
+
+	static Long extractProduction(HttpServletRequest request) {
+		return Long.valueOf(request.getParameter(PRODUCTION));
+	}
+
+	static Long extractSize(HttpServletRequest request) {
+		return Long.valueOf(request.getParameter(SIZE));
+	}
+
+	static String extractMd(HttpServletRequest request) {
+		return request.getParameter(MD);
+	}
+
+	static String extractName(HttpServletRequest request) {
+		return request.getParameter(NAME);
+	}
+
+	static Boolean extractEnabled(HttpServletRequest request) {
+		return Boolean.valueOf(request.getParameter(ENABLED));
+	}
+
+	static Long extractFileServiceGroup(HttpServletRequest request) {
+		return Long.valueOf(request.getParameter(FSG));
+	}
+
+	static Long extractSdCardPriceFen(HttpServletRequest request) {
+		String priceYuan = request.getParameter(PRICE);
+		return MoneyTool.yuanToFen(priceYuan);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES, method = RequestMethod.GET)
@@ -74,8 +121,55 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request,
 			HttpServletResponse response) {
-
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		final String name = extractName(request);
+		if (Strings.isNullOrEmpty(name)) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		final Long sdCardPriceFen = extractSdCardPriceFen(request);
+		if (sdCardPriceFen == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		final Long productionId = extractProduction(request);
+		if (productionId == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		Production prod = productionRMapper.selectById(productionId);
+		if (prod == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		final Long size = extractSize(request);
+		if (size == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		final String md = extractMd(request);
+		if (Strings.isNullOrEmpty(md)) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		final Boolean enabled = extractEnabled(request);
+		if (enabled == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		final Long fsgId = extractFileServiceGroup(request);
+		if (fsgId == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		FileServiceGroup fsg = fsgRMapper.selectById(fsgId);
+		if (fsg == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		File file = new File();
+		file.reset();
+		file.setDir(extractDir(request));
+		file.setName(name);
+		file.setSdCardPriceFen(sdCardPriceFen);
+		file.setProductionId(productionId);
+		file.setSize(size);
+		file.setMd(md);
+		file.setEnabled(enabled);
+		file.setFileServiceGroupId(fsgId);
+		wMapper.insert(file);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_FILES);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.GET)
@@ -171,34 +265,6 @@ public class AdminWebGuiFileController {
 		e.enable();
 		wMapper.enable(e);
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
-	}
-
-	Long extractId(HttpServletRequest request) {
-		return Long.valueOf(request.getParameter(ID));
-	}
-	
-	String extractDir(HttpServletRequest request) {
-		return request.getParameter(DIR);
-	}
-	
-	Long extractProductionId(HttpServletRequest request) {
-		return Long.valueOf(request.getParameter(PRODUCTION));
-	}
-	
-	Long extractSize(HttpServletRequest request) {
-		return Long.valueOf(request.getParameter(SIZE));
-	}
-	
-	String extractMd(HttpServletRequest request) {
-		return request.getParameter(MD);
-	}
-	
-	Boolean extractEnabled(HttpServletRequest request) {
-		return Boolean.valueOf(request.getParameter(ENABLED));
-	}
-	
-	Long extractFileServiceGroupId(HttpServletRequest request) {
-		return Long.valueOf(request.getParameter(FSG));
 	}
 
 }

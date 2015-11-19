@@ -101,7 +101,8 @@ CREATE TABLE production
   dir character varying NOT NULL,
   CONSTRAINT prod_pkey PRIMARY KEY (id),
   CONSTRAINT production_dir_key UNIQUE (dir),
-  CONSTRAINT production_id_key UNIQUE (id)
+  CONSTRAINT production_id_key UNIQUE (id),
+  CONSTRAINT production_name_key UNIQUE (name)
 );
 
 -- Table: sd_order

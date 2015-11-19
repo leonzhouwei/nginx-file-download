@@ -21,6 +21,7 @@ function initTable(result) {
 		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>', elem['dir'], '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
+		buffer.push('<td style="text-align: right;">', elem['sdCardPriceFen'] / 100, '</td>');
 		buffer.push('<td>', elem['productionId'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
