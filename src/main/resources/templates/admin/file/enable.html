@@ -14,12 +14,13 @@
 		<hr />
 		<form action="/admin/files/enable" method="post">
 			<div class="form-group">
-				<label for="productionNameText">编号</label> <input type="text"
-					class="form-control" name="id" th:value="${id}" readonly="readonly" />
+				<label for="idText">编号</label> <input type="text"
+					class="form-control" id="idText" name="id" th:value="${id}"
+					readonly="readonly" />
 			</div>
 			<div class="form-group">
-				<label for="productionNameText">名称</label> <input type="text"
-					class="form-control" name="name" th:value="${name}"
+				<label for="nameText">名称</label> <input type="text"
+					class="form-control" id="nameText" name="name" th:value="${name}"
 					readonly="readonly" />
 			</div>
 			<button type="submit" class="btn btn-success">确认启用</button>

@@ -14,18 +14,19 @@
 		<hr />
 		<form action="/i/sd-card-orders" method="post">
 			<div class="form-group">
-				<label for="fileIdText">文件编号</label> <input class="form-control"
-					id="fileIdText" name="fileId" type="text" readonly="readonly"
-					th:value="${fileId}" />
+				<label for="fileIdText">文件编号</label> <input type="text"
+					class="form-control" id="fileIdText" name="fileId"
+					readonly="readonly" th:value="${fileId}" />
 			</div>
 			<div class="form-group">
-				<label for="fileNameText">文件名称</label> <input class="form-control"
-					id="fileNameText" type="text" readonly="readonly"
+				<label for="fileNameText">文件名称</label> <input type="text"
+					class="form-control" id="fileNameText" readonly="readonly"
 					th:value="${fileName}" />
 			</div>
 			<div class="form-group">
-				<label for="priceText">价格 (元)</label> <input class="form-control"
-					id="priceText" type="text" readonly="readonly" th:value="${price}" />
+				<label for="priceText">价格 (元)</label> <input type="text"
+					class="form-control" id="priceText" readonly="readonly"
+					th:value="${price}" />
 			</div>
 			<input type="hidden" name="uuid" th:value="${uuid}" />
 			<button type="submit" class="btn btn-primary">确认购买</button>
