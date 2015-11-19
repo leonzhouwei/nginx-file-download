@@ -206,7 +206,8 @@ public class AdminWebGuiFileController {
 		}
 		e.resetUpdatedAt();
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_FILES);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.GET)
@@ -235,7 +236,8 @@ public class AdminWebGuiFileController {
 		}
 		e.disable();
 		wMapper.disable(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_FILES);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.GET)
@@ -264,7 +266,8 @@ public class AdminWebGuiFileController {
 		}
 		e.enable();
 		wMapper.enable(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_FILES);
 	}
 
 }

@@ -46,7 +46,7 @@ public class WebGuiSdCardOrderController {
 	}
 
 	@RequestMapping(value = RouteDefine.I_SD_CARD_ORDERS_NEW, method = RequestMethod.GET)
-	public ModelAndView gotoNewOrderPage(HttpServletRequest request,
+	public ModelAndView gotoNew(HttpServletRequest request,
 			HttpServletResponse response) {
 		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {
@@ -94,7 +94,8 @@ public class WebGuiSdCardOrderController {
 		order.setPriceFen(file.getSdCardPriceFen());
 		order.setUserId(LoginInterceptor.getAccountId(request));
 		sdCardOrderWMapper.insert(order);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.I_SD_CARD_ORDERS);
 	}
 
 }

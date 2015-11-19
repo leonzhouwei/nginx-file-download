@@ -29,6 +29,7 @@ public class AdminWebGuiProductionController {
 	static final String ID = "id";
 	static final String ENABLED = "enabled";
 	static final String DESCRIPTION = "description";
+	static final String DIR = "dir";
 	static final String NAME = "name";
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/production/";
@@ -76,16 +77,20 @@ public class AdminWebGuiProductionController {
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request,
 			HttpServletResponse response) {
+		String dir = request.getParameter(DIR);
+		logger.debug("dir: " + dir);
 		String name = request.getParameter(NAME);
 		logger.debug("name: " + name);
 		String description = request.getParameter(DESCRIPTION);
 		logger.debug("description: " + description);
 		Production e = new Production();
 		e.reset();
+		e.setDir(dir);
 		e.setName(name);
 		e.setDescription(description);
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_PRODUCTIONS);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.GET)
@@ -126,7 +131,8 @@ public class AdminWebGuiProductionController {
 		}
 		e.resetUpdatedAt();
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_PRODUCTIONS);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.GET)
@@ -155,7 +161,8 @@ public class AdminWebGuiProductionController {
 		}
 		e.disable();
 		wMapper.disable(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_PRODUCTIONS);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.GET)
@@ -184,7 +191,8 @@ public class AdminWebGuiProductionController {
 		}
 		e.enable();
 		wMapper.enable(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_PRODUCTIONS);
 	}
 
 }

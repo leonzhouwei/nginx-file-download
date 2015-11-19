@@ -67,7 +67,8 @@ public class AdminWebGuiFileServiceGroupController {
 		e.reset();
 		e.setName(name);
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_FILE_SERVICE_GROUPS);
 	}
 
 }

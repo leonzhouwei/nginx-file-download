@@ -75,7 +75,8 @@ public class AdminWebGuiFileServiceController {
 		e.setHost(host);
 		e.setGroupId(Long.parseLong(groupIdStr));
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+				RouteDefine.ADMIN_FILE_SERVICES);
 	}
 
 }
