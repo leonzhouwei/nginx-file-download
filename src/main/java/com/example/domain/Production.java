@@ -20,6 +20,9 @@ public class Production extends Base {
 	}
 
 	public void setDescription(String description) {
+		if (description == null) {
+			this.description = EMPTY_STRING;
+		}
 		this.description = description;
 	}
 	
