@@ -14,19 +14,20 @@ public final class ModelAndViewTool {
 
 	private ModelAndViewTool() {
 	}
-	
+
 	public static ModelAndView newModelAndView(AppConfig appConfig,
 			String viewName) {
 		ModelAndView ret = new ModelAndView(viewName);
 		ret.getModel().put(APP_ASSETS_HOME, appConfig.getAssetsHome());
 		return ret;
 	}
-	
-	public static ModelAndView newModelAndViewFor404(AppConfig appConfig,HttpServletResponse response) {
-		HttpServletResponseUtil.setStatusAsNotFound(response);
+
+	public static ModelAndView newModelAndViewFor404(AppConfig appConfig,
+			HttpServletResponse response) {
+		HttpResponseTool.setStatusAsNotFound(response);
 		return newModelAndView(appConfig, COMMON_404);
 	}
-	
+
 	public static ModelAndView newModelAndViewAndRedirect(AppConfig appConfig,
 			String url) {
 		ModelAndView ret = new ModelAndView(new RedirectView(url));

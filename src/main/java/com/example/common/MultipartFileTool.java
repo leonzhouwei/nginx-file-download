@@ -20,15 +20,15 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-public final class MultipartFileUtils {
+public final class MultipartFileTool {
 
 	static final String DEFAULT_FLAG = ".";
 	static final String DEFAULT_PREFIX_BEFORE_TIMESTAMP = "-";
 
 	private static final Logger logger = Logger
-			.getLogger(MultipartFileUtils.class);
+			.getLogger(MultipartFileTool.class);
 
-	private MultipartFileUtils() {
+	private MultipartFileTool() {
 	}
 
 	public static List<File> saveFiles(HttpServletRequest request,

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.FilePathTool;
-import com.example.common.HttpServletResponseUtil;
+import com.example.common.HttpResponseTool;
 import com.example.config.AppConfig;
 import com.example.webapi.RouteDefine;
 
@@ -29,6 +29,6 @@ public class AssetsImageController {
 		String imageFilePath = FilePathTool.join(appConfig.getImageDirPath(),
 				uri);
 		File file = new File(imageFilePath);
-		HttpServletResponseUtil.writeImage(response, file);
+		HttpResponseTool.writeImage(response, file);
 	}
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.common.HttpServletResponseUtil;
+import com.example.common.HttpResponseTool;
 import com.example.domain.SdCardOrder;
 import com.example.filter.LoginInterceptor;
 import com.example.persist.must.SdCardOrderRMapper;
@@ -25,7 +25,7 @@ public class SdCardOrderApi {
 	public void list(HttpServletRequest request, HttpServletResponse response) {
 		Long id = LoginInterceptor.getAccountId(request);
 		List<SdCardOrder> list = rMapper.selectByUserId(id);
-		HttpServletResponseUtil.writeResponse(response, list);
+		HttpResponseTool.writeResponse(response, list);
 	}
 
 }

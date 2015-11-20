@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.common.HttpServletResponseUtil;
+import com.example.common.HttpResponseTool;
 import com.example.domain.Production;
 import com.example.persist.must.ProductionRMapper;
 import com.example.webapi.RouteDefine;
@@ -25,14 +25,14 @@ public class AdminProductionApi {
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		List<Production> list = rMapper.selectAllIgnoreEnabled();
-		HttpServletResponseUtil.writeResponse(response, list);
+		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}", method = RequestMethod.GET)
 	public void getById(HttpServletRequest request, @PathVariable String id,
 			HttpServletResponse response) {
 		Production e = rMapper.selectById(Long.parseLong(id));
-		HttpServletResponseUtil.writeResponse(response, e);
+		HttpResponseTool.writeResponse(response, e);
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.common.HttpRequestTool;
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
 import com.example.domain.FileServiceGroup;
@@ -22,11 +23,8 @@ import com.example.webgui.WebGuiDefine;
 @Controller
 public class AdminWebGuiFileServiceGroupController {
 
-	static final String ENABLED = "enabled";
 	static final String CREATED_AT = "createdAt";
 	static final String UPDATED_AT = "updatedAt";
-	static final String ID = "id";
-	static final String NAME = "name";
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
 			+ "/file-service-group/";
@@ -61,7 +59,7 @@ public class AdminWebGuiFileServiceGroupController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request,
 			HttpServletResponse response) {
-		String name = request.getParameter(NAME);
+		String name = HttpRequestTool.extractName(request);
 		logger.debug("name: " + name);
 		FileServiceGroup e = new FileServiceGroup();
 		e.reset();

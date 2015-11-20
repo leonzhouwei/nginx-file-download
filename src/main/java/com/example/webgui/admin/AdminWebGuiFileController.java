@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.common.HttpRequestTool;
 import com.example.common.ModelAndViewTool;
 import com.example.common.MoneyTool;
 import com.example.config.AppConfig;
@@ -29,13 +30,10 @@ import com.google.common.collect.Maps;
 @Controller
 public class AdminWebGuiFileController {
 
-	static final String ID = "id";
 	static final String DIR = "dir";
-	static final String NAME = "name";
 	static final String PRODUCTION = "production";
 	static final String SIZE = "size";
 	static final String MD = "md";
-	static final String ENABLED = "enabled";
 	static final String FSG = "fsg";
 	static final String PRICE = "price";
 
@@ -61,18 +59,14 @@ public class AdminWebGuiFileController {
 
 	static Map<String, Object> toMap(File e) {
 		Map<String, Object> ret = Maps.newHashMap();
-		ret.put(ID, e.getId());
-		ret.put(NAME, e.getName());
-		ret.put(ENABLED, e.getEnabled());
+		ret.put(HttpRequestTool.ID, e.getId());
+		ret.put(HttpRequestTool.NAME, e.getName());
+		ret.put(HttpRequestTool.ENABLED, e.getEnabled());
 		return ret;
 	}
 
 	static void addAllObjects(ModelAndView mav, File e) {
 		mav.addAllObjects(toMap(e));
-	}
-
-	static Long extractId(HttpServletRequest request) {
-		return Long.valueOf(request.getParameter(ID));
 	}
 
 	static String extractDir(HttpServletRequest request) {
@@ -89,14 +83,6 @@ public class AdminWebGuiFileController {
 
 	static String extractMd(HttpServletRequest request) {
 		return request.getParameter(MD);
-	}
-
-	static String extractName(HttpServletRequest request) {
-		return request.getParameter(NAME);
-	}
-
-	static Boolean extractEnabled(HttpServletRequest request) {
-		return Boolean.valueOf(request.getParameter(ENABLED));
 	}
 
 	static Long extractFileServiceGroup(HttpServletRequest request) {
@@ -121,7 +107,7 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request,
 			HttpServletResponse response) {
-		final String name = extractName(request);
+		final String name = HttpRequestTool.extractName(request);
 		if (Strings.isNullOrEmpty(name)) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -145,7 +131,7 @@ public class AdminWebGuiFileController {
 		if (Strings.isNullOrEmpty(md)) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		final Boolean enabled = extractEnabled(request);
+		final Boolean enabled = HttpRequestTool.extractEnabled(request);
 		if (enabled == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -175,8 +161,10 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter(ID);
-		final long id = Long.parseLong(idStr);
+		Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -190,21 +178,25 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter(ID);
-		final long id = Long.parseLong(idStr);
+		final Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		String name = request.getParameter(NAME);
+		String dir = request.getParameter(DIR);
+		if (!Strings.isNullOrEmpty(dir)) {
+			e.setDir(dir);
+		}
+		String name = HttpRequestTool.extractName(request);
 		if (!Strings.isNullOrEmpty(name)) {
 			e.setName(name);
 		}
-		String enabledStr = request.getParameter(ENABLED);
-		if (!Strings.isNullOrEmpty(enabledStr)) {
-			e.setEnabled(Boolean.valueOf(enabledStr));
-		}
+		Boolean enabled = HttpRequestTool.extractEnabled(request, false);
 		e.resetUpdatedAt();
+		e.setEnabled(enabled);
 		wMapper.update(e);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
 				RouteDefine.ADMIN_FILES);
@@ -213,8 +205,10 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.GET)
 	public ModelAndView gotoDisable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter(ID);
-		final long id = Long.parseLong(idStr);
+		Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -228,8 +222,10 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.POST)
 	public ModelAndView disable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter(ID);
-		final long id = Long.parseLong(idStr);
+		Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -243,8 +239,10 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.GET)
 	public ModelAndView gotoEnable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter(ID);
-		final long id = Long.parseLong(idStr);
+		Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -258,8 +256,10 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.POST)
 	public ModelAndView enable(HttpServletRequest request,
 			HttpServletResponse response) {
-		String idStr = request.getParameter(ID);
-		final long id = Long.parseLong(idStr);
+		Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);

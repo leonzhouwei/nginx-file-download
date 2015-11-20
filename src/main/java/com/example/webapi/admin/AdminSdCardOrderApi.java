@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.common.HttpServletResponseUtil;
+import com.example.common.HttpResponseTool;
 import com.example.domain.SdCardOrder;
 import com.example.persist.must.SdCardOrderRMapper;
 import com.example.webapi.RouteDefine;
@@ -24,7 +24,7 @@ public class AdminSdCardOrderApi {
 	@RequestMapping(value = RouteDefine.API_ADMIN_SD_CARD_ORDERS, method = RequestMethod.GET)
 	public void list(HttpServletRequest request, HttpServletResponse response) {
 		List<SdCardOrder> list = rMapper.selectAll();
-		HttpServletResponseUtil.writeResponse(response, list);
+		HttpResponseTool.writeResponse(response, list);
 	}
 
 }

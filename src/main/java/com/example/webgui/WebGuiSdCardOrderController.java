@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.common.HttpServletResponseUtil;
+import com.example.common.HttpResponseTool;
 import com.example.common.ModelAndViewTool;
 import com.example.common.UuidTool;
 import com.example.config.AppConfig;
@@ -78,7 +78,7 @@ public class WebGuiSdCardOrderController {
 		}
 		String uuid = request.getParameter(UUID);
 		if (Strings.isNullOrEmpty(uuid)) {
-			HttpServletResponseUtil.setStatusAsNotFound(response);
+			HttpResponseTool.setStatusAsNotFound(response);
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		final long fileId = Long.parseLong(fileIdStr);

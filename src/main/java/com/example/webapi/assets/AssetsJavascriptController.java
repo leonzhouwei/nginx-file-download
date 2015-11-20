@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.FilePathTool;
-import com.example.common.HttpServletResponseUtil;
+import com.example.common.HttpResponseTool;
 import com.example.config.AppConfig;
 import com.example.webapi.RouteDefine;
 
@@ -28,7 +28,7 @@ public class AssetsJavascriptController {
 		String uri = request.getRequestURI();
 		String path = FilePathTool.join(appConfig.getDataDir(), uri);
 		File file = new File(path);
-		HttpServletResponseUtil.writeCss(response, file);
+		HttpResponseTool.writeCss(response, file);
 	}
 
 }

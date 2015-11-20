@@ -23,8 +23,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.common.HttpDefine;
-import com.example.common.HttpServletRequestTool;
-import com.example.common.HttpServletResponseUtil;
+import com.example.common.HttpRequestTool;
+import com.example.common.HttpResponseTool;
 import com.example.common.JsonTool;
 import com.example.config.AppConfig;
 import com.example.domain.DownloadHistory;
@@ -153,7 +153,7 @@ public class DownloadApi {
 		DownloadTask task = taskRMapper.selectByUuid(result.taskUuid);
 		if (task == null) {
 			if (LoginInterceptor.getAccountId(request) == null) {
-				HttpServletResponseUtil.setStatusAsUnauthorized(response);
+				HttpResponseTool.setStatusAsUnauthorized(response);
 				return;
 			}
 			// not found, create a new one
@@ -190,7 +190,7 @@ public class DownloadApi {
 		}
 		final String host = tempHost;
 		logger.info("web server host: " + host);
-		final String clientIp = HttpServletRequestTool.getClientIp(request);
+		final String clientIp = HttpRequestTool.getClientIp(request);
 		logger.info("client IP: " + clientIp);
 		logger.info("X-Forwarded-For: " + request.getHeader(HttpDefine.XFF));
 		logger.info("request parameters: "
@@ -198,26 +198,26 @@ public class DownloadApi {
 		//
 		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {
-			HttpServletResponseUtil.setStatusAsNotFound(response);
+			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		String uuid = request.getParameter(UUID);
 		if (Strings.isNullOrEmpty(uuid)) {
-			HttpServletResponseUtil.setStatusAsNotFound(response);
+			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		// find the file by id
 		final long fileId = Long.parseLong(fileIdStr);
 		File file = fileRMapper.selectById(fileId);
 		if (file == null) {
-			HttpServletResponseUtil.setStatusAsNotFound(response);
+			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		// check the production
 		Production production = productionRMapper.selectById(file
 				.getProductionId());
 		if (production == null) {
-			HttpServletResponseUtil.setStatusAsNotFound(response);
+			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		// check the file service group
@@ -227,7 +227,7 @@ public class DownloadApi {
 				.selectById(fileServiceGroupId);
 		logger.info("file service group: " + JsonTool.toJson(fsg));
 		if (fsg == null) {
-			HttpServletResponseUtil.setStatusAsNotFound(response);
+			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		// check the file service
@@ -238,7 +238,7 @@ public class DownloadApi {
 				.selectByGroupIdAndHost(params);
 		logger.info("file service: " + JsonTool.toJson(fileService));
 		if (fileService == null) {
-			HttpServletResponseUtil.setStatusAsNotFound(response);
+			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		// success

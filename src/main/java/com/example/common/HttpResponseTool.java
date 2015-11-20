@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
-public final class HttpServletResponseUtil {
+public final class HttpResponseTool {
 
 	static final String EMPTY = "";
 
@@ -28,9 +28,9 @@ public final class HttpServletResponseUtil {
 	private static final int bufferSize = 1024;
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(HttpServletResponseUtil.class);
+			.getLogger(HttpResponseTool.class);
 
-	private HttpServletResponseUtil() {
+	private HttpResponseTool() {
 	}
 
 	public static void setDefaultContentType(HttpServletResponse response) {
