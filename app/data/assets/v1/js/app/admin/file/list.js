@@ -17,18 +17,19 @@ function initTable(result) {
 			buffer.push('<tr>');
 		}
 		var id = elem['id'];
-		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td>', id, '</td>');
-		buffer.push('<td>', elem['dir'], '</td>');
-		buffer.push('<td>', elem['name'], '</td>');
-		buffer.push('<td style="text-align: right;">', elem['sdCardPriceFen'] / 100, '</td>');
-		buffer.push('<td>', elem['productionId'], '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
-		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
-		buffer.push('<td>', elem['md'], '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>', enabled, '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
+		buffer.push('<td>', elem['dir'], '</td>');
+		buffer.push('<td>', elem['name'], '</td>');
+		buffer.push('<td style="text-align: right;">',
+				elem['sdCardPriceFen'] / 100, '</td>');
+		buffer.push('<td>', elem['productionId'], '</td>');
+		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
+		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
+		buffer.push('<td>', elem['md'], '</td>');
 		buffer.push('<td>', elem['fileServiceGroupId'], '</td>');
 		// ----------
 		buffer.push('<td>');
@@ -38,7 +39,7 @@ function initTable(result) {
 		// ----------
 		if (enabled == true) {
 			buffer.push('<a href="/admin/files/disable?id=' + id,
-			'" class="btn btn-warning btn-xs">停用</a>');
+					'" class="btn btn-warning btn-xs">停用</a>');
 		} else {
 			buffer.push('<a href="/admin/files/enable?id=' + id,
 					'" class="btn btn-success btn-xs">启用</a>');

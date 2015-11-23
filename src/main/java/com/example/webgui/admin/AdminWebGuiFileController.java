@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.common.HttpRequestTool;
 import com.example.common.ModelAndViewTool;
 import com.example.common.MoneyTool;
+import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.File;
 import com.example.domain.FileServiceGroup;
@@ -32,10 +33,7 @@ public class AdminWebGuiFileController {
 
 	static final String DIR = "dir";
 	static final String PRODUCTION = "production";
-	static final String SIZE = "size";
-	static final String MD = "md";
 	static final String FSG = "fsg";
-	static final String PRICE = "price";
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/file/";
 	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
@@ -60,6 +58,8 @@ public class AdminWebGuiFileController {
 	static Map<String, Object> toMap(File e) {
 		Map<String, Object> ret = Maps.newHashMap();
 		ret.put(HttpRequestTool.ID, e.getId());
+		ret.put(DIR, e.getDir());
+		ret.put(HttpRequestTool.PRICE, e.getSdCardPriceFen());
 		ret.put(HttpRequestTool.NAME, e.getName());
 		ret.put(HttpRequestTool.ENABLED, e.getEnabled());
 		return ret;
@@ -77,20 +77,12 @@ public class AdminWebGuiFileController {
 		return Long.valueOf(request.getParameter(PRODUCTION));
 	}
 
-	static Long extractSize(HttpServletRequest request) {
-		return Long.valueOf(request.getParameter(SIZE));
-	}
-
-	static String extractMd(HttpServletRequest request) {
-		return request.getParameter(MD);
-	}
-
 	static Long extractFileServiceGroup(HttpServletRequest request) {
 		return Long.valueOf(request.getParameter(FSG));
 	}
 
 	static Long extractSdCardPriceFen(HttpServletRequest request) {
-		String priceYuan = request.getParameter(PRICE);
+		String priceYuan = request.getParameter(HttpRequestTool.PRICE);
 		return MoneyTool.yuanToFen(priceYuan);
 	}
 
@@ -123,11 +115,11 @@ public class AdminWebGuiFileController {
 		if (prod == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		final Long size = extractSize(request);
+		final Long size = HttpRequestTool.extractSize(request);
 		if (size == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		final String md = extractMd(request);
+		String md = HttpRequestTool.extractMd(request);
 		if (Strings.isNullOrEmpty(md)) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -171,7 +163,7 @@ public class AdminWebGuiFileController {
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
 				VIEW_NAME_EDIT);
-		addAllObjects(ret, e);
+		ret.getModel().putAll(ReflectTool.toMap(e));
 		return ret;
 	}
 
@@ -194,9 +186,42 @@ public class AdminWebGuiFileController {
 		if (!Strings.isNullOrEmpty(name)) {
 			e.setName(name);
 		}
-		Boolean enabled = HttpRequestTool.extractEnabled(request, false);
+		final Long sdCardPriceFen = HttpRequestTool
+				.extractPriceFromYuanToFen(request);
+		if (sdCardPriceFen != null) {
+			e.setSdCardPriceFen(sdCardPriceFen);
+		}
+		final Long productionId = HttpRequestTool.extractLong(request,
+				PRODUCTION);
+		if (productionId != null) {
+			e.setProductionId(productionId);
+			Production production = productionRMapper.selectById(productionId);
+			if (production == null) {
+				return ModelAndViewTool.newModelAndViewFor404(appConfig,
+						response);
+			}
+		}
+		final Long size = HttpRequestTool.extractSize(request);
+		if (size != null) {
+			e.setSize(size);
+		}
+		String md = HttpRequestTool.extractMd(request);
+		if (!Strings.isNullOrEmpty(md)) {
+			e.setMd(md);
+		}
+		final Boolean enabled = HttpRequestTool.extractEnabled(request);
+		if (enabled != null) {
+			e.setEnabled(enabled);
+		}
+		final Long fsgId = HttpRequestTool.extractLong(request, FSG);
+		if (fsgId != null) {
+			FileServiceGroup fsg = fsgRMapper.selectById(fsgId);
+			if (fsg == null) {
+				return ModelAndViewTool.newModelAndViewFor404(appConfig,
+						response);
+			}
+		}
 		e.resetUpdatedAt();
-		e.setEnabled(enabled);
 		wMapper.update(e);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
 				RouteDefine.ADMIN_FILES);

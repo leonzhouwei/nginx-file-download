@@ -1,12 +1,12 @@
 package com.example.domain;
 
 public class Account extends Base {
-	
+
 	private Long id;
 	private String name;
 	private String password;
 	private Boolean isAdmin;
-	
+
 	public static boolean isValidAccount(Account account) {
 		if (account == null || !account.getEnabled()) {
 			return false;
