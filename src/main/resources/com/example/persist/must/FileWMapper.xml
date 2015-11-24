@@ -4,32 +4,40 @@
 <mapper namespace="com.example.persist.must.FileWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.File">
-	   INSERT INTO file
-	   (created_at, updated_at, enabled, id, dir, name, size, md, sd_card_price_fen, production_id, file_service_group_id)
-	   VALUES
-	   (#{createdAt}, #{updatedAt}, #{enabled}, default, #{dir}, #{name}, #{size}, #{md}, #{sdCardPriceFen}, #{productionId}, #{fileServiceGroupId})
+		INSERT INTO file
+		(created_at,
+		updated_at, enabled, id, dir, name, size, md, sd_card_price_fen,
+		production_id, file_service_group_id)
+		VALUES
+		(#{createdAt},
+		#{updatedAt}, #{enabled}, default, #{dir}, #{name}, #{size}, #{md},
+		#{sdCardPriceFen}, #{productionId}, #{fileServiceGroupId})
 	</insert>
-	
+
 	<update id="update" parameterType="com.example.domain.File">
-        UPDATE file
-        SET
-        name=#{name}, enabled=#{enabled},
-        updated_at=#{updatedAt}
-        WHERE id=#{id}
-    </update>
-	
+		UPDATE file
+		SET
+		enabled=#{enabled},
+		updated_at=#{updatedAt}, dir=#{dir}, name=#{name},
+		size=#{size}, md=#{md},
+		sd_card_price_fen=#{sdCardPriceFen},
+		production_id=#{productionId},
+		file_service_group_id=#{fileServiceGroupId}
+		WHERE id=#{id}
+	</update>
+
 	<update id="enable" parameterType="com.example.domain.File">
-        UPDATE file
-        SET enabled=true,
-        updated_at=#{updatedAt}
-        WHERE id=#{id}
-    </update>
-    
-    <update id="disable" parameterType="com.example.domain.File">
-        UPDATE file
-        SET enabled=false,
-        updated_at=#{updatedAt}
-        WHERE id=#{id}
-    </update>
+		UPDATE file
+		SET enabled=true,
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
+
+	<update id="disable" parameterType="com.example.domain.File">
+		UPDATE file
+		SET enabled=false,
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
 
 </mapper>

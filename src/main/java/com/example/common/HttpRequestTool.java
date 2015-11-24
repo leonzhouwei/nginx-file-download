@@ -83,6 +83,14 @@ public final class HttpRequestTool {
 	public static Long extractId(HttpServletRequest request) {
 		return Long.valueOf(request.getParameter(ID));
 	}
+	
+	public static Double extractPriceYuan(HttpServletRequest request) {
+		String priceStr = request.getParameter(PRICE);
+		if (Strings.isNullOrEmpty(priceStr)) {
+			return null;
+		}
+		return Double.valueOf(priceStr);
+	}
 
 	public static Long extractPriceFromYuanToFen(HttpServletRequest request,
 			String priceParam) {

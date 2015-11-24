@@ -10,7 +10,7 @@ public class File extends Base {
 	private Long sdCardPriceFen;
 	private String md;
 	private Long fileServiceGroupId;
-	
+
 	public void resetBy(File another) {
 		super.resetBy(another);
 		setId(another.getId());
@@ -56,6 +56,10 @@ public class File extends Base {
 		this.size = size;
 	}
 
+	public void resetSizeMb(Long sizeMb) {
+		setSize(sizeMb * 1024 * 1024);
+	}
+
 	public Long getProductionId() {
 		return productionId;
 	}
@@ -70,6 +74,11 @@ public class File extends Base {
 
 	public void setSdCardPriceFen(Long sdCardPriceFen) {
 		this.sdCardPriceFen = sdCardPriceFen;
+	}
+
+	public void resetSdCardPriceYuan(Double sdCardPriceYuan) {
+		double priceFen = 100 * sdCardPriceYuan.doubleValue();
+		setSdCardPriceFen((long) priceFen);
 	}
 
 	public String getMd() {

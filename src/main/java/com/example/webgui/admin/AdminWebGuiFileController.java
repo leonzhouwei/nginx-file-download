@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.HttpRequestTool;
+import com.example.common.JsonTool;
 import com.example.common.ModelAndViewTool;
 import com.example.common.MoneyTool;
 import com.example.common.ReflectTool;
@@ -43,6 +46,9 @@ public class AdminWebGuiFileController {
 			+ WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(AdminWebGuiFileController.class);
 
 	@Autowired
 	private AppConfig appConfig;
@@ -170,6 +176,7 @@ public class AdminWebGuiFileController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request,
 			HttpServletResponse response) {
+		logger.debug(JsonTool.toJson(request.getParameterMap()));
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response,
@@ -188,10 +195,10 @@ public class AdminWebGuiFileController {
 		if (!Strings.isNullOrEmpty(name)) {
 			e.setName(name);
 		}
-		final Long sdCardPriceFen = HttpRequestTool
-				.extractPriceFromYuanToFen(request);
-		if (sdCardPriceFen != null) {
-			e.setSdCardPriceFen(sdCardPriceFen);
+		final Double sdCardPriceYuan = HttpRequestTool
+				.extractPriceYuan(request);
+		if (sdCardPriceYuan != null) {
+			e.resetSdCardPriceYuan(sdCardPriceYuan);
 		}
 		final Long productionId = HttpRequestTool.extractLong(request,
 				PRODUCTION);
@@ -203,9 +210,9 @@ public class AdminWebGuiFileController {
 			}
 			e.setProductionId(productionId);
 		}
-		final Double size = HttpRequestTool.extractSize(request);
-		if (size != null) {
-			e.setSize((long) size.doubleValue());
+		final Double sizeMb = HttpRequestTool.extractSize(request);
+		if (sizeMb != null) {
+			e.resetSizeMb((long) sizeMb.doubleValue());
 		}
 		String md = HttpRequestTool.extractMd(request);
 		if (!Strings.isNullOrEmpty(md)) {
