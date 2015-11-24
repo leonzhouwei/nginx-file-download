@@ -9,7 +9,6 @@ function initTable(result) {
 	len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
-		var table = $('#table');
 		var buffer = [];
 		if (i % 2 == 0) {
 			buffer.push('<tr class="active">');
