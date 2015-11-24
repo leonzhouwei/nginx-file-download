@@ -22,4 +22,5 @@ release.properties
 # customized
 config/*.production
 daily_build/
-var/
+var/app.pid
+var/log
