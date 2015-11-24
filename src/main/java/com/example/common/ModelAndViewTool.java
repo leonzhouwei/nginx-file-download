@@ -27,6 +27,12 @@ public final class ModelAndViewTool {
 		HttpResponseTool.setStatusAsNotFound(response);
 		return newModelAndView(appConfig, COMMON_404);
 	}
+	
+	public static ModelAndView newModelAndViewFor404(AppConfig appConfig,
+			HttpServletResponse response, String message) {
+		HttpResponseTool.setStatusAsNotFound(response, message);
+		return newModelAndView(appConfig, COMMON_404);
+	}
 
 	public static ModelAndView newModelAndViewAndRedirect(AppConfig appConfig,
 			String url) {

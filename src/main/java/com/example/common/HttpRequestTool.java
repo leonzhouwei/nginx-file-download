@@ -101,12 +101,12 @@ public final class HttpRequestTool {
 		return MoneyTool.yuanToFen(priceStr);
 	}
 
-	public static Long extractSize(HttpServletRequest request) {
+	public static Double extractSize(HttpServletRequest request) {
 		String sizeStr = request.getParameter(SIZE);
 		if (Strings.isNullOrEmpty(sizeStr)) {
 			return null;
 		}
-		return Long.valueOf(sizeStr);
+		return Double.valueOf(sizeStr);
 	}
 
 }

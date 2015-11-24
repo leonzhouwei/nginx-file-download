@@ -139,6 +139,14 @@ public final class HttpResponseTool {
 		writeError(response, status, error);
 	}
 
+	public static void setStatusAsNotFound(HttpServletResponse response,
+			String msg) {
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		ServerErrorDto error = new ServerErrorDto();
+		error.setMessage(msg);
+		writeError(response, status, error);
+	}
+
 	public static void setStatusAsUnauthorized(HttpServletResponse response) {
 		HttpStatus status = HttpStatus.UNAUTHORIZED;
 		ServerErrorDto error = new ServerErrorDto();

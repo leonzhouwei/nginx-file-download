@@ -115,7 +115,7 @@ public class AdminWebGuiFileController {
 		if (prod == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		final Long size = HttpRequestTool.extractSize(request);
+		final Double size = HttpRequestTool.extractSize(request);
 		if (size == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -141,7 +141,7 @@ public class AdminWebGuiFileController {
 		file.setName(name);
 		file.setSdCardPriceFen(sdCardPriceFen);
 		file.setProductionId(productionId);
-		file.setSize(size);
+		file.setSize((long) size.doubleValue());
 		file.setMd(md);
 		file.setEnabled(enabled);
 		file.setFileServiceGroupId(fsgId);
@@ -172,11 +172,13 @@ public class AdminWebGuiFileController {
 			HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response,
+					HttpRequestTool.ID);
 		}
 		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response,
+					"file not found");
 		}
 		String dir = request.getParameter(DIR);
 		if (!Strings.isNullOrEmpty(dir)) {
@@ -194,16 +196,16 @@ public class AdminWebGuiFileController {
 		final Long productionId = HttpRequestTool.extractLong(request,
 				PRODUCTION);
 		if (productionId != null) {
-			e.setProductionId(productionId);
 			Production production = productionRMapper.selectById(productionId);
 			if (production == null) {
 				return ModelAndViewTool.newModelAndViewFor404(appConfig,
-						response);
+						response, PRODUCTION);
 			}
+			e.setProductionId(productionId);
 		}
-		final Long size = HttpRequestTool.extractSize(request);
+		final Double size = HttpRequestTool.extractSize(request);
 		if (size != null) {
-			e.setSize(size);
+			e.setSize((long) size.doubleValue());
 		}
 		String md = HttpRequestTool.extractMd(request);
 		if (!Strings.isNullOrEmpty(md)) {
@@ -218,7 +220,7 @@ public class AdminWebGuiFileController {
 			FileServiceGroup fsg = fsgRMapper.selectById(fsgId);
 			if (fsg == null) {
 				return ModelAndViewTool.newModelAndViewFor404(appConfig,
-						response);
+						response, FSG);
 			}
 		}
 		e.resetUpdatedAt();
