@@ -1,7 +1,5 @@
 package com.example.webgui.admin;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.common.HttpRequestTool;
 import com.example.common.JsonTool;
 import com.example.common.ModelAndViewTool;
-import com.example.common.MoneyTool;
 import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.File;
@@ -29,7 +26,6 @@ import com.example.persist.must.ProductionRMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
 
 @Controller
 public class AdminWebGuiFileController {
@@ -61,37 +57,6 @@ public class AdminWebGuiFileController {
 	@Autowired
 	private FileServiceGroupRMapper fsgRMapper;
 
-	static Map<String, Object> toMap(File e) {
-		Map<String, Object> ret = Maps.newHashMap();
-		ret.put(HttpRequestTool.ID, e.getId());
-		ret.put(DIR, e.getDir());
-		ret.put(HttpRequestTool.PRICE, e.getSdCardPriceFen());
-		ret.put(HttpRequestTool.NAME, e.getName());
-		ret.put(HttpRequestTool.ENABLED, e.getEnabled());
-		return ret;
-	}
-
-	static void addAllObjects(ModelAndView mav, File e) {
-		mav.addAllObjects(toMap(e));
-	}
-
-	static String extractDir(HttpServletRequest request) {
-		return request.getParameter(DIR);
-	}
-
-	static Long extractProduction(HttpServletRequest request) {
-		return Long.valueOf(request.getParameter(PRODUCTION));
-	}
-
-	static Long extractFileServiceGroup(HttpServletRequest request) {
-		return Long.valueOf(request.getParameter(FSG));
-	}
-
-	static Long extractSdCardPriceFen(HttpServletRequest request) {
-		String priceYuan = request.getParameter(HttpRequestTool.PRICE);
-		return MoneyTool.yuanToFen(priceYuan);
-	}
-
 	@RequestMapping(value = RouteDefine.ADMIN_FILES, method = RequestMethod.GET)
 	public ModelAndView list() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
@@ -109,11 +74,13 @@ public class AdminWebGuiFileController {
 		if (Strings.isNullOrEmpty(name)) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		final Long sdCardPriceFen = extractSdCardPriceFen(request);
-		if (sdCardPriceFen == null) {
+		final Double sdCardPriceYuan = HttpRequestTool
+				.extractPriceYuan(request);
+		if (sdCardPriceYuan == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		final Long productionId = extractProduction(request);
+		final Long productionId = HttpRequestTool.extractLong(request,
+				PRODUCTION);
 		if (productionId == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -133,7 +100,7 @@ public class AdminWebGuiFileController {
 		if (enabled == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		final Long fsgId = extractFileServiceGroup(request);
+		final Long fsgId = HttpRequestTool.extractLong(request, FSG);
 		if (fsgId == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -143,9 +110,9 @@ public class AdminWebGuiFileController {
 		}
 		File file = new File();
 		file.reset();
-		file.setDir(extractDir(request));
+		file.setDir(request.getParameter(DIR));
 		file.setName(name);
-		file.setSdCardPriceFen(sdCardPriceFen);
+		file.resetSdCardPriceYuan(sdCardPriceYuan);
 		file.setProductionId(productionId);
 		file.setSize((long) size.doubleValue());
 		file.setMd(md);
@@ -249,7 +216,7 @@ public class AdminWebGuiFileController {
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
 				VIEW_NAME_DISABLE);
-		addAllObjects(ret, e);
+		ret.getModel().putAll(ReflectTool.toMap(e));
 		return ret;
 	}
 
@@ -283,7 +250,7 @@ public class AdminWebGuiFileController {
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
 				VIEW_NAME_ENABLE);
-		addAllObjects(ret, e);
+		ret.getModel().putAll(ReflectTool.toMap(e));
 		return ret;
 	}
 
