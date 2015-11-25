@@ -36,6 +36,12 @@
 			<label for="mdText">消息摘要</label> <input class="form-control"
 				type="text" id="mdText" readonly="readonly" th:value="${md}"></input>
 		</div>
+
+		<!-- ===== vendor scripts ===== -->
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
+
+		<!-- ===== application scripts ===== -->
 	</div>
 </body>
 

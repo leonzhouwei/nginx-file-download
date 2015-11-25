@@ -27,14 +27,12 @@
 			</div>
 			<div class="form-group">
 				<label for="createdAtText">创建时间</label> <input type="text"
-					class="form-control" th:value="${createdAt}"
-					readonly="readonly" />
+					class="form-control" th:value="${createdAt}" readonly="readonly" />
 			</div>
 			<div class="form-group">
-                <label for="updatedAtText">上次修改时间</label> <input type="text"
-                    class="form-control" th:value="${updatedAt}"
-                    readonly="readonly" />
-            </div>
+				<label for="updatedAtText">上次修改时间</label> <input type="text"
+					class="form-control" th:value="${updatedAt}" readonly="readonly" />
+			</div>
 			<div class="form-group">
 				<label for="dirText">目录</label> <input type="text"
 					class="form-control" id="dirText" name="dir" th:value="${dir}" />
@@ -69,8 +67,11 @@
 			<button type="submit" class="btn btn-primary">确认</button>
 		</form>
 
+		<!-- ===== vendor scripts ===== -->
 		<script
 			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
+		
+		<!-- ===== application scripts ===== -->
 		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file/new.js'}"></script>
 	</div>
 </body>

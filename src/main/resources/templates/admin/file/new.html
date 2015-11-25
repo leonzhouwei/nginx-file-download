@@ -22,9 +22,9 @@
 					class="form-control" id="nameText" name="name" />
 			</div>
 			<div class="form-group">
-                <label for="priceText">SD 卡价格 (元)</label> <input type="text"
-                    class="form-control" id="sizeText" name="price" />
-            </div>
+				<label for="priceText">SD 卡价格 (元)</label> <input type="text"
+					class="form-control" id="sizeText" name="price" />
+			</div>
 			<div class="form-group">
 				<label for="productionSelect">产品</label> <select
 					class="form-control" id="productionSelect" name="production"></select>
@@ -52,8 +52,11 @@
 			<button type="submit" class="btn btn-primary">确认</button>
 		</form>
 
+		<!-- ===== vendor scripts ===== -->
 		<script
 			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
+		
+		<!-- ===== application scripts ===== -->
 		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file/new.js'}"></script>
 	</div>
 </body>
