@@ -14,6 +14,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
+		
 		var id = elem['id'];
 		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td>', id, '</td>');
@@ -38,6 +39,7 @@ function initTable(result) {
 					'" class="btn btn-success btn-xs">启用</a>');
 		}
 		buffer.push('</td>');
+		
 		// ----------
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
