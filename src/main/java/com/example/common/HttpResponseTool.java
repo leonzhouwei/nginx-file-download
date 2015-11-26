@@ -131,8 +131,15 @@ public final class HttpResponseTool {
 			throws IOException {
 		writeFile(IMAGE_CONTENT_TYPE, response, file);
 	}
+	
+	public static void setStatusAsOk(HttpServletResponse response) {
+		setDefaultContentType(response);
+		HttpStatus status = HttpStatus.OK;
+		response.setStatus(status.value());
+	}
 
 	public static void setStatusAsNotFound(HttpServletResponse response) {
+		setDefaultContentType(response);
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		ServerErrorDto error = new ServerErrorDto();
 		error.setMessage(status.name());
@@ -141,6 +148,7 @@ public final class HttpResponseTool {
 
 	public static void setStatusAsNotFound(HttpServletResponse response,
 			String msg) {
+		setDefaultContentType(response);
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		ServerErrorDto error = new ServerErrorDto();
 		error.setMessage(msg);
@@ -148,6 +156,7 @@ public final class HttpResponseTool {
 	}
 
 	public static void setStatusAsUnauthorized(HttpServletResponse response) {
+		setDefaultContentType(response);
 		HttpStatus status = HttpStatus.UNAUTHORIZED;
 		ServerErrorDto error = new ServerErrorDto();
 		error.setMessage(status.name());
