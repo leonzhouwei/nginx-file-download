@@ -14,6 +14,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
+		
 		var id = elem['id'];
 		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td>', id, '</td>');
@@ -26,8 +27,9 @@ function initTable(result) {
 				'" class="btn btn-primary btn-xs">下载</a></td>');
 		buffer.push('<td><a href="/i/sd-card-orders/new?fileId=' + id,
 				'" class="btn btn-primary btn-xs">下单</a></td>');
-		buffer.push('/<tr>');
+		
+		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tr:last').after(newRow);
+		$('#table tbody').append(newRow);
 	}
 }

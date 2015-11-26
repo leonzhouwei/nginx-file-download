@@ -15,6 +15,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
+		
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
 		var enabled = elem['enabled'];
@@ -50,9 +51,10 @@ function initTable(result) {
 				+ '&uuid=', UUID.generate(),
 				'" class="btn btn-info btn-xs">下载</a>');
 		buffer.push('</td>');
+		
 		// ----------
-		buffer.push('/<tr>');
+		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tr:last').after(newRow);
+		$('#table tbody').append(newRow);
 	}
 }

@@ -31,6 +31,9 @@ jQuery.messager = {
 	}
 }
 
-function alert(options) {
-	$.messager.alert(options);
+function alert(message) {
+	$.messager.alert({
+		msg : message,
+		title : '系统提示'
+	});
 }

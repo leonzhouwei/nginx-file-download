@@ -14,6 +14,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
+		
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>');
 		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
@@ -35,8 +36,9 @@ function initTable(result) {
 		}
 		buffer.push('<td style="text-align: right;">', hours, 'h ', minutes,
 				'm ', seconds, 's', '</td>');
-		buffer.push('/<tr>');
+		
+		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tr:last').after(newRow);
+		$('#table tbody').append(newRow);
 	}
 }

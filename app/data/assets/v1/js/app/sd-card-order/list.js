@@ -14,6 +14,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
+		
 		var createdAt = iso8601ToHuman(elem['createdAt']);
 		var statusHuman = toStatusHuman(elem['status']);
 		buffer.push('<td>', elem['id'], '</td>');
@@ -26,9 +27,10 @@ function initTable(result) {
 		buffer.push('<td>', elem['userZipCode'], '</td>');
 		buffer.push('<td>', elem['userMobile'], '</td>');
 		buffer.push('<td>', elem['userEmail'], '</td>');
-		buffer.push('/<tr>');
+		
+		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tr:last').after(newRow);
+		$('#table tbody').append(newRow);
 	}
 }
 

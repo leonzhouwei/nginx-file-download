@@ -37,8 +37,8 @@ function initTable(result) {
 		}
 		buffer.push('</td>');
 		// ----------
-		buffer.push('/<tr>');
+		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tr:last').after(newRow);
+		$('#table tbody').append(newRow);
 	}
 }

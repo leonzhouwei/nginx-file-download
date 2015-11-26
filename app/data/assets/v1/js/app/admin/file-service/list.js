@@ -24,8 +24,8 @@ function initTable(result) {
 		buffer.push('<td>', elem['groupId'], '</td>');
 		buffer.push('<td>', elem['host'], '</td>');
 		// ----------
-		buffer.push('/<tr>');
+		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tr:last').after(newRow);
+		$('#table tbody').append(newRow);
 	}
 }

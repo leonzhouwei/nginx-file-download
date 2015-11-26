@@ -5,8 +5,7 @@ $(function() {
 });
 
 function initTable(result) {
-	const
-	len = result.length;
+	const len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var buffer = [];
@@ -32,16 +31,25 @@ function initTable(result) {
 		// ----------
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		if (enabled == true) {
-			buffer.push('<a href="/admin/productions/disable?id=' + id,
-					'" class="btn btn-warning btn-xs">停用</a>');
+			buffer.push('<a href="javascript:disable(' + id,
+					');" class="btn btn-warning btn-xs">停用</a>');
 		} else {
 			buffer.push('<a href="/admin/productions/enable?id=' + id,
 					'" class="btn btn-success btn-xs">启用</a>');
 		}
 		buffer.push('</td>');
 		// ----------
-		buffer.push('/<tr>');
+		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tr:last').after(newRow);
+		$('#table tbody').append(newRow);
 	}
+}
+
+function disable(id) {
+	$.post('/api/admin/productions/' + id + '/disable', function(data) {
+		alert('禁用操作成功!');
+	});
+	$.get("/api/admin/productions", function(result) {
+		initTable(result['content']);
+	});
 }
