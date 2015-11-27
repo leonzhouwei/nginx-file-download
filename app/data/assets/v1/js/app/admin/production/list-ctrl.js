@@ -56,14 +56,13 @@ function initTable(result) {
 
 function showDisableModal(param) {
 	id = param;
-	$("#myModal").modal('show');
+	$("#appModalDiv").modal('show');
 }
 
 function disable(id) {
 	$.post('/api/admin/productions/' + id + '/disable', function(data) {
 		console.log(data);
-		console.log('oops');
-		$("#myModal").modal('show');
+		showAppModelForOk();
 		init();
 	});
 	// $.get("/api/admin/productions", function(result) {
