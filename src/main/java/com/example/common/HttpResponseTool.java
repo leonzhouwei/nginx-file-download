@@ -132,12 +132,6 @@ public final class HttpResponseTool {
 		writeFile(IMAGE_CONTENT_TYPE, response, file);
 	}
 	
-	public static void setStatusAsOk(HttpServletResponse response) {
-		setDefaultContentType(response);
-		HttpStatus status = HttpStatus.OK;
-		response.setStatus(status.value());
-	}
-
 	public static void setStatusAsNotFound(HttpServletResponse response) {
 		setDefaultContentType(response);
 		HttpStatus status = HttpStatus.NOT_FOUND;
@@ -191,7 +185,7 @@ public final class HttpResponseTool {
 				return;
 			}
 			is = new FileInputStream(file);
-			writeFromInputStream(IMAGE_CONTENT_TYPE, response, is);
+			writeFromInputStream(contentType, response, is);
 		} finally {
 			if (is != null) {
 				is.close();
