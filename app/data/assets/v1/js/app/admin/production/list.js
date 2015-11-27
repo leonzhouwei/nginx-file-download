@@ -1,3 +1,5 @@
+var id;
+
 $(function() {
 	$.get("/api/admin/productions", function(result) {
 		initTable(result['content']);
@@ -5,7 +7,9 @@ $(function() {
 });
 
 function initTable(result) {
-	const len = result.length;
+	$('#tbody').empty();
+	const
+	len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var buffer = [];
@@ -14,7 +18,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
-		
+
 		var id = elem['id'];
 		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td>', id, '</td>');
@@ -32,26 +36,33 @@ function initTable(result) {
 		// ----------
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		if (enabled == true) {
-			buffer.push('<a href="javascript:disable(' + id,
+			buffer.push('<a href="#" onclick="javascript:disable(' + id,
 					');" class="btn btn-warning btn-xs">停用</a>');
 		} else {
 			buffer.push('<a href="/admin/productions/enable?id=' + id,
 					'" class="btn btn-success btn-xs">启用</a>');
 		}
 		buffer.push('</td>');
-		
+
 		// ----------
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tbody').append(newRow);
+		$('#tbody').append(newRow);
 	}
+}
+
+function showDisableModal(param) {
+	id = param;
+	$("#myModal").modal('show');
 }
 
 function disable(id) {
 	$.post('/api/admin/productions/' + id + '/disable', function(data) {
-		alert('禁用操作成功!');
-	});
-	$.get("/api/admin/productions", function(result) {
-		initTable(result['content']);
-	});
+		console.log(data);
+		console.log('oops');
+		$("#myModal").modal('show');
+	},'json');
+	// $.get("/api/admin/productions", function(result) {
+	// initTable(result['content']);
+	// });
 }
