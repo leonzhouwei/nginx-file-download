@@ -1,15 +1,18 @@
 var id;
 
 $(function() {
-	$.get("/api/admin/productions", function(result) {
+	init();
+});
+
+function init() {
+	getAll(function(result) {
 		initTable(result['content']);
 	});
-});
+}
 
 function initTable(result) {
 	$('#tbody').empty();
-	const
-	len = result.length;
+	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var buffer = [];
@@ -61,7 +64,8 @@ function disable(id) {
 		console.log(data);
 		console.log('oops');
 		$("#myModal").modal('show');
-	},'json');
+		init();
+	});
 	// $.get("/api/admin/productions", function(result) {
 	// initTable(result['content']);
 	// });

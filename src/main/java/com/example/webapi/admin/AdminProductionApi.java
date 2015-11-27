@@ -56,5 +56,18 @@ public class AdminProductionApi {
 		wMapper.disable(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
+	
+	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/enable", method = RequestMethod.POST)
+	public void enable(HttpServletRequest request, @PathVariable String id,
+			HttpServletResponse response) {
+		Production e = rMapper.selectById(Long.parseLong(id));
+		logger.debug(JsonTool.toJson(e));
+		if (e == null) {
+			HttpResponseTool.setStatusAsNotFound(response);
+			return;
+		}
+		wMapper.enable(e);
+		HttpResponseTool.writeResponse(response, e);
+	}
 
 }
