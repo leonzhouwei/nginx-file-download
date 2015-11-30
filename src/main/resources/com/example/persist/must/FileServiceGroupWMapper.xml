@@ -9,5 +9,17 @@
 		VALUES
 		(#{createdAt}, #{updatedAt}, #{enabled}, default, #{name})
 	</insert>
+	
+	<update id="enable" parameterType="com.example.domain.FileServiceGroup">
+	   UPDATE file_service_group 
+	   SET updated_at=#{updatedAt}, enabled=true
+	   WHERE id=#{id}
+	</update>
+	
+	<update id="disable" parameterType="com.example.domain.FileServiceGroup">
+       UPDATE file_service_group 
+       SET updated_at=#{updatedAt}, enabled=false
+       WHERE id=#{id}
+    </update>
 
 </mapper>

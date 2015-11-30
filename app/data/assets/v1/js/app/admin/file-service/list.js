@@ -30,3 +30,17 @@ function initTable(result) {
 		$('#table tbody').append(newRow);
 	}
 }
+
+function disable(id) {
+	doDisable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
+}
+
+function enable(id) {
+	doEnable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
+}

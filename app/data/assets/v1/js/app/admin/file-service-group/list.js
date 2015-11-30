@@ -1,10 +1,15 @@
 $(function() {
-	$.get("/api/admin/fsgroups", function(result) {
-		initTable(result['content']);
-	});
+	init();
 });
 
+function init() {
+	doGetAll(function(result) {
+		initTable(extractContent(result));
+	});
+}
+
 function initTable(result) {
+	$('#tbody').empty();
 	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
@@ -29,11 +34,11 @@ function initTable(result) {
 		// ----------
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		if (enabled == true) {
-			buffer.push('<a href="/admin/fsgroups/disable?id=' + id,
-					'" class="btn btn-warning btn-xs">停用</a>');
+			buffer.push('<a href="#" onclick="javascript:disable(' + id,
+					');" class="btn btn-warning btn-xs">停用</a>');
 		} else {
-			buffer.push('<a href="/admin/fsgroups/enable?id=' + id,
-					'" class="btn btn-success btn-xs">启用</a>');
+			buffer.push('<a href=#" onclick="javascript:enable(' + id,
+					');" class="btn btn-success btn-xs">启用</a>');
 		}
 		buffer.push('</td>');
 
@@ -42,4 +47,18 @@ function initTable(result) {
 		var newRow = buffer.join('');
 		$('#table tbody').append(newRow);
 	}
+}
+
+function disable(id) {
+	doDisable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
+}
+
+function enable(id) {
+	doEnable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
 }
