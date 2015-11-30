@@ -4,7 +4,7 @@ $(function() {
 
 function init() {
 	doGetAll(function(result) {
-		initTable(result['content']);
+		initTable(extractApiContent(result));
 	});
 }
 
