@@ -35,7 +35,7 @@ public class AdminFileServiceGroupApi {
 			+ "/{id}/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
-		FileServiceGroup e = rMapper.selectById(id);
+		FileServiceGroup e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;

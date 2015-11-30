@@ -17,6 +17,14 @@
 		SELECT
 		<include refid="columns" />
 		FROM file_service
+		WHERE enabled=true
+		ORDER BY created_at DESC, id DESC
+	</select>
+
+	<select id="selectAllIgnoreEnabled" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM file_service
 		ORDER BY created_at DESC, id DESC
 	</select>
 
@@ -25,7 +33,25 @@
 		SELECT
 		<include refid="columns" />
 		FROM file_service
-		WHERE group_id=#{groupId} AND host=#{host} AND enabled=true
+		WHERE group_id=#{groupId} AND host=#{host} AND
+		enabled=true
+	</select>
+
+	<select id="selectById" parameterType="long" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM file_service
+		WHERE enabled=true AND id=#{id}
+		ORDER BY created_at DESC, id DESC
+	</select>
+
+	<select id="selectByIdIgnoreEnabled" parameterType="long"
+		resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM file_service
+		WHERE id=#{id}
+		ORDER BY created_at DESC, id DESC
 	</select>
 
 </mapper>

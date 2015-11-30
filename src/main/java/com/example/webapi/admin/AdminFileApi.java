@@ -34,7 +34,7 @@ public class AdminFileApi {
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
-		File e = rMapper.selectById(id);
+		File e = rMapper.selectByIdIgnoreEnabled(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;

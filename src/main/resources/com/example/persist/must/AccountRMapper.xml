@@ -18,6 +18,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM account
+		WHERE enabled=true
 		ORDER BY created_at DESC, id DESC
 	</select>
 
@@ -25,7 +26,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM account
-		WHERE id=#{id}
+        WHERE enabled=true AND id=#{id}
 	</select>
 
 	<select id="selectByNameAndPassword" parameterType="com.example.domain.Account"
@@ -33,7 +34,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM account
-		WHERE name=#{name} AND password=#{password}
+		WHERE enabled=true AND name=#{name} AND password=#{password}
 	</select>
 
 </mapper>

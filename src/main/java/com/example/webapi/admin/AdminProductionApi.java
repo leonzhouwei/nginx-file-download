@@ -40,14 +40,14 @@ public class AdminProductionApi {
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}", method = RequestMethod.GET)
 	public void getById(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
-		Production e = rMapper.selectById(id);
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		HttpResponseTool.writeResponse(response, e);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
-		Production e = rMapper.selectById(id);
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		logger.debug(JsonTool.toJson(e));
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);

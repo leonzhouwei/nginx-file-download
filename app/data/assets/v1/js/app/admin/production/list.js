@@ -34,7 +34,6 @@ function initTable(result) {
 		buffer.push('<td>');
 		buffer.push('<a href="/admin/productions/edit?id=' + id,
 				'" class="btn btn-primary btn-xs">编辑</a>');
-		// ----------
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		if (enabled == true) {
 			buffer.push('<a href="#" onclick="javascript:disable(' + id,

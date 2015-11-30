@@ -6,4 +6,8 @@ public interface FileServiceWMapper {
 
 	public void insert(FileService e);
 	
+	public void enable(FileService e);
+	
+	public void disable(FileService e);
+	
 }

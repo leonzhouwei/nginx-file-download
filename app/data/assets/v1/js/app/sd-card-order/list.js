@@ -31,7 +31,7 @@ function initTable(result) {
 
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
-		$('#table tbody').append(newRow);
+		$('#tbody').append(newRow);
 	}
 }
 
