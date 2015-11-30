@@ -5,8 +5,7 @@ $(function() {
 });
 
 function initTable(result) {
-	const
-	len = result.length;
+	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var buffer = [];
@@ -15,7 +14,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
-		
+
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
@@ -24,7 +23,7 @@ function initTable(result) {
 		buffer.push('<td>', enabled, '</td>');
 		buffer.push('<td>', elem['groupId'], '</td>');
 		buffer.push('<td>', elem['host'], '</td>');
-		
+
 		// ----------
 		buffer.push('</tr>');
 		var newRow = buffer.join('');

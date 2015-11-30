@@ -5,7 +5,7 @@ $(function() {
 });
 
 function initTable(result) {
-	const len = result.length;
+	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var buffer = [];
@@ -14,7 +14,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
-		
+
 		var hhmmss = toHhmmddHuman(elem['timeCostMillis']);
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>');
@@ -24,7 +24,7 @@ function initTable(result) {
 		buffer.push('<td>', elem['clientIp'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td style="text-align: right;">', hhmmss, '</td>');
-		
+
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
 		$('#table tbody').append(newRow);

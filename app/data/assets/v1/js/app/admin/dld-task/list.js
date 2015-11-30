@@ -5,7 +5,7 @@ $(function() {
 });
 
 function initTable(result) {
-	const len = result.length;
+	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var buffer = [];
@@ -14,7 +14,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
-		
+
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>');
 		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
@@ -22,21 +22,20 @@ function initTable(result) {
 		buffer.push('</td>');
 		buffer.push('<td>', elem['userId'], '</td>');
 		buffer.push('<td>', elem['clientIp'], '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['createdAt']),
-				'</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		var timeCostSeconds = parseInt(elem['timeCostMillis'] / 1000);
 		var hours = parseInt(timeCostSeconds / 3600);
 		var minutes = parseInt((timeCostSeconds - 3600 * hours) / 60);
 		if (minutes < 10) {
-			minutes = '0' + minutes;	
+			minutes = '0' + minutes;
 		}
 		var seconds = parseInt(timeCostSeconds - 3600 * hours - 60 * minutes);
 		if (seconds < 10) {
-			seconds = '0' + seconds;	
+			seconds = '0' + seconds;
 		}
 		buffer.push('<td style="text-align: right;">', hours, 'h ', minutes,
 				'm ', seconds, 's', '</td>');
-		
+
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
 		$('#table tbody').append(newRow);

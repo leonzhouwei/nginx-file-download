@@ -5,8 +5,7 @@ $(function() {
 });
 
 function initTable(result) {
-	const
-	len = result.length;
+	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var buffer = [];
@@ -15,7 +14,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
-		
+
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
@@ -37,7 +36,7 @@ function initTable(result) {
 					'" class="btn btn-success btn-xs">启用</a>');
 		}
 		buffer.push('</td>');
-		
+
 		// ----------
 		buffer.push('</tr>');
 		var newRow = buffer.join('');

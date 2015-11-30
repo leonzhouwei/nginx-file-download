@@ -1,12 +1,16 @@
 $(function() {
-	$.get("/api/admin/files", function(result) {
-		initTable(result['content']);
-	});
+	init();
 });
 
+function init() {
+	doGetAll(function(result) {
+		initTable(extractContent(result));
+	});
+}
+
 function initTable(result) {
-	const
-	len = result.length;
+	$('#tbody').empty();
+	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
 		var buffer = [];
@@ -15,7 +19,7 @@ function initTable(result) {
 		} else {
 			buffer.push('<tr>');
 		}
-		
+
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
 		var enabled = elem['enabled'];
@@ -38,11 +42,11 @@ function initTable(result) {
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		// ----------
 		if (enabled == true) {
-			buffer.push('<a href="/admin/files/disable?id=' + id,
-					'" class="btn btn-warning btn-xs">停用</a>');
+			buffer.push('<a href="#" onclick="javascript:disable(' + id,
+					');" class="btn btn-warning btn-xs">停用</a>');
 		} else {
-			buffer.push('<a href="/admin/files/enable?id=' + id,
-					'" class="btn btn-success btn-xs">启用</a>');
+			buffer.push('<a href=#" onclick="javascript:enable(' + id,
+					');" class="btn btn-success btn-xs">启用</a>');
 		}
 		buffer.push('</td>');
 		// ----------
@@ -51,10 +55,24 @@ function initTable(result) {
 				+ '&uuid=', UUID.generate(),
 				'" class="btn btn-info btn-xs">下载</a>');
 		buffer.push('</td>');
-		
+
 		// ----------
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
 		$('#table tbody').append(newRow);
 	}
+}
+
+function disable(id) {
+	doDisable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
+}
+
+function enable(id) {
+	doEnable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
 }
