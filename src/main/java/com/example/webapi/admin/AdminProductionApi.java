@@ -38,16 +38,16 @@ public class AdminProductionApi {
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}", method = RequestMethod.GET)
-	public void getById(HttpServletRequest request, @PathVariable String id,
-			HttpServletResponse response) {
-		Production e = rMapper.selectById(Long.parseLong(id));
+	public void getById(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable Long id) {
+		Production e = rMapper.selectById(id);
 		HttpResponseTool.writeResponse(response, e);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/disable", method = RequestMethod.POST)
-	public void disable(HttpServletRequest request, @PathVariable String id,
-			HttpServletResponse response) {
-		Production e = rMapper.selectById(Long.parseLong(id));
+	public void disable(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable Long id) {
+		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
@@ -56,11 +56,11 @@ public class AdminProductionApi {
 		wMapper.disable(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
-	
+
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/enable", method = RequestMethod.POST)
-	public void enable(HttpServletRequest request, @PathVariable String id,
-			HttpServletResponse response) {
-		Production e = rMapper.selectByIdIgnoreEnabled(Long.parseLong(id));
+	public void enable(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable Long id) {
+		Production e = rMapper.selectByIdIgnoreEnabled(id);
 		logger.debug(JsonTool.toJson(e));
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
