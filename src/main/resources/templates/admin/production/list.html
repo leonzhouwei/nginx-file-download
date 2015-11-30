@@ -10,7 +10,7 @@
 
 <body>
 	<div class="container" layout:fragment="content">
-		<h4 class="">
+		<h4>
 			产品列表&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admin/productions/new"
 				class="btn btn-primary btn-info">新建</a>
 		</h4>
@@ -39,10 +39,11 @@
 			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
 
 		<!-- ===== application scripts ===== -->
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/common.js'}"></script>
 		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/time-util.js'}"></script>
 		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/model.js'}"></script>
 		<script
-            th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/production/api.js'}"></script>
+			th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/production/api.js'}"></script>
 		<script
 			th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/production/list.js'}"></script>
 	</div>
