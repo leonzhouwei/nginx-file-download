@@ -1,11 +1,9 @@
-var id;
-
 $(function() {
 	init();
 });
 
 function init() {
-	getAll(function(result) {
+	doGetAll(function(result) {
 		initTable(result['content']);
 	});
 }
@@ -42,8 +40,8 @@ function initTable(result) {
 			buffer.push('<a href="#" onclick="javascript:disable(' + id,
 					');" class="btn btn-warning btn-xs">停用</a>');
 		} else {
-			buffer.push('<a href="/admin/productions/enable?id=' + id,
-					'" class="btn btn-success btn-xs">启用</a>');
+			buffer.push('<a href=#" onclick="javascript:enable(' + id,
+					');" class="btn btn-success btn-xs">启用</a>');
 		}
 		buffer.push('</td>');
 
@@ -54,18 +52,16 @@ function initTable(result) {
 	}
 }
 
-function showDisableModal(param) {
-	id = param;
-	$("#appModalDiv").modal('show');
-}
-
 function disable(id) {
-	$.post('/api/admin/productions/' + id + '/disable', function(data) {
-		console.log(data);
+	doDisable(id, function(data) {
 		showAppModelForOk();
 		init();
 	});
-	// $.get("/api/admin/productions", function(result) {
-	// initTable(result['content']);
-	// });
+}
+
+function enable(id) {
+	doEnable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
 }

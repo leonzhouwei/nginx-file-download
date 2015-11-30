@@ -60,7 +60,7 @@ public class AdminProductionApi {
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/enable", method = RequestMethod.POST)
 	public void enable(HttpServletRequest request, @PathVariable String id,
 			HttpServletResponse response) {
-		Production e = rMapper.selectById(Long.parseLong(id));
+		Production e = rMapper.selectByIdIgnoreEnabled(Long.parseLong(id));
 		logger.debug(JsonTool.toJson(e));
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
