@@ -1,5 +1,6 @@
 const CONTENT = 'content';
 
-function extractApiContent(json) {
+// extract the content field from a JSON string
+function extractContent(json) {
 	return json[CONTENT];
 }
