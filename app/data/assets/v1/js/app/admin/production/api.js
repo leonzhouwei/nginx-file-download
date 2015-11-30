@@ -1,11 +1,13 @@
+const ROUTE = '/api/admin/productions/';
+
 function doGetAll(func) {
-	$.get("/api/admin/productions", func);
+	$.get(ROUTE, func);
 }
 
 function doDisable(id, func) {
-	$.post('/api/admin/productions/' + id + '/disable', func);
+	$.post(ROUTE + id + '/disable', func);
 }
 
 function doEnable(id, func) {
-	$.post('/api/admin/productions/' + id + '/enable', func);
+	$.post(ROUTE + id + '/enable', func);
 }
