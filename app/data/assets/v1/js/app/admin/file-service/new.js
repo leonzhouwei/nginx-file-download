@@ -7,8 +7,7 @@ $(function() {
 });
 
 function initSelect(data) {
-	const
-	len = data.length;
+	var len = data.length;
 	var groupIdSelect = $('#groupIdSelect');
 	for (var i = 0; i < len; ++i) {
 		var e = data[i];

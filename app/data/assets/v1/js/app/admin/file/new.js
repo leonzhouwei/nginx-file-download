@@ -11,8 +11,7 @@ $(function() {
 });
 
 function initProductionSelect(data) {
-	const
-	len = data.length;
+	var len = data.length;
 	var select = $('#productionSelect');
 	for (var i = 0; i < len; ++i) {
 		var e = data[i];
