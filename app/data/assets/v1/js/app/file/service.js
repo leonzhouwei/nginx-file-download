@@ -1,6 +1,6 @@
-function FileServiceService() {
+function FileService() {
 
-	var ROUTE = '/api/i/dld-tasks';
+	var ROUTE = '/api/files';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);

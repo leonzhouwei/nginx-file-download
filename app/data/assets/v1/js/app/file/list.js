@@ -1,4 +1,4 @@
-var service = new FileServiceService();
+var service = new FileService();
 
 $(function() {
 	service.getAll(function(result) {
