@@ -1,9 +1,12 @@
+var prodService = new AdminProductionService();
+var fsgService = new AdminFileServiceGroupService();
+
 $(function() {
-	$.get("/api/admin/productions", function(result) {
-		initProductionSelect(result['content']);
+	prodService.getAll(function(result) {
+		initProductionSelect(extractContent(result));
 	});
-	$.get("/api/admin/fsgroups", function(result) {
-		initFsgSelect(result['content']);
+	fsgService.getAll(function(result) {
+		initFsgSelect(extractContent(result));
 	});
 });
 
