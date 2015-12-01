@@ -1,10 +1,13 @@
+var service = new DldTaskService();
+
 $(function() {
-	$.get("/api/i/dld-tasks", function(result) {
-		initTable(result['content']);
+	service.getAll(function(result) {
+		initTable(extractContent(result));
 	});
 });
 
 function initTable(result) {
+	$('#tbody').empty();
 	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];

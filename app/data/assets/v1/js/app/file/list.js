@@ -1,10 +1,13 @@
+var service = new FileServiceService();
+
 $(function() {
-	$.get("/api/files", function(result) {
-		initTable(result['content']);
+	service.getAll(function(result) {
+		initTable(extractContent(result));
 	});
 });
 
 function initTable(result) {
+	$('#tbody').empty();
 	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];

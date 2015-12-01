@@ -1,10 +1,13 @@
+var service = new SdCardOrderService();
+
 $(function() {
-	$.get("/api/i/sd-card-orders", function(result) {
-		initTable(result['content']);
+	service.getAll(function(result) {
+		initTable(extractContent(result));
 	});
 });
 
 function initTable(result) {
+	$('#tbody').empty();
 	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
