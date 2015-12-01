@@ -1,6 +1,6 @@
-const ROUTE = '/api/admin/productions/';
-
 function AdminProductionService() {
+	
+	const ROUTE = '/api/admin/productions/';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);
