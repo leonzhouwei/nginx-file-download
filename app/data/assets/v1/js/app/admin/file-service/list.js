@@ -1,9 +1,11 @@
+var service = new AdminFileServiceService();
+
 $(function() {
 	init();
 });
 
 function init() {
-	doGetAll(function(result) {
+	service.getAll(function(result) {
 		initTable(extractContent(result));
 	});
 }
@@ -56,21 +58,14 @@ function disable(id) {
 }
 
 function enable(id) {
-	doEnable(id, function(data) {
+	service.enable(id, function(data) {
 		showAppModelForOk();
 		init();
 	});
 }
 
 function disable(id) {
-	doDisable(id, function(data) {
-		showAppModelForOk();
-		init();
-	});
-}
-
-function enable(id) {
-	doEnable(id, function(data) {
+	service.disable(id, function(data) {
 		showAppModelForOk();
 		init();
 	});
