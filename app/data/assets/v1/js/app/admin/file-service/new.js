@@ -1,6 +1,8 @@
+var fsgService = new AdminFileServiceGroupService();
+
 $(function() {
-	$.get("/api/admin/fsgroups", function(result) {
-		initSelect(result['content']);
+	fsgService.getAll(function(result) {
+		initSelect(extractContent(result));
 	});
 });
 
