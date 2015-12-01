@@ -1,10 +1,13 @@
+var service = new AdminDldTaskService();
+
 $(function() {
-	$.get("/api/admin/dld-tasks", function(result) {
+	service.getAll(function(result) {
 		initTable(result['content']);
 	});
 });
 
 function initTable(result) {
+	$('#tbody').empty();
 	var len = result.length;
 	for (var i = 0; i < len; ++i) {
 		var elem = result[i];
@@ -41,3 +44,18 @@ function initTable(result) {
 		$('#tbody').append(newRow);
 	}
 }
+
+function disable(id) {
+	service.disable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
+}
+
+function enable(id) {
+	service.enable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
+}
+
