@@ -2,7 +2,7 @@ var service = new AdminDldTaskService();
 
 $(function() {
 	service.getAll(function(result) {
-		initTable(result['content']);
+		initTable(extractContent(result));
 	});
 });
 

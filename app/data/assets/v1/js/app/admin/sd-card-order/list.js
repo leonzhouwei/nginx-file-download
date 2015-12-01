@@ -1,6 +1,8 @@
+var service = new AdminSdCardOrderService();
+
 $(function() {
-	$.get("/api/admin/sd-card-orders", function(result) {
-		initTable(result['content']);
+	service.getAll(function(result) {
+		initTable(extractContent(result));
 	});
 });
 
