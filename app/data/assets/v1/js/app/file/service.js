@@ -1,6 +1,6 @@
 function FileService() {
 
-	var ROUTE = '/api/files';
+	var ROUTE = apiRoutePrefixNoSlash() + '/files';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);

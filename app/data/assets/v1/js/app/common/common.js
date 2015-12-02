@@ -1,4 +1,7 @@
 const
+API_ROUTE_PREFIX = '/api/v1';
+
+const
 CONTENT = 'content';
 
 const
@@ -44,4 +47,8 @@ function hideAppModel() {
 // extract the content field from a JSON string
 function extractContent(json) {
 	return json[CONTENT];
+}
+
+function apiRoutePrefixNoSlash() {
+	return API_ROUTE_PREFIX;
 }

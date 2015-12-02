@@ -1,6 +1,6 @@
 function AdminFileServiceGroupService() {
 
-	var ROUTE = '/api/admin/fsgroups/';
+	var ROUTE = apiRoutePrefixNoSlash() + '/admin/fsgroups/';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);

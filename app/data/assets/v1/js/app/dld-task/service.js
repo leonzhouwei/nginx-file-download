@@ -1,6 +1,6 @@
 function DldTaskService() {
 
-	var ROUTE = '/api/i/dld-tasks';
+	var ROUTE = apiRoutePrefixNoSlash() + '/i/dld-tasks';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);

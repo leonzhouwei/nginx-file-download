@@ -1,6 +1,6 @@
 function SdCardOrderService() {
 
-	var ROUTE = '/api/i/sd-card-orders';
+	var ROUTE = apiRoutePrefixNoSlash() + '/i/sd-card-orders';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);

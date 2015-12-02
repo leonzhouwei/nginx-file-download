@@ -15,7 +15,7 @@ public final class RouteDefine {
 
 	public static final String ADMIN = ROOT + "admin";
 
-	public static final String API = ROOT + "api";
+	public static final String API = ROOT + "api/v1/";
 
 	public static final String FILES = ROOT + "files";
 

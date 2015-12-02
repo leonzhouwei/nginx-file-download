@@ -1,6 +1,6 @@
 function AdminProductionService() {
 
-	var ROUTE = '/api/admin/productions/';
+	var ROUTE = apiRoutePrefixNoSlash() + '/admin/productions/';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);

@@ -1,6 +1,6 @@
 function AdminDldTaskService() {
 
-	var ROUTE = '/api/admin/dld-tasks';
+	var ROUTE = apiRoutePrefixNoSlash() + '/admin/dld-tasks';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);

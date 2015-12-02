@@ -1,6 +1,6 @@
 function AdminFileService() {
 
-	var ROUTE = '/api/admin/files/';
+	var ROUTE = apiRoutePrefixNoSlash() + '/admin/files/';
 
 	this.getAll = function(func) {
 		$.get(ROUTE, func);
