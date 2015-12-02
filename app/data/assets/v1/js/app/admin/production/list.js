@@ -25,13 +25,13 @@ function initTable(result) {
 		var id = elem['id'];
 		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td>', id, '</td>');
+		var enabled = elem['enabled'];
+		buffer.push('<td>', enabled, '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('<td>', elem['dir'], '</td>');
 		buffer.push('<td>', elem['description'], '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
-		var enabled = elem['enabled'];
-		buffer.push('<td>', enabled, '</td>');
 		// ----------
 		buffer.push('<td>');
 		buffer.push('<a href="/admin/productions/edit?id=' + id,

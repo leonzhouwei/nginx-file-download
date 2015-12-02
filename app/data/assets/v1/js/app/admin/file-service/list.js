@@ -24,10 +24,10 @@ function initTable(result) {
 
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>', enabled, '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		buffer.push('<td>', elem['groupId'], '</td>');
 		buffer.push('<td>', elem['host'], '</td>');
 		// ----------

@@ -19,13 +19,13 @@ function initTable(result) {
 		}
 
 		buffer.push('<td>', elem['id'], '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td>');
 		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
 				elem['fileId'], '</a>');
 		buffer.push('</td>');
 		buffer.push('<td>', elem['userId'], '</td>');
 		buffer.push('<td>', elem['clientIp'], '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		var timeCostSeconds = parseInt(elem['timeCostMillis'] / 1000);
 		var hours = parseInt(timeCostSeconds / 3600);
 		var minutes = parseInt((timeCostSeconds - 3600 * hours) / 60);
