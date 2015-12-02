@@ -8,7 +8,7 @@ This is a large file downloading service based on Nginx, Spring Boot, PostgreSQL
 - ORM for RDBMS: [MyBatis-Spring](http://mybatis.github.io/spring/) v1.1.1
 - Download History Data Storage (optional, can be disabled): [SSDB](https://www.github.com/ideawu/ssdb/)  v1.8.2
 	- About 30 download history records per GB
-- Other Data Storage (users, large Files for downloading, download tasks, etc.): [PostgreSQL](http://www.postgresql.org/)  v9.2
+- Other Data Storage (users, large files for downloading, download tasks, etc.): [PostgreSQL](http://www.postgresql.org/)  v9.2
 
 ## Some Screenshots of the Ordinary User
 ### Main
