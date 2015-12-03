@@ -15,7 +15,8 @@
 		<form action="/admin/fsgroups/edit" method="post">
 			<div class="form-group">
 				<label for="idText">编号</label> <input type="text"
-					class="form-control" id="idText" name="id" th:value="${id}" />
+					class="form-control" readonly="readonly" id="idText" name="id"
+					th:value="${id}" />
 			</div>
 			<div class="form-group">
 				<label for="nameText">名称</label> <input type="text"

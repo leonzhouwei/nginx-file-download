@@ -54,6 +54,8 @@ public final class RouteDefine {
 	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
 	public static final String ADMIN_FILE_SERVICE_GROUPS = ADMIN
 			+ FILE_SERVICE_GROUPS;
+	public static final String ADMIN_FILE_SERVICE_GROUPS_EDIT = ADMIN_FILE_SERVICE_GROUPS
+			+ "/edit";
 	public static final String ADMIN_FILE_SERVICE_GROUPS_NEW = ADMIN_FILE_SERVICE_GROUPS
 			+ "/new";
 	public static final String ADMIN_FILE_SERVICES = ADMIN + "/file-services";

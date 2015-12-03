@@ -9,5 +9,7 @@ public interface FileServiceGroupWMapper {
 	public void enable(FileServiceGroup e);
 	
 	public void disable(FileServiceGroup e);
+	
+	public void update(FileServiceGroup e);
 
 }

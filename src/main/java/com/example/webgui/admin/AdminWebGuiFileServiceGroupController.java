@@ -13,18 +13,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.HttpRequestTool;
 import com.example.common.ModelAndViewTool;
+import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.FileServiceGroup;
 import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileServiceGroupWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
+import com.google.common.base.Strings;
 
 @Controller
 public class AdminWebGuiFileServiceGroupController {
-
-	static final String CREATED_AT = "createdAt";
-	static final String UPDATED_AT = "updatedAt";
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
 			+ "/file-service-group/";
@@ -67,6 +66,48 @@ public class AdminWebGuiFileServiceGroupController {
 		wMapper.insert(e);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
 				RouteDefine.ADMIN_FILE_SERVICE_GROUPS);
+	}
+
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_EDIT, method = RequestMethod.GET)
+	public ModelAndView gotoEdit(HttpServletRequest request,
+			HttpServletResponse response) {
+		Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		FileServiceGroup e = rMapper.selectByIdIgnoreEnabled(id);
+		if (e == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
+				VIEW_NAME_EDIT);
+		ret.getModel().putAll(ReflectTool.toMap(e));
+		return ret;
+	}
+
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_EDIT, method = RequestMethod.POST)
+	public ModelAndView edit(HttpServletRequest request,
+			HttpServletResponse response) {
+		Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		FileServiceGroup e = rMapper.selectByIdIgnoreEnabled(id);
+		if (e == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		String name = request.getParameter(HttpRequestTool.NAME);
+		if (!Strings.isNullOrEmpty(name)) {
+			e.setName(name);
+		}
+		Boolean enabled = HttpRequestTool.extractEnabled(request);
+		if (enabled != null) {
+			e.setEnabled(enabled);
+		}
+		e.resetUpdatedAt();
+		wMapper.update(e);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
+						RouteDefine.ADMIN_FILE_SERVICE_GROUPS);
 	}
 
 }

@@ -7,19 +7,26 @@
 		INSERT INTO file_service_group
 		(created_at, updated_at, enabled, id, name)
 		VALUES
-		(#{createdAt}, #{updatedAt}, #{enabled}, default, #{name})
+		(#{createdAt},
+		#{updatedAt}, #{enabled}, default, #{name})
 	</insert>
-	
+
 	<update id="enable" parameterType="com.example.domain.FileServiceGroup">
-	   UPDATE file_service_group 
-	   SET updated_at=#{updatedAt}, enabled=true
-	   WHERE id=#{id}
+		UPDATE file_service_group
+		SET updated_at=#{updatedAt}, enabled=true
+		WHERE id=#{id}
 	</update>
-	
+
 	<update id="disable" parameterType="com.example.domain.FileServiceGroup">
-       UPDATE file_service_group 
-       SET updated_at=#{updatedAt}, enabled=false
-       WHERE id=#{id}
-    </update>
+		UPDATE file_service_group
+		SET updated_at=#{updatedAt}, enabled=false
+		WHERE id=#{id}
+	</update>
+
+	<update id="update" parameterType="com.example.domain.FileServiceGroup">
+		UPDATE file_service_group
+		SET updated_at=#{updatedAt}, enabled=#{enabled}, name=#{name}
+		WHERE id=#{id}
+	</update>
 
 </mapper>
