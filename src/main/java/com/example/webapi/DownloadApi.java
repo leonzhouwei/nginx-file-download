@@ -170,7 +170,7 @@ public class DownloadApi {
 		response.setHeader(WEB_SERVER_X_ACCEL, xAccelRedirect);
 		response.addHeader(HttpDefine.CONTENT_DISPOSITION, ATACHMENT_FILENAME
 				+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
-		// save current download behavior
+		// save the current download behavior
 		recordHistory(request, task, result);
 	}
 
