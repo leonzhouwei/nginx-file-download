@@ -32,7 +32,8 @@ function initTable(result) {
 		buffer.push('<td>', elem['host'], '</td>');
 		// ----------
 		buffer.push('<td>');
-		buffer.push('<a href="#" class="btn btn-primary btn-xs">编辑</a>');
+		buffer.push('<a href="/admin/file-services/edit?id=', id,
+				'" class="btn btn-primary btn-xs">编辑</a>');
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		if (enabled == true) {
 			buffer.push('<a href="#" onclick="javascript:disable(' + id,

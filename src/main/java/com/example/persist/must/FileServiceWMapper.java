@@ -10,4 +10,6 @@ public interface FileServiceWMapper {
 	
 	public void disable(FileService e);
 	
+	public void update(FileService e);
+	
 }

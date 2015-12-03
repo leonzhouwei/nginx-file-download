@@ -13,5 +13,5 @@ function AdminFileServiceService() {
 	this.enable = function(id, func) {
 		$.post(ROUTE + id + '/enable', func);
 	}
-
+	
 }

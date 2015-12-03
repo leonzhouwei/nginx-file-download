@@ -59,6 +59,8 @@ public final class RouteDefine {
 	public static final String ADMIN_FILE_SERVICE_GROUPS_NEW = ADMIN_FILE_SERVICE_GROUPS
 			+ "/new";
 	public static final String ADMIN_FILE_SERVICES = ADMIN + "/file-services";
+	public static final String ADMIN_FILE_SERVICES_EDIT = ADMIN_FILE_SERVICES
+			+ "/edit";
 	public static final String ADMIN_FILE_SERVICES_NEW = ADMIN_FILE_SERVICES
 			+ "/new";
 	public static final String ADMIN_FILES = ADMIN + "/files";
