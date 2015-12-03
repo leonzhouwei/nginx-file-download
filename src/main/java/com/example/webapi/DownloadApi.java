@@ -152,11 +152,6 @@ public class DownloadApi {
 		// try to find the download task by uuid
 		DownloadTask task = taskRMapper.selectByUuid(result.taskUuid);
 		if (task == null) {
-			if (LoginInterceptor.getAccountId(request) == null) {
-				HttpResponseTool.setStatusAsUnauthorized(response);
-				return;
-			}
-			// not found, create a new one
 			task = new DownloadTask();
 			task.reset();
 			task.setFileId(result.file.getId());
