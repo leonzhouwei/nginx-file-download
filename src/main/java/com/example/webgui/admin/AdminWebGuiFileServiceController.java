@@ -23,8 +23,6 @@ import com.example.webgui.WebGuiDefine;
 @Controller
 public class AdminWebGuiFileServiceController {
 
-	static final String CREATED_AT = "createdAt";
-	static final String UPDATED_AT = "updatedAt";
 	static final String GROUPS = "groups";
 	static final String HOST = "host";
 	static final String GROUP_ID = "groupId";
