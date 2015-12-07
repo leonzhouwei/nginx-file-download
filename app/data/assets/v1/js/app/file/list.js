@@ -25,11 +25,11 @@ function initTable(result) {
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td>', elem['md'], '</td>');
-		buffer.push('<td><a href="/fsgroups/', elem['fileServiceGroupId'],
-				'/download/' + elem['name'] + '?fileId=' + id + '&uuid=', UUID
-						.generate(),
+		buffer.push('<td><a href="', API_ROUTE_PREFIX, '/fsgroups/',
+				elem['fileServiceGroupId'], '/download/', elem['name'],
+				'?fileId=', id, '&uuid=', UUID.generate(),
 				'" class="btn btn-primary btn-xs">下载</a></td>');
-		buffer.push('<td><a href="/i/sd-card-orders/new?fileId=' + id,
+		buffer.push('<td><a href="/i/sd-card-orders/new?fileId=', id,
 				'" class="btn btn-primary btn-xs">下单</a></td>');
 
 		buffer.push('</tr>');

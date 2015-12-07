@@ -140,7 +140,7 @@ public class DownloadApi {
 		return flg;
 	}
 
-	@RequestMapping(RouteDefine.FILE_SERVICE_GROUPS
+	@RequestMapping(RouteDefine.API_FILE_SERVICE_GROUPS
 			+ "/{fsGroupId}/download/**")
 	public void downloadWithAuth(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException,

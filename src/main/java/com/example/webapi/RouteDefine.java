@@ -6,11 +6,6 @@ public final class RouteDefine {
 	}
 
 	// -------------------------------------------------------------------------
-	public static final String STRING_ADMIN = "admin";
-
-	public static final String FILE_SERVICE_GROUPS = "/fsgroups";
-
-	// -------------------------------------------------------------------------
 	public static final String ROOT = "/";
 
 	public static final String ADMIN = ROOT + "admin";
@@ -29,21 +24,9 @@ public final class RouteDefine {
 			+ "/js";
 
 	// -------------------------------------------------------------------------
-	public static final String API_ADMIN = API + ADMIN;
-	public static final String API_ADMIN_DOWNLOAD_TASKS = API_ADMIN
-			+ "/dld-tasks";
-	public static final String API_ADMIN_FILES = API_ADMIN + "/files";
-	public static final String API_ADMIN_FILE_SERVICES = API_ADMIN
-			+ "/file-services";
-	public static final String API_ADMIN_FILE_SERVICE_GROUPS = API_ADMIN
-			+ FILE_SERVICE_GROUPS;
-	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN
-			+ "/sd-card-orders";
-	public static final String API_ADMIN_PRODUCTIONS = API_ADMIN
-			+ "/productions";
-
-	// -------------------------------------------------------------------------
 	public static final String API_FILES = API + "/files";
+	public static final String API_FILE_SERVICE_GROUPS = API
+			+ "/fsgroups";
 
 	// -------------------------------------------------------------------------
 	public static final String API_I = API + "/i";
@@ -51,9 +34,23 @@ public final class RouteDefine {
 	public static final String API_I_SD_CARD_ORDERS = API_I + "/sd-card-orders";
 
 	// -------------------------------------------------------------------------
+	public static final String API_ADMIN = API + ADMIN;
+	public static final String API_ADMIN_DOWNLOAD_TASKS = API_ADMIN
+			+ "/dld-tasks";
+	public static final String API_ADMIN_FILES = API_ADMIN + "/files";
+	public static final String API_ADMIN_FILE_SERVICES = API_ADMIN
+			+ "/file-services";
+	public static final String API_ADMIN_FILE_SERVICE_GROUPS = API_ADMIN
+			+ "/fsgroups";
+	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN
+			+ "/sd-card-orders";
+	public static final String API_ADMIN_PRODUCTIONS = API_ADMIN
+			+ "/productions";
+
+	// -------------------------------------------------------------------------
 	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
 	public static final String ADMIN_FILE_SERVICE_GROUPS = ADMIN
-			+ FILE_SERVICE_GROUPS;
+			+ "/fsgroups";
 	public static final String ADMIN_FILE_SERVICE_GROUPS_EDIT = ADMIN_FILE_SERVICE_GROUPS
 			+ "/edit";
 	public static final String ADMIN_FILE_SERVICE_GROUPS_NEW = ADMIN_FILE_SERVICE_GROUPS

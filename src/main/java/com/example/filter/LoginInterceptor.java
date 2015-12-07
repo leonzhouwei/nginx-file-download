@@ -23,7 +23,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	static {
 		unrestrictedRoutePatterns.add(RouteDefine.BASE_ASSETS + ".*");
 		unrestrictedRoutePatterns.add(RouteDefine.LOGIN + ".*");
-		unrestrictedRoutePatterns.add(RouteDefine.FILE_SERVICE_GROUPS + ".*");
+		unrestrictedRoutePatterns.add(RouteDefine.API_FILE_SERVICE_GROUPS
+				+ ".*");
 	}
 
 	private AccountRMapper accountRMapper;
