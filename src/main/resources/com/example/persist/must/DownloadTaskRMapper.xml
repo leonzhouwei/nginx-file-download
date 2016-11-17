@@ -24,7 +24,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM download_task
-		WHERE enabled=true
+		WHERE enabled=1
 		ORDER BY created_at DESC, id DESC
 	</select>
 
@@ -32,14 +32,14 @@
 		SELECT
 		<include refid="columns" />
 		FROM download_task
-		WHERE id=#{id} AND enabled=true
+		WHERE id=#{id} AND enabled=1
 	</select>
 
 	<select id="selectByUserId" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM download_task
-		WHERE user_id=#{userId} AND enabled=true
+		WHERE user_id=#{userId} AND enabled=1
         ORDER BY created_at DESC, id DESC
 	</select>
 
@@ -47,7 +47,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM download_task
-		WHERE uuid=#{uuid} AND enabled=true
+		WHERE uuid=#{uuid} AND enabled=1
 	</select>
 
 </mapper>

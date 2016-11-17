@@ -7,7 +7,6 @@ public class File extends Base {
 	private String name;
 	private Long size;
 	private Long productionId;
-	private Long sdCardPriceFen;
 	private String md;
 	private Long fileServiceGroupId;
 
@@ -66,19 +65,6 @@ public class File extends Base {
 
 	public void setProductionId(Long productionId) {
 		this.productionId = productionId;
-	}
-
-	public Long getSdCardPriceFen() {
-		return sdCardPriceFen;
-	}
-
-	public void setSdCardPriceFen(Long sdCardPriceFen) {
-		this.sdCardPriceFen = sdCardPriceFen;
-	}
-
-	public void resetSdCardPriceYuan(Double sdCardPriceYuan) {
-		double priceFen = 100 * sdCardPriceYuan.doubleValue();
-		setSdCardPriceFen((long) priceFen);
 	}
 
 	public String getMd() {

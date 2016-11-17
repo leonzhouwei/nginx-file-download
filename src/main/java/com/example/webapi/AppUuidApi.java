@@ -12,5 +12,5 @@ public class AppUuidApi {
 	public String get() {
 		return AppConfig.APP_UUID;
 	}
-
+	
 }

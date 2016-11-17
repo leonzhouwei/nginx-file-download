@@ -4,13 +4,10 @@
 <mapper namespace="com.example.persist.must.DownloadTaskWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.DownloadTask">
-	   <selectKey order="AFTER" keyProperty="id" resultType="long">
-            SELECT currval('download_task_id_seq')
-       </selectKey>
 	   INSERT INTO download_task
-	   (id, uuid, created_at, updated_at, enabled, user_id, file_id, client_ip, expired_at, time_cost_millis)
+	   (uuid, created_at, updated_at, enabled, user_id, file_id, client_ip, expired_at, time_cost_millis, last_dlded_at)
 	   VALUES
-	   (default, #{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{userId}, #{fileId}, #{clientIp}, #{expiredAt}, #{timeCostMillis})
+	   (#{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{userId}, #{fileId}, #{clientIp}, #{expiredAt}, #{timeCostMillis}, #{lastDldedAt})
 	</insert>
 	
 	<update id="updateTimeCostMillis" parameterType="com.example.domain.DownloadTask">

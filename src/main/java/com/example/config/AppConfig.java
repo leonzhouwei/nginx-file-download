@@ -17,17 +17,13 @@ import com.google.common.collect.Lists;
 @Component
 public class AppConfig implements InitializingBean {
 
-	public static final String APP_UUID = UUID.randomUUID().toString()
-			.toLowerCase();
+	public static final String APP_UUID = UUID.randomUUID().toString().toLowerCase();
 
-	public static final String CURRENT_WORKING_DIR = System
-			.getProperty("user.dir");
-	public static final String FILE_SEPARATOR = System
-			.getProperty("file.separator");
+	public static final String CURRENT_WORKING_DIR = System.getProperty("user.dir");
+	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
 	static final String DEV_MODE = "dev";
 	static final String PROD_MODE = "prod";
-	static final String ASSETS_DIR = "app/data/assets";
 
 	// app ---------------------------------------------------------------------
 	@Value("${app.runMode}")
@@ -44,6 +40,38 @@ public class AppConfig implements InitializingBean {
 	private String imageDirPath;
 	private String assetsHome;
 
+	// rdbms -------------------------------------------------------------------
+	@Value("${app.db.driverClassName}")
+	private String rdbmsDriverClassName;
+	@Value("${app.db.initialSize}")
+	private int rdbmsInitialSize;
+	@Value("${app.db.maxActive}")
+	private int rdbmsMaxActive;
+	@Value("${app.db.minIdle}")
+	private int rdbmsMinIdle;
+	@Value("${app.db.maxIdle}")
+	private int rdbmsMaxIdle;
+	@Value("${app.db.removeAbandoned}")
+	private boolean rdbmsRemoveAbandoned;
+	@Value("${app.db.removeAbandonedTimeout}")
+	private int rdbmsRemoveAbandonedTimeout;
+	@Value("${app.db.maxWait}")
+	private int rdbmsMaxWait;
+	@Value("${app.db.validationQuery}")
+	private String rdbmsValidationQuery;
+	@Value("${app.db.testOnBorrow}")
+	private boolean rdbmsTestOnBorrow;
+	@Value("${app.db.url}")
+	private String rdbmsUrl;
+	@Value("${app.db.username}")
+	private String rdbmsUsername;
+	@Value("${app.db.password}")
+	private String rdbmsPassword;
+
+	// nginx -------------------------------------------------------------------
+	@Value("${app.nginx.xAccelPrefix}")
+	private String xAccelPrefix;
+
 	// ssdb --------------------------------------------------------------------
 	@Value("${app.ssdb.timeout}")
 	private int ssdbTimeoutMillis;
@@ -57,15 +85,8 @@ public class AppConfig implements InitializingBean {
 	private int ssdbPort;
 	@Value("${app.ssdb.auth}")
 	private String ssdbAuth;
-	
-	// nginx -------------------------------------------------------------------
-	@Value("${app.nginx.xAccelPrefix}")
-	private String xAccelPrefix;
 
-	public String getWorkDirPath() {
-		return workDirPath;
-	}
-
+	// app ---------------------------------------------------------------------
 	public boolean isInDevelopMode() {
 		if (runMode.compareTo(DEV_MODE) == 0) {
 			return true;
@@ -84,6 +105,81 @@ public class AppConfig implements InitializingBean {
 		return runMode;
 	}
 
+	public String getWorkDirPath() {
+		return workDirPath;
+	}
+
+	public String getDataDir() {
+		return dataDir;
+	}
+
+	public String getAssetsHome() {
+		return assetsHome;
+	}
+
+	public Boolean getDisableDownloadHistory() {
+		return disableDownloadHistory;
+	}
+
+	// rdbms -------------------------------------------------------------------
+	public String getRdbmsDriverClassName() {
+		return rdbmsDriverClassName;
+	}
+
+	public int getRdbmsInitialSize() {
+		return rdbmsInitialSize;
+	}
+
+	public int getRdbmsMaxActive() {
+		return rdbmsMaxActive;
+	}
+
+	public int getRdbmsMinIdle() {
+		return rdbmsMinIdle;
+	}
+
+	public int getRdbmsMaxIdle() {
+		return rdbmsMaxIdle;
+	}
+
+	public boolean isRdbmsRemoveAbandoned() {
+		return rdbmsRemoveAbandoned;
+	}
+
+	public int getRdbmsRemoveAbandonedTimeout() {
+		return rdbmsRemoveAbandonedTimeout;
+	}
+
+	public int getRdbmsMaxWait() {
+		return rdbmsMaxWait;
+	}
+
+	public String getRdbmsValidationQuery() {
+		return rdbmsValidationQuery;
+	}
+
+	public boolean isRdbmsTestOnBorrow() {
+		return rdbmsTestOnBorrow;
+	}
+
+	public String getRdbmsUrl() {
+		return rdbmsUrl;
+	}
+
+	public String getRdbmsUsername() {
+		return rdbmsUsername;
+	}
+
+	public String getRdbmsPassword() {
+		return rdbmsPassword;
+	}
+
+	// nginx -------------------------------------------------------------------
+	public String getXAccelPrefix() {
+		return xAccelPrefix;
+	}
+
+	// ssdb --------------------------------------------------------------------
 	public int getSsdbTimeoutMillis() {
 		return ssdbTimeoutMillis;
 	}
@@ -120,12 +216,13 @@ public class AppConfig implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		//
 		Properties props = new Properties();
-		InputStreamReader isr = new InputStreamReader(new FileInputStream(
-				"custom/config/application.properties"), StandardCharsets.UTF_8);
+		InputStreamReader isr = new InputStreamReader(new FileInputStream("custom/config/application.properties"),
+				StandardCharsets.UTF_8);
 		props.load(isr);
 		imageDirPath = props.getProperty("app.imageDirPath");
 		isr.close();
 		//
+		final String ASSETS_DIR = dataDir + "/assets";
 		File dir = new File(ASSETS_DIR);
 		List<String> list = Lists.newArrayList();
 		String[] children = dir.list();
@@ -135,32 +232,13 @@ public class AppConfig implements InitializingBean {
 			}
 		}
 		if (list.isEmpty()) {
-			throw new RuntimeException(
-					"versioned static resources directory not found under '"
-							+ ASSETS_DIR + "'");
+			throw new RuntimeException("versioned static resources directory not found under '" + ASSETS_DIR + "'");
 		}
 		if (list.size() > 1) {
 			throw new RuntimeException(
-					"multiple versioned static resources directories have been found under '"
-							+ ASSETS_DIR + "'");
+					"multiple versioned static resources directories have been found under '" + ASSETS_DIR + "'");
 		}
 		assetsHome = "/assets/" + list.get(0);
-	}
-
-	public String getDataDir() {
-		return dataDir;
-	}
-
-	public String getAssetsHome() {
-		return assetsHome;
-	}
-
-	public String getXAccelPrefix() {
-		return xAccelPrefix;
-	}
-
-	public Boolean getDisableDownloadHistory() {
-		return disableDownloadHistory;
 	}
 
 }

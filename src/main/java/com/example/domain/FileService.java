@@ -5,6 +5,7 @@ public class FileService extends Base {
 	private Long id;
 	private String host;
 	private Long groupId;
+	private String name;
 
 	public Long getId() {
 		return id;
@@ -29,5 +30,13 @@ public class FileService extends Base {
 	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
 	} 
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

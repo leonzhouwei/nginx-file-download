@@ -10,6 +10,7 @@ public class AppVersionApi {
 	
 	@RequestMapping(RouteDefine.APP_VERSION)
 	public String get() {
+		System.err.println("oops: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return Version.VERSION;
 	}
 

@@ -29,6 +29,7 @@ cp -r $CONFIG $BUILD_VERSION/
 cp -r $CUSTOM $BUILD_VERSION/
 
 cp *.sh $BUILD_VERSION/
+cp sqlite.sqlite $BUILD_VERSION/
 #rm $BUILD_VERSION/build.sh
 rm $BUILD_VERSION/daily_build.sh
 

@@ -7,11 +7,12 @@ app.data.dir=./app/data
 app.nginx.xAccelPrefix=/protected/
 
 ################################################################################
-app.ignoreCustomizedInterceptors=false
-app.download.history.disable=true
+app.ignoreCustomizedInterceptors=true
+app.download.history.disable=false
 
 ################################################################################
-app.db.driverClassName=org.sqlite.JDBC
+#app.db.driverClassName=org.postgresql.Driver
+app.db.driverClassName=org.apache.derby.jdbc.ClientDriver
 app.db.initialSize=10
 app.db.maxActive=990
 app.db.minIdle=90
@@ -22,11 +23,12 @@ app.db.maxWait=60000
 app.db.validationQuery=select 1
 app.db.testOnBorrow=true
 
-app.db.url=jdbc:sqlite:sqlite.sqlite
+app.db.url=jdbc:postgresql://10.61.193.17:5432/test
 app.db.username=postgres
 app.db.password=postgres
 
 ################################################################################
+## SSDB for crawler tasks
 # timeout's unit is milliseconds
 app.ssdb.timeout=30000
 app.ssdb.maxActive=1000

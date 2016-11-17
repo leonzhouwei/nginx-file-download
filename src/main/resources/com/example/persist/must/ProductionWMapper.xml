@@ -4,16 +4,12 @@
 <mapper namespace="com.example.persist.must.ProductionWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.Production">
-		<selectKey order="AFTER" keyProperty="id" resultType="long">
-			SELECT
-			currval('production_id_seq')
-		</selectKey>
 		INSERT INTO production
-		(id, created_at, updated_at, enabled, name,
+		(created_at, updated_at, enabled, name,
 		description, dir)
 		VALUES
-		(default, #{createdAt}, #{updatedAt}, #{enabled},
-		#{name}, #{description}, #{dir})
+		(#{createdAt}, #{updatedAt}, #{enabled},
+		#{name}, #{description}, #{dir});
 	</insert>
 
 	<update id="update" parameterType="com.example.domain.Production">
@@ -26,16 +22,18 @@
 
 	<update id="enable" parameterType="com.example.domain.Production">
 		UPDATE production
-		SET enabled=true,
+		SET
+		enabled=1,
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
-	
+
 	<update id="disable" parameterType="com.example.domain.Production">
-        UPDATE production
-        SET enabled=false,
-        updated_at=#{updatedAt}
-        WHERE id=#{id}
-    </update>
+		UPDATE production
+		SET
+		enabled=0,
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
 
 </mapper>

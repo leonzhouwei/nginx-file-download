@@ -8,7 +8,7 @@
 		dir,
 		name,
 		size,
-		sd_card_price_fen, md, file_service_group_id
+		md, file_service_group_id
 	</sql>
 
 	<resultMap type="com.example.domain.File" id="resultMap">
@@ -16,7 +16,6 @@
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
 		<result property="productionId" column="production_id" />
-		<result property="sdCardPriceFen" column="sd_card_price_fen" />
 		<result property="fileServiceGroupId" column="file_service_group_id" />
 	</resultMap>
 
@@ -24,7 +23,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM file
-		WHERE enabled=true
+		WHERE enabled=1
 		ORDER BY created_at DESC, id DESC
 	</select>
 
@@ -39,7 +38,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM file
-		WHERE id=#{id} AND enabled=true
+		WHERE id=#{id} AND enabled=1
 	</select>
 
 	<select id="selectByIdIgnoreEnabled" parameterType="long"

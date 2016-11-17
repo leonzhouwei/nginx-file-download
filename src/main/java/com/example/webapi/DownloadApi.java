@@ -114,6 +114,8 @@ public class DownloadApi {
 		final String prodDir = production.getDir();
 		if (prodDir.startsWith(SLASH)) {
 			sb.append(prodDir.substring(1));
+		} else {
+			sb.append(prodDir);
 		}
 		if (!prodDir.endsWith(SLASH)) {
 			sb.append(FILE_SEPARATOR);
@@ -159,6 +161,10 @@ public class DownloadApi {
 			task.setUserId(LoginInterceptor.getAccountId(request));
 			task.setUuid(result.taskUuid);
 			taskWMapper.insert(task);
+		} else {
+			task.resetLastDldedAt();
+			task.resetTimeCostMillis();
+			taskWMapper.updateLastDldedAt(task);
 		}
 		String fileName = result.file.getName();
 		// respond
@@ -253,7 +259,7 @@ public class DownloadApi {
 		logger.debug(request.getRequestURL().toString());
 		try {
 			String path = "var/gopher.jpg";
-			// path是指欲下载的文件的路径。
+			// path 是指欲下载的文件的路径。
 			java.io.File file = new java.io.File(path);
 			logger.debug("file length: " + file.length());
 			// 取得文件名。
@@ -263,9 +269,9 @@ public class DownloadApi {
 			byte[] buffer = new byte[fis.available()];
 			fis.read(buffer);
 			fis.close();
-			// 清空response
+			// 清空 response
 			response.reset();
-			// 设置response的Header
+			// 设置 response 的 Header
 			response.addHeader("Content-Disposition", "attachment;filename="
 					+ new String(filename.getBytes()));
 			response.addHeader("Content-Length", "" + file.length());

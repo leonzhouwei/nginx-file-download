@@ -75,7 +75,7 @@ public class DownloadTask extends Base {
 		this.lastDldedAt = lastDldedAt;
 	}
 	
-	public void resetLastDldededAt() {
+	public void resetLastDldedAt() {
 		setLastDldedAt(new Date());
 	}
 	

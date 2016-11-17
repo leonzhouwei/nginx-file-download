@@ -42,11 +42,6 @@
 					class="form-control" id="nameText" name="name" th:value="${name}" />
 			</div>
 			<div class="form-group">
-				<label for="priceText">SD 卡价格 (元)</label> <input type="text"
-					class="form-control" id="sizeText" name="price"
-					th:value="${sdCardPriceFen}/100" />
-			</div>
-			<div class="form-group">
 				<label for="productionSelect">产品</label> <select
 					class="form-control" id="productionSelect" name="production"></select>
 			</div>
@@ -65,6 +60,8 @@
 				</select>
 			</div>
 			<button type="submit" class="btn btn-primary">确认</button>
+			<input type="hidden" id="productionIdHidden" th:value="${productionId}"></input>
+			<input type="hidden" id="fsgIdHidden" th:value="${fileServiceGroupId}"></input>
 		</form>
 
 		<!-- ===== vendor scripts ===== -->
@@ -72,7 +69,12 @@
 			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
 		
 		<!-- ===== application scripts ===== -->
-		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file/new.js'}"></script>
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/common.js'}"></script>
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/production/service.js'}"></script>
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file-service-group/service.js'}"></script>
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/admin/file/edit.js'}"></script>
 	</div>
 </body>
 

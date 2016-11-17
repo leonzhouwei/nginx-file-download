@@ -18,7 +18,7 @@ public class DownloadTaskWMapperTest {
 //	@Test
 	public void testUpdate() {
 		DownloadTask e = rMapper.selectById(3L);
-		e.resetLastDldededAt();
+		e.resetLastDldedAt();
 		e.resetTimeCostMillis();
 		e.resetUpdatedAt();
 		mapper.updateLastDldedAt(e);

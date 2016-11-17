@@ -30,6 +30,7 @@ cp -r $CONFIG/application.properties.production $BUILD_VERSION/$CONFIG/applicati
 cp -r $CONFIG/logback.xml.production $BUILD_VERSION/$CONFIG/logback.xml
 cp -r $CUSTOM $BUILD_VERSION/
 
+cp sqlite.sqlite $BUILD_VERSION/
 cp *.sh $BUILD_VERSION/
 rm $BUILD_VERSION/build.sh
 rm $BUILD_VERSION/daily_build.sh

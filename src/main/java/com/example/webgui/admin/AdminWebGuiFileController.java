@@ -112,7 +112,6 @@ public class AdminWebGuiFileController {
 		file.reset();
 		file.setDir(request.getParameter(DIR));
 		file.setName(name);
-		file.resetSdCardPriceYuan(sdCardPriceYuan);
 		file.setProductionId(productionId);
 		file.setSize((long) size.doubleValue());
 		file.setMd(md);
@@ -162,11 +161,6 @@ public class AdminWebGuiFileController {
 		if (!Strings.isNullOrEmpty(name)) {
 			e.setName(name);
 		}
-		final Double sdCardPriceYuan = HttpRequestTool
-				.extractPriceYuan(request);
-		if (sdCardPriceYuan != null) {
-			e.resetSdCardPriceYuan(sdCardPriceYuan);
-		}
 		final Long productionId = HttpRequestTool.extractLong(request,
 				PRODUCTION);
 		if (productionId != null) {
@@ -196,6 +190,7 @@ public class AdminWebGuiFileController {
 				return ModelAndViewTool.newModelAndViewFor404(appConfig,
 						response, FSG);
 			}
+			e.setFileServiceGroupId(fsgId);
 		}
 		e.resetUpdatedAt();
 		wMapper.update(e);

@@ -6,12 +6,12 @@
 	<insert id="insert" parameterType="com.example.domain.File">
 		INSERT INTO file
 		(created_at,
-		updated_at, enabled, id, dir, name, size, md, sd_card_price_fen,
+		updated_at, enabled, dir, name, size, md, sd_card_price_fen,
 		production_id, file_service_group_id)
 		VALUES
 		(#{createdAt},
-		#{updatedAt}, #{enabled}, default, #{dir}, #{name}, #{size}, #{md},
-		#{sdCardPriceFen}, #{productionId}, #{fileServiceGroupId})
+		#{updatedAt}, #{enabled}, #{dir}, #{name}, #{size}, #{md},
+		#{productionId}, #{fileServiceGroupId})
 	</insert>
 
 	<update id="update" parameterType="com.example.domain.File">
@@ -20,7 +20,6 @@
 		enabled=#{enabled},
 		updated_at=#{updatedAt}, dir=#{dir}, name=#{name},
 		size=#{size}, md=#{md},
-		sd_card_price_fen=#{sdCardPriceFen},
 		production_id=#{productionId},
 		file_service_group_id=#{fileServiceGroupId}
 		WHERE id=#{id}
@@ -28,14 +27,14 @@
 
 	<update id="enable" parameterType="com.example.domain.File">
 		UPDATE file
-		SET enabled=true,
+		SET enabled=1,
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
 
 	<update id="disable" parameterType="com.example.domain.File">
 		UPDATE file
-		SET enabled=false,
+		SET enabled=0,
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>

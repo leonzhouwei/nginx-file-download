@@ -17,7 +17,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM file_service
-		WHERE enabled=true
+		WHERE enabled=1
 		ORDER BY created_at DESC, id DESC
 	</select>
 
@@ -34,14 +34,14 @@
 		<include refid="columns" />
 		FROM file_service
 		WHERE group_id=#{groupId} AND host=#{host} AND
-		enabled=true
+		enabled=1
 	</select>
 
 	<select id="selectById" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file_service
-		WHERE enabled=true AND id=#{id}
+		WHERE enabled=1 AND id=#{id}
 		ORDER BY created_at DESC, id DESC
 	</select>
 

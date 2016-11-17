@@ -5,15 +5,15 @@
 
 	<insert id="insert" parameterType="com.example.domain.FileService">
 		INSERT INTO file_service
-		(created_at, updated_at, enabled, id, host, group_id)
+		(created_at, updated_at, enabled, host, group_id)
 		VALUES
-		(#{createdAt}, #{updatedAt}, #{enabled}, default, #{host}, #{groupId})
+		(#{createdAt}, #{updatedAt}, #{enabled}, #{host}, #{groupId});
 	</insert>
 
 	<update id="enable" parameterType="com.example.domain.FileService">
 		UPDATE file_service
 		SET
-		enabled=true,
+		enabled=1,
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
@@ -21,7 +21,7 @@
 	<update id="disable" parameterType="com.example.domain.FileService">
 		UPDATE file_service
 		SET
-		enabled=false,
+		enabled=0,
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>

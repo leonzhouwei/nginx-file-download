@@ -11,10 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 import com.example.config.AppConfig;
+import com.example.webapi.AppVersionApi;
 import com.google.common.io.Files;
 
 @ComponentScan
@@ -32,6 +31,8 @@ public class App {
 		try {
 			cac = SpringApplication.run(App.class, args);
 			app = cac.getBean(App.class);
+			AppVersionApi apiControllerBean = cac.getBean(AppVersionApi.class);
+			System.out.println(apiControllerBean);
 			app.logStatus();
 		} catch (Exception e) {
 			logger.warn("", e);
@@ -59,10 +60,10 @@ public class App {
 	}
 }
 
-@Configuration
-@ImportResource("/spring/applicationContext.xml")
-class XmlImportingConfiguration {
-}
+//@Configuration
+//@ImportResource("/spring/applicationContext.xml")
+//class XmlImportingConfiguration {
+//}
 
 // public EmbeddedServletContainerFactory servletContainer()
 // throws UnknownHostException {

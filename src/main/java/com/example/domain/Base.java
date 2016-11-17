@@ -8,7 +8,7 @@ public class Base {
 
 	private Date createdAt;
 	private Date updatedAt;
-	private Boolean enabled;
+	private Integer enabled;
 	
 	public Base() {
 	}
@@ -51,11 +51,15 @@ public class Base {
 	}
 
 	public final Boolean getEnabled() {
-		return enabled;
+		return enabled == 1;
 	}
 
 	public final void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
+		int value = 0;
+		if (enabled) {
+			value = 1;
+		}
+		this.enabled = value;
 	}
 	
 	public final void enable() {

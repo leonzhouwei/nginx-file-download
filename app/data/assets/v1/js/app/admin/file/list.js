@@ -30,8 +30,6 @@ function initTable(result) {
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		buffer.push('<td>', elem['dir'], '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
-		buffer.push('<td style="text-align: right;">',
-				elem['sdCardPriceFen'] / 100, '</td>');
 		buffer.push('<td>', elem['productionId'], '</td>');
 		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
