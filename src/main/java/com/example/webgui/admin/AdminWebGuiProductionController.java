@@ -30,16 +30,13 @@ public class AdminWebGuiProductionController {
 	static final String DIR = "dir";
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/production/";
-	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
-			+ WebGuiDefine.DISABLE;
+	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX + WebGuiDefine.DISABLE;
 	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
-	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX
-			+ WebGuiDefine.ENABLE;
+	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX + WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AdminWebGuiProductionController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminWebGuiProductionController.class);
 
 	@Autowired
 	private AppConfig appConfig;
@@ -47,19 +44,6 @@ public class AdminWebGuiProductionController {
 	private ProductionRMapper rMapper;
 	@Autowired
 	private ProductionWMapper wMapper;
-
-	static Map<String, Object> toMap(Production e) {
-		Map<String, Object> ret = Maps.newHashMap();
-		ret.put(HttpRequestTool.ID, e.getId());
-		ret.put(HttpRequestTool.NAME, e.getName());
-		ret.put(HttpRequestTool.DESCRIPTION, e.getDescription());
-		ret.put(HttpRequestTool.ENABLED, e.getEnabled());
-		return ret;
-	}
-
-	static void addAllObjects(ModelAndView mav, Production e) {
-		mav.addAllObjects(toMap(e));
-	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -72,8 +56,7 @@ public class AdminWebGuiProductionController {
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.POST)
-	public ModelAndView newOne(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView newOne(HttpServletRequest request, HttpServletResponse response) {
 		String dir = request.getParameter(DIR);
 		logger.debug("dir: " + dir);
 		String name = HttpRequestTool.extractName(request);
@@ -88,13 +71,11 @@ public class AdminWebGuiProductionController {
 		e.setDescription(description);
 		e.setEnabled(enabled);
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_PRODUCTIONS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.GET)
-	public ModelAndView gotoEdit(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -103,15 +84,12 @@ public class AdminWebGuiProductionController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_EDIT);
-		addAllObjects(ret, e);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
 		return ret;
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.POST)
-	public ModelAndView edit(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -130,13 +108,11 @@ public class AdminWebGuiProductionController {
 		e.resetUpdatedAt();
 		e.setEnabled(enabled);
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_PRODUCTIONS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.GET)
-	public ModelAndView gotoDisable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView gotoDisable(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -145,15 +121,12 @@ public class AdminWebGuiProductionController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_DISABLE);
-		addAllObjects(ret, e);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DISABLE, e);
 		return ret;
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.POST)
-	public ModelAndView disable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView disable(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -164,13 +137,11 @@ public class AdminWebGuiProductionController {
 		}
 		e.disable();
 		wMapper.disable(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_PRODUCTIONS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.GET)
-	public ModelAndView gotoEnable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView gotoEnable(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -179,15 +150,12 @@ public class AdminWebGuiProductionController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_ENABLE);
-		addAllObjects(ret, e);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ENABLE, e);
 		return ret;
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.POST)
-	public ModelAndView enable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView enable(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -198,8 +166,7 @@ public class AdminWebGuiProductionController {
 		}
 		e.enable();
 		wMapper.enable(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_PRODUCTIONS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
 	}
 
 }

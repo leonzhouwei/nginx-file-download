@@ -26,6 +26,7 @@
 				<label for="descriptionText">描述</label> <input type="text"
 					class="form-control" name="description" th:value="${description}" />
 			</div>
+			
 			<div class="form-group">
 				<label for="enabledSelect">已经启用</label> <select class="form-control"
 					id="enabledSelect" name="enabled">
@@ -33,7 +34,17 @@
 					<option value="false" th:selected="${!enabled}">禁用</option>
 				</select>
 			</div>
+			<div class="form-group">
+				<label for="createdAtText">创建时间</label> <input type="text"
+					class="form-control" th:value="${createdAt}" readonly="readonly" />
+			</div>
+			<div class="form-group">
+				<label for="updatedAtText">上次修改时间</label> <input type="text"
+					class="form-control" th:value="${updatedAt}" readonly="readonly" />
+			</div>
 			<button type="submit" class="btn btn-primary">确认</button>
+			&nbsp;&nbsp;&nbsp; <a href="#"
+				onclick="javascript:window.history.back();" class="btn btn-warning">取消</a>
 		</form>
 		
 		<!-- ===== vendor scripts ===== -->
