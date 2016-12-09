@@ -24,10 +24,6 @@ function initTable(result) {
 
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
-		var enabled = elem['enabled'];
-		buffer.push('<td>', enabled, '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		buffer.push('<td>', elem['dir'], '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('<td>', elem['productionId'], '</td>');
@@ -35,6 +31,10 @@ function initTable(result) {
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td>', elem['md'], '</td>');
 		buffer.push('<td>', elem['fileServiceGroupId'], '</td>');
+		var enabled = elem['enabled'];
+		buffer.push('<td>', enabled, '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		// ----------
 		buffer.push('<td>');
 		buffer.push('<a href="/admin/files/edit?id=' + id,

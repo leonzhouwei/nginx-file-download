@@ -19,7 +19,6 @@ function initTable(result) {
 		}
 
 		buffer.push('<td>', elem['id'], '</td>');
-		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td>');
 		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
 				elem['fileId'], '</a>');
@@ -38,7 +37,7 @@ function initTable(result) {
 		}
 		buffer.push('<td style="text-align: right;">', hours, 'h ', minutes,
 				'm ', seconds, 's', '</td>');
-
+		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
 		$('#tbody').append(newRow);

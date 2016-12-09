@@ -24,11 +24,11 @@ function initTable(result) {
 
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
+		buffer.push('<td>', elem['name'], '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>', enabled, '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
-		buffer.push('<td>', elem['name'], '</td>');
 		// ----------
 		buffer.push('<td>');
 		buffer.push('<a href="/admin/fsgroups/edit/?id=', id,
