@@ -13,7 +13,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.example.config.AppConfig;
-import com.example.webapi.AppVersionApi;
 import com.google.common.io.Files;
 
 @ComponentScan
@@ -31,8 +30,6 @@ public class App {
 		try {
 			cac = SpringApplication.run(App.class, args);
 			app = cac.getBean(App.class);
-			AppVersionApi apiControllerBean = cac.getBean(AppVersionApi.class);
-			System.out.println(apiControllerBean);
 			app.logStatus();
 		} catch (Exception e) {
 			logger.warn("", e);

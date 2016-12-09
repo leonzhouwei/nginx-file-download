@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
+
+<head>
+<title>修改用户信息</title>
+<meta charset="utf-8" />
+</head>
+
+<body>
+	<div class="container" layout:fragment="content">
+		<h4>编辑</h4>
+		<hr />
+		<form action="/admin/accounts/edit" method="post">
+			<div class="form-group">
+				<label for="idText">编号</label> <input type="text"
+					class="form-control" id="idText" name="id" th:value="${id}"
+					readonly="readonly" />
+			</div>
+			<div class="form-group">
+				<label for="nameText">名称</label> <input type="text"
+					class="form-control" id="nameText" name="name" th:value="${name}" />
+			</div>
+			<div class="form-group">
+				<label for="passwordText">密码</label> <input type="password"
+					class="form-control" id="passwordText" name="password"
+					value="******" />
+			</div>
+			<div class="form-group">
+				<label for="roleSelect">角色</label> <select class="form-control"
+					id="roleSelect" name="role">
+					<option value="1" th:selected="${roleId == 1}">管理员</option>
+					<option value="2" th:selected="${!(roleId == 1)}">普通用户</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="enabledSelect">已经启用</label> <select class="form-control"
+					id="enabledSelect" name="enabled">
+					<option value="true" th:selected="${enabled}">启用</option>
+					<option value="false" th:selected="${!enabled}">禁用</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">确认</button>
+			&nbsp;&nbsp;&nbsp; <a href="#"
+				onclick="javascript:window.history.back();" class="btn btn-warning">取消</a>
+		</form>
+
+		<!-- ===== vendor scripts ===== -->
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
+
+		<!-- ===== application scripts ===== -->
+	</div>
+</body>
+
+</html>

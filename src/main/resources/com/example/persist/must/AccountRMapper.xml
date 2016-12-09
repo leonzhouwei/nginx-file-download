@@ -3,22 +3,21 @@
 
 <mapper namespace="com.example.persist.must.AccountRMapper">
 
-	<sql id="columns">created_at, updated_at, enabled, id, name, password,
-		is_admin
+	<sql id="columns">created_at, updated_at, enabled, id, name,
+		role_id
 	</sql>
 
 	<resultMap type="com.example.domain.Account" id="resultMap">
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
-		<result property="isAdmin" column="is_admin" />
+		<result property="roleId" column="role_id" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM account
-		WHERE enabled=1
 		ORDER BY created_at DESC, id DESC
 	</select>
 
@@ -26,7 +25,7 @@
 		SELECT
 		<include refid="columns" />
 		FROM account
-        WHERE enabled=1 AND id=#{id}
+		WHERE id=#{id}
 	</select>
 
 	<select id="selectByNameAndPassword" parameterType="com.example.domain.Account"

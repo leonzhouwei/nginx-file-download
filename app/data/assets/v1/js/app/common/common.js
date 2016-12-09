@@ -33,6 +33,13 @@ function showAppModelForOk() {
 	});
 }
 
+function showAppModelForJqError(obj) {
+	console.log(obj);
+	var error = extractError(obj);
+	var msg = error['message'];
+	showAppModelForNg(msg);
+}
+
 function showAppModelForNg(msg) {
 	showAppModel({
 		title : '<font color="red">失败!</font>',
@@ -47,6 +54,12 @@ function hideAppModel() {
 // extract the content field from a JSON string
 function extractContent(json) {
 	return json[CONTENT];
+}
+
+// extract the error from jQuery error object
+function extractError(jqErr) {
+	var respText = jqErr['responseJSON'];
+	return respText['error'];
 }
 
 function apiRoutePrefixNoSlash() {

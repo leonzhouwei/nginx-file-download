@@ -11,12 +11,6 @@ import org.apache.ibatis.type.JdbcType;
 import org.joda.time.DateTime;
 
 public class DateTypeHandler extends BaseTypeHandler<Date> {
-	
-	public static void main(String[] args) {
-		DateTime dt = new DateTime();
-		String utc = dt.toString();
-		System.out.println(utc);
-	}
 
 	@Override
 	public void setNonNullParameter(PreparedStatement ps, int i, Date parameter, JdbcType jdbcType)

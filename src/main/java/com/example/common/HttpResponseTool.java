@@ -132,6 +132,11 @@ public final class HttpResponseTool {
 		writeFile(IMAGE_CONTENT_TYPE, response, file);
 	}
 	
+	public static void setStatusAs200(HttpServletResponse response) {
+		setDefaultContentType(response);
+		
+	}
+	
 	public static void setStatusAsNotFound(HttpServletResponse response) {
 		setDefaultContentType(response);
 		HttpStatus status = HttpStatus.NOT_FOUND;

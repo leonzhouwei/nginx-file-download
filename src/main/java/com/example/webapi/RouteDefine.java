@@ -17,16 +17,13 @@ public final class RouteDefine {
 	// -------------------------------------------------------------------------
 	public static final String BASE_ASSETS = ROOT + "assets";
 	public static final String ASSETS_VERSION = BASE_ASSETS + "/v1";
-	public static final String ASSETS_VERSION_IMAGES = ASSETS_VERSION
-			+ "/images";
+	public static final String ASSETS_VERSION_IMAGES = ASSETS_VERSION + "/images";
 	public static final String ASSETS_VERSION_CSS = ASSETS_VERSION + "/css";
-	public static final String ASSETS_VERSION_JAVASCRIPT = ASSETS_VERSION
-			+ "/js";
+	public static final String ASSETS_VERSION_JAVASCRIPT = ASSETS_VERSION + "/js";
 
 	// -------------------------------------------------------------------------
 	public static final String API_FILES = API + "/files";
-	public static final String API_FILE_SERVICE_GROUPS = API
-			+ "/fsgroups";
+	public static final String API_FILE_SERVICE_GROUPS = API + "/fsgroups";
 
 	// -------------------------------------------------------------------------
 	public static final String API_I = API + "/i";
@@ -35,31 +32,26 @@ public final class RouteDefine {
 
 	// -------------------------------------------------------------------------
 	public static final String API_ADMIN = API + ADMIN;
-	public static final String API_ADMIN_DOWNLOAD_TASKS = API_ADMIN
-			+ "/dld-tasks";
+	public static final String API_ADMIN_DOWNLOAD_TASKS = API_ADMIN + "/dld-tasks";
 	public static final String API_ADMIN_FILES = API_ADMIN + "/files";
-	public static final String API_ADMIN_FILE_SERVICES = API_ADMIN
-			+ "/file-services";
-	public static final String API_ADMIN_FILE_SERVICE_GROUPS = API_ADMIN
-			+ "/fsgroups";
-	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN
-			+ "/sd-card-orders";
-	public static final String API_ADMIN_PRODUCTIONS = API_ADMIN
-			+ "/productions";
+	public static final String API_ADMIN_FILE_SERVICES = API_ADMIN + "/file-services";
+	public static final String API_ADMIN_FILE_SERVICE_GROUPS = API_ADMIN + "/fsgroups";
+	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN + "/sd-card-orders";
+	public static final String API_ADMIN_PRODUCTIONS = API_ADMIN + "/productions";
+	public static final String API_ADMIN_ACCOUNTS = API_ADMIN + "/accounts";
 
 	// -------------------------------------------------------------------------
+	public static final String ADMIN_ACCOUNTS = ADMIN + "/accounts";
+	public static final String ADMIN_ACCOUNTS_NEW = ADMIN_ACCOUNTS + "/new";
+	public static final String ADMIN_ACCOUNTS_EDIT = ADMIN_ACCOUNTS + "/edit";
+	
 	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
-	public static final String ADMIN_FILE_SERVICE_GROUPS = ADMIN
-			+ "/fsgroups";
-	public static final String ADMIN_FILE_SERVICE_GROUPS_EDIT = ADMIN_FILE_SERVICE_GROUPS
-			+ "/edit";
-	public static final String ADMIN_FILE_SERVICE_GROUPS_NEW = ADMIN_FILE_SERVICE_GROUPS
-			+ "/new";
+	public static final String ADMIN_FILE_SERVICE_GROUPS = ADMIN + "/fsgroups";
+	public static final String ADMIN_FILE_SERVICE_GROUPS_EDIT = ADMIN_FILE_SERVICE_GROUPS + "/edit";
+	public static final String ADMIN_FILE_SERVICE_GROUPS_NEW = ADMIN_FILE_SERVICE_GROUPS + "/new";
 	public static final String ADMIN_FILE_SERVICES = ADMIN + "/file-services";
-	public static final String ADMIN_FILE_SERVICES_EDIT = ADMIN_FILE_SERVICES
-			+ "/edit";
-	public static final String ADMIN_FILE_SERVICES_NEW = ADMIN_FILE_SERVICES
-			+ "/new";
+	public static final String ADMIN_FILE_SERVICES_EDIT = ADMIN_FILE_SERVICES + "/edit";
+	public static final String ADMIN_FILE_SERVICES_NEW = ADMIN_FILE_SERVICES + "/new";
 	public static final String ADMIN_FILES = ADMIN + "/files";
 	public static final String ADMIN_FILES_NEW = ADMIN_FILES + "/new";
 	public static final String ADMIN_FILES_EDIT = ADMIN_FILES + "/edit";
@@ -67,14 +59,10 @@ public final class RouteDefine {
 	public static final String ADMIN_FILES_ENABLE = ADMIN_FILES + "/enable";
 	public static final String ADMIN_SD_CARD_ORDERS = ADMIN + "/sd-card-orders";
 	public static final String ADMIN_PRODUCTIONS = ADMIN + "/productions";
-	public static final String ADMIN_PRODUCTIONS_DISABLE = ADMIN_PRODUCTIONS
-			+ "/disable";
-	public static final String ADMIN_PRODUCTIONS_EDIT = ADMIN_PRODUCTIONS
-			+ "/edit";
-	public static final String ADMIN_PRODUCTIONS_ENABLE = ADMIN_PRODUCTIONS
-			+ "/enable";
-	public static final String ADMIN_PRODUCTIONS_NEW = ADMIN_PRODUCTIONS
-			+ "/new";
+	public static final String ADMIN_PRODUCTIONS_DISABLE = ADMIN_PRODUCTIONS + "/disable";
+	public static final String ADMIN_PRODUCTIONS_EDIT = ADMIN_PRODUCTIONS + "/edit";
+	public static final String ADMIN_PRODUCTIONS_ENABLE = ADMIN_PRODUCTIONS + "/enable";
+	public static final String ADMIN_PRODUCTIONS_NEW = ADMIN_PRODUCTIONS + "/new";
 
 	// -------------------------------------------------------------------------
 	public static final String I = ROOT + "i";

@@ -3,7 +3,7 @@ function FileService() {
 	var ROUTE = apiRoutePrefixNoSlash() + '/files';
 
 	this.getAll = function(func) {
-		$.get(ROUTE, func);
+		$.get(ROUTE, func).fail(showAppModelForJqError);
 	}
 
 }

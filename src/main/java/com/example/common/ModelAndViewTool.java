@@ -21,6 +21,13 @@ public final class ModelAndViewTool {
 		ret.getModel().put(APP_ASSETS_HOME, appConfig.getAssetsHome());
 		return ret;
 	}
+	
+	public static <T> ModelAndView newModelAndView(AppConfig appConfig,
+			String viewName, T t) {
+		ModelAndView ret = newModelAndView(appConfig, viewName);
+		ret.addAllObjects(ReflectTool.toMap(t));
+		return ret;
+	}
 
 	public static ModelAndView newModelAndViewFor404(AppConfig appConfig,
 			HttpServletResponse response) {

@@ -33,7 +33,7 @@ public class AccountPrevillegeInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		if (uri.startsWith(RouteDefine.ADMIN)) {
-			if (!account.getIsAdmin()) {
+			if (!account.isAdmin()) {
 				HttpResponseTool.setStatusAsUnauthorized(response);
 				return false;
 			}

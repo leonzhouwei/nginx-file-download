@@ -39,7 +39,7 @@ function initTable(result) {
 			buffer.push('<a href="#" onclick="javascript:disable(' + id,
 					');" class="btn btn-warning btn-xs">停用</a>');
 		} else {
-			buffer.push('<a href=#" onclick="javascript:enable(' + id,
+			buffer.push('<a href="#" onclick="javascript:enable(' + id,
 					');" class="btn btn-success btn-xs">启用</a>');
 		}
 		buffer.push('</td>');

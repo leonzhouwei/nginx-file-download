@@ -2,10 +2,13 @@ package com.example.domain;
 
 public class Account extends Base {
 
+	static final long ROLE_ADMIN = 1L;
+	static final long ROLE_NORMAL = 2L;
+
 	private Long id;
 	private String name;
 	private String password;
-	private Integer isAdmin;
+	private Long roleId;
 
 	public static boolean isValidAccount(Account account) {
 		if (account == null || !account.getEnabled()) {
@@ -38,16 +41,20 @@ public class Account extends Base {
 		this.password = password;
 	}
 
-	public Boolean getIsAdmin() {
-		return isAdmin == 1;
+	public Long getRoleId() {
+		return roleId;
 	}
 
-	public void setIsAdmin(Boolean isAdmin) {
-		if (isAdmin) {
-			this.isAdmin = 1;
+	public void setRoleId(Long roleId) {
+		if (roleId == ROLE_ADMIN) {
+			this.roleId = roleId;
 		} else {
-			this.isAdmin = 0;
+			this.roleId = ROLE_NORMAL;
 		}
+	}
+
+	public boolean isAdmin() {
+		return roleId == ROLE_ADMIN;
 	}
 
 }

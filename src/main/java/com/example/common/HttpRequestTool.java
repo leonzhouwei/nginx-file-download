@@ -116,5 +116,10 @@ public final class HttpRequestTool {
 		}
 		return Double.valueOf(sizeStr);
 	}
+	
+	public static Integer extractInteger(HttpServletRequest request, String name) {
+		String str = request.getParameter(name);
+		return Integer.valueOf(str);
+	}
 
 }

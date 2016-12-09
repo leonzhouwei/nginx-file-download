@@ -6,7 +6,7 @@ CREATE TABLE account
   updated_at TEXT NOT NULL,
   name TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
-  is_admin INTEGER NOT NULL
+  role_id INTEGER NOT NULL
 );
 
 CREATE TABLE download_task

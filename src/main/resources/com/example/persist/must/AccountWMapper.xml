@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.persist.must.AccountWMapper">
+
+	<insert id="insert" parameterType="com.example.domain.Account">
+		INSERT INTO account
+		(created_at,
+		updated_at, enabled, name, password, role_id)
+		VALUES
+		(#{createdAt},
+		#{updatedAt}, #{enabled}, #{name}, #{password},
+		#{roleId})
+	</insert>
+
+	<update id="update" parameterType="com.example.domain.Account">
+		UPDATE account
+		SET
+		name=#{name}, password=#{password}, role_id=#{roleId},
+		enabled=#{enabled},
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
+
+	<update id="updateEnabled" parameterType="com.example.domain.Account">
+		UPDATE account
+		SET
+		enabled=#{enabled},
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="com.example.domain.Account">
+		DELETE FROM account WHERE
+		id=#{id}
+	</delete>
+
+</mapper>
