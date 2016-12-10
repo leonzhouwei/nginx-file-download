@@ -14,8 +14,8 @@ import com.example.common.ModelAndViewTool;
 import com.example.common.Sha2Encoder;
 import com.example.config.AppConfig;
 import com.example.domain.Account;
-import com.example.persist.must.AccountRMapper;
-import com.example.persist.must.AccountWMapper;
+import com.example.persist.must.AdminAccountRMapper;
+import com.example.persist.must.AdminAccountWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 
@@ -32,9 +32,9 @@ public class AdminAccountController {
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
-	private AccountWMapper wMapper;
+	private AdminAccountWMapper wMapper;
 	@Autowired
-	private AccountRMapper rMapper;
+	private AdminAccountRMapper rMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -67,7 +67,7 @@ public class AdminAccountController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		Account account = rMapper.selectByIdIgnoreEnabled(id);
+		Account account = rMapper.selectById(id);
 		if (account == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -81,7 +81,7 @@ public class AdminAccountController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		Account account = rMapper.selectByIdIgnoreEnabled(id);
+		Account account = rMapper.selectById(id);
 		if (account == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}

@@ -13,27 +13,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpResponseTool;
 import com.example.domain.Account;
-import com.example.persist.must.AccountRMapper;
-import com.example.persist.must.AccountWMapper;
+import com.example.persist.must.AdminAccountRMapper;
+import com.example.persist.must.AdminAccountWMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController
 public class AdminAccountApi {
 
 	@Autowired
-	private AccountRMapper rMapper;
+	private AdminAccountRMapper rMapper;
 	@Autowired
-	private AccountWMapper wMapper;
+	private AdminAccountWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
-		List<Account> list = rMapper.selectAllIngoreEnabled();
+		List<Account> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/enable", method = RequestMethod.POST)
 	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		Account account = rMapper.selectByIdIgnoreEnabled(id);
+		Account account = rMapper.selectById(id);
 		if (account == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
@@ -45,7 +45,7 @@ public class AdminAccountApi {
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		Account account = rMapper.selectByIdIgnoreEnabled(id);
+		Account account = rMapper.selectById(id);
 		if (account == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
@@ -57,7 +57,7 @@ public class AdminAccountApi {
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/delete", method = RequestMethod.POST)
 	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		Account account = rMapper.selectByIdIgnoreEnabled(id);
+		Account account = rMapper.selectById(id);
 		if (account == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;

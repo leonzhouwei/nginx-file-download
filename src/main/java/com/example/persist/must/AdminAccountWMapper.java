@@ -2,7 +2,7 @@ package com.example.persist.must;
 
 import com.example.domain.Account;
 
-public interface AccountWMapper {
+public interface AdminAccountWMapper {
 	
 	public void insert(Account account);
 	

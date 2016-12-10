@@ -5,18 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.domain.Account;
-import com.example.persist.must.AccountRMapper;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = App.class)
-public class AccountRMapperTest {
+public class AdminAccountRMapperTest {
 	
 	@Autowired
-	private AccountRMapper mapper;
+	private AdminAccountRMapper mapper;
 
 //	@Test
 	public void testSelectAllIngoreEnabled() {
-		List<Account> c = mapper.selectAllIngoreEnabled();
+		List<Account> c = mapper.selectAll();
 		for (Account e : c) {
 			System.out.println(e.getId() + ", " + e.getName());
 		}
