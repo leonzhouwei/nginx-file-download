@@ -14,14 +14,21 @@
 		<result property="roleId" column="role_id" />
 	</resultMap>
 
-	<select id="selectAll" resultMap="resultMap">
+	<select id="selectAllIngoreEnabled" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM account
 		ORDER BY created_at DESC, id DESC
 	</select>
-
+	
 	<select id="selectById" parameterType="long" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM account
+		WHERE id=#{id} and enabled=1
+	</select>
+
+	<select id="selectByIdIgnoreEnabled" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM account

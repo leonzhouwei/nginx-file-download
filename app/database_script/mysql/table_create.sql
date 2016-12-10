@@ -6,7 +6,7 @@ CREATE TABLE account
   updated_at datetime NOT NULL,
   name VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(256) NOT NULL,
-  is_admin bool NOT NULL
+  role_id bigint NOT NULL
 );
 
 CREATE TABLE download_task

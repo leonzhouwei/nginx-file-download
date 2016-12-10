@@ -10,7 +10,7 @@ CREATE TABLE account
   created_at timestamp with time zone,
   updated_at timestamp with time zone,
   password character varying NOT NULL DEFAULT ''::character varying,
-  is_admin smallint NOT NULL,
+  role_id bigint NOT NULL,
   CONSTRAINT account_pkey PRIMARY KEY (id)
 );
 

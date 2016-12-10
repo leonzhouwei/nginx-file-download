@@ -67,7 +67,7 @@ public class AdminAccountController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		Account account = rMapper.selectById(id);
+		Account account = rMapper.selectByIdIgnoreEnabled(id);
 		if (account == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -81,7 +81,7 @@ public class AdminAccountController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		Account account = rMapper.selectById(id);
+		Account account = rMapper.selectByIdIgnoreEnabled(id);
 		if (account == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}

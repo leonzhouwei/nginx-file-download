@@ -15,8 +15,8 @@ public class AccountRMapperTest {
 	private AccountRMapper mapper;
 
 //	@Test
-	public void testSelectAll() {
-		List<Account> c = mapper.selectAll();
+	public void testSelectAllIngoreEnabled() {
+		List<Account> c = mapper.selectAllIngoreEnabled();
 		for (Account e : c) {
 			System.out.println(e.getId() + ", " + e.getName());
 		}
