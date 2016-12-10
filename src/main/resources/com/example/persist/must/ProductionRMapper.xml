@@ -11,14 +11,6 @@
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
 	</resultMap>
-
-	<select id="selectAll" resultMap="resultMap">
-		SELECT
-		<include refid="columns" />
-		FROM production
-		WHERE enabled=1
-		ORDER BY created_at DESC, id DESC
-	</select>
 	
 	<select id="selectById" parameterType="long" resultMap="resultMap">
 		SELECT

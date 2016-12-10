@@ -16,8 +16,8 @@ import com.example.common.ModelAndViewTool;
 import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.FileServiceGroup;
-import com.example.persist.must.FileServiceGroupRMapper;
-import com.example.persist.must.FileServiceGroupWMapper;
+import com.example.persist.must.AdminFileServiceGroupRMapper;
+import com.example.persist.must.AdminFileServiceGroupWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
@@ -41,9 +41,9 @@ public class AdminWebGuiFileServiceGroupController {
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
-	private FileServiceGroupRMapper rMapper;
+	private AdminFileServiceGroupRMapper rMapper;
 	@Autowired
-	private FileServiceGroupWMapper wMapper;
+	private AdminFileServiceGroupWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -75,7 +75,7 @@ public class AdminWebGuiFileServiceGroupController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileServiceGroup e = rMapper.selectByIdIgnoreEnabled(id);
+		FileServiceGroup e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -92,7 +92,7 @@ public class AdminWebGuiFileServiceGroupController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileServiceGroup e = rMapper.selectByIdIgnoreEnabled(id);
+		FileServiceGroup e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}

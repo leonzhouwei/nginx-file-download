@@ -17,7 +17,7 @@ import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.FileService;
 import com.example.domain.FileServiceGroup;
-import com.example.persist.must.FileServiceGroupRMapper;
+import com.example.persist.must.AdminFileServiceGroupRMapper;
 import com.example.persist.must.FileServiceRMapper;
 import com.example.persist.must.FileServiceWMapper;
 import com.example.webapi.RouteDefine;
@@ -51,7 +51,7 @@ public class AdminWebGuiFileServiceController {
 	@Autowired
 	private FileServiceWMapper wMapper;
 	@Autowired
-	private FileServiceGroupRMapper fsgRMapper;
+	private AdminFileServiceGroupRMapper fsgRMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -113,7 +113,7 @@ public class AdminWebGuiFileServiceController {
 		}
 		Long groupId = HttpRequestTool.extractLong(request, GROUP_ID);
 		if (groupId != null) {
-			FileServiceGroup fsg = fsgRMapper.selectByIdIgnoreEnabled(groupId);
+			FileServiceGroup fsg = fsgRMapper.selectById(groupId);
 			if (fsg == null) {
 				return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 			}

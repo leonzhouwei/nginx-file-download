@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpResponseTool;
 import com.example.domain.FileServiceGroup;
-import com.example.persist.must.FileServiceGroupRMapper;
-import com.example.persist.must.FileServiceGroupWMapper;
+import com.example.persist.must.AdminFileServiceGroupRMapper;
+import com.example.persist.must.AdminFileServiceGroupWMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController
 public class AdminFileServiceGroupApi {
 
 	@Autowired
-	private FileServiceGroupRMapper rMapper;
+	private AdminFileServiceGroupRMapper rMapper;
 	@Autowired
-	private FileServiceGroupWMapper wMapper;
+	private AdminFileServiceGroupWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.GET)
 	public void list(HttpServletRequest request, HttpServletResponse response) {
-		List<FileServiceGroup> list = rMapper.selectAllIgnoreEnabled();
+		List<FileServiceGroup> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
@@ -35,7 +35,7 @@ public class AdminFileServiceGroupApi {
 			+ "/{id}/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
-		FileServiceGroup e = rMapper.selectByIdIgnoreEnabled(id);
+		FileServiceGroup e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
@@ -49,7 +49,7 @@ public class AdminFileServiceGroupApi {
 			+ "/{id}/enable", method = RequestMethod.POST)
 	public void enable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
-		FileServiceGroup e = rMapper.selectByIdIgnoreEnabled(id);
+		FileServiceGroup e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;

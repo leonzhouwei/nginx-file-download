@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.domain.FileServiceGroup;
 
-public interface FileServiceGroupRMapper {
+public interface AdminFileServiceGroupRMapper {
 	
 	public List<FileServiceGroup> selectAll();
 	
