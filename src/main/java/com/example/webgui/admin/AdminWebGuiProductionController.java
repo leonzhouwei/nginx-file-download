@@ -15,8 +15,8 @@ import com.example.common.HttpRequestTool;
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
 import com.example.domain.Production;
-import com.example.persist.must.ProductionRMapper;
-import com.example.persist.must.ProductionWMapper;
+import com.example.persist.must.AdminProductionRMapper;
+import com.example.persist.must.AdminProductionWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
@@ -38,9 +38,9 @@ public class AdminWebGuiProductionController {
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
-	private ProductionRMapper rMapper;
+	private AdminProductionRMapper rMapper;
 	@Autowired
-	private ProductionWMapper wMapper;
+	private AdminProductionWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -77,7 +77,7 @@ public class AdminWebGuiProductionController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
+		Production e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -91,7 +91,7 @@ public class AdminWebGuiProductionController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
+		Production e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -105,64 +105,6 @@ public class AdminWebGuiProductionController {
 		e.resetUpdatedAt();
 		e.setEnabled(enabled);
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
-	}
-
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.GET)
-	public ModelAndView gotoDisable(HttpServletRequest request, HttpServletResponse response) {
-		final Long id = HttpRequestTool.extractId(request);
-		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
-		if (e == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DISABLE, e);
-		return ret;
-	}
-
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_DISABLE, method = RequestMethod.POST)
-	public ModelAndView disable(HttpServletRequest request, HttpServletResponse response) {
-		final Long id = HttpRequestTool.extractId(request);
-		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
-		if (e == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		e.disable();
-		wMapper.disable(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
-	}
-
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.GET)
-	public ModelAndView gotoEnable(HttpServletRequest request, HttpServletResponse response) {
-		final Long id = HttpRequestTool.extractId(request);
-		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
-		if (e == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ENABLE, e);
-		return ret;
-	}
-
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_ENABLE, method = RequestMethod.POST)
-	public ModelAndView enable(HttpServletRequest request, HttpServletResponse response) {
-		final Long id = HttpRequestTool.extractId(request);
-		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
-		if (e == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		e.enable();
-		wMapper.enable(e);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
 	}
 

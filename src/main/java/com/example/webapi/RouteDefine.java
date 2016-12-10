@@ -46,18 +46,21 @@ public final class RouteDefine {
 	public static final String ADMIN_ACCOUNTS_EDIT = ADMIN_ACCOUNTS + "/edit";
 	
 	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
+	
 	public static final String ADMIN_FILE_SERVICE_GROUPS = ADMIN + "/fsgroups";
 	public static final String ADMIN_FILE_SERVICE_GROUPS_EDIT = ADMIN_FILE_SERVICE_GROUPS + "/edit";
 	public static final String ADMIN_FILE_SERVICE_GROUPS_NEW = ADMIN_FILE_SERVICE_GROUPS + "/new";
+	
 	public static final String ADMIN_FILE_SERVICES = ADMIN + "/file-services";
 	public static final String ADMIN_FILE_SERVICES_EDIT = ADMIN_FILE_SERVICES + "/edit";
 	public static final String ADMIN_FILE_SERVICES_NEW = ADMIN_FILE_SERVICES + "/new";
+	
 	public static final String ADMIN_FILES = ADMIN + "/files";
 	public static final String ADMIN_FILES_NEW = ADMIN_FILES + "/new";
 	public static final String ADMIN_FILES_EDIT = ADMIN_FILES + "/edit";
 	public static final String ADMIN_FILES_DISABLE = ADMIN_FILES + "/disable";
 	public static final String ADMIN_FILES_ENABLE = ADMIN_FILES + "/enable";
-	public static final String ADMIN_SD_CARD_ORDERS = ADMIN + "/sd-card-orders";
+	
 	public static final String ADMIN_PRODUCTIONS = ADMIN + "/productions";
 	public static final String ADMIN_PRODUCTIONS_DISABLE = ADMIN_PRODUCTIONS + "/disable";
 	public static final String ADMIN_PRODUCTIONS_EDIT = ADMIN_PRODUCTIONS + "/edit";

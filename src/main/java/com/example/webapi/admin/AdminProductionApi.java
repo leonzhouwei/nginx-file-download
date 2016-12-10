@@ -16,57 +16,55 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.common.HttpResponseTool;
 import com.example.common.JsonTool;
 import com.example.domain.Production;
-import com.example.persist.must.ProductionRMapper;
-import com.example.persist.must.ProductionWMapper;
+import com.example.persist.must.AdminProductionRMapper;
+import com.example.persist.must.AdminProductionWMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController
 public class AdminProductionApi {
 
-	static final Logger logger = LoggerFactory
-			.getLogger(AdminProductionApi.class);
+	static final Logger logger = LoggerFactory.getLogger(AdminProductionApi.class);
 
 	@Autowired
-	private ProductionRMapper rMapper;
+	private AdminProductionRMapper rMapper;
 	@Autowired
-	private ProductionWMapper wMapper;
+	private AdminProductionWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
-		List<Production> list = rMapper.selectAllIgnoreEnabled();
+		List<Production> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}", method = RequestMethod.GET)
-	public void getById(HttpServletRequest request,
-			HttpServletResponse response, @PathVariable Long id) {
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
+	public void getById(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		Production e = rMapper.selectById(id);
 		HttpResponseTool.writeResponse(response, e);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/disable", method = RequestMethod.POST)
-	public void disable(HttpServletRequest request,
-			HttpServletResponse response, @PathVariable Long id) {
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
+	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
 		}
-		wMapper.disable(e);
+		e.disable();
+		wMapper.updateEnabled(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/enable", method = RequestMethod.POST)
-	public void enable(HttpServletRequest request,
-			HttpServletResponse response, @PathVariable Long id) {
-		Production e = rMapper.selectByIdIgnoreEnabled(id);
+	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
 		}
-		wMapper.enable(e);
+		e.enable();
+		wMapper.updateEnabled(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
 
