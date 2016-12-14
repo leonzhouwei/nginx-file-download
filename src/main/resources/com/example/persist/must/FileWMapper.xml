@@ -6,7 +6,7 @@
 	<insert id="insert" parameterType="com.example.domain.File">
 		INSERT INTO file
 		(created_at,
-		updated_at, enabled, dir, name, size, md, sd_card_price_fen,
+		updated_at, enabled, dir, name, size, md,
 		production_id, file_service_group_id)
 		VALUES
 		(#{createdAt},
@@ -38,5 +38,10 @@
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
-
+	
+	<delete id="delete" parameterType="com.example.domain.File">
+		DELETE FROM file
+		WHERE id=#{id}
+	</delete>
+	
 </mapper>

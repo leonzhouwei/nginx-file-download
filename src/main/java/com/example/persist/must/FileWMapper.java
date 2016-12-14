@@ -11,5 +11,6 @@ public interface FileWMapper {
 	public void enable(File e);
 	
 	public void disable(File e);
-
+	
+	public void delete(File e);
 }

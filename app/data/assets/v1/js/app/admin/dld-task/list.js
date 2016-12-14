@@ -1,10 +1,14 @@
 var service = new AdminDldTaskService();
 
 $(function() {
+	init();
+});
+
+function init() {
 	service.getAll(function(result) {
 		initTable(extractContent(result));
 	});
-});
+}
 
 function initTable(result) {
 	$('#tbody').empty();
@@ -18,7 +22,8 @@ function initTable(result) {
 			buffer.push('<tr>');
 		}
 
-		buffer.push('<td>', elem['id'], '</td>');
+		var id = elem['id'];
+		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>');
 		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
 				elem['fileId'], '</a>');
@@ -38,6 +43,13 @@ function initTable(result) {
 		buffer.push('<td style="text-align: right;">', hours, 'h ', minutes,
 				'm ', seconds, 's', '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
+		// ------------
+		buffer.push('<td>');
+		buffer.push('<a href="#" onclick="javascript:remove(' + id,
+				');" class="btn btn-danger btn-xs">删除</a>');
+		buffer.push('</td>');
+		// ------------
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
 		$('#tbody').append(newRow);
@@ -58,3 +70,9 @@ function enable(id) {
 	});
 }
 
+function remove(id) {
+	service.remove(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
+}

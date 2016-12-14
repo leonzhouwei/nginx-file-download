@@ -87,6 +87,7 @@ public final class HttpResponseTool {
 	public static void writeError(HttpServletResponse response,
 			HttpStatus status, ServerErrorDto error) {
 		try {
+			setDefaultContentType(response);
 			response.setStatus(status.value());
 			ResponseDto<ServerErrorDto> responseDto = new ResponseDto<ServerErrorDto>();
 			responseDto.setError(error);
@@ -108,7 +109,9 @@ public final class HttpResponseTool {
 	public static void writeInternalServerError(HttpServletResponse response,
 			String id, String message, String url) {
 		ServerErrorDto error = new ServerErrorDto();
+		error.setId(id);
 		error.setMessage(message);
+		error.setUrl(url);
 		writeError(response, HttpStatus.INTERNAL_SERVER_ERROR, error);
 	}
 

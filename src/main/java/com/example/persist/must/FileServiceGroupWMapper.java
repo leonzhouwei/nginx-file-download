@@ -2,7 +2,7 @@ package com.example.persist.must;
 
 import com.example.domain.FileServiceGroup;
 
-public interface AdminFileServiceGroupWMapper {
+public interface FileServiceGroupWMapper {
 	
 	public void insert(FileServiceGroup e);
 	
@@ -11,5 +11,7 @@ public interface AdminFileServiceGroupWMapper {
 	public void disable(FileServiceGroup e);
 	
 	public void update(FileServiceGroup e);
+	
+	public void delete(FileServiceGroup e);
 
 }

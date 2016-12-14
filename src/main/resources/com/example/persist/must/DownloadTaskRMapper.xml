@@ -19,23 +19,37 @@
 		<result property="timeCostMillis" column="time_cost_millis" />
 		<result property="lastDldedAt" column="last_dlded_at" />
 	</resultMap>
-
+	
 	<select id="selectAll" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM download_task
+		ORDER BY created_at DESC, id DESC
+	</select>
+
+	<select id="selectAllEnabled" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM download_task
 		WHERE enabled=1
 		ORDER BY created_at DESC, id DESC
 	</select>
-
+	
 	<select id="selectById" parameterType="long" resultMap="resultMap">
+		SELECT
+		<include refid="columns" />
+		FROM download_task
+		WHERE id=#{id}
+	</select>
+
+	<select id="selectEnabledById" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM download_task
 		WHERE id=#{id} AND enabled=1
 	</select>
 
-	<select id="selectByUserId" parameterType="long" resultMap="resultMap">
+	<select id="selectEnabledByUserId" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM download_task
@@ -43,7 +57,7 @@
         ORDER BY created_at DESC, id DESC
 	</select>
 
-	<select id="selectByUuid" parameterType="string" resultMap="resultMap">
+	<select id="selectEnabledByUuid" parameterType="string" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM download_task

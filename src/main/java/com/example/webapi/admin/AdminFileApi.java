@@ -27,14 +27,14 @@ public class AdminFileApi {
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
-		List<File> list = rMapper.selectAllIgnoreEnabled();
+		List<File> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
-		File e = rMapper.selectByIdIgnoreEnabled(id);
+		File e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
@@ -47,13 +47,25 @@ public class AdminFileApi {
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/enable", method = RequestMethod.POST)
 	public void enable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
-		File e = rMapper.selectByIdIgnoreEnabled(id);
+		File e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
 		}
 		e.enable();
 		wMapper.enable(e);
+		HttpResponseTool.writeResponse(response, e);
+	}
+	
+	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/delete", method = RequestMethod.POST)
+	public void delete(HttpServletRequest request,
+			HttpServletResponse response, @PathVariable Long id) {
+		File e = rMapper.selectById(id);
+		if (e == null) {
+			HttpResponseTool.setStatusAsNotFound(response);
+			return;
+		}
+		wMapper.delete(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
 

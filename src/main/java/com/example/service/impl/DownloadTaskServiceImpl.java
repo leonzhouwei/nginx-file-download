@@ -61,7 +61,7 @@ public class DownloadTaskServiceImpl implements DownloadTaskService {
 
 	@Override
 	public long updateTimeCostMillis(long taskId) {
-		DownloadTask task = taskRMapper.selectById(taskId);
+		DownloadTask task = taskRMapper.selectEnabledById(taskId);
 		if (task == null) {
 			return -1;
 		}

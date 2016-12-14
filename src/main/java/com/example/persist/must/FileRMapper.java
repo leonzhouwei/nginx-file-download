@@ -8,10 +8,10 @@ public interface FileRMapper {
 	
 	public List<File> selectAll();
 	
-	public List<File> selectAllIgnoreEnabled();
+	public List<File> selectAllEnabled();
 	
 	public File selectById(long id);
 	
-	public File selectByIdIgnoreEnabled(long id);
+	public File selectEnabledById(long id);
 
 }

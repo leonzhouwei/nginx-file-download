@@ -152,7 +152,7 @@ public class DownloadApi {
 			return;
 		}
 		// try to find the download task by uuid
-		DownloadTask task = taskRMapper.selectByUuid(result.taskUuid);
+		DownloadTask task = taskRMapper.selectEnabledByUuid(result.taskUuid);
 		if (task == null) {
 			task = new DownloadTask();
 			task.reset();
@@ -209,13 +209,13 @@ public class DownloadApi {
 		}
 		// find the file by id
 		final long fileId = Long.parseLong(fileIdStr);
-		File file = fileRMapper.selectById(fileId);
+		File file = fileRMapper.selectEnabledById(fileId);
 		if (file == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		// check the production
-		Production production = productionRMapper.selectById(file
+		Production production = productionRMapper.selectEnabledById(file
 				.getProductionId());
 		if (production == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
@@ -225,7 +225,7 @@ public class DownloadApi {
 		final long fileServiceGroupId = file.getFileServiceGroupId();
 		logger.info("file service group id: " + fileServiceGroupId);
 		FileServiceGroup fsg = fileServiceGroupRMapper
-				.selectById(fileServiceGroupId);
+				.selectEnabledById(fileServiceGroupId);
 		logger.info("file service group: " + JsonTool.toJson(fsg));
 		if (fsg == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
@@ -236,7 +236,7 @@ public class DownloadApi {
 		params.setGroupId(fsg.getId());
 		params.setHost(host);
 		FileService fileService = fileServiceRMapper
-				.selectByGroupIdAndHost(params);
+				.selectEnabledByGroupIdAndHost(params);
 		logger.info("file service: " + JsonTool.toJson(fileService));
 		if (fileService == null) {
 			HttpResponseTool.setStatusAsNotFound(response);

@@ -36,6 +36,7 @@ function showAppModelForOk() {
 function showAppModelForJqError(obj) {
 	console.log(obj);
 	var error = extractError(obj);
+	console.log(error);
 	var msg = error['message'];
 	showAppModelForNg(msg);
 }
@@ -59,7 +60,8 @@ function extractContent(json) {
 // extract the error from jQuery error object
 function extractError(jqErr) {
 	var respText = jqErr['responseJSON'];
-	return respText['error'];
+	var err = respText['error'];
+	return err;
 }
 
 function apiRoutePrefixNoSlash() {

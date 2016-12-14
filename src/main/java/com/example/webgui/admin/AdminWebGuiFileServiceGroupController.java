@@ -16,8 +16,8 @@ import com.example.common.ModelAndViewTool;
 import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.FileServiceGroup;
-import com.example.persist.must.AdminFileServiceGroupRMapper;
-import com.example.persist.must.AdminFileServiceGroupWMapper;
+import com.example.persist.must.FileServiceGroupRMapper;
+import com.example.persist.must.FileServiceGroupWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
@@ -41,9 +41,9 @@ public class AdminWebGuiFileServiceGroupController {
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
-	private AdminFileServiceGroupRMapper rMapper;
+	private FileServiceGroupRMapper rMapper;
 	@Autowired
-	private AdminFileServiceGroupWMapper wMapper;
+	private FileServiceGroupWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.GET)
 	public ModelAndView list() {

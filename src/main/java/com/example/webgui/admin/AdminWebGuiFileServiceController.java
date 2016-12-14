@@ -17,7 +17,7 @@ import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.FileService;
 import com.example.domain.FileServiceGroup;
-import com.example.persist.must.AdminFileServiceGroupRMapper;
+import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileServiceRMapper;
 import com.example.persist.must.FileServiceWMapper;
 import com.example.webapi.RouteDefine;
@@ -51,7 +51,7 @@ public class AdminWebGuiFileServiceController {
 	@Autowired
 	private FileServiceWMapper wMapper;
 	@Autowired
-	private AdminFileServiceGroupRMapper fsgRMapper;
+	private FileServiceGroupRMapper fsgRMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -66,12 +66,14 @@ public class AdminWebGuiFileServiceController {
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request,
 			HttpServletResponse response) {
+		String name = request.getParameter("name");
 		String host = request.getParameter(HOST);
 		logger.debug("host: " + host);
 		String groupIdStr = request.getParameter(GROUP_ID);
 		logger.debug("group id: " + groupIdStr);
 		FileService e = new FileService();
 		e.reset();
+		e.setName(name);
 		e.setHost(host);
 		e.setGroupId(Long.parseLong(groupIdStr));
 		wMapper.insert(e);
@@ -86,7 +88,7 @@ public class AdminWebGuiFileServiceController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileService e = rMapper.selectByIdIgnoreEnabled(id);
+		FileService e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -103,7 +105,7 @@ public class AdminWebGuiFileServiceController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileService e = rMapper.selectByIdIgnoreEnabled(id);
+		FileService e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}

@@ -27,14 +27,14 @@ public class FileApi {
 
 	@RequestMapping(value = RouteDefine.API_FILES, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
-		List<File> list = rMapper.selectAll();
+		List<File> list = rMapper.selectAllEnabled();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_FILES + "/{id}", method = RequestMethod.GET)
 	public void getById(HttpServletRequest request, @PathVariable String id,
 			HttpServletResponse response) {
-		File file = rMapper.selectById(Long.parseLong(id));
+		File file = rMapper.selectEnabledById(Long.parseLong(id));
 		HttpResponseTool.writeResponse(response, file);
 	}
 

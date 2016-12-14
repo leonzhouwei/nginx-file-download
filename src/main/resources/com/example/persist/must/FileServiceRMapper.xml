@@ -13,7 +13,7 @@
 		<result property="groupId" column="group_id" />
 	</resultMap>
 
-	<select id="selectAll" resultMap="resultMap">
+	<select id="selectAllEnabled" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file_service
@@ -21,14 +21,14 @@
 		ORDER BY created_at DESC, id DESC
 	</select>
 
-	<select id="selectAllIgnoreEnabled" resultMap="resultMap">
+	<select id="selectAll" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file_service
 		ORDER BY created_at DESC, id DESC
 	</select>
 
-	<select id="selectByGroupIdAndHost" parameterType="com.example.domain.FileService"
+	<select id="selectEnabledByGroupIdAndHost" parameterType="com.example.domain.FileService"
 		resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
@@ -37,7 +37,7 @@
 		enabled=1
 	</select>
 
-	<select id="selectById" parameterType="long" resultMap="resultMap">
+	<select id="selectEnabledById" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file_service
@@ -45,7 +45,7 @@
 		ORDER BY created_at DESC, id DESC
 	</select>
 
-	<select id="selectByIdIgnoreEnabled" parameterType="long"
+	<select id="selectById" parameterType="long"
 		resultMap="resultMap">
 		SELECT
 		<include refid="columns" />

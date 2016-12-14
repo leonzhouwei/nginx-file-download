@@ -27,15 +27,13 @@ public class AdminFileServiceApi {
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES, method = RequestMethod.GET)
 	public void list(HttpServletRequest request, HttpServletResponse response) {
-		List<FileService> list = rMapper.selectAllIgnoreEnabled();
+		List<FileService> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES
-			+ "/{id}/disable", method = RequestMethod.POST)
-	public void disable(HttpServletRequest request,
-			HttpServletResponse response, @PathVariable Long id) {
-		FileService e = rMapper.selectByIdIgnoreEnabled(id);
+	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES + "/{id}/disable", method = RequestMethod.POST)
+	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		FileService e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
@@ -45,17 +43,26 @@ public class AdminFileServiceApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES
-			+ "/{id}/enable", method = RequestMethod.POST)
-	public void enable(HttpServletRequest request,
-			HttpServletResponse response, @PathVariable Long id) {
-		FileService e = rMapper.selectByIdIgnoreEnabled(id);
+	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES + "/{id}/enable", method = RequestMethod.POST)
+	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		FileService e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
 		}
 		e.enable();
 		wMapper.enable(e);
+		HttpResponseTool.writeResponse(response, e);
+	}
+
+	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES + "/{id}/actions/delete", method = RequestMethod.POST)
+	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		FileService e = rMapper.selectById(id);
+		if (e == null) {
+			HttpResponseTool.setStatusAsNotFound(response);
+			return;
+		}
+		wMapper.delete(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
 

@@ -21,5 +21,10 @@
        SET updated_at=#{updatedAt}, last_dlded_at=#{lastDldedAt}, time_cost_millis=#{timeCostMillis}  
        WHERE id=#{id}
     </update>
+    
+    <delete id="delete" parameterType="com.example.domain.DownloadTask">
+    	DELETE FROM download_task
+    	WHERE id=#{id}
+    </delete>
 
 </mapper>

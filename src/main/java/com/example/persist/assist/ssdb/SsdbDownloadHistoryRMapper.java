@@ -55,7 +55,7 @@ public class SsdbDownloadHistoryRMapper implements DownloadHistoryRMapper {
 	@Override
 	public List<DownloadHistory> selectAll() {
 		List<DownloadHistory> ret = Lists.newArrayList();
-		List<DownloadTask> tasks = taskMapper.selectAll();
+		List<DownloadTask> tasks = taskMapper.selectAllEnabled();
 		List<String> keys = Lists.newArrayList();
 		for (DownloadTask e : tasks) {
 			keys.add(keyFor(e.getId()));

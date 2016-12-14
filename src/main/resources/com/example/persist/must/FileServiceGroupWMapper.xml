@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.persist.must.AdminFileServiceGroupWMapper">
+<mapper namespace="com.example.persist.must.FileServiceGroupWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.FileServiceGroup">
 		INSERT INTO file_service_group
@@ -28,5 +28,10 @@
 		SET updated_at=#{updatedAt}, enabled=#{enabled}, name=#{name}
 		WHERE id=#{id}
 	</update>
+	
+	<delete id="delete" parameterType="com.example.domain.FileServiceGroup">
+		DELETE FROM file_service_group
+		WHERE id=#{id}
+	</delete>
 
 </mapper>

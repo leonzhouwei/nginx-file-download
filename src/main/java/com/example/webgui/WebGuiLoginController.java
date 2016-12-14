@@ -57,7 +57,7 @@ public class WebGuiLoginController {
 		Account e = new Account();
 		e.setName(username);
 		e.setPassword(cypher);
-		Account account = rMapper.selectByNameAndPassword(e);
+		Account account = rMapper.selectEnabledByNameAndPassword(e);
 		if (!Account.isValidAccount(account)) {
 			response.sendRedirect(RouteDefine.ROOT);
 			return;

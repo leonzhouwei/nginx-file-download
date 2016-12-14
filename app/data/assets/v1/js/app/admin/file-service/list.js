@@ -42,8 +42,10 @@ function initTable(result) {
 			buffer.push('<a href="#" onclick="javascript:enable(' + id,
 					');" class="btn btn-success btn-xs">启用</a>');
 		}
+		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
+		buffer.push('<a href="#" onclick="javascript:remove(' + id,
+				');" class="btn btn-danger btn-xs">删除</a>');
 		buffer.push('</td>');
-
 		// ----------
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
@@ -67,6 +69,13 @@ function enable(id) {
 
 function disable(id) {
 	service.disable(id, function(data) {
+		showAppModelForOk();
+		init();
+	});
+}
+
+function remove(id) {
+	service.remove(id, function(data) {
 		showAppModelForOk();
 		init();
 	});

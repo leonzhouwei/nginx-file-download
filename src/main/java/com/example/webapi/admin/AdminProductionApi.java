@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.common.HttpResponseTool;
 import com.example.common.JsonTool;
 import com.example.domain.Production;
-import com.example.persist.must.AdminProductionRMapper;
-import com.example.persist.must.AdminProductionWMapper;
+import com.example.persist.must.ProductionRMapper;
+import com.example.persist.must.ProductionWMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController
@@ -26,9 +26,9 @@ public class AdminProductionApi {
 	static final Logger logger = LoggerFactory.getLogger(AdminProductionApi.class);
 
 	@Autowired
-	private AdminProductionRMapper rMapper;
+	private ProductionRMapper rMapper;
 	@Autowired
-	private AdminProductionWMapper wMapper;
+	private ProductionWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
@@ -65,6 +65,19 @@ public class AdminProductionApi {
 		}
 		e.enable();
 		wMapper.updateEnabled(e);
+		HttpResponseTool.writeResponse(response, e);
+	}
+
+	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/actions/delete", method = RequestMethod.POST)
+	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		Production e = rMapper.selectById(id);
+		logger.debug(JsonTool.toJson(e));
+		if (e == null) {
+			HttpResponseTool.setStatusAsNotFound(response);
+			return;
+		}
+		e.enable();
+		wMapper.delete(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
 

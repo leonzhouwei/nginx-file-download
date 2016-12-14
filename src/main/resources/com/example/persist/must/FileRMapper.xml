@@ -19,7 +19,7 @@
 		<result property="fileServiceGroupId" column="file_service_group_id" />
 	</resultMap>
 
-	<select id="selectAll" resultMap="resultMap">
+	<select id="selectAllEnabled" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file
@@ -27,21 +27,21 @@
 		ORDER BY created_at DESC, id DESC
 	</select>
 
-	<select id="selectAllIgnoreEnabled" resultMap="resultMap">
+	<select id="selectAll" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file
 		ORDER BY created_at DESC, id DESC
 	</select>
 
-	<select id="selectById" parameterType="long" resultMap="resultMap">
+	<select id="selectEnabledById" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file
 		WHERE id=#{id} AND enabled=1
 	</select>
 
-	<select id="selectByIdIgnoreEnabled" parameterType="long"
+	<select id="selectById" parameterType="long"
 		resultMap="resultMap">
 		SELECT
 		<include refid="columns" />

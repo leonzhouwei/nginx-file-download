@@ -33,7 +33,7 @@ public class DownloadTaskApi {
 	@RequestMapping(value = RouteDefine.API_I_DOWNLOAD_TASKS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		Long userId = LoginInterceptor.getAccountId(request);
-		List<DownloadTask> tasks = rMapper.selectByUserId(userId);
+		List<DownloadTask> tasks = rMapper.selectEnabledByUserId(userId);
 		HttpResponseTool.writeResponse(response, tasks);
 	}
 
@@ -45,7 +45,7 @@ public class DownloadTaskApi {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
 		}
-		File file = fileRMapper.selectById(id);
+		File file = fileRMapper.selectEnabledById(id);
 		if (file == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;

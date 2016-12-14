@@ -8,10 +8,14 @@ public interface DownloadTaskRMapper {
 	
 	public List<DownloadTask> selectAll();
 	
+	public List<DownloadTask> selectAllEnabled();
+	
 	public DownloadTask selectById(long id);
 	
-	public List<DownloadTask> selectByUserId(long userId);
+	public DownloadTask selectEnabledById(long id);
 	
-	public DownloadTask selectByUuid(String uuid);
+	public List<DownloadTask> selectEnabledByUserId(long userId);
+	
+	public DownloadTask selectEnabledByUuid(String uuid);
 
 }

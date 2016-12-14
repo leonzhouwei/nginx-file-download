@@ -15,8 +15,8 @@ import com.example.common.HttpRequestTool;
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
 import com.example.domain.Production;
-import com.example.persist.must.AdminProductionRMapper;
-import com.example.persist.must.AdminProductionWMapper;
+import com.example.persist.must.ProductionRMapper;
+import com.example.persist.must.ProductionWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
@@ -38,9 +38,9 @@ public class AdminWebGuiProductionController {
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
-	private AdminProductionRMapper rMapper;
+	private ProductionRMapper rMapper;
 	@Autowired
-	private AdminProductionWMapper wMapper;
+	private ProductionWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.GET)
 	public ModelAndView list() {

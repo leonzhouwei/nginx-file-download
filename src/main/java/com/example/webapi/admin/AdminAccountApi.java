@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpResponseTool;
 import com.example.domain.Account;
-import com.example.persist.must.AdminAccountRMapper;
-import com.example.persist.must.AdminAccountWMapper;
+import com.example.persist.must.AccountRMapper;
+import com.example.persist.must.AccountWMapper;
 import com.example.webapi.RouteDefine;
 
 @RestController
 public class AdminAccountApi {
 
 	@Autowired
-	private AdminAccountRMapper rMapper;
+	private AccountRMapper rMapper;
 	@Autowired
-	private AdminAccountWMapper wMapper;
+	private AccountWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {

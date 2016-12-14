@@ -2,12 +2,14 @@ package com.example.persist.must;
 
 import com.example.domain.Production;
 
-public interface AdminProductionWMapper {
+public interface ProductionWMapper {
 	
-	public Integer insert(Production p);
+	public void insert(Production p);
 	
 	public void update(Production p);
 	
 	public void updateEnabled(Production p);
+	
+	public void delete(Production p);
 
 }

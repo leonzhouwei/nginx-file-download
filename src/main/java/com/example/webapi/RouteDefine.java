@@ -28,7 +28,6 @@ public final class RouteDefine {
 	// -------------------------------------------------------------------------
 	public static final String API_I = API + "/i";
 	public static final String API_I_DOWNLOAD_TASKS = API_I + "/dld-tasks";
-	public static final String API_I_SD_CARD_ORDERS = API_I + "/sd-card-orders";
 
 	// -------------------------------------------------------------------------
 	public static final String API_ADMIN = API + ADMIN;
@@ -36,7 +35,6 @@ public final class RouteDefine {
 	public static final String API_ADMIN_FILES = API_ADMIN + "/files";
 	public static final String API_ADMIN_FILE_SERVICES = API_ADMIN + "/file-services";
 	public static final String API_ADMIN_FILE_SERVICE_GROUPS = API_ADMIN + "/fsgroups";
-	public static final String API_ADMIN_SD_CARD_ORDERS = API_ADMIN + "/sd-card-orders";
 	public static final String API_ADMIN_PRODUCTIONS = API_ADMIN + "/productions";
 	public static final String API_ADMIN_ACCOUNTS = API_ADMIN + "/accounts";
 
@@ -70,8 +68,6 @@ public final class RouteDefine {
 	// -------------------------------------------------------------------------
 	public static final String I = ROOT + "i";
 	public static final String I_DOWNLOAD_TASKS = I + "/dld-tasks";
-	public static final String I_SD_CARD_ORDERS = I + "/sd-card-orders";
-	public static final String I_SD_CARD_ORDERS_NEW = I_SD_CARD_ORDERS + "/new";
 
 	public static final String LOGIN = ROOT + "login";
 	public static final String LOGOUT = ROOT + "logout";

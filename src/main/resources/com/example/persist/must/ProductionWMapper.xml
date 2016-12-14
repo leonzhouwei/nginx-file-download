@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.persist.must.AdminProductionWMapper">
+<mapper namespace="com.example.persist.must.ProductionWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.Production">
 		INSERT INTO production
@@ -9,7 +9,8 @@
 		description, dir)
 		VALUES
 		(#{createdAt}, #{updatedAt}, #{enabled},
-		#{name}, #{description}, #{dir});
+		#{name}, #{description},
+		#{dir});
 	</insert>
 
 	<update id="update" parameterType="com.example.domain.Production">
@@ -27,5 +28,10 @@
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
+
+	<delete id="delete" parameterType="com.example.domain.Production">
+		DELETE FROM production
+		WHERE id=#{id}
+	</delete>
 
 </mapper>

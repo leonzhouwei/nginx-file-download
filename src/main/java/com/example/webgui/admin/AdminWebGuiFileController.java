@@ -74,11 +74,6 @@ public class AdminWebGuiFileController {
 		if (Strings.isNullOrEmpty(name)) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		final Double sdCardPriceYuan = HttpRequestTool
-				.extractPriceYuan(request);
-		if (sdCardPriceYuan == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
 		final Long productionId = HttpRequestTool.extractLong(request,
 				PRODUCTION);
 		if (productionId == null) {
@@ -129,7 +124,7 @@ public class AdminWebGuiFileController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		File e = rMapper.selectByIdIgnoreEnabled(id);
+		File e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -148,7 +143,7 @@ public class AdminWebGuiFileController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response,
 					HttpRequestTool.ID);
 		}
-		File e = rMapper.selectByIdIgnoreEnabled(id);
+		File e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response,
 					"file not found");
@@ -205,7 +200,7 @@ public class AdminWebGuiFileController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		File e = rMapper.selectByIdIgnoreEnabled(id);
+		File e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -222,7 +217,7 @@ public class AdminWebGuiFileController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		File e = rMapper.selectByIdIgnoreEnabled(id);
+		File e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -239,7 +234,7 @@ public class AdminWebGuiFileController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		File e = rMapper.selectByIdIgnoreEnabled(id);
+		File e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -256,7 +251,7 @@ public class AdminWebGuiFileController {
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		File e = rMapper.selectByIdIgnoreEnabled(id);
+		File e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}

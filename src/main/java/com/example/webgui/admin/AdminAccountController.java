@@ -14,8 +14,8 @@ import com.example.common.ModelAndViewTool;
 import com.example.common.Sha2Encoder;
 import com.example.config.AppConfig;
 import com.example.domain.Account;
-import com.example.persist.must.AdminAccountRMapper;
-import com.example.persist.must.AdminAccountWMapper;
+import com.example.persist.must.AccountRMapper;
+import com.example.persist.must.AccountWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 
@@ -32,9 +32,9 @@ public class AdminAccountController {
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
-	private AdminAccountWMapper wMapper;
+	private AccountRMapper rMapper;
 	@Autowired
-	private AdminAccountRMapper rMapper;
+	private AccountWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS, method = RequestMethod.GET)
 	public ModelAndView list() {

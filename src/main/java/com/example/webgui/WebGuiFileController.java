@@ -1,7 +1,5 @@
 package com.example.webgui;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,20 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.common.DateTimeTool;
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
 import com.example.domain.File;
 import com.example.persist.must.FileRMapper;
 import com.example.webapi.RouteDefine;
-import com.google.common.collect.Maps;
 
 @Controller
 public class WebGuiFileController {
 
 	static final String VIEW_NAME_PREFIX = "file/";
-	static final String VIEW_NAME_DETAIL = VIEW_NAME_PREFIX
-			+ WebGuiDefine.DETAIL;
+	static final String VIEW_NAME_DETAIL = VIEW_NAME_PREFIX + WebGuiDefine.DETAIL;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 
 	@Autowired
@@ -33,36 +28,18 @@ public class WebGuiFileController {
 	@Autowired
 	private FileRMapper rMapper;
 
-	static Map<String, Object> toMap(File file) {
-		Map<String, Object> ret = Maps.newHashMap();
-		ret.put("id", file.getId());
-		ret.put("name", file.getName());
-		ret.put("size", file.getSize());
-		ret.put("sizeMb", file.getSize() / 1024 / 1024);
-		ret.put("createdAt", DateTimeTool.toLocal(file.getCreatedAt()));
-		ret.put("md", file.getMd());
-		return ret;
-	}
-
-	static void addAllObjects(ModelAndView mav, File e) {
-		mav.addAllObjects(toMap(e));
-	}
-
 	@RequestMapping(value = RouteDefine.FILES, method = RequestMethod.GET)
 	public ModelAndView list() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.FILES + "/{id}", method = RequestMethod.GET)
-	public ModelAndView getById(HttpServletRequest request,
-			@PathVariable String id, HttpServletResponse response) {
-		File file = rMapper.selectById(Long.parseLong(id));
+	public ModelAndView getById(HttpServletRequest request, @PathVariable String id, HttpServletResponse response) {
+		File file = rMapper.selectEnabledById(Long.parseLong(id));
 		if (file == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_DETAIL);
-		addAllObjects(ret, file);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DETAIL, file);
 		return ret;
 	}
 

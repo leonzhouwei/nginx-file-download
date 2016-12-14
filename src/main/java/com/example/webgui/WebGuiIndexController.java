@@ -38,7 +38,7 @@ public class WebGuiIndexController {
 			return null;
 		}
 		
-		Account account = accoutRMapper.selectById(id);
+		Account account = accoutRMapper.selectEnabledById(id);
 		if (account.isAdmin()) {
 			return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_INDEX);
 		}
