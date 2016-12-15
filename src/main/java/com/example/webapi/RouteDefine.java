@@ -42,6 +42,7 @@ public final class RouteDefine {
 	public static final String ADMIN_ACCOUNTS = ADMIN + "/accounts";
 	public static final String ADMIN_ACCOUNTS_NEW = ADMIN_ACCOUNTS + "/new";
 	public static final String ADMIN_ACCOUNTS_EDIT = ADMIN_ACCOUNTS + "/edit";
+	public static final String ADMIN_ACCOUNTS_EDIT_PASSWORD = ADMIN_ACCOUNTS + "/edit-pswd";
 	
 	public static final String ADMIN_DOWNLOAD_TASKS = ADMIN + "/dld-tasks";
 	

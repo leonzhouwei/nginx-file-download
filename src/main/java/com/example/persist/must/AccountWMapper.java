@@ -12,4 +12,6 @@ public interface AccountWMapper {
 
 	public void delete(Account account);
 
+	public void updatePassword(Account account);
+
 }

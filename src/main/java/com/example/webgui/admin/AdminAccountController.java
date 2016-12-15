@@ -29,6 +29,7 @@ public class AdminAccountController {
 	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX + WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
+	static final String VIEW_NAME_ADMIN_ACCOUNTS_EDIT_PASSWORD = VIEW_NAME_PREFIX + "edit-pswd";
 
 	@Autowired
 	private AppConfig appConfig;
@@ -83,6 +84,9 @@ public class AdminAccountController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		Account account = rMapper.selectById(id);
+		if (account == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
 		String name = HttpRequestTool.extractName(request);
 		String rawPassword = request.getParameter("password");
 		if (!Strings.isNullOrEmpty(rawPassword)) {
@@ -96,6 +100,37 @@ public class AdminAccountController {
 		account.resetUpdatedAt();
 		account.setEnabled(enabled);
 		wMapper.update(account);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_ACCOUNTS);
+	}
+
+	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_EDIT_PASSWORD, method = RequestMethod.GET)
+	public ModelAndView gotoEditPassword(HttpServletRequest request, HttpServletResponse response) {
+		final Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		Account account = rMapper.selectById(id);
+		if (account == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_ACCOUNTS_EDIT_PASSWORD, account);
+	}
+	
+	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_EDIT_PASSWORD, method = RequestMethod.POST)
+	public ModelAndView editPassword(HttpServletRequest request, HttpServletResponse response) {
+		final Long id = HttpRequestTool.extractId(request);
+		if (id == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		Account account = rMapper.selectById(id);
+		if (account == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		String newRawPassword = request.getParameter("password");
+		String newPassword = Sha2Encoder.encode(newRawPassword);
+		account.setPassword(newPassword);
+		account.resetUpdatedAt();
+		wMapper.updatePassword(account);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_ACCOUNTS);
 	}
 

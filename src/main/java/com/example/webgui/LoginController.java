@@ -24,13 +24,12 @@ import com.example.webapi.RouteDefine;
 @Controller
 public class LoginController {
 
-	static final String PASSWORD = "username";
-	static final String USERNAME = "password";
+	static final String PASSWORD = "password";
+	static final String USERNAME = "username";
 
 	static final String VIEW_NAME_LOGIN = "login";
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private AppConfig appConfig;
@@ -43,12 +42,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.POST)
-	public void login(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		if (LoginInterceptor.sessionIdExist(request)) {
 			response.sendRedirect(RouteDefine.FILES);
-			logger.info(LoginInterceptor.getSessionId(request)
-					+ " has already signed in");
+			logger.info(LoginInterceptor.getSessionId(request) + " has already signed in");
 			return;
 		}
 		String username = request.getParameter(USERNAME);
@@ -68,8 +65,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = RouteDefine.LOGOUT)
-	public void logout(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		if (LoginInterceptor.sessionIdExist(request)) {
 			LoginInterceptor.removeSessionId(request);
 		}

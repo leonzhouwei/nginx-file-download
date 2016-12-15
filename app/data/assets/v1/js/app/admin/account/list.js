@@ -37,6 +37,9 @@ function initTable(result) {
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
 		// ----------
 		buffer.push('<td>');
+		buffer.push('<a href="/admin/accounts/edit-pswd/?id=', id,
+				'" class="btn btn-primary btn-xs">修改密码</a>');
+		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
 		buffer.push('<a href="/admin/accounts/edit/?id=', id,
 				'" class="btn btn-primary btn-xs">编辑</a>');
 		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');

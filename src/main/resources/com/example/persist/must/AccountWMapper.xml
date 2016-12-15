@@ -30,6 +30,14 @@
 		WHERE id=#{id}
 	</update>
 
+	<update id="updatePassword" parameterType="com.example.domain.Account">
+		UPDATE account
+		SET
+		password=#{password},
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
+
 	<delete id="delete" parameterType="com.example.domain.Account">
 		DELETE FROM account WHERE
 		id=#{id}
