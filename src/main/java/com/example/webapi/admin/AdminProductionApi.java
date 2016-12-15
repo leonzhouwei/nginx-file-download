@@ -42,7 +42,7 @@ public class AdminProductionApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/disable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/actions/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));
@@ -55,7 +55,7 @@ public class AdminProductionApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/enable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/actions/enable", method = RequestMethod.POST)
 	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));

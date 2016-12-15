@@ -26,7 +26,7 @@ function initTable(result) {
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td>', elem['md'], '</td>');
 		buffer.push('<td><a href="', API_ROUTE_PREFIX, '/fsgroups/',
-				elem['fileServiceGroupId'], '/download/', elem['name'],
+				elem['fileServiceGroupId'], '/actions/download/', elem['name'],
 				'?fileId=', id, '&uuid=', UUID.generate(),
 				'" class="btn btn-primary btn-xs">下载</a></td>');
 

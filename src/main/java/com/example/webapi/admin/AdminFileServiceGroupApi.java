@@ -31,7 +31,7 @@ public class AdminFileServiceGroupApi {
 		HttpResponseTool.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICE_GROUPS + "/{id}/disable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICE_GROUPS + "/{id}/actions/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		FileServiceGroup e = rMapper.selectById(id);
 		if (e == null) {
@@ -43,7 +43,7 @@ public class AdminFileServiceGroupApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICE_GROUPS + "/{id}/enable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICE_GROUPS + "/{id}/actions/enable", method = RequestMethod.POST)
 	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		FileServiceGroup e = rMapper.selectById(id);
 		if (e == null) {

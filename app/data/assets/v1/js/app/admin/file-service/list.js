@@ -54,7 +54,7 @@ function initTable(result) {
 }
 
 function disable(id) {
-	doDisable(id, function(data) {
+	service.disable(id, function(data) {
 		showAppModelForOk();
 		init();
 	});
@@ -62,13 +62,6 @@ function disable(id) {
 
 function enable(id) {
 	service.enable(id, function(data) {
-		showAppModelForOk();
-		init();
-	});
-}
-
-function disable(id) {
-	service.disable(id, function(data) {
 		showAppModelForOk();
 		init();
 	});

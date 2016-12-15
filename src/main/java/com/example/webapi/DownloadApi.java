@@ -143,7 +143,7 @@ public class DownloadApi {
 	}
 
 	@RequestMapping(RouteDefine.API_FILE_SERVICE_GROUPS
-			+ "/{fsGroupId}/download/**")
+			+ "/{fsGroupId}/actions/download/**")
 	public void downloadWithAuth(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException,
 			UnknownHostException {

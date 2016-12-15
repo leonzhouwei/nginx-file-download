@@ -31,7 +31,7 @@ public class AdminFileApi {
 		HttpResponseTool.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/disable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
 		File e = rMapper.selectById(id);
@@ -44,7 +44,7 @@ public class AdminFileApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/enable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/enable", method = RequestMethod.POST)
 	public void enable(HttpServletRequest request,
 			HttpServletResponse response, @PathVariable Long id) {
 		File e = rMapper.selectById(id);

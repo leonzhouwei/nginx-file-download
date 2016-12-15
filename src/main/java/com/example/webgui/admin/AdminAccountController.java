@@ -18,6 +18,7 @@ import com.example.persist.must.AccountRMapper;
 import com.example.persist.must.AccountWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
+import com.google.common.base.Strings;
 
 @Controller
 public class AdminAccountController {
@@ -82,16 +83,15 @@ public class AdminAccountController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		Account account = rMapper.selectById(id);
-		if (account == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
 		String name = HttpRequestTool.extractName(request);
 		String rawPassword = request.getParameter("password");
-		String cipher = Sha2Encoder.encode(rawPassword);
+		if (!Strings.isNullOrEmpty(rawPassword)) {
+			String cipher = Sha2Encoder.encode(rawPassword);
+			account.setPassword(cipher);
+		}
 		Long role = HttpRequestTool.extractLong(request, "role");
 		Boolean enabled = HttpRequestTool.extractEnabled(request);
 		account.setName(name);
-		account.setPassword(cipher);
 		account.setRoleId(role);
 		account.resetUpdatedAt();
 		account.setEnabled(enabled);

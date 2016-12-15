@@ -3,9 +3,9 @@ package com.example.domain;
 public class Production extends Base {
 	
 	private Long id;
-	private String name;
-	private String description;
-	private String dir;
+	private String name = EMPTY_STRING;
+	private String description = EMPTY_STRING;
+	private String dir = EMPTY_STRING;
 	
 	public Long getId() {
 		return id;
@@ -21,7 +21,7 @@ public class Production extends Base {
 
 	public void setDescription(String description) {
 		if (description == null) {
-			this.description = EMPTY_STRING;
+			description = EMPTY_STRING;
 		}
 		this.description = description;
 	}
@@ -36,6 +36,9 @@ public class Production extends Base {
 	}
 
 	public void setName(String name) {
+		if (name == null) {
+			name = EMPTY_STRING;
+		}
 		this.name = name;
 	}
 	
@@ -49,6 +52,9 @@ public class Production extends Base {
 	}
 
 	public void setDir(String dir) {
+		if (dir == null) {
+			dir = EMPTY_STRING;
+		}
 		this.dir = dir;
 	}
 

@@ -31,7 +31,7 @@ public class AdminAccountApi {
 		HttpResponseTool.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/enable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/actions/enable", method = RequestMethod.POST)
 	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		Account account = rMapper.selectById(id);
 		if (account == null) {
@@ -43,7 +43,7 @@ public class AdminAccountApi {
 		HttpResponseTool.writeResponse(response, account);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/disable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/actions/disable", method = RequestMethod.POST)
 	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		Account account = rMapper.selectById(id);
 		if (account == null) {
@@ -55,7 +55,7 @@ public class AdminAccountApi {
 		HttpResponseTool.writeResponse(response, account);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/delete", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/actions/delete", method = RequestMethod.POST)
 	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
 		Account account = rMapper.selectById(id);
 		if (account == null) {
