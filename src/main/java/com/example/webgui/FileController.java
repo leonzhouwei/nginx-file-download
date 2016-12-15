@@ -17,7 +17,7 @@ import com.example.persist.must.FileRMapper;
 import com.example.webapi.RouteDefine;
 
 @Controller
-public class WebGuiFileController {
+public class FileController {
 
 	static final String VIEW_NAME_PREFIX = "file/";
 	static final String VIEW_NAME_DETAIL = VIEW_NAME_PREFIX + WebGuiDefine.DETAIL;
@@ -34,8 +34,8 @@ public class WebGuiFileController {
 	}
 
 	@RequestMapping(value = RouteDefine.FILES + "/{id}", method = RequestMethod.GET)
-	public ModelAndView getById(HttpServletRequest request, @PathVariable String id, HttpServletResponse response) {
-		File file = rMapper.selectEnabledById(Long.parseLong(id));
+	public ModelAndView getById(HttpServletRequest request, @PathVariable Long id, HttpServletResponse response) {
+		File file = rMapper.selectEnabledById(id);
 		if (file == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}

@@ -11,7 +11,7 @@ import com.example.config.AppConfig;
 import com.example.webapi.RouteDefine;
 
 @Controller
-public class WebGuiDownloadTaskController {
+public class DownloadTaskController {
 
 	static final String VIEW_NAME_PREFIX = "dld-task/";
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;

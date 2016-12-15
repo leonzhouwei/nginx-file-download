@@ -15,24 +15,18 @@ import com.example.common.HttpRequestTool;
 import com.example.common.ModelAndViewTool;
 import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
-import com.example.domain.FileService;
 import com.example.domain.FileServiceGroup;
 import com.example.persist.must.FileServiceGroupRMapper;
-import com.example.persist.must.FileServiceRMapper;
-import com.example.persist.must.FileServiceWMapper;
+import com.example.persist.must.FileServiceGroupWMapper;
 import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
 
 @Controller
-public class AdminWebGuiFileServiceController {
-
-	static final String GROUPS = "groups";
-	static final String HOST = "host";
-	static final String GROUP_ID = "groupId";
+public class AdminFileServiceGroupController {
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
-			+ "/file-service/";
+			+ "/file-service-group/";
 	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
 			+ WebGuiDefine.DISABLE;
 	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
@@ -42,53 +36,46 @@ public class AdminWebGuiFileServiceController {
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(AdminWebGuiFileServiceController.class);
+			.getLogger(AdminFileServiceGroupController.class);
 
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
-	private FileServiceRMapper rMapper;
+	private FileServiceGroupRMapper rMapper;
 	@Autowired
-	private FileServiceWMapper wMapper;
-	@Autowired
-	private FileServiceGroupRMapper fsgRMapper;
+	private FileServiceGroupWMapper wMapper;
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.GET)
 	public ModelAndView list() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_NEW, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_NEW, method = RequestMethod.GET)
 	public ModelAndView gotoNew() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request,
 			HttpServletResponse response) {
-		String name = request.getParameter("name");
-		String host = request.getParameter(HOST);
-		logger.debug("host: " + host);
-		String groupIdStr = request.getParameter(GROUP_ID);
-		logger.debug("group id: " + groupIdStr);
-		FileService e = new FileService();
+		String name = HttpRequestTool.extractName(request);
+		logger.debug("name: " + name);
+		FileServiceGroup e = new FileServiceGroup();
 		e.reset();
 		e.setName(name);
-		e.setHost(host);
-		e.setGroupId(Long.parseLong(groupIdStr));
 		wMapper.insert(e);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILE_SERVICES);
+				RouteDefine.ADMIN_FILE_SERVICE_GROUPS);
 	}
-	
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_EDIT, method = RequestMethod.GET)
+
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_EDIT, method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request,
 			HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileService e = rMapper.selectById(id);
+		FileServiceGroup e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
@@ -97,29 +84,21 @@ public class AdminWebGuiFileServiceController {
 		ret.getModel().putAll(ReflectTool.toMap(e));
 		return ret;
 	}
-	
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_EDIT, method = RequestMethod.POST)
+
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_EDIT, method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request,
 			HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileService e = rMapper.selectById(id);
+		FileServiceGroup e = rMapper.selectById(id);
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		String host = request.getParameter(HOST);
-		if (!Strings.isNullOrEmpty(host)) {
-			e.setHost(host);
-		}
-		Long groupId = HttpRequestTool.extractLong(request, GROUP_ID);
-		if (groupId != null) {
-			FileServiceGroup fsg = fsgRMapper.selectById(groupId);
-			if (fsg == null) {
-				return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-			}
-			e.setGroupId(groupId);
+		String name = request.getParameter(HttpRequestTool.NAME);
+		if (!Strings.isNullOrEmpty(name)) {
+			e.setName(name);
 		}
 		Boolean enabled = HttpRequestTool.extractEnabled(request);
 		if (enabled != null) {
@@ -128,7 +107,7 @@ public class AdminWebGuiFileServiceController {
 		e.resetUpdatedAt();
 		wMapper.update(e);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILE_SERVICES);
+						RouteDefine.ADMIN_FILE_SERVICE_GROUPS);
 	}
 
 }

@@ -12,7 +12,7 @@ import com.example.webapi.RouteDefine;
 import com.example.webgui.WebGuiDefine;
 
 @Controller
-public class AdminWebGuiDownloadTaskController {
+public class AdminDownloadTaskController {
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/dld-task/";
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;

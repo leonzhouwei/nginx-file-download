@@ -18,7 +18,7 @@ import com.example.persist.must.AccountRMapper;
 import com.example.webapi.RouteDefine;
 
 @Controller
-public class WebGuiIndexController {
+public class IndexController {
 
 	static final String ASSETS_VERSION = "ASSETS_VERSION";
 

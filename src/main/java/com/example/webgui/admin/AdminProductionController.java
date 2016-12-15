@@ -22,7 +22,7 @@ import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
 
 @Controller
-public class AdminWebGuiProductionController {
+public class AdminProductionController {
 
 	static final String DIR = "dir";
 
@@ -33,7 +33,7 @@ public class AdminWebGuiProductionController {
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
-	private static final Logger logger = LoggerFactory.getLogger(AdminWebGuiProductionController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminProductionController.class);
 
 	@Autowired
 	private AppConfig appConfig;

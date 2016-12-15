@@ -22,7 +22,7 @@ import com.example.persist.must.AccountRMapper;
 import com.example.webapi.RouteDefine;
 
 @Controller
-public class WebGuiLoginController {
+public class LoginController {
 
 	static final String PASSWORD = "username";
 	static final String USERNAME = "password";
@@ -30,7 +30,7 @@ public class WebGuiLoginController {
 	static final String VIEW_NAME_LOGIN = "login";
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(WebGuiLoginController.class);
+			.getLogger(LoginController.class);
 
 	@Autowired
 	private AppConfig appConfig;

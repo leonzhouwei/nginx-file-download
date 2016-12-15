@@ -28,7 +28,7 @@ import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
 
 @Controller
-public class AdminWebGuiFileController {
+public class AdminFileController {
 
 	static final String DIR = "dir";
 	static final String PRODUCTION = "production";
@@ -44,7 +44,7 @@ public class AdminWebGuiFileController {
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(AdminWebGuiFileController.class);
+			.getLogger(AdminFileController.class);
 
 	@Autowired
 	private AppConfig appConfig;
