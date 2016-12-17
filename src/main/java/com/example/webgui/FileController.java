@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
 import com.example.domain.File;
+import com.example.dto.FileDto;
 import com.example.persist.must.FileRMapper;
 import com.example.webapi.RouteDefine;
 
@@ -39,7 +40,8 @@ public class FileController {
 		if (file == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DETAIL, file);
+		FileDto dto = new FileDto(file);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DETAIL, dto);
 		return ret;
 	}
 
