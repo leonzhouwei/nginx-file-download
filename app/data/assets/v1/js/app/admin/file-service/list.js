@@ -24,7 +24,7 @@ function initTable(result) {
 
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
-		buffer.push('<td>', elem['groupId'], '</td>');
+		buffer.push('<td>', elem['group']['id'], '</td>');
 		buffer.push('<td>', elem['host'], '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>', enabled, '</td>');

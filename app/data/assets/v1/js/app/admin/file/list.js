@@ -26,11 +26,11 @@ function initTable(result) {
 		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>', elem['dir'], '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
-		buffer.push('<td>', elem['productionId'], '</td>');
+		buffer.push('<td>', elem['production']['id'], '</td>');
 		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td>', elem['md'], '</td>');
-		buffer.push('<td>', elem['fileServiceGroupId'], '</td>');
+		buffer.push('<td>', elem['fileServiceGroup']['id'], '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>', enabled, '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');

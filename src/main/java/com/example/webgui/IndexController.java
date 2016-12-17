@@ -39,7 +39,7 @@ public class IndexController {
 		}
 		
 		Account account = accoutRMapper.selectEnabledById(id);
-		if (account.isAdmin()) {
+		if (Account.isAdmin(account)) {
 			return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_INDEX);
 		}
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_INDEX);

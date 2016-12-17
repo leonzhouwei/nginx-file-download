@@ -13,10 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.common.HttpRequestTool;
 import com.example.common.ModelAndViewTool;
-import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.FileService;
 import com.example.domain.FileServiceGroup;
+import com.example.dto.FileServiceDto;
 import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileServiceRMapper;
 import com.example.persist.must.FileServiceWMapper;
@@ -25,7 +25,7 @@ import com.example.webgui.WebGuiDefine;
 import com.google.common.base.Strings;
 
 @Controller
-public class AdminServiceController {
+public class AdminFileServiceController {
 
 	static final String GROUPS = "groups";
 	static final String HOST = "host";
@@ -42,7 +42,7 @@ public class AdminServiceController {
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(AdminServiceController.class);
+			.getLogger(AdminFileServiceController.class);
 
 	@Autowired
 	private AppConfig appConfig;
@@ -92,9 +92,9 @@ public class AdminServiceController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
+		FileServiceDto dto = new FileServiceDto(e);
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_EDIT);
-		ret.getModel().putAll(ReflectTool.toMap(e));
+				VIEW_NAME_EDIT, dto);
 		return ret;
 	}
 	

@@ -115,7 +115,7 @@ public class AdminAccountController {
 		}
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_ACCOUNTS_EDIT_PASSWORD, account);
 	}
-	
+
 	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_EDIT_PASSWORD, method = RequestMethod.POST)
 	public ModelAndView editPassword(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);

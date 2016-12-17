@@ -14,11 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.common.HttpRequestTool;
 import com.example.common.JsonTool;
 import com.example.common.ModelAndViewTool;
-import com.example.common.ReflectTool;
 import com.example.config.AppConfig;
 import com.example.domain.File;
 import com.example.domain.FileServiceGroup;
 import com.example.domain.Production;
+import com.example.dto.FileDto;
 import com.example.persist.must.FileRMapper;
 import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileWMapper;
@@ -128,9 +128,9 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
+		FileDto dto = new FileDto(e);
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_EDIT);
-		ret.getModel().putAll(ReflectTool.toMap(e));
+				VIEW_NAME_EDIT, dto);
 		return ret;
 	}
 
@@ -204,9 +204,9 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
+		FileDto dto = new FileDto(e);
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_DISABLE);
-		ret.getModel().putAll(ReflectTool.toMap(e));
+				VIEW_NAME_DISABLE, dto);
 		return ret;
 	}
 
@@ -238,9 +238,9 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
+		FileDto dto = new FileDto(e);
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_ENABLE);
-		ret.getModel().putAll(ReflectTool.toMap(e));
+				VIEW_NAME_ENABLE, dto);
 		return ret;
 	}
 

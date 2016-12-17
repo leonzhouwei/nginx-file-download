@@ -25,10 +25,13 @@ function initTable(result) {
 		var id = elem['id'];
 		buffer.push('<td>', id, '</td>');
 		buffer.push('<td>');
-		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
-				elem['fileId'], '</a>');
+		
+		var fileId = elem['file']['id'];
+		buffer.push('<a href="/files/' + fileId + '" target="_blank">',
+				fileId, '</a>');
 		buffer.push('</td>');
-		buffer.push('<td>', elem['userId'], '</td>');
+		
+		buffer.push('<td>', elem['user']['id'], '</td>');
 		buffer.push('<td>', elem['clientIp'], '</td>');
 		var timeCostSeconds = parseInt(elem['timeCostMillis'] / 1000);
 		var hours = parseInt(timeCostSeconds / 3600);

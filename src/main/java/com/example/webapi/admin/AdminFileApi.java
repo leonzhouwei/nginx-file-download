@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpResponseTool;
 import com.example.domain.File;
+import com.example.dto.FileDto;
 import com.example.persist.must.FileRMapper;
 import com.example.persist.must.FileWMapper;
 import com.example.webapi.RouteDefine;
@@ -28,7 +29,8 @@ public class AdminFileApi {
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		List<File> list = rMapper.selectAll();
-		HttpResponseTool.writeResponse(response, list);
+		List<FileDto> dtos = FileDto.toList(list);
+		HttpResponseTool.writeResponse(response, dtos);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/disable", method = RequestMethod.POST)
@@ -41,7 +43,8 @@ public class AdminFileApi {
 		}
 		e.disable();
 		wMapper.disable(e);
-		HttpResponseTool.writeResponse(response, e);
+		FileDto dto = new FileDto(e);
+		HttpResponseTool.writeResponse(response, dto);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/enable", method = RequestMethod.POST)
@@ -54,7 +57,8 @@ public class AdminFileApi {
 		}
 		e.enable();
 		wMapper.enable(e);
-		HttpResponseTool.writeResponse(response, e);
+		FileDto dto = new FileDto(e);
+		HttpResponseTool.writeResponse(response, dto);
 	}
 	
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/delete", method = RequestMethod.POST)
@@ -66,7 +70,8 @@ public class AdminFileApi {
 			return;
 		}
 		wMapper.delete(e);
-		HttpResponseTool.writeResponse(response, e);
+		FileDto dto = new FileDto(e);
+		HttpResponseTool.writeResponse(response, dto);
 	}
 
 }

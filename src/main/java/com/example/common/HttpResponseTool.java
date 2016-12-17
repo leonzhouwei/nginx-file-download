@@ -46,7 +46,7 @@ public final class HttpResponseTool {
 			pw.write(json);
 			pw.close();
 		} catch (Exception e) {
-			logger.warn(e.getMessage());
+			logger.warn("", e);
 		}
 	}
 
@@ -60,7 +60,7 @@ public final class HttpResponseTool {
 			pw.write(json);
 			pw.close();
 		} catch (Exception e) {
-			logger.warn(e.getMessage());
+			logger.warn("", e);
 		}
 	}
 
@@ -70,7 +70,7 @@ public final class HttpResponseTool {
 			responseDto.setContent(t);
 			writeResponse(response, responseDto);
 		} catch (Exception e) {
-			logger.warn(e.getMessage());
+			logger.warn("", e);
 		}
 	}
 
@@ -97,7 +97,7 @@ public final class HttpResponseTool {
 			pw.write(json);
 			pw.close();
 		} catch (Exception e) {
-			logger.warn(e.getMessage());
+			logger.warn("", e);
 		}
 	}
 

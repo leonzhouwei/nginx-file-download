@@ -9,6 +9,10 @@ public class Account extends Base {
 	private String name;
 	private String password;
 	private Long roleId;
+	
+	public static boolean isAdmin(Account account) {
+		return account.getRoleId() == ROLE_ADMIN;
+	}
 
 	public static boolean isValidAccount(Account account) {
 		if (account == null || !account.getEnabled()) {
@@ -51,10 +55,6 @@ public class Account extends Base {
 		} else {
 			this.roleId = ROLE_NORMAL;
 		}
-	}
-
-	public boolean isAdmin() {
-		return roleId == ROLE_ADMIN;
 	}
 
 }

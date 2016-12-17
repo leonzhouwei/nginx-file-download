@@ -1,17 +1,20 @@
 package com.example.dto;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import com.example.common.DateTimeTool;
+import com.example.domain.Account;
 import com.example.domain.DownloadTask;
+import com.example.domain.File;
 import com.google.common.collect.Lists;
 
-public class DownloadTaskDto extends Base {
+public class DownloadTaskDto extends BaseDto {
 	
 	public Long id;
-	public AccountDto user;
-	public FileDto file;
+	public Account user;
+	public File file;
 	public String clientIp;
 	public String expiredAt;
 	public Long timeCostMillis;
@@ -20,6 +23,9 @@ public class DownloadTaskDto extends Base {
 	
 	public static List<DownloadTaskDto> toList(Collection<DownloadTask> c) {
 		List<DownloadTaskDto> ret = Lists.newArrayList();
+		if (c == null) {
+			return ret;
+		}
 		for (DownloadTask e : c) {
 			DownloadTaskDto dto = new DownloadTaskDto(e);
 			ret.add(dto);
@@ -34,14 +40,24 @@ public class DownloadTaskDto extends Base {
 	public DownloadTaskDto(DownloadTask e) {
 		super(e);
 		this.id = e.getId();
-		this.user = new AccountDto();
-		this.user.id = e.getUserId();
-		this.file = new FileDto();
-		this.file.id = e.getFileId();
+		this.user = new Account();
+		this.user.setId(e.getUserId());
+		this.file = new File();
+		this.file.setId(e.getFileId());
 		this.clientIp = e.getClientIp();
-		this.expiredAt = DateTimeTool.toIso8601(e.getExpiredAt());
+		
+		Date expiredAt = e.getExpiredAt();
+		if (expiredAt != null) {
+			this.expiredAt = DateTimeTool.toIso8601(expiredAt);
+		}
+		
 		this.timeCostMillis = e.getTimeCostMillis();
-		this.lastDldedAt = DateTimeTool.toIso8601(e.getLastDldedAt());
+		
+		Date lastDldedAt = e.getLastDldedAt();
+		if (lastDldedAt != null) {
+			this.lastDldedAt = DateTimeTool.toIso8601(lastDldedAt);
+		}
+		
 		this.uuid = e.getUuid();
 	}
 

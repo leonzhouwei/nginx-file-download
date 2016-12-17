@@ -7,7 +7,10 @@ function iso8601ToHuman(iso8601) {
 	if (ret.indexOf('T') > 0) {
 		ret = ret.replace('T', ' ');
 	}
-	return ret;
+	if (ret.indexOf('Z') > 0) {
+		ret = ret.replace('Z', ' ');
+	}
+	return ret + ' (UTC)';
 }
 
 function toHhmmddHuman(milliseconds) {
