@@ -21,8 +21,9 @@ function initTable(result) {
 		var hhmmss = toHhmmddHuman(elem['timeCostMillis']);
 		buffer.push('<td>', elem['id'], '</td>');
 		buffer.push('<td>');
-		buffer.push('<a href="/files/' + elem['fileId'] + '" target="_blank">',
-				elem['fileId'], '</a>');
+		var fileId = elem['file']['Id'];
+		buffer.push('<a href="/files/' + fileId + '" target="_blank">',
+				fileId, '</a>');
 		buffer.push('</td>');
 		buffer.push('<td>', elem['clientIp'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
