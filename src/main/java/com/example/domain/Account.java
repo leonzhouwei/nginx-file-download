@@ -11,6 +11,9 @@ public class Account extends Base {
 	private Long roleId;
 	
 	public static boolean isAdmin(Account account) {
+		if (account == null) {
+			return false;
+		}
 		return account.getRoleId() == ROLE_ADMIN;
 	}
 

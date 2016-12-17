@@ -7,7 +7,7 @@ app.data.dir=./app/data
 app.nginx.xAccelPrefix=/protected/
 
 ################################################################################
-app.ignoreCustomizedInterceptors=true
+app.ignoreCustomizedInterceptors=false
 app.download.history.disable=true
 
 ################################################################################
