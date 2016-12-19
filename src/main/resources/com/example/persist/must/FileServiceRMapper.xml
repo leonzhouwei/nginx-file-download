@@ -35,6 +35,7 @@
 		FROM file_service
 		WHERE group_id=#{groupId} AND host=#{host} AND
 		enabled=1
+		LIMIT 1
 	</select>
 
 	<select id="selectEnabledById" parameterType="long" resultMap="resultMap">
@@ -42,16 +43,18 @@
 		<include refid="columns" />
 		FROM file_service
 		WHERE enabled=1 AND id=#{id}
-		ORDER BY created_at DESC, id DESC
+		ORDER BY created_at DESC,
+		id DESC
+		LIMIT 1
 	</select>
 
-	<select id="selectById" parameterType="long"
-		resultMap="resultMap">
+	<select id="selectById" parameterType="long" resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM file_service
 		WHERE id=#{id}
 		ORDER BY created_at DESC, id DESC
+		LIMIT 1
 	</select>
 
 </mapper>
