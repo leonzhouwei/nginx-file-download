@@ -14,8 +14,4 @@ function AdminFileServiceService() {
 		$.post(ROUTE + id + '/actions/enable', func).fail(showAppModelForJqError);
 	}
 	
-	this.remove = function(id, func) {
-		$.post(ROUTE + id + '/actions/delete', func).fail(showAppModelForJqError);
-	}
-	
 }

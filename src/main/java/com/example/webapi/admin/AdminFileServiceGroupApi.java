@@ -55,16 +55,4 @@ public class AdminFileServiceGroupApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICE_GROUPS
-			+ "/{id}/actions/delete", method = RequestMethod.POST)
-	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		FileServiceGroup e = rMapper.selectById(id);
-		if (e == null) {
-			HttpResponseTool.setStatusAsNotFound(response);
-			return;
-		}
-		wMapper.delete(e);
-		HttpResponseTool.writeResponse(response, e);
-	}
-
 }

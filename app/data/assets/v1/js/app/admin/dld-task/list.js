@@ -47,12 +47,16 @@ function initTable(result) {
 				'm ', seconds, 's', '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
-		// ------------
+		var enabled = elem['enabled'];
 		buffer.push('<td>');
-		buffer.push('<a href="#" onclick="javascript:remove(' + id,
-				');" class="btn btn-danger btn-xs">删除</a>');
+		if (enabled == true) {
+			buffer.push('<a href="#" onclick="javascript:disable(' + id,
+					');" class="btn btn-warning btn-xs">停用</a>');
+		} else {
+			buffer.push('<a href=#" onclick="javascript:enable(' + id,
+					');" class="btn btn-success btn-xs">启用</a>');
+		}
 		buffer.push('</td>');
-		// ------------
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
 		$('#tbody').append(newRow);
@@ -68,13 +72,6 @@ function disable(id) {
 
 function enable(id) {
 	service.enable(id, function(data) {
-		showAppModelForOk();
-		init();
-	});
-}
-
-function remove(id) {
-	service.remove(id, function(data) {
 		showAppModelForOk();
 		init();
 	});

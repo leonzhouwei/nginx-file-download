@@ -8,8 +8,8 @@ public interface ProductionWMapper {
 	
 	public void update(Production p);
 	
-	public void updateEnabled(Production p);
+	public void enable(Production p);
 	
-	public void delete(Production p);
-
+	public void disable(Production p);
+	
 }

@@ -59,16 +59,4 @@ public class AdminFileServiceApi {
 		HttpResponseTool.writeResponse(response, dto);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES + "/{id}/actions/delete", method = RequestMethod.POST)
-	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		FileService e = rMapper.selectById(id);
-		if (e == null) {
-			HttpResponseTool.setStatusAsNotFound(response);
-			return;
-		}
-		wMapper.delete(e);
-		FileServiceDto dto = new FileServiceDto(e);
-		HttpResponseTool.writeResponse(response, dto);
-	}
-
 }

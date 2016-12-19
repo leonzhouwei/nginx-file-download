@@ -8,9 +8,9 @@ public interface AccountWMapper {
 
 	public void update(Account account);
 
-	public void updateEnabled(Account account);
-
-	public void delete(Account account);
+	public void enable(Account account);
+	
+	public void disable(Account account);
 
 	public void updatePassword(Account account);
 

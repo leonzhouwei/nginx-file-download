@@ -39,9 +39,4 @@
 		WHERE id=#{id}
 	</update>
 	
-	<delete id="delete" parameterType="com.example.domain.File">
-		DELETE FROM file
-		WHERE id=#{id}
-	</delete>
-	
 </mapper>

@@ -33,15 +33,29 @@ public class AdminDownloadTaskApi {
 		HttpResponseTool.writeResponse(response, dtos);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/delete", method = RequestMethod.POST)
-	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		DownloadTask task = rMapper.selectById(id);
-		if (task == null) {
+	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/disable", method = RequestMethod.POST)
+	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		DownloadTask e = rMapper.selectById(id);
+		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return;
 		}
-		wMapper.delete(task);
-		DownloadTaskDto dto = new DownloadTaskDto(task); 
+		e.disable();
+		wMapper.disable(e);
+		DownloadTaskDto dto = new DownloadTaskDto(e);
+		HttpResponseTool.writeResponse(response, dto);
+	}
+
+	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/enable", method = RequestMethod.POST)
+	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+		DownloadTask e = rMapper.selectById(id);
+		if (e == null) {
+			HttpResponseTool.setStatusAsNotFound(response);
+			return;
+		}
+		e.enable();
+		wMapper.enable(e);
+		DownloadTaskDto dto = new DownloadTaskDto(e);
 		HttpResponseTool.writeResponse(response, dto);
 	}
 

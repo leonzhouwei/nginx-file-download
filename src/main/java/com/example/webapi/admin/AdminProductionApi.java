@@ -51,7 +51,7 @@ public class AdminProductionApi {
 			return;
 		}
 		e.disable();
-		wMapper.updateEnabled(e);
+		wMapper.disable(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
 
@@ -64,20 +64,7 @@ public class AdminProductionApi {
 			return;
 		}
 		e.enable();
-		wMapper.updateEnabled(e);
-		HttpResponseTool.writeResponse(response, e);
-	}
-
-	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/actions/delete", method = RequestMethod.POST)
-	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		Production e = rMapper.selectById(id);
-		logger.debug(JsonTool.toJson(e));
-		if (e == null) {
-			HttpResponseTool.setStatusAsNotFound(response);
-			return;
-		}
-		e.enable();
-		wMapper.delete(e);
+		wMapper.enable(e);
 		HttpResponseTool.writeResponse(response, e);
 	}
 

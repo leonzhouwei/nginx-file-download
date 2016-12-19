@@ -11,7 +11,5 @@ public interface FileServiceGroupWMapper {
 	public void disable(FileServiceGroup e);
 	
 	public void update(FileServiceGroup e);
-	
-	public void delete(FileServiceGroup e);
 
 }

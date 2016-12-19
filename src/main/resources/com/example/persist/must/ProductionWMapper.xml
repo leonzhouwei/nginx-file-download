@@ -21,17 +21,18 @@
 		WHERE id=#{id}
 	</update>
 
-	<update id="updateEnabled" parameterType="com.example.domain.Production">
+	<update id="enable" parameterType="com.example.domain.Production">
 		UPDATE production
 		SET
-		enabled=#{enabled},
-		updated_at=#{updatedAt}
+		enabled=1, updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
-
-	<delete id="delete" parameterType="com.example.domain.Production">
-		DELETE FROM production
+	
+	<update id="disable" parameterType="com.example.domain.Production">
+		UPDATE production
+		SET
+		enabled=0, updated_at=#{updatedAt}
 		WHERE id=#{id}
-	</delete>
+	</update>
 
 </mapper>

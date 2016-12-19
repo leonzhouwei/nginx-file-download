@@ -28,10 +28,5 @@
 		SET updated_at=#{updatedAt}, enabled=#{enabled}, name=#{name}
 		WHERE id=#{id}
 	</update>
-	
-	<delete id="delete" parameterType="com.example.domain.FileServiceGroup">
-		DELETE FROM file_service_group
-		WHERE id=#{id}
-	</delete>
 
 </mapper>

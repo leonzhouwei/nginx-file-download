@@ -47,9 +47,6 @@ function initTable(result) {
 			buffer.push('<a href="#" onclick="javascript:enable(' + id,
 					');" class="btn btn-success btn-xs">启用</a>');
 		}
-		buffer.push('&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
-		buffer.push('<a href="#" onclick="javascript:remove(' + id,
-		');" class="btn btn-danger btn-xs">删除</a>');
 		buffer.push('</td>');
 		// ----------
 		buffer.push('</tr>');

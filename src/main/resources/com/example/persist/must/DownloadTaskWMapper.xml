@@ -4,27 +4,37 @@
 <mapper namespace="com.example.persist.must.DownloadTaskWMapper">
 
 	<insert id="insert" parameterType="com.example.domain.DownloadTask">
-	   INSERT INTO download_task
-	   (uuid, created_at, updated_at, enabled, user_id, file_id, client_ip, expired_at, time_cost_millis, last_dlded_at)
-	   VALUES
-	   (#{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{userId}, #{fileId}, #{clientIp}, #{expiredAt}, #{timeCostMillis}, #{lastDldedAt})
+		INSERT INTO download_task
+		(uuid, created_at, updated_at, enabled, user_id, file_id, client_ip,
+		expired_at, time_cost_millis, last_dlded_at)
+		VALUES
+		(#{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{userId}, #{fileId},
+		#{clientIp}, #{expiredAt}, #{timeCostMillis}, #{lastDldedAt})
 	</insert>
-	
+
 	<update id="updateTimeCostMillis" parameterType="com.example.domain.DownloadTask">
-	   UPDATE download_task 
-	   SET updated_at=#{updatedAt}, time_cost_millis=#{timeCostMillis} 
-	   WHERE id=#{id}
+		UPDATE download_task
+		SET updated_at=#{updatedAt}, time_cost_millis=#{timeCostMillis}
+		WHERE id=#{id}
 	</update>
-	
+
 	<update id="updateLastDldedAt" parameterType="com.example.domain.DownloadTask">
-       UPDATE download_task 
-       SET updated_at=#{updatedAt}, last_dlded_at=#{lastDldedAt}, time_cost_millis=#{timeCostMillis}  
-       WHERE id=#{id}
-    </update>
-    
-    <delete id="delete" parameterType="com.example.domain.DownloadTask">
-    	DELETE FROM download_task
-    	WHERE id=#{id}
-    </delete>
+		UPDATE download_task
+		SET updated_at=#{updatedAt}, last_dlded_at=#{lastDldedAt},
+		time_cost_millis=#{timeCostMillis}
+		WHERE id=#{id}
+	</update>
+
+	<update id="enable" parameterType="com.example.domain.DownloadTask">
+		UPDATE download_task
+		SET enabled=1, updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
+
+	<update id="disable" parameterType="com.example.domain.DownloadTask">
+		UPDATE download_task
+		SET enabled=0, updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
 
 </mapper>

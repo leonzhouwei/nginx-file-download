@@ -32,10 +32,5 @@
 		updated_at=#{updatedAt}, host=#{host}, group_id=#{groupId}
 		WHERE id=#{id}
 	</update>
-	
-	<delete id="delete" parameterType="com.example.domain.FileService">
-		DELETE FROM file_service
-		WHERE id=#{id}
-	</delete>
 
 </mapper>

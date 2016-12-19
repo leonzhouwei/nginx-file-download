@@ -22,10 +22,18 @@
 		WHERE id=#{id}
 	</update>
 
-	<update id="updateEnabled" parameterType="com.example.domain.Account">
+	<update id="enable" parameterType="com.example.domain.Account">
 		UPDATE account
 		SET
-		enabled=#{enabled},
+		enabled=1,
+		updated_at=#{updatedAt}
+		WHERE id=#{id}
+	</update>
+
+	<update id="disable" parameterType="com.example.domain.Account">
+		UPDATE account
+		SET
+		enabled=0,
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
@@ -37,10 +45,5 @@
 		updated_at=#{updatedAt}
 		WHERE id=#{id}
 	</update>
-
-	<delete id="delete" parameterType="com.example.domain.Account">
-		DELETE FROM account WHERE
-		id=#{id}
-	</delete>
 
 </mapper>

@@ -12,6 +12,4 @@ public interface FileServiceWMapper {
 	
 	public void update(FileService e);
 	
-	public void delete(FileService e);
-	
 }

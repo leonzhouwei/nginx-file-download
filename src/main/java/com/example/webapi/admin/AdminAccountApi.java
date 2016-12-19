@@ -39,7 +39,7 @@ public class AdminAccountApi {
 			return;
 		}
 		account.enable();
-		wMapper.updateEnabled(account);
+		wMapper.enable(account);
 		HttpResponseTool.writeResponse(response, account);
 	}
 
@@ -51,18 +51,7 @@ public class AdminAccountApi {
 			return;
 		}
 		account.disable();
-		wMapper.updateEnabled(account);
-		HttpResponseTool.writeResponse(response, account);
-	}
-
-	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/actions/delete", method = RequestMethod.POST)
-	public void delete(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
-		Account account = rMapper.selectById(id);
-		if (account == null) {
-			HttpResponseTool.setStatusAsNotFound(response);
-			return;
-		}
-		wMapper.delete(account);
+		wMapper.disable(account);
 		HttpResponseTool.writeResponse(response, account);
 	}
 

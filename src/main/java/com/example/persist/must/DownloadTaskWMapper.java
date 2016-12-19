@@ -9,7 +9,9 @@ public interface DownloadTaskWMapper {
 	public void updateTimeCostMillis(DownloadTask e);
 
 	public void updateLastDldedAt(DownloadTask e);
-
-	public void delete(DownloadTask e);
+	
+	public void enable(DownloadTask e);
+	
+	public void disable(DownloadTask e);
 
 }
