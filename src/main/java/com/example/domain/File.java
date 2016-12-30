@@ -6,9 +6,9 @@ public class File extends Base {
 	private String dir;
 	private String name;
 	private Long size;
-	private Long productionId;
 	private String md;
-	private Long fileServiceGroupId;
+	private Production production = new Production();
+	private FileServiceGroup fileServiceGroup = new FileServiceGroup();
 
 	public void resetBy(File another) {
 		super.resetBy(another);
@@ -16,7 +16,24 @@ public class File extends Base {
 		setDir(another.getDir());
 		setName(another.getName());
 		setSize(another.getSize());
-		setProductionId(another.getProductionId());
+		setProduction(another.getProduction());
+		setFileServiceGroup(another.getFileServiceGroup());
+	}
+
+	public Production getProduction() {
+		return production;
+	}
+
+	public void setProduction(Production production) {
+		this.production = production;
+	}
+
+	public FileServiceGroup getFileServiceGroup() {
+		return fileServiceGroup;
+	}
+
+	public void setFileServiceGroup(FileServiceGroup group) {
+		this.fileServiceGroup = group;
 	}
 
 	public Long getId() {
@@ -59,28 +76,12 @@ public class File extends Base {
 		setSize(sizeMb * 1024 * 1024);
 	}
 
-	public Long getProductionId() {
-		return productionId;
-	}
-
-	public void setProductionId(Long productionId) {
-		this.productionId = productionId;
-	}
-
 	public String getMd() {
 		return md;
 	}
 
 	public void setMd(String md) {
 		this.md = md;
-	}
-
-	public Long getFileServiceGroupId() {
-		return fileServiceGroupId;
-	}
-
-	public void setFileServiceGroupId(Long fileServiceGroupId) {
-		this.fileServiceGroupId = fileServiceGroupId;
 	}
 
 }

@@ -10,13 +10,13 @@
 		VALUES
 		(#{createdAt},
 		#{updatedAt}, #{enabled}, #{name}, #{password},
-		#{roleId})
+		#{role.id})
 	</insert>
 
 	<update id="update" parameterType="com.example.domain.Account">
 		UPDATE account
 		SET
-		name=#{name}, role_id=#{roleId},
+		name=#{name}, role_id=#{role.id},
 		enabled=#{enabled},
 		updated_at=#{updatedAt}
 		WHERE id=#{id}

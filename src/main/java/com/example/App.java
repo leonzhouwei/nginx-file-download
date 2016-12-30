@@ -41,8 +41,7 @@ public class App {
 		logger.info("version: " + Version.VERSION);
 		logger.info("static assests home: " + appConfig.getAssetsHome());
 		String pid = System.getProperty("PID");
-		String pidFilePath = AppConfig.CURRENT_WORKING_DIR
-				+ AppConfig.FILE_SEPARATOR + appConfig.getWorkDirPath()
+		String pidFilePath = AppConfig.CURRENT_WORKING_DIR + AppConfig.FILE_SEPARATOR + appConfig.getWorkDirPath()
 				+ AppConfig.FILE_SEPARATOR + "app.pid";
 		File pidFile = new File(pidFilePath);
 		if (!pidFile.getParentFile().exists()) {
@@ -51,16 +50,15 @@ public class App {
 		Files.write(pid, pidFile, StandardCharsets.UTF_8);
 		logger.info("uuid: " + AppConfig.APP_UUID);
 		logger.info("process id: " + pid);
-		logger.info("current working directory: '"
-				+ AppConfig.CURRENT_WORKING_DIR + "'");
+		logger.info("current working directory: '" + AppConfig.CURRENT_WORKING_DIR + "'");
 		logger.info("----- Status Info  END  ----- ");
 	}
 }
 
-//@Configuration
-//@ImportResource("/spring/applicationContext.xml")
-//class XmlImportingConfiguration {
-//}
+// @Configuration
+// @ImportResource("/spring/applicationContext.xml")
+// class XmlImportingConfiguration {
+// }
 
 // public EmbeddedServletContainerFactory servletContainer()
 // throws UnknownHostException {

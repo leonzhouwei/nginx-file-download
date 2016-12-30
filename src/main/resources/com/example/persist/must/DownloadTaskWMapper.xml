@@ -8,7 +8,7 @@
 		(uuid, created_at, updated_at, enabled, user_id, file_id, client_ip,
 		expired_at, time_cost_millis, last_dlded_at)
 		VALUES
-		(#{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{userId}, #{fileId},
+		(#{uuid}, #{createdAt}, #{updatedAt}, #{enabled}, #{user.id}, #{file.id},
 		#{clientIp}, #{expiredAt}, #{timeCostMillis}, #{lastDldedAt})
 	</insert>
 

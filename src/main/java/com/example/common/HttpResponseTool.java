@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.serializer.ValueFilter;
 
 public final class HttpResponseTool {
 
@@ -24,6 +26,20 @@ public final class HttpResponseTool {
 	static final String CSS_CONTENT_TYPE = "text/css";
 	static final String JAVASCRIPT_CONTENT_TYPE = "text/javascript";
 	static final String IMAGE_CONTENT_TYPE = "image";
+	
+	static class FastJsonValueFilter implements ValueFilter {
+
+		@Override
+		public Object process(Object object, String name, Object value) {
+			if (value instanceof Date) {
+				value = DateTimeTool.toIso8601((Date) value);
+			}
+			return value;
+		}
+		
+	}
+
+	final static FastJsonValueFilter FASTJSON_VALUE_FILTER = new FastJsonValueFilter();
 
 	private static final int bufferSize = 1024;
 
@@ -49,12 +65,12 @@ public final class HttpResponseTool {
 			logger.warn("", e);
 		}
 	}
-
+	
 	public static <T> void writeResponse(HttpServletResponse response,
 			ResponseDto<T> responseDto) {
 		try {
 			String json = JSON.toJSONString(responseDto,
-					SerializerFeature.UseISO8601DateFormat);
+					FASTJSON_VALUE_FILTER, SerializerFeature.UseISO8601DateFormat);
 			setDefaultContentType(response);
 			PrintWriter pw = response.getWriter();
 			pw.write(json);

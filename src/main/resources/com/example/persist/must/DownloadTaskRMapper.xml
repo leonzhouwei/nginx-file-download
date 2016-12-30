@@ -8,16 +8,23 @@
 		client_ip, time_cost_millis, user_id
 	</sql>
 
-	<resultMap type="com.example.domain.DownloadTask" id="resultMap">
+	<resultMap id="resultMap" type="com.example.domain.DownloadTask">
+		<result property="enabled" column="enabled" />
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
-		<result property="userId" column="user_id" />
-		<result property="fileId" column="file_id" />
+		<result property="id" column="id" />
 		<result property="clientIp" column="client_ip" />
 		<result property="expiredAt" column="expired_at" />
 		<result property="timeCostMillis" column="time_cost_millis" />
 		<result property="lastDldedAt" column="last_dlded_at" />
+		<!-- -->
+		<association property="user" javaType="com.example.domain.Account">
+			<id property="id" column="user_id" />
+		</association>
+		<association property="file" javaType="com.example.domain.File">
+			<id property="id" column="file_id" />
+		</association>
 	</resultMap>
 
 	<select id="selectAll" resultMap="resultMap">
@@ -56,8 +63,9 @@
 		SELECT
 		<include refid="columns" />
 		FROM download_task
-		WHERE user_id=#{userId} AND enabled=1
-		ORDER BY created_at DESC, id DESC
+		WHERE user_id=#{user.id} AND enabled=1
+		ORDER BY
+		created_at DESC, id DESC
 	</select>
 
 	<select id="selectEnabledByUuid" parameterType="string"

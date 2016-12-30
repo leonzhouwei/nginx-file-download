@@ -58,7 +58,7 @@ public class AdminAccountController {
 		account.reset();
 		account.setName(name);
 		account.setPassword(cipher);
-		account.setRoleId(role);
+		account.getRole().setId(role);
 		wMapper.insert(account);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_ACCOUNTS);
 	}
@@ -96,7 +96,7 @@ public class AdminAccountController {
 		Long role = HttpRequestTool.extractLong(request, "role");
 		Boolean enabled = HttpRequestTool.extractEnabled(request);
 		account.setName(name);
-		account.setRoleId(role);
+		account.getRole().setId(role);
 		account.resetUpdatedAt();
 		account.setEnabled(enabled);
 		wMapper.update(account);

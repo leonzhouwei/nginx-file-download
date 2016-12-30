@@ -16,7 +16,6 @@ import com.example.common.ModelAndViewTool;
 import com.example.config.AppConfig;
 import com.example.domain.FileService;
 import com.example.domain.FileServiceGroup;
-import com.example.dto.FileServiceDto;
 import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileServiceRMapper;
 import com.example.persist.must.FileServiceWMapper;
@@ -75,7 +74,7 @@ public class AdminFileServiceController {
 		e.reset();
 		e.setName(name);
 		e.setHost(host);
-		e.setGroupId(Long.parseLong(groupIdStr));
+		e.getGroup().setId(Long.parseLong(groupIdStr));
 		wMapper.insert(e);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
 				RouteDefine.ADMIN_FILE_SERVICES);
@@ -92,9 +91,8 @@ public class AdminFileServiceController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileServiceDto dto = new FileServiceDto(e);
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_EDIT, dto);
+				VIEW_NAME_EDIT, e);
 		return ret;
 	}
 	
@@ -119,7 +117,7 @@ public class AdminFileServiceController {
 			if (fsg == null) {
 				return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 			}
-			e.setGroupId(groupId);
+			e.getGroup().setId(groupId);
 		}
 		Boolean enabled = HttpRequestTool.extractEnabled(request);
 		if (enabled != null) {

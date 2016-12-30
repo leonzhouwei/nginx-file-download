@@ -18,7 +18,6 @@ import com.example.config.AppConfig;
 import com.example.domain.File;
 import com.example.domain.FileServiceGroup;
 import com.example.domain.Production;
-import com.example.dto.FileDto;
 import com.example.persist.must.FileRMapper;
 import com.example.persist.must.FileServiceGroupRMapper;
 import com.example.persist.must.FileWMapper;
@@ -107,11 +106,11 @@ public class AdminFileController {
 		file.reset();
 		file.setDir(request.getParameter(DIR));
 		file.setName(name);
-		file.setProductionId(productionId);
+		file.getProduction().setId(productionId);
 		file.setSize((long) size.doubleValue());
 		file.setMd(md);
 		file.setEnabled(enabled);
-		file.setFileServiceGroupId(fsgId);
+		file.getFileServiceGroup().setId(fsgId);
 		wMapper.insert(file);
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
 				RouteDefine.ADMIN_FILES);
@@ -128,9 +127,8 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileDto dto = new FileDto(e);
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_EDIT, dto);
+				VIEW_NAME_EDIT, e);
 		return ret;
 	}
 
@@ -164,7 +162,7 @@ public class AdminFileController {
 				return ModelAndViewTool.newModelAndViewFor404(appConfig,
 						response, PRODUCTION);
 			}
-			e.setProductionId(productionId);
+			e.getProduction().setId(productionId);
 		}
 		final Double sizeMb = HttpRequestTool.extractSize(request);
 		if (sizeMb != null) {
@@ -185,7 +183,7 @@ public class AdminFileController {
 				return ModelAndViewTool.newModelAndViewFor404(appConfig,
 						response, FSG);
 			}
-			e.setFileServiceGroupId(fsgId);
+			e.getFileServiceGroup().setId(fsgId);
 		}
 		e.resetUpdatedAt();
 		wMapper.update(e);
@@ -204,9 +202,8 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileDto dto = new FileDto(e);
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_DISABLE, dto);
+				VIEW_NAME_DISABLE, e);
 		return ret;
 	}
 
@@ -238,9 +235,8 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		FileDto dto = new FileDto(e);
 		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_ENABLE, dto);
+				VIEW_NAME_ENABLE, e);
 		return ret;
 	}
 

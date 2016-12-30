@@ -156,9 +156,9 @@ public class DownloadApi {
 		if (task == null) {
 			task = new DownloadTask();
 			task.reset();
-			task.setFileId(result.file.getId());
+			task.getFile().setId(result.file.getId());
 			task.setClientIp(result.clientIp);
-			task.setUserId(LoginInterceptor.getAccountId(request));
+			task.getUser().setId(LoginInterceptor.getAccountId(request));
 			task.setUuid(result.taskUuid);
 			taskWMapper.insert(task);
 		} else {
@@ -216,13 +216,13 @@ public class DownloadApi {
 		}
 		// check the production
 		Production production = productionRMapper.selectEnabledById(file
-				.getProductionId());
+				.getProduction().getId());
 		if (production == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		// check the file service group
-		final long fileServiceGroupId = file.getFileServiceGroupId();
+		final long fileServiceGroupId = file.getFileServiceGroup().getId();
 		logger.info("file service group id: " + fileServiceGroupId);
 		FileServiceGroup fsg = fileServiceGroupRMapper
 				.selectEnabledById(fileServiceGroupId);
@@ -233,7 +233,7 @@ public class DownloadApi {
 		}
 		// check the file service
 		FileService params = new FileService();
-		params.setGroupId(fsg.getId());
+		params.getGroup().setId(fsg.getId());
 		params.setHost(host);
 		FileService fileService = fileServiceRMapper
 				.selectEnabledByGroupIdAndHost(params);

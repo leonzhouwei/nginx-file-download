@@ -7,8 +7,8 @@ import org.joda.time.DateTime;
 public class DownloadTask extends Base {
 
 	private Long id;
-	private Long userId;
-	private Long fileId;
+	private Account user = new Account();
+	private File file = new File();
 	private String clientIp;
 	private Date expiredAt;
 	private Long timeCostMillis;
@@ -22,6 +22,8 @@ public class DownloadTask extends Base {
 		setExpiredAt(expiredAt.toDate());
 		setTimeCostMillis(0L);
 		setLastDldedAt(getCreatedAt());
+		setUser(new Account());
+		setFile(new File());
 	}
 
 	public String getClientIp() {
@@ -33,14 +35,6 @@ public class DownloadTask extends Base {
 			clientIp = EMPTY_STRING;
 		}
 		this.clientIp = clientIp;
-	}
-
-	public Long getFileId() {
-		return fileId;
-	}
-
-	public void setFileId(Long fileId) {
-		this.fileId = fileId;
 	}
 
 	public Date getExpiredAt() {
@@ -83,12 +77,20 @@ public class DownloadTask extends Base {
 		setTimeCostMillis(lastDldedAt.getTime() - getCreatedAt().getTime());
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Account getUser() {
+		return user;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(Account user) {
+		this.user = user;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
 	}
 
 	public String getUuid() {

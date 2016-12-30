@@ -7,11 +7,17 @@
 		role_id
 	</sql>
 
-	<resultMap type="com.example.domain.Account" id="resultMap">
+	<resultMap id="resultMap" type="com.example.domain.Account">
+		<result property="enabled" column="enabled" />
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
-		<result property="roleId" column="role_id" />
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<!-- -->
+		<association property="role" javaType="com.example.domain.Role">
+			<id property="id" column="role_id" />
+		</association>
 	</resultMap>
 
 	<select id="selectEnabledById" parameterType="long" resultMap="resultMap">

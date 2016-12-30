@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpResponseTool;
 import com.example.domain.DownloadTask;
-import com.example.dto.DownloadTaskDto;
 import com.example.persist.must.DownloadTaskRMapper;
 import com.example.persist.must.DownloadTaskWMapper;
 import com.example.webapi.RouteDefine;
@@ -29,8 +28,7 @@ public class AdminDownloadTaskApi {
 	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS, method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		List<DownloadTask> tasks = rMapper.selectAll();
-		List<DownloadTaskDto> dtos = DownloadTaskDto.toList(tasks);
-		HttpResponseTool.writeResponse(response, dtos);
+		HttpResponseTool.writeResponse(response, tasks);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/disable", method = RequestMethod.POST)
@@ -42,8 +40,7 @@ public class AdminDownloadTaskApi {
 		}
 		e.disable();
 		wMapper.disable(e);
-		DownloadTaskDto dto = new DownloadTaskDto(e);
-		HttpResponseTool.writeResponse(response, dto);
+		HttpResponseTool.writeResponse(response, e);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/enable", method = RequestMethod.POST)
@@ -55,8 +52,7 @@ public class AdminDownloadTaskApi {
 		}
 		e.enable();
 		wMapper.enable(e);
-		DownloadTaskDto dto = new DownloadTaskDto(e);
-		HttpResponseTool.writeResponse(response, dto);
+		HttpResponseTool.writeResponse(response, e);
 	}
 
 }

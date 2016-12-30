@@ -8,6 +8,7 @@ CREATE TABLE account
   password VARCHAR(256) NOT NULL,
   role_id bigint NOT NULL
 );
+create index idx_account_name_pswd on account (name, password);
 
 CREATE TABLE download_task
 (

@@ -26,44 +26,44 @@ public class Base {
 		setEnabled(true);
 	}
 
-	public final Date getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public final void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public final void resetCreatedAt() {
+	public void resetCreatedAt() {
 		setCreatedAt(new Date());
 	}
 
-	public final Date getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public final void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public final void resetUpdatedAt() {
+	public void resetUpdatedAt() {
 		setUpdatedAt(new Date());
 	}
 
-	public final Boolean getEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 
-	public final void setEnabled(Boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 	
-	public final void enable() {
+	public void enable() {
 		setEnabled(true);
 		resetUpdatedAt();
 	}
 	
-	public final void disable() {
+	public void disable() {
 		setEnabled(false);
 		resetUpdatedAt();
 	}

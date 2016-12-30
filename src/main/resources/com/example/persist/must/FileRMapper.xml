@@ -12,11 +12,22 @@
 	</sql>
 
 	<resultMap type="com.example.domain.File" id="resultMap">
+		<result property="enabled" column="enabled" />
 		<result property="createdAt" column="created_at" />
 		<result property="updatedAt" column="updated_at" />
 		<!-- -->
-		<result property="productionId" column="production_id" />
-		<result property="fileServiceGroupId" column="file_service_group_id" />
+		<result property="id" column="id" />
+		<result property="dir" column="dir" />
+		<result property="name" column="name" />
+		<result property="size" column="size" />
+		<result property="md" column="md" />
+		<!-- -->
+		<association property="production" javaType="com.example.domain.Production">
+			<id property="id" column="production_id" />
+		</association>
+		<association property="fileServiceGroup" javaType="com.example.domain.FileServiceGroup">
+			<id property="id" column="file_service_group_id" />
+		</association>
 	</resultMap>
 
 	<select id="selectAllEnabled" resultMap="resultMap">

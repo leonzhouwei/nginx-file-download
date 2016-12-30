@@ -1,11 +1,16 @@
 package com.example.domain;
 
 public class FileService extends Base {
-	
+
 	private Long id;
 	private String host;
-	private Long groupId;
+	private FileServiceGroup group = new FileServiceGroup();
 	private String name;
+	
+	public void reset() {
+		super.reset();
+		setGroup(new FileServiceGroup());
+	}
 
 	public Long getId() {
 		return id;
@@ -23,20 +28,20 @@ public class FileService extends Base {
 		this.host = host;
 	}
 
-	public Long getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
-	} 
-	
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public FileServiceGroup getGroup() {
+		return group;
+	}
+
+	public void setGroup(FileServiceGroup group) {
+		this.group = group;
 	}
 
 }

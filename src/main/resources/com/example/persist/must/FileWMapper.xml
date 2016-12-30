@@ -11,7 +11,7 @@
 		VALUES
 		(#{createdAt},
 		#{updatedAt}, #{enabled}, #{dir}, #{name}, #{size}, #{md},
-		#{productionId}, #{fileServiceGroupId})
+		#{production.id}, #{fileServiceGroup.id})
 	</insert>
 
 	<update id="update" parameterType="com.example.domain.File">

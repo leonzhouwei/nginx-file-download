@@ -7,7 +7,7 @@
 		INSERT INTO file_service
 		(created_at, updated_at, enabled, name, host, group_id)
 		VALUES
-		(#{createdAt}, #{updatedAt}, #{enabled}, #{name}, #{host}, #{groupId});
+		(#{createdAt}, #{updatedAt}, #{enabled}, #{name}, #{host}, #{group.id});
 	</insert>
 
 	<update id="enable" parameterType="com.example.domain.FileService">
