@@ -9,6 +9,6 @@ JAR_BASE_NAME=nginx-file-download
 base_path=$(cd `dirname $0`; pwd)
 cd $base_path
 
-java -jar ./$JAR_BASE_NAME*.jar
+java -jar ./$JAR_BASE_NAME*.jar -server -XX:+UseConcMarkSweepGC  -XX:CMSInitiatingOccupancyFraction=80
 
 exit 0

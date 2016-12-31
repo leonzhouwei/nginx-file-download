@@ -16,17 +16,17 @@ mvn clean
 mvn package -Dmaven.test.skip=true
 
 APP=app
-JAR_FILE_BASE_NAME=$(basename $TARGET/$JAR_BASE_NAME*.jar)
-VERSION=${JAR_FILE_BASE_NAME/$JAR_BASE_NAME-/''}
-VERSION=${VERSION/'.jar'/''}
-BUILD_VERSION=$BUILD/$VERSION
+#JAR_FILE_BASE_NAME=$(basename $TARGET/$JAR_BASE_NAME*.jar)
+#VERSION=${JAR_FILE_BASE_NAME/$JAR_BASE_NAME-/''}
+#VERSION=${VERSION/'.jar'/''}
+BUILD_VERSION=$BUILD
 
 rm -rf $BUILD
 mkdir -p $BUILD_VERSION/$APP
 mkdir -p $BUILD_VERSION/$CONFIG
 
 cp -r $APP/data $BUILD_VERSION/$APP/
-cp -r $CONFIG/application.properties.production $BUILD_VERSION/$CONFIG/application.properties
+cp -r $CONFIG/application.properties $BUILD_VERSION/$CONFIG/application.properties
 cp -r $CONFIG/logback.xml.production $BUILD_VERSION/$CONFIG/logback.xml
 cp -r $CUSTOM $BUILD_VERSION/
 
