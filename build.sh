@@ -26,8 +26,7 @@ mkdir -p $BUILD_VERSION/$APP
 mkdir -p $BUILD_VERSION/$CONFIG
 
 cp -r $APP/data $BUILD_VERSION/$APP/
-cp -r $CONFIG/application.properties $BUILD_VERSION/$CONFIG/application.properties
-cp -r $CONFIG/logback.xml.production $BUILD_VERSION/$CONFIG/logback.xml
+cp -r $CONFIG $BUILD_VERSION/
 cp -r $CUSTOM $BUILD_VERSION/
 
 cp sqlite.sqlite $BUILD_VERSION/
