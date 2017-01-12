@@ -24,3 +24,4 @@ config/*.production
 daily_build/
 var/app.pid
 var/log
+.DS_Store
