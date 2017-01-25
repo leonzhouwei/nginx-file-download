@@ -26,7 +26,7 @@ public class AssetsImageController {
 	public void get(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String uri = request.getRequestURI();
-		String imageFilePath = FilePathTool.join(appConfig.getImageDirPath(),
+		String imageFilePath = FilePathTool.join(appConfig.getDataDir(),
 				uri);
 		File file = new File(imageFilePath);
 		HttpResponseTool.writeImage(response, file);

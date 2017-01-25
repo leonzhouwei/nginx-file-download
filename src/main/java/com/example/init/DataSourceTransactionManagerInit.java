@@ -5,9 +5,10 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
-//@Configurations
+@Configuration
 public class DataSourceTransactionManagerInit implements InitializingBean {
 
 	private DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();

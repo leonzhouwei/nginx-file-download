@@ -1,11 +1,7 @@
 package com.example.config;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Properties;
 import java.util.UUID;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -26,8 +22,6 @@ public class AppConfig implements InitializingBean {
 	static final String PROD_MODE = "prod";
 
 	// app ---------------------------------------------------------------------
-	@Value("${app.runMode}")
-	private String runMode;
 	@Value("${app.workDir}")
 	private String workDirPath;
 	@Value("${app.ignoreCustomizedInterceptors}")
@@ -36,8 +30,7 @@ public class AppConfig implements InitializingBean {
 	private String dataDir;
 	@Value("${app.download.history.disable}")
 	private Boolean disableDownloadHistory;
-
-	private String imageDirPath;
+	
 	private String assetsHome;
 
 	// rdbms -------------------------------------------------------------------
@@ -87,24 +80,6 @@ public class AppConfig implements InitializingBean {
 	private String ssdbAuth;
 
 	// app ---------------------------------------------------------------------
-	public boolean isInDevelopMode() {
-		if (runMode.compareTo(DEV_MODE) == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean isInProductionMode() {
-		if (runMode.compareTo(PROD_MODE) == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	public String getRunMode() {
-		return runMode;
-	}
-
 	public String getWorkDirPath() {
 		return workDirPath;
 	}
@@ -204,23 +179,12 @@ public class AppConfig implements InitializingBean {
 		return ssdbAuth;
 	}
 
-	public String getImageDirPath() {
-		return imageDirPath;
-	}
-
 	public Boolean getIgnoreCustomizedInterceptors() {
 		return ignoreCustomizedInterceptors;
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		//
-		Properties props = new Properties();
-		InputStreamReader isr = new InputStreamReader(new FileInputStream("custom/config/application.properties"),
-				StandardCharsets.UTF_8);
-		props.load(isr);
-		imageDirPath = props.getProperty("app.imageDirPath");
-		isr.close();
 		//
 		final String ASSETS_DIR = dataDir + "/assets";
 		File dir = new File(ASSETS_DIR);
