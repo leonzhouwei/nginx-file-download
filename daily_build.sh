@@ -2,37 +2,34 @@
 
 ################################################################################
 # editable variables
-CUSTOM=custom
-CONFIG=config
-BUILD=daily_build
-TARGET=target
-JAR_BASE_NAME=nginx-file-download
+CONFIG="config"
+BUILD="build"
+TARGET="target"
+JAR_NAME_PREFIX="nginx-file-download"
 
-################################################################################
-#################### !! DO NOT EDIT THE STATEMENTS BELOW !! ####################
+######################################################################
+############### !! DO NOT EDIT THE STATEMENTS BELOW !! ###############
 base_path=$(cd `dirname $0`; pwd)
-cd $base_path
+APP="app"
+
+cd ${base_path}
+
 mvn clean
-mvn package -Dmaven.test.skip=true
+mvn package
 
-APP=app
-# JAR_FILE_BASE_NAME=$(basename $TARGET/$JAR_BASE_NAME*.jar)
-# VERSION=${JAR_FILE_BASE_NAME/$JAR_BASE_NAME-/''}
-# VERSION=${VERSION/'.jar'/''}
-BUILD_VERSION=$BUILD
+rm -rf ${BUILD}
+mkdir -p ${BUILD}/${APP}
 
-rm -rf $BUILD
-mkdir -p $BUILD_VERSION/$APP
+cp -r ${APP}/data ${BUILD}/${APP}/
 
-cp -r $APP/data $BUILD_VERSION/$APP/
-cp -r $CONFIG $BUILD_VERSION/
-cp -r $CUSTOM $BUILD_VERSION/
+mkdir -p ${BUILD}/${CONFIG}
+cp -r ${CONFIG}/application.properties ${BUILD}/${CONFIG}
+cp -r ${CONFIG}/logback.xml ${BUILD}/${CONFIG}
 
-cp *.sh $BUILD_VERSION/
-cp sqlite.sqlite $BUILD_VERSION/
-rm $BUILD_VERSION/build.sh
-rm $BUILD_VERSION/daily_build.sh
+cp sqlite.sqlite ${BUILD}/
 
-cp $TARGET/$JAR_BASE_NAME*.jar $BUILD_VERSION/
+cp ${TARGET}/${JAR_NAME_PREFIX}*.jar ${BUILD}/
+
+cp startup.sh ${BUILD}/
 
 exit 0

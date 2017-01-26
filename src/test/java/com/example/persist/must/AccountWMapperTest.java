@@ -1,6 +1,5 @@
 package com.example.persist.must;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
@@ -19,7 +18,7 @@ public class AccountWMapperTest {
 	@Autowired
 	private ApplicationContext appCtx;
 
-	@Test
+//	@Test
 	public void testInsert() {
 		String[] activeProfiles = appCtx.getEnvironment().getActiveProfiles();
 		System.out.println("activeProfiles:");

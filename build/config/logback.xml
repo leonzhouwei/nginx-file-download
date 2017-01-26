@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<property name="EXAMPLE_COM_APP_LOG_FILE" value="var/log/app.log" />
+	<property name="EXAMPLE_COM_ERROR_LOG_FILE" value="var/log/error.log" />
+
+	<appender name="EXAMPLE_COM_APP_LOG_FILE_APPENDER"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [%t] --- %-40.40logger{39} [%file:%line] : %msg%n</pattern>
+		</encoder>
+		<file>${EXAMPLE_COM_APP_LOG_FILE}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${EXAMPLE_COM_APP_LOG_FILE}.%i.gz</fileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="EXAMPLE_COM_ERROR_LOG_FILE_APPENDER"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [%t] --- %-40.40logger{39} [%file:%line] : %msg%n</pattern>
+		</encoder>
+		<file>${EXAMPLE_COM_ERROR_LOG_FILE}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${EXAMPLE_COM_ERROR_LOG_FILE}.%i.gz</fileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<logger name="com.example" level="DEBUG">
+		<appender-ref ref="EXAMPLE_COM_APP_LOG_FILE_APPENDER" />
+		<appender-ref ref="EXAMPLE_COM_ERROR_LOG_FILE_APPENDER" />
+	</logger>
+
+</configuration>
