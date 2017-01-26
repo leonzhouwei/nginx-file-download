@@ -36,9 +36,9 @@ CMD [  \
 	"-XX:+HeapDumpOnOutOfMemoryError",  \
 	"-XX:HeapDumpPath=./var/log/",  \
 	"-Dspring.profiles.active=prod",  \
-    "-jar",  \
-    "nginx-file-download-0.10.0.jar",  \
-    ">/dev/null",  \
+	"-jar",  \
+	"nginx-file-download-0.10.0.jar",  \
+	">/dev/null",  \
 	"2>./var/log/startup.err.log",  \
-    "&"  \
+	"&"  \
     ]
