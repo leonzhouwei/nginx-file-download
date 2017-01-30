@@ -23,8 +23,7 @@ public final class HttpRequestTool {
 	public static final String toEntireIp(String ipAddr)
 			throws UnknownHostException {
 		InetAddress inetAddr = InetAddress.getByName(ipAddr);
-		ipAddr = inetAddr.getHostAddress();
-		return ipAddr;
+		return inetAddr.getHostAddress();
 	}
 
 	public static String getClientIp(HttpServletRequest request)

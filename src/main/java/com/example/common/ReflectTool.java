@@ -1,11 +1,15 @@
 package com.example.common;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.nutz.lang.Strings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
 
@@ -13,6 +17,8 @@ public final class ReflectTool {
 
 	static final String GET = "get";
 	static final String GET_CLASS = GET + "Class";
+
+	private static final Logger logger = LoggerFactory.getLogger(ReflectTool.class);
 
 	private ReflectTool() {
 	}
@@ -44,8 +50,8 @@ public final class ReflectTool {
 					ret.put(name, value);
 				}
 			}
-		} catch (Exception e) {
-			// no operations
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			logger.warn(StringUtils.EMPTY, e);
 		}
 		return ret;
 	}

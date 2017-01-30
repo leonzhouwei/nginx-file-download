@@ -23,8 +23,10 @@ public class Production extends Base {
 
 	public void setDescription(String description) {
 		if (description == null) {
-			description = StringUtils.EMPTY;
+			this.description = StringUtils.EMPTY;
+			return;
 		}
+		
 		this.description = description;
 	}
 	
@@ -39,8 +41,10 @@ public class Production extends Base {
 
 	public void setName(String name) {
 		if (name == null) {
-			name = StringUtils.EMPTY;
+			this.name = StringUtils.EMPTY;
+			return;
 		}
+		
 		this.name = name;
 	}
 	
@@ -55,8 +59,10 @@ public class Production extends Base {
 
 	public void setDir(String dir) {
 		if (dir == null) {
-			dir = StringUtils.EMPTY;
+			this.dir = StringUtils.EMPTY;
+			return;
 		}
+		
 		this.dir = dir;
 	}
 

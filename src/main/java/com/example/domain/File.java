@@ -52,10 +52,11 @@ public class File extends Base {
 
 	public void setDir(String dir) {
 		if (dir == null) {
-			dir = StringUtils.EMPTY;
+			this.dir = StringUtils.EMPTY;
+			return;
 		}
-		dir = dir.trim();
-		this.dir = dir;
+		
+		this.dir = dir.trim();
 	}
 
 	public String getName() {

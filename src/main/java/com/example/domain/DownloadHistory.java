@@ -15,7 +15,7 @@ public class DownloadHistory extends Base {
 	private String appServerThreadName;
 	private String requestRoute;
 	private String requestParameters;
-	
+
 	public void reset() {
 		super.reset();
 		setWebServerHost(StringUtils.EMPTY);
@@ -40,8 +40,10 @@ public class DownloadHistory extends Base {
 
 	public void setClientIp(String clientIp) {
 		if (clientIp == null) {
-			clientIp = StringUtils.EMPTY;
+			this.clientIp = StringUtils.EMPTY;
+			return;
 		}
+		
 		this.clientIp = clientIp;
 	}
 
@@ -51,12 +53,10 @@ public class DownloadHistory extends Base {
 
 	public void setWebServerHost(String webServerHost) {
 		if (webServerHost == null) {
-			webServerHost = StringUtils.EMPTY;
+			this.webServerHost = StringUtils.EMPTY;
+			return;
 		}
-		int index = webServerHost.indexOf(":");
-		if (index > 0) {
-			webServerHost = webServerHost.substring(0, index);
-		}
+		
 		this.webServerHost = webServerHost;
 	}
 

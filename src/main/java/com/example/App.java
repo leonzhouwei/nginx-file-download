@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import com.google.common.io.Files;
 @ComponentScan
 @EnableAutoConfiguration
 public class App {
+	
+	public static final String VERSION = "0.10.0";
 
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 	private static ConfigurableApplicationContext cac;
@@ -32,13 +35,13 @@ public class App {
 			app = cac.getBean(App.class);
 			app.logStatus();
 		} catch (Exception e) {
-			logger.warn("", e);
+			logger.warn(StringUtils.EMPTY, e);
 		}
 	}
 
 	void logStatus() throws IOException {
 		logger.info("----- Status Info START ----- ");
-		logger.info("version: " + Version.VERSION);
+		logger.info("version: " + VERSION);
 		logger.info("static assests home: " + appConfig.getAssetsHome());
 		String pid = System.getProperty("PID");
 		String pidFilePath = AppConfig.CURRENT_WORKING_DIR + AppConfig.FILE_SEPARATOR + appConfig.getWorkDirPath()
@@ -54,19 +57,3 @@ public class App {
 		logger.info("----- Status Info  END  ----- ");
 	}
 }
-
-// @Configuration
-// @ImportResource("/spring/applicationContext.xml")
-// class XmlImportingConfiguration {
-// }
-
-// public EmbeddedServletContainerFactory servletContainer()
-// throws UnknownHostException {
-// TomcatEmbeddedServletContainerFactory factory = new
-// TomcatEmbeddedServletContainerFactory();
-// factory.setPort(appConfig.getHttpPort());
-// factory.setSessionTimeout(appConfig.getHttpSessionTimeout(),
-// TimeUnit.SECONDS);
-// factory.setUriEncoding(AppConfig.getCharsetName());
-// return factory;
-// }

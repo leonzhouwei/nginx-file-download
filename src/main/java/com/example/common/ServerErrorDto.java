@@ -6,7 +6,8 @@ public class ServerErrorDto {
 	private String message;
 	private String url;
 	
-	public ServerErrorDto() {
+	public ServerErrorDto(String message) {
+		this(null, message, null);
 	}
 	
 	public ServerErrorDto(String id, String message, String url) {

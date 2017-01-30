@@ -1,4 +1,4 @@
-package com.example.persist.assistl.ssdb.driver;
+package com.example.persist.assist.ssdb.driver;
 
 import java.util.Map;
 

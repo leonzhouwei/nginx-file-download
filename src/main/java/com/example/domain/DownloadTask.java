@@ -19,8 +19,8 @@ public class DownloadTask extends Base {
 	public void reset() {
 		super.reset();
 		DateTime dateTime = new DateTime(getCreatedAt());
-		DateTime expiredAt = dateTime.plusDays(7);
-		setExpiredAt(expiredAt.toDate());
+		DateTime expired = dateTime.plusDays(7);
+		setExpiredAt(expired.toDate());
 		setTimeCostMillis(0L);
 		setLastDldedAt(getCreatedAt());
 		setUser(new Account());
@@ -33,8 +33,10 @@ public class DownloadTask extends Base {
 
 	public void setClientIp(String clientIp) {
 		if (clientIp == null) {
-			clientIp = StringUtils.EMPTY;
+			this.clientIp = StringUtils.EMPTY;
+			return;
 		}
+		
 		this.clientIp = clientIp;
 	}
 

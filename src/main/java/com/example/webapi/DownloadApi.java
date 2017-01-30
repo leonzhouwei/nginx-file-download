@@ -29,7 +29,6 @@ import com.example.domain.FileService;
 import com.example.domain.FileServiceGroup;
 import com.example.domain.Production;
 import com.example.filter.LoginInterceptor;
-import com.example.persist.assist.DownloadHistoryWMapper;
 import com.example.persist.must.DownloadTaskRMapper;
 import com.example.persist.must.DownloadTaskWMapper;
 import com.example.persist.must.FileRMapper;
@@ -90,8 +89,6 @@ public class DownloadApi {
 	private ProductionRMapper productionRMapper;
 	@Autowired
 	private FileRMapper fileRMapper;
-	@Autowired
-	private DownloadHistoryWMapper historyWMapper;
 	@Autowired
 	private FileServiceGroupRMapper fileServiceGroupRMapper;
 	@Autowired
@@ -282,7 +279,6 @@ public class DownloadApi {
 			history.setWebServerHost(result.webServerHost);
 			history.setRequestRoute(result.requestRoute);
 			history.setRequestParameters(JsonTool.toJson(request.getParameterMap()));
-			historyWMapper.insert(history);
 			logger.info("download history saved (" + JsonTool.toJson(history) + ")");
 		} catch (Exception e) {
 			logger.warn(EMPTY, e);

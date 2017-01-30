@@ -9,6 +9,7 @@ public class Base {
 	private Boolean enabled;
 	
 	public Base() {
+		// no operations here
 	}
 	
 	public void resetBy(Base another) {

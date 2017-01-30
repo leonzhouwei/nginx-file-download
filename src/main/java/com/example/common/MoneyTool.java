@@ -19,14 +19,14 @@ public final class MoneyTool {
 			String decimalStr = priceYuan.substring(index + 1);
 			decimal = Long.parseLong(decimalStr);
 		}
-		long integer = 0;
+		long lng;
 		if (index > 0) {
 			String intStr = priceYuan.substring(0, index);
-			integer = Long.parseLong(intStr) * 100;
+			lng = Long.parseLong(intStr) * 100;
 		} else {
-			integer = Long.parseLong(priceYuan) * 100;
+			lng = Long.parseLong(priceYuan) * 100;
 		}
-		final long totalFen = integer + decimal;
+		final long totalFen = lng + decimal;
 		return totalFen;
 	}
 

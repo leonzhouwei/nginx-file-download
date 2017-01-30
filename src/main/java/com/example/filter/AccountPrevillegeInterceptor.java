@@ -12,12 +12,12 @@ import com.example.persist.must.AccountRMapper;
 import com.example.webapi.RouteDefine;
 
 public class AccountPrevillegeInterceptor implements HandlerInterceptor {
-	
+
 	private AccountRMapper accountRMapper;
-	
+
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 		String uri = request.getRequestURI();
 		for (String e : LoginInterceptor.unrestrictedRoutePatterns) {
 			if (uri.matches(e)) {
@@ -27,32 +27,28 @@ public class AccountPrevillegeInterceptor implements HandlerInterceptor {
 		Long id = LoginInterceptor.getAccountId(request);
 		if (id == null) {
 			return false;
-		} 
+		}
 		Account account = accountRMapper.selectById(id);
 		if (!Account.isValidAccount(account)) {
 			return false;
 		}
-		if (uri.startsWith(RouteDefine.ADMIN)) {
-			if (!Account.isAdmin(account)) {
-				HttpResponseTool.setStatusAsUnauthorized(response);
-				return false;
-			}
+		if (uri.startsWith(RouteDefine.ADMIN) && !Account.isAdmin(account)) {
+			HttpResponseTool.setStatusAsUnauthorized(response);
+			return false;
 		}
 		return true;
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		// no operations
+		// no operations for postHandle
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex)
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		// no operations
+		// no operations for afterCompletion
 	}
 
 	public AccountRMapper getAccountRMapper() {
