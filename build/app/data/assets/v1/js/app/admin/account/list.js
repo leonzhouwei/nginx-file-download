@@ -26,7 +26,7 @@ function initTable(result) {
 		buffer.push('<td>', id, '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>', elem['name'], '</td>');
-		var role = elem['roleId'];
+		var role = elem['role']['id'];
 		if (role == 1) {
 			buffer.push('<td>', '管理员', '</td>');
 		} else {
