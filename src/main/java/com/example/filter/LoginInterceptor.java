@@ -6,15 +6,12 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.example.domain.Account;
 import com.example.persist.must.AccountRMapper;
 import com.example.webapi.RouteDefine;
 import com.google.common.collect.Sets;
 
-public class LoginInterceptor implements HandlerInterceptor {
+public class LoginInterceptor extends BaseInterceptor {
 
 	public static final String PREFIX = "example.com/";
 	public static final String SEESION_ID = PREFIX + "sessionId";
@@ -82,18 +79,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 		}
 		redirectToLogin(response);
 		return false;
-	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		// no operations
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		// no operations
 	}
 
 	public AccountRMapper getAccountRMapper() {

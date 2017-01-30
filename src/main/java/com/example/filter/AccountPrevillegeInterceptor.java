@@ -3,15 +3,12 @@ package com.example.filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.example.common.HttpResponseTool;
 import com.example.domain.Account;
 import com.example.persist.must.AccountRMapper;
 import com.example.webapi.RouteDefine;
 
-public class AccountPrevillegeInterceptor implements HandlerInterceptor {
+public class AccountPrevillegeInterceptor extends BaseInterceptor {
 
 	private AccountRMapper accountRMapper;
 
@@ -37,18 +34,6 @@ public class AccountPrevillegeInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		return true;
-	}
-
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		// no operations for postHandle
-	}
-
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		// no operations for afterCompletion
 	}
 
 	public AccountRMapper getAccountRMapper() {
