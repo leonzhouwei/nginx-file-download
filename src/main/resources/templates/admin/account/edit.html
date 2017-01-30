@@ -25,8 +25,8 @@
 			<div class="form-group">
 				<label for="roleSelect">角色</label> <select class="form-control"
 					id="roleSelect" name="role">
-					<option value="1" th:selected="${roleId == 1}">管理员</option>
-					<option value="2" th:selected="${!(roleId == 1)}">普通用户</option>
+					<option value="1" th:selected="${role.id == 1}">管理员</option>
+					<option value="2" th:selected="${!(role.id == 1)}">普通用户</option>
 				</select>
 			</div>
 

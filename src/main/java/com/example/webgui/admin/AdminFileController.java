@@ -34,16 +34,13 @@ public class AdminFileController {
 	static final String FSG = "fsg";
 
 	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/file/";
-	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
-			+ WebGuiDefine.DISABLE;
+	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX + WebGuiDefine.DISABLE;
 	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
-	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX
-			+ WebGuiDefine.ENABLE;
+	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX + WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AdminFileController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminFileController.class);
 
 	@Autowired
 	private AppConfig appConfig;
@@ -67,41 +64,18 @@ public class AdminFileController {
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES, method = RequestMethod.POST)
-	public ModelAndView newOne(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView newOne(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView ng = newOneCheck(request, response);
+		if (ng != null) {
+			return ng;
+		}
+		
 		final String name = HttpRequestTool.extractName(request);
-		if (Strings.isNullOrEmpty(name)) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		final Long productionId = HttpRequestTool.extractLong(request,
-				PRODUCTION);
-		if (productionId == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		Production prod = productionRMapper.selectById(productionId);
-		if (prod == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
+		final Long productionId = HttpRequestTool.extractLong(request, PRODUCTION);
 		final Double size = HttpRequestTool.extractSize(request);
-		if (size == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
 		String md = HttpRequestTool.extractMd(request);
-		if (Strings.isNullOrEmpty(md)) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
 		final Boolean enabled = HttpRequestTool.extractEnabled(request);
-		if (enabled == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
 		final Long fsgId = HttpRequestTool.extractLong(request, FSG);
-		if (fsgId == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
-		FileServiceGroup fsg = fsgRMapper.selectById(fsgId);
-		if (fsg == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
-		}
 		File file = new File();
 		file.reset();
 		file.setDir(request.getParameter(DIR));
@@ -112,13 +86,44 @@ public class AdminFileController {
 		file.setEnabled(enabled);
 		file.getFileServiceGroup().setId(fsgId);
 		wMapper.insert(file);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILES);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_FILES);
+	}
+	
+	private ModelAndView newOneCheck(HttpServletRequest request, HttpServletResponse response) {
+		final String name = HttpRequestTool.extractName(request);
+		final Long productionId = HttpRequestTool.extractLong(request, PRODUCTION);
+		final Double size = HttpRequestTool.extractSize(request);
+		String md = HttpRequestTool.extractMd(request);
+		final Boolean enabled = HttpRequestTool.extractEnabled(request);
+		final Long fsgId = HttpRequestTool.extractLong(request, FSG);
+		if (Strings.isNullOrEmpty(name) || productionId == null || size == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		if (Strings.isNullOrEmpty(md) || enabled == null || fsgId == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		
+		return newOneCheckWithDb(request, response);
+	}
+	
+	private ModelAndView newOneCheckWithDb(HttpServletRequest request, HttpServletResponse response) {
+		final Long productionId = HttpRequestTool.extractLong(request, PRODUCTION);
+		Production prod = productionRMapper.selectById(productionId);
+		if (prod == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		
+		final Long fsgId = HttpRequestTool.extractLong(request, FSG);
+		FileServiceGroup fsg = fsgRMapper.selectById(fsgId);
+		if (fsg == null) {
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+		}
+		
+		return null;
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.GET)
-	public ModelAndView gotoEdit(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -127,24 +132,20 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_EDIT, e);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
 		return ret;
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.POST)
-	public ModelAndView edit(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		logger.debug(JsonTool.toJson(request.getParameterMap()));
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response,
-					HttpRequestTool.ID);
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response, HttpRequestTool.ID);
 		}
 		File e = rMapper.selectById(id);
 		if (e == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response,
-					"file not found");
+			return ModelAndViewTool.newModelAndViewFor404(appConfig, response, "file not found");
 		}
 		String dir = request.getParameter(DIR);
 		if (!Strings.isNullOrEmpty(dir)) {
@@ -154,13 +155,11 @@ public class AdminFileController {
 		if (!Strings.isNullOrEmpty(name)) {
 			e.setName(name);
 		}
-		final Long productionId = HttpRequestTool.extractLong(request,
-				PRODUCTION);
+		final Long productionId = HttpRequestTool.extractLong(request, PRODUCTION);
 		if (productionId != null) {
 			Production production = productionRMapper.selectById(productionId);
 			if (production == null) {
-				return ModelAndViewTool.newModelAndViewFor404(appConfig,
-						response, PRODUCTION);
+				return ModelAndViewTool.newModelAndViewFor404(appConfig, response, PRODUCTION);
 			}
 			e.getProduction().setId(productionId);
 		}
@@ -180,20 +179,17 @@ public class AdminFileController {
 		if (fsgId != null) {
 			FileServiceGroup fsg = fsgRMapper.selectById(fsgId);
 			if (fsg == null) {
-				return ModelAndViewTool.newModelAndViewFor404(appConfig,
-						response, FSG);
+				return ModelAndViewTool.newModelAndViewFor404(appConfig, response, FSG);
 			}
 			e.getFileServiceGroup().setId(fsgId);
 		}
 		e.resetUpdatedAt();
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILES);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_FILES);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.GET)
-	public ModelAndView gotoDisable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView gotoDisable(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -202,14 +198,12 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_DISABLE, e);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DISABLE, e);
 		return ret;
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.POST)
-	public ModelAndView disable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView disable(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -220,13 +214,11 @@ public class AdminFileController {
 		}
 		e.disable();
 		wMapper.disable(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILES);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_FILES);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.GET)
-	public ModelAndView gotoEnable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView gotoEnable(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -235,14 +227,12 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_ENABLE, e);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ENABLE, e);
 		return ret;
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.POST)
-	public ModelAndView enable(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView enable(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -253,8 +243,7 @@ public class AdminFileController {
 		}
 		e.enable();
 		wMapper.enable(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILES);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_FILES);
 	}
 
 }
