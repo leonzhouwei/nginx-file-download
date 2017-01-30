@@ -47,6 +47,8 @@ function initTable(result) {
 				'm ', seconds, 's', '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['expiredAt']), '</td>');
+		buffer.push('<td>', elem['uuid'], '</td>');
 		var enabled = elem['enabled'];
 		buffer.push('<td>');
 		if (enabled == true) {

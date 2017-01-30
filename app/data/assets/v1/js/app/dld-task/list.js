@@ -27,7 +27,10 @@ function initTable(result) {
 		buffer.push('</td>');
 		buffer.push('<td>', elem['clientIp'], '</td>');
 		buffer.push('<td>', iso8601ToHuman(elem['createdAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['updatedAt']), '</td>');
+		buffer.push('<td>', iso8601ToHuman(elem['expiredAt']), '</td>');
 		buffer.push('<td style="text-align: right;">', hhmmss, '</td>');
+		buffer.push('<td>', elem['uuid'], '</td>');
 
 		buffer.push('</tr>');
 		var newRow = buffer.join('');
