@@ -28,6 +28,7 @@ public class DataSourceInit {
 		ds.setRemoveAbandonedTimeout(appConfig.getRdbmsRemoveAbandonedTimeout());
 		ds.setTestOnBorrow(appConfig.isRdbmsTestOnBorrow());
 		ds.setValidationQuery(appConfig.getRdbmsValidationQuery());
+		ds.setDefaultAutoCommit(false);
 		return ds;
 	}
 
