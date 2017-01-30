@@ -1,9 +1,11 @@
 package com.example.config;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,19 @@ import com.google.common.collect.Lists;
 
 @Component
 public class AppConfig implements InitializingBean {
+
+	public static class MultipleVersionedStaticResourceDirectoriesException extends RuntimeException {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 7742418804277082421L;
+
+		public MultipleVersionedStaticResourceDirectoriesException(List<String> list) {
+			super("multiple versioned static resources directories have been found: "
+					+ StringUtils.join(list, StringUtils.SPACE));
+		}
+	}
 
 	public static final String APP_UUID = UUID.randomUUID().toString().toLowerCase();
 
@@ -30,7 +45,7 @@ public class AppConfig implements InitializingBean {
 	private String dataDir;
 	@Value("${app.download.history.disable}")
 	private Boolean disableDownloadHistory;
-	
+
 	private String assetsHome;
 
 	// rdbms -------------------------------------------------------------------
@@ -196,11 +211,11 @@ public class AppConfig implements InitializingBean {
 			}
 		}
 		if (list.isEmpty()) {
-			throw new RuntimeException("versioned static resources directory not found under '" + ASSETS_DIR + "'");
+			throw new FileNotFoundException(
+					"versioned static resources directory not found under '" + ASSETS_DIR + "'");
 		}
 		if (list.size() > 1) {
-			throw new RuntimeException(
-					"multiple versioned static resources directories have been found under '" + ASSETS_DIR + "'");
+			throw new MultipleVersionedStaticResourceDirectoriesException(list);
 		}
 		assetsHome = "/assets/" + list.get(0);
 	}

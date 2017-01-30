@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class File extends Base {
 
 	private Long id;
@@ -50,7 +52,7 @@ public class File extends Base {
 
 	public void setDir(String dir) {
 		if (dir == null) {
-			dir = EMPTY_STRING;
+			dir = StringUtils.EMPTY;
 		}
 		dir = dir.trim();
 		this.dir = dir;

@@ -24,7 +24,7 @@ import com.example.webapi.RouteDefine;
 @Controller
 public class LoginController {
 
-	static final String PASSWORD = "password";
+	static final String PSWD = "password";
 	static final String USERNAME = "username";
 
 	static final String VIEW_NAME_LOGIN = "login";
@@ -49,7 +49,7 @@ public class LoginController {
 			return;
 		}
 		String username = request.getParameter(USERNAME);
-		String plain = request.getParameter(PASSWORD);
+		String plain = request.getParameter(PSWD);
 		String cypher = Sha2Encoder.encode(plain);
 		Account e = new Account();
 		e.setName(username);

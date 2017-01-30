@@ -1,11 +1,13 @@
 package com.example.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Production extends Base {
 	
 	private Long id;
-	private String name = EMPTY_STRING;
-	private String description = EMPTY_STRING;
-	private String dir = EMPTY_STRING;
+	private String name = StringUtils.EMPTY;
+	private String description = StringUtils.EMPTY;
+	private String dir = StringUtils.EMPTY;
 	
 	public Long getId() {
 		return id;
@@ -21,7 +23,7 @@ public class Production extends Base {
 
 	public void setDescription(String description) {
 		if (description == null) {
-			description = EMPTY_STRING;
+			description = StringUtils.EMPTY;
 		}
 		this.description = description;
 	}
@@ -37,7 +39,7 @@ public class Production extends Base {
 
 	public void setName(String name) {
 		if (name == null) {
-			name = EMPTY_STRING;
+			name = StringUtils.EMPTY;
 		}
 		this.name = name;
 	}
@@ -53,7 +55,7 @@ public class Production extends Base {
 
 	public void setDir(String dir) {
 		if (dir == null) {
-			dir = EMPTY_STRING;
+			dir = StringUtils.EMPTY;
 		}
 		this.dir = dir;
 	}

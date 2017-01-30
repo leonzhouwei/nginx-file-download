@@ -4,8 +4,6 @@ import java.util.Date;
 
 public class Base {
 	
-	static final String EMPTY_STRING = "";
-
 	private Date createdAt;
 	private Date updatedAt;
 	private Boolean enabled;

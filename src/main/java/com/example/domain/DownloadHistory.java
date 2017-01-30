@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.example.config.AppConfig;
 
 public class DownloadHistory extends Base {
@@ -16,12 +18,12 @@ public class DownloadHistory extends Base {
 	
 	public void reset() {
 		super.reset();
-		setWebServerHost(EMPTY_STRING);
+		setWebServerHost(StringUtils.EMPTY);
 		setAppServerUuid(AppConfig.APP_UUID);
 		setAppServerThreadId(Thread.currentThread().getId());
 		setAppServerThreadName(Thread.currentThread().getName());
-		setRequestRoute(EMPTY_STRING);
-		setRequestParameters(EMPTY_STRING);
+		setRequestRoute(StringUtils.EMPTY);
+		setRequestParameters(StringUtils.EMPTY);
 	}
 
 	public Long getTaskId() {
@@ -38,7 +40,7 @@ public class DownloadHistory extends Base {
 
 	public void setClientIp(String clientIp) {
 		if (clientIp == null) {
-			clientIp = EMPTY_STRING;
+			clientIp = StringUtils.EMPTY;
 		}
 		this.clientIp = clientIp;
 	}
@@ -49,7 +51,7 @@ public class DownloadHistory extends Base {
 
 	public void setWebServerHost(String webServerHost) {
 		if (webServerHost == null) {
-			webServerHost = EMPTY_STRING;
+			webServerHost = StringUtils.EMPTY;
 		}
 		int index = webServerHost.indexOf(":");
 		if (index > 0) {

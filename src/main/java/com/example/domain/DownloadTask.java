@@ -2,6 +2,7 @@ package com.example.domain;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 public class DownloadTask extends Base {
@@ -32,7 +33,7 @@ public class DownloadTask extends Base {
 
 	public void setClientIp(String clientIp) {
 		if (clientIp == null) {
-			clientIp = EMPTY_STRING;
+			clientIp = StringUtils.EMPTY;
 		}
 		this.clientIp = clientIp;
 	}

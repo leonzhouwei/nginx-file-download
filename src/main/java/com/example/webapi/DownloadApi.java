@@ -10,13 +10,13 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.common.Constants;
 import com.example.common.HttpDefine;
 import com.example.common.HttpRequestTool;
 import com.example.common.HttpResponseTool;
@@ -174,7 +174,7 @@ public class DownloadApi {
 			// save the current download behavior
 			recordHistory(request, task, result);
 		} catch (UnsupportedEncodingException e) {
-			logger.warn(Constants.EMPTY_STRING, e);
+			logger.warn(StringUtils.EMPTY, e);
 			HttpResponseTool.writeInternalServerError(response, e);
 		}
 	}
@@ -196,7 +196,7 @@ public class DownloadApi {
 		try {
 			clientIp = HttpRequestTool.getClientIp(request);
 		} catch (UnknownHostException e) {
-			logger.warn(Constants.EMPTY_STRING, e);
+			logger.warn(StringUtils.EMPTY, e);
 		}
 		logger.info("client IP: " + clientIp);
 		logger.info("X-Forwarded-For: " + request.getHeader(HttpDefine.XFF));
