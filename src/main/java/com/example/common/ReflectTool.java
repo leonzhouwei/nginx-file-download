@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.nutz.lang.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +41,7 @@ public final class ReflectTool {
 				if (!methodName.startsWith(GET) || methodName.compareTo(GET_CLASS) == 0) {
 					continue;
 				}
-				String name = Strings.lowerFirst(methodName.substring(GET.length()));
+				String name = StringUtils.uncapitalize(methodName.substring(GET.length()));
 				Object value = e.invoke(t);
 				if (value instanceof Date) {
 					ret.put(name, DateTimeTool.toIso8601((Date) value));

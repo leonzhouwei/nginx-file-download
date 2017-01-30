@@ -59,8 +59,6 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.eclipse.jetty</groupId> <artifactId>jetty-servlets</artifactId> 
-			<optional>true</optional> </dependency> -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -69,11 +67,6 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>ssdb4j</artifactId>
-			<version>9.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xerial</groupId>
