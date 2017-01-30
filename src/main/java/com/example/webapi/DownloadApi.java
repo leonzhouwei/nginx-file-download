@@ -1,11 +1,5 @@
 package com.example.webapi;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
@@ -22,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.common.Constants;
 import com.example.common.HttpDefine;
 import com.example.common.HttpRequestTool;
 import com.example.common.HttpResponseTool;
@@ -54,8 +49,8 @@ public class DownloadApi {
 	static final String COLON = ":";
 	static final String SLASH = "/";
 	static final String FILE_SEPARATOR = "/";
-	static final String regEx = "[\u4e00-\u9fa5]";
-	static final Pattern pat = Pattern.compile(regEx);
+	static final String CHINESE_CHARACTOR_REG_EX = "[\u4e00-\u9fa5]";
+	static final Pattern CHINESE_CHARACTOR_PATTERN = Pattern.compile(CHINESE_CHARACTOR_REG_EX);
 	static final String UTF_8_CHARSET_NAME = StandardCharsets.UTF_8.name();
 
 	static final String FILE_ID = "fileId";
@@ -74,13 +69,15 @@ public class DownloadApi {
 	}
 
 	private static class Result {
-		public boolean ok = false;
-		public String clientIp;
-		public String webServerHost;
-		public String requestRoute;
-		public String taskUuid;
-		public Production production;
-		public File file;
+		boolean ok = false;
+		String clientIp;
+		String webServerHost;
+		String requestRoute;
+		String taskUuid;
+		String fileIdStr;
+		// --------------------
+		Production production;
+		File file;
 	}
 
 	@Autowired
@@ -100,11 +97,9 @@ public class DownloadApi {
 	@Autowired
 	private FileServiceRMapper fileServiceRMapper;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(DownloadApi.class);
+	private static final Logger logger = LoggerFactory.getLogger(DownloadApi.class);
 
-	static final String xAccelRedirect(final String routePrefix,
-			Production production, File file)
+	static final String xAccelRedirect(final String routePrefix, Production production, File file)
 			throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
 		sb.append(routePrefix);
@@ -134,7 +129,7 @@ public class DownloadApi {
 	}
 
 	public static boolean containChinese(String str) {
-		Matcher matcher = pat.matcher(str);
+		Matcher matcher = CHINESE_CHARACTOR_PATTERN.matcher(str);
 		boolean flg = false;
 		if (matcher.find()) {
 			flg = true;
@@ -142,15 +137,13 @@ public class DownloadApi {
 		return flg;
 	}
 
-	@RequestMapping(RouteDefine.API_FILE_SERVICE_GROUPS
-			+ "/{fsGroupId}/actions/download/**")
-	public void downloadWithAuth(HttpServletRequest request,
-			HttpServletResponse response) throws UnsupportedEncodingException,
-			UnknownHostException {
+	@RequestMapping(RouteDefine.API_FILE_SERVICE_GROUPS + "/{fsGroupId}/actions/download/**")
+	public void downloadWithAuth(HttpServletRequest request, HttpServletResponse response) {
 		Result result = logAndCheck(request, response);
 		if (!result.ok) {
 			return;
 		}
+
 		// try to find the download task by uuid
 		DownloadTask task = taskRMapper.selectEnabledByUuid(result.taskUuid);
 		if (task == null) {
@@ -167,23 +160,30 @@ public class DownloadApi {
 			taskWMapper.updateLastDldedAt(task);
 		}
 		String fileName = result.file.getName();
+
 		// respond
 		response.setContentType(HttpDefine.CONTENT_TYPE_VALUE_APP_OCTETSTREAM);
 		String xAccelRoutePrefix = appConfig.getXAccelPrefix();
-		String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix,
-				result.production, result.file);
-		logger.info(WEB_SERVER_X_ACCEL + ": " + xAccelRedirect);
-		response.setHeader(WEB_SERVER_X_ACCEL, xAccelRedirect);
-		response.addHeader(HttpDefine.CONTENT_DISPOSITION, ATACHMENT_FILENAME
-				+ URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
-		// save the current download behavior
-		recordHistory(request, task, result);
+		String xAccelRedirect = "";
+		try {
+			xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, result.production, result.file);
+			logger.info(WEB_SERVER_X_ACCEL + ": " + xAccelRedirect);
+			response.setHeader(WEB_SERVER_X_ACCEL, xAccelRedirect);
+			response.addHeader(HttpDefine.CONTENT_DISPOSITION,
+					ATACHMENT_FILENAME + URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
+			// save the current download behavior
+			recordHistory(request, task, result);
+		} catch (UnsupportedEncodingException e) {
+			logger.warn(Constants.EMPTY_STRING, e);
+			HttpResponseTool.writeInternalServerError(response, e);
+		}
 	}
 
-	Result logAndCheck(HttpServletRequest request, HttpServletResponse response)
-			throws UnknownHostException {
+	Result logAndCheck(HttpServletRequest request, HttpServletResponse response) {
+		// extract request route
 		final String route = request.getRequestURI();
 		logger.info("route: " + route);
+		// extract web server host
 		String tempHost = request.getHeader(WEB_SERVER_HOST);
 		final int indexOfColon = tempHost.indexOf(COLON);
 		if (indexOfColon > 0) {
@@ -191,32 +191,53 @@ public class DownloadApi {
 		}
 		final String host = tempHost;
 		logger.info("web server host: " + host);
-		final String clientIp = HttpRequestTool.getClientIp(request);
+		// extract client's IP
+		String clientIp = "";
+		try {
+			clientIp = HttpRequestTool.getClientIp(request);
+		} catch (UnknownHostException e) {
+			logger.warn(Constants.EMPTY_STRING, e);
+		}
 		logger.info("client IP: " + clientIp);
 		logger.info("X-Forwarded-For: " + request.getHeader(HttpDefine.XFF));
-		logger.info("request parameters: "
-				+ JsonTool.toJson(request.getParameterMap()));
-		//
+		logger.info("request parameters: " + JsonTool.toJson(request.getParameterMap()));
+		if (Strings.isNullOrEmpty(clientIp)) {
+			HttpResponseTool.setStatusAsNotFound(response, "client IP not found");
+			return newStatusNgResult();
+		}
+		// extract file ID
 		String fileIdStr = request.getParameter(FILE_ID);
 		if (Strings.isNullOrEmpty(fileIdStr)) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
+		// extract task UUID
 		String uuid = request.getParameter(UUID);
 		if (Strings.isNullOrEmpty(uuid)) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
+
+		// check with database
+		Result result = new Result();
+		result.clientIp = clientIp;
+		result.webServerHost = host;
+		result.requestRoute = route;
+		result.fileIdStr = fileIdStr;
+		result.taskUuid = uuid;
+		return logAndCheckWithDatabase(response, result);
+	}
+
+	Result logAndCheckWithDatabase(HttpServletResponse response, Result result) {
 		// find the file by id
-		final long fileId = Long.parseLong(fileIdStr);
+		final long fileId = Long.parseLong(result.fileIdStr);
 		File file = fileRMapper.selectEnabledById(fileId);
 		if (file == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
 		// check the production
-		Production production = productionRMapper.selectEnabledById(file
-				.getProduction().getId());
+		Production production = productionRMapper.selectEnabledById(file.getProduction().getId());
 		if (production == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
@@ -224,8 +245,7 @@ public class DownloadApi {
 		// check the file service group
 		final long fileServiceGroupId = file.getFileServiceGroup().getId();
 		logger.info("file service group id: " + fileServiceGroupId);
-		FileServiceGroup fsg = fileServiceGroupRMapper
-				.selectEnabledById(fileServiceGroupId);
+		FileServiceGroup fsg = fileServiceGroupRMapper.selectEnabledById(fileServiceGroupId);
 		logger.info("file service group: " + JsonTool.toJson(fsg));
 		if (fsg == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
@@ -234,27 +254,43 @@ public class DownloadApi {
 		// check the file service
 		FileService params = new FileService();
 		params.getGroup().setId(fsg.getId());
-		params.setHost(host);
-		FileService fileService = fileServiceRMapper
-				.selectEnabledByGroupIdAndHost(params);
+		params.setHost(result.webServerHost);
+		FileService fileService = fileServiceRMapper.selectEnabledByGroupIdAndHost(params);
 		logger.info("file service: " + JsonTool.toJson(fileService));
 		if (fileService == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
+		
 		// success
-		Result ret = newStatusOkResult();
-		ret.clientIp = clientIp;
-		ret.webServerHost = host;
-		ret.requestRoute = route;
-		ret.taskUuid = uuid;
-		ret.file = file;
-		ret.production = production;
-		return ret;
+		result.ok = true;
+		result.file = file;
+		result.production = production;
+		return result;
 	}
 
-	void downloadLocalFile(HttpServletRequest request,
-			HttpServletResponse response) {
+	void recordHistory(HttpServletRequest request, DownloadTask task, Result result) {
+		try {
+			if (appConfig.getDisableDownloadHistory()) {
+				logger.info("download history disabled");
+				return;
+			}
+			DownloadHistory history = new DownloadHistory();
+			history.reset();
+			history.setTaskId(task.getId());
+			history.setClientIp(result.clientIp);
+			history.setWebServerHost(result.webServerHost);
+			history.setRequestRoute(result.requestRoute);
+			history.setRequestParameters(JsonTool.toJson(request.getParameterMap()));
+			historyWMapper.insert(history);
+			logger.info("download history saved (" + JsonTool.toJson(history) + ")");
+		} catch (Exception e) {
+			logger.warn(EMPTY, e);
+		}
+	}
+	
+/*
+	void downloadLocalFile(HttpServletRequest request, HttpServletResponse response) {
 		logger.debug(request.getRequestURI());
 		logger.debug(request.getRequestURL().toString());
 		try {
@@ -272,11 +308,9 @@ public class DownloadApi {
 			// 清空 response
 			response.reset();
 			// 设置 response 的 Header
-			response.addHeader("Content-Disposition", "attachment;filename="
-					+ new String(filename.getBytes()));
+			response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
 			response.addHeader("Content-Length", "" + file.length());
-			OutputStream toClient = new BufferedOutputStream(
-					response.getOutputStream());
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
 			response.setContentType("application/octet-stream");
 			toClient.write(buffer);
 			toClient.flush();
@@ -285,28 +319,6 @@ public class DownloadApi {
 			ex.printStackTrace();
 		}
 	}
-
-	void recordHistory(HttpServletRequest request, DownloadTask task,
-			Result result) {
-		try {
-			if (appConfig.getDisableDownloadHistory()) {
-				logger.info("download history disabled");
-				return;
-			}
-			DownloadHistory history = new DownloadHistory();
-			history.reset();
-			history.setTaskId(task.getId());
-			history.setClientIp(result.clientIp);
-			history.setWebServerHost(result.webServerHost);
-			history.setRequestRoute(result.requestRoute);
-			history.setRequestParameters(JsonTool.toJson(request
-					.getParameterMap()));
-			historyWMapper.insert(history);
-			logger.info("download history saved (" + JsonTool.toJson(history)
-					+ ")");
-		} catch (Exception e) {
-			logger.warn(EMPTY, e);
-		}
-	}
+*/
 
 }
