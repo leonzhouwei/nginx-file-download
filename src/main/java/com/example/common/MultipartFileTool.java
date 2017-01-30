@@ -57,23 +57,23 @@ public final class MultipartFileTool {
 	}
 
 	public static List<File> saveFiles(HttpServletRequest request, String dirPath)
-			throws IllegalStateException, IOException {
+			throws IOException {
 		File dir = new File(dirPath);
 		return saveFiles(request, dir);
 	}
 
 	public static List<File> saveFilesWithTimestamp(HttpServletRequest request, String dirPath)
-			throws IllegalStateException, IOException {
+			throws IOException {
 		File dir = new File(dirPath);
 		return saveFilesWithTimestamp(request, dir);
 	}
 
-	public static List<File> saveFiles(HttpServletRequest request, File dir) throws IllegalStateException, IOException {
+	public static List<File> saveFiles(HttpServletRequest request, File dir) throws IOException {
 		return saveFilesWithTimestamp(request, dir);
 	}
 
 	public static List<File> saveFilesWithTimestamp(HttpServletRequest request, File dir)
-			throws IllegalStateException, IOException {
+			throws IOException {
 		boolean isMultipart = isMultipartRequest(request);
 		if (!isMultipart) {
 			throw new NotMultipartRequestException(request);
@@ -85,23 +85,23 @@ public final class MultipartFileTool {
 	// -------------------------------------------------------------------------
 
 	public static List<File> saveFiles(MultipartHttpServletRequest request, String dirPath)
-			throws IllegalStateException, IOException {
+			throws IOException {
 		File dir = new File(dirPath);
 		return saveFilesWithTimestamp(request, dir, null);
 	}
 
 	public static List<File> saveFiles(MultipartHttpServletRequest request, File dir)
-			throws IllegalStateException, IOException {
+			throws IOException {
 		return saveFilesWithTimestamp(request, dir, null);
 	}
 
 	public static List<File> saveFilesWithTimestamp(MultipartHttpServletRequest request, File dir)
-			throws IllegalStateException, IOException {
+			throws IOException {
 		return saveFilesWithTimestamp(request, dir, new DateTime());
 	}
 
 	public static List<File> saveFilesWithTimestamp(MultipartHttpServletRequest request, File dir, DateTime dateTime)
-			throws IllegalStateException, IOException {
+			throws IOException {
 		// validate original files' names
 		List<File> ret = Lists.newArrayList();
 		Iterator<String> iterator = request.getFileNames();
@@ -161,8 +161,7 @@ public final class MultipartFileTool {
 		sb.append(dateTime.getMillis());
 		sb.append(post);
 		String newPath = sb.toString();
-		File ret = new File(newPath);
-		return ret;
+		return new File(newPath);
 	}
 
 	static void checkUploadedFileNames(Collection<String> fileNames) {

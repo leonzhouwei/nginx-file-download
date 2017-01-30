@@ -53,7 +53,7 @@ public class AdminProductionController {
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.POST)
-	public ModelAndView newOne(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView newOne(HttpServletRequest request) {
 		String dir = request.getParameter(DIR);
 		logger.debug("dir: " + dir);
 		String name = HttpRequestTool.extractName(request);
@@ -81,8 +81,7 @@ public class AdminProductionController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
-		return ret;
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.POST)

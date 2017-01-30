@@ -5,11 +5,11 @@ public class Role {
 	static final long ADMIN = 1L;
 	static final long NORMAL = 2L;
 
+	private Long id;
+	
 	public static boolean isAdmin(Account account) {
 		return account.getRole().getId() == ADMIN;
 	}
-
-	private Long id;
 
 	public Long getId() {
 		return id;

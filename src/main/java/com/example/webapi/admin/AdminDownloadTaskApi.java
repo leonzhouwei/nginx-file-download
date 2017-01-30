@@ -2,7 +2,6 @@ package com.example.webapi.admin;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +25,13 @@ public class AdminDownloadTaskApi {
 	private DownloadTaskWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS, method = RequestMethod.GET)
-	public void getAll(HttpServletRequest request, HttpServletResponse response) {
+	public void getAll(HttpServletResponse response) {
 		List<DownloadTask> tasks = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, tasks);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/disable", method = RequestMethod.POST)
-	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void disable(HttpServletResponse response, @PathVariable Long id) {
 		DownloadTask e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
@@ -44,7 +43,7 @@ public class AdminDownloadTaskApi {
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/enable", method = RequestMethod.POST)
-	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void enable(HttpServletResponse response, @PathVariable Long id) {
 		DownloadTask e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);

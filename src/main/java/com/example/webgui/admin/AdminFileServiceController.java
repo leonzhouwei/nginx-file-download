@@ -30,18 +30,14 @@ public class AdminFileServiceController {
 	static final String HOST = "host";
 	static final String GROUP_ID = "groupId";
 
-	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
-			+ "/file-service/";
-	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
-			+ WebGuiDefine.DISABLE;
+	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/file-service/";
+	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX + WebGuiDefine.DISABLE;
 	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
-	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX
-			+ WebGuiDefine.ENABLE;
+	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX + WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AdminFileServiceController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminFileServiceController.class);
 
 	@Autowired
 	private AppConfig appConfig;
@@ -63,8 +59,7 @@ public class AdminFileServiceController {
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES, method = RequestMethod.POST)
-	public ModelAndView newOne(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView newOne(HttpServletRequest request) {
 		String name = request.getParameter("name");
 		String host = request.getParameter(HOST);
 		logger.debug("host: " + host);
@@ -76,13 +71,11 @@ public class AdminFileServiceController {
 		e.setHost(host);
 		e.getGroup().setId(Long.parseLong(groupIdStr));
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILE_SERVICES);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_FILE_SERVICES);
 	}
-	
+
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_EDIT, method = RequestMethod.GET)
-	public ModelAndView gotoEdit(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -91,14 +84,11 @@ public class AdminFileServiceController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_EDIT, e);
-		return ret;
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
 	}
-	
+
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_EDIT, method = RequestMethod.POST)
-	public ModelAndView edit(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -125,8 +115,7 @@ public class AdminFileServiceController {
 		}
 		e.resetUpdatedAt();
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILE_SERVICES);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_FILE_SERVICES);
 	}
 
 }

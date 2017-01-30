@@ -20,7 +20,7 @@ public class DownloadTaskController {
 	private AppConfig appConfig;
 
 	@RequestMapping(value = RouteDefine.I_DOWNLOAD_TASKS, method = RequestMethod.GET)
-	public ModelAndView ModelAndView() {
+	public ModelAndView getAll() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 

@@ -30,6 +30,9 @@ public class AdminAccountController {
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 	static final String VIEW_NAME_ADMIN_ACCOUNTS_EDIT_PASSWORD = VIEW_NAME_PREFIX + "edit-pswd";
+	
+	static final String PSWD = "password";
+	static final String ROLE = "role";
 
 	@Autowired
 	private AppConfig appConfig;
@@ -49,10 +52,10 @@ public class AdminAccountController {
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS, method = RequestMethod.POST)
-	public ModelAndView newOne(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView newOne(HttpServletRequest request) {
 		String name = HttpRequestTool.extractName(request);
-		Long role = HttpRequestTool.extractLong(request, "role");
-		String password = request.getParameter("password");
+		Long role = HttpRequestTool.extractLong(request, ROLE);
+		String password = request.getParameter(PSWD);
 		String cipher = Sha2Encoder.encode(password);
 		Account account = new Account();
 		account.reset();
@@ -73,8 +76,7 @@ public class AdminAccountController {
 		if (account == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, account);
-		return ret;
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, account);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_EDIT, method = RequestMethod.POST)
@@ -88,12 +90,12 @@ public class AdminAccountController {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
 		String name = HttpRequestTool.extractName(request);
-		String rawPassword = request.getParameter("password");
+		String rawPassword = request.getParameter(PSWD);
 		if (!Strings.isNullOrEmpty(rawPassword)) {
 			String cipher = Sha2Encoder.encode(rawPassword);
 			account.setPassword(cipher);
 		}
-		Long role = HttpRequestTool.extractLong(request, "role");
+		Long role = HttpRequestTool.extractLong(request, ROLE);
 		Boolean enabled = HttpRequestTool.extractEnabled(request);
 		account.setName(name);
 		account.getRole().setId(role);
@@ -126,7 +128,7 @@ public class AdminAccountController {
 		if (account == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		String newRawPassword = request.getParameter("password");
+		String newRawPassword = request.getParameter(PSWD);
 		String newPassword = Sha2Encoder.encode(newRawPassword);
 		account.setPassword(newPassword);
 		account.resetUpdatedAt();

@@ -2,7 +2,6 @@ package com.example.webapi.admin;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +25,13 @@ public class AdminFileServiceApi {
 	private FileServiceWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES, method = RequestMethod.GET)
-	public void list(HttpServletRequest request, HttpServletResponse response) {
+	public void list(HttpServletResponse response) {
 		List<FileService> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES + "/{id}/actions/disable", method = RequestMethod.POST)
-	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void disable(HttpServletResponse response, @PathVariable Long id) {
 		FileService e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
@@ -44,7 +43,7 @@ public class AdminFileServiceApi {
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILE_SERVICES + "/{id}/actions/enable", method = RequestMethod.POST)
-	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void enable(HttpServletResponse response, @PathVariable Long id) {
 		FileService e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);

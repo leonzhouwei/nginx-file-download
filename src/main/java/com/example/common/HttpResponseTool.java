@@ -41,9 +41,7 @@ public final class HttpResponseTool {
 
 	}
 
-	final static FastJsonValueFilter FASTJSON_VALUE_FILTER = new FastJsonValueFilter();
-
-	private static final int bufferSize = 1024;
+	private static final int BUFFER_SIZE = 1024;
 
 	private static final Logger logger = LoggerFactory.getLogger(HttpResponseTool.class);
 
@@ -68,7 +66,8 @@ public final class HttpResponseTool {
 
 	public static <T> void writeResponse(HttpServletResponse response, ResponseDto<T> responseDto) {
 		try {
-			String json = JSON.toJSONString(responseDto, FASTJSON_VALUE_FILTER, SerializerFeature.UseISO8601DateFormat);
+			String json = JSON.toJSONString(responseDto, new FastJsonValueFilter(),
+					SerializerFeature.UseISO8601DateFormat);
 			setDefaultContentType(response);
 			PrintWriter pw = response.getWriter();
 			pw.write(json);
@@ -169,8 +168,8 @@ public final class HttpResponseTool {
 		try {
 			gos = response.getOutputStream();
 			int count = -1;
-			byte data[] = new byte[bufferSize];
-			while ((count = is.read(data, 0, bufferSize)) != -1) {
+			byte[] data = new byte[BUFFER_SIZE];
+			while ((count = is.read(data, 0, BUFFER_SIZE)) != -1) {
 				gos.write(data, 0, count);
 			}
 			gos.flush();
@@ -183,7 +182,7 @@ public final class HttpResponseTool {
 	}
 
 	public static void writeFile(String contentType, HttpServletResponse response, File file) throws IOException {
-		if (file.exists() == false) {
+		if (!file.exists()) {
 			setStatusAsNotFound(response);
 			return;
 		}

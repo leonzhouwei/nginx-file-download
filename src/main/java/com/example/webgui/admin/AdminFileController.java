@@ -132,8 +132,7 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
-		return ret;
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_EDIT, method = RequestMethod.POST)
@@ -198,8 +197,7 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DISABLE, e);
-		return ret;
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DISABLE, e);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_DISABLE, method = RequestMethod.POST)
@@ -227,8 +225,7 @@ public class AdminFileController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ENABLE, e);
-		return ret;
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ENABLE, e);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILES_ENABLE, method = RequestMethod.POST)

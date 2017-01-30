@@ -36,8 +36,7 @@ public final class HttpRequestTool {
 		if (split.length < 1) {
 			return toEntireIp(request.getRemoteAddr());
 		}
-		String ret = split[0].trim();
-		return ret;
+		return split[0].trim();
 	}
 
 	public static String getClientIpNullToEmpty(HttpServletRequest request)

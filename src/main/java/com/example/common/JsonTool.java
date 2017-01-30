@@ -13,9 +13,7 @@ public final class JsonTool {
 	}
 
 	public static <T> String toJson(T t) {
-		String json = JSON.toJSONString(t,
-				SerializerFeature.UseISO8601DateFormat);
-		return json;
+		return JSON.toJSONString(t, SerializerFeature.UseISO8601DateFormat);
 	}
 
 	public static <T> T parse(String json, Class<T> clazz) {

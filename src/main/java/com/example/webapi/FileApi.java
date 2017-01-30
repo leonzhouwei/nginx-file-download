@@ -2,7 +2,6 @@ package com.example.webapi;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -26,13 +25,13 @@ public class FileApi {
 	private FileRDao rDao;
 
 	@RequestMapping(value = RouteDefine.API_FILES, method = RequestMethod.GET)
-	public void getAll(HttpServletRequest request, HttpServletResponse response) {
+	public void getAll(HttpServletResponse response) {
 		List<File> list = rDao.selectAllEnabled();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_FILES + "/{id}", method = RequestMethod.GET)
-	public void getById(HttpServletRequest request, @PathVariable Long id, HttpServletResponse response) {
+	public void getById(@PathVariable Long id, HttpServletResponse response) {
 		File file = rDao.selectEnabledById(id);
 		HttpResponseTool.writeResponse(response, file);
 	}

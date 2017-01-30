@@ -2,7 +2,6 @@ package com.example.webapi.admin;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +25,13 @@ public class AdminFileApi {
 	private FileWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES, method = RequestMethod.GET)
-	public void getAll(HttpServletRequest request, HttpServletResponse response) {
+	public void getAll(HttpServletResponse response) {
 		List<File> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/disable", method = RequestMethod.POST)
-	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void disable(HttpServletResponse response, @PathVariable Long id) {
 		File e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);
@@ -44,7 +43,7 @@ public class AdminFileApi {
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/enable", method = RequestMethod.POST)
-	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void enable(HttpServletResponse response, @PathVariable Long id) {
 		File e = rMapper.selectById(id);
 		if (e == null) {
 			HttpResponseTool.setStatusAsNotFound(response);

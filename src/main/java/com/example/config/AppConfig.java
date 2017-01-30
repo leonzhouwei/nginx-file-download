@@ -201,8 +201,8 @@ public class AppConfig implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		//
-		final String ASSETS_DIR = dataDir + "/assets";
-		File dir = new File(ASSETS_DIR);
+		final String assestsDir = dataDir + "/assets";
+		File dir = new File(assestsDir);
 		List<String> list = Lists.newArrayList();
 		String[] children = dir.list();
 		for (String e : children) {
@@ -212,7 +212,7 @@ public class AppConfig implements InitializingBean {
 		}
 		if (list.isEmpty()) {
 			throw new FileNotFoundException(
-					"versioned static resources directory not found under '" + ASSETS_DIR + "'");
+					"versioned static resources directory not found under '" + assestsDir + "'");
 		}
 		if (list.size() > 1) {
 			throw new MultipleVersionedStaticResourceDirectoriesException(list);

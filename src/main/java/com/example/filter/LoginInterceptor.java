@@ -20,17 +20,16 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public static final String SEESION_ID = PREFIX + "sessionId";
 
 	static final Set<String> unrestrictedRoutePatterns = Sets.newHashSet();
+
 	static {
 		unrestrictedRoutePatterns.add(RouteDefine.BASE_ASSETS + ".*");
 		unrestrictedRoutePatterns.add(RouteDefine.LOGIN + ".*");
-		unrestrictedRoutePatterns.add(RouteDefine.API
-				+ ".*");
+		unrestrictedRoutePatterns.add(RouteDefine.API + ".*");
 	}
 
 	private AccountRMapper accountRMapper;
 
-	public static void redirectToLogin(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	public static void redirectToLogin(HttpServletResponse response) throws IOException {
 		response.sendRedirect(RouteDefine.LOGIN);
 	}
 
@@ -64,8 +63,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 		String uri = request.getRequestURI();
 		for (String e : unrestrictedRoutePatterns) {
 			if (uri.matches(e)) {
@@ -74,27 +73,25 @@ public class LoginInterceptor implements HandlerInterceptor {
 		}
 		Long id = getAccountId(request);
 		if (id == null) {
-			redirectToLogin(request, response);
+			redirectToLogin(response);
 			return false;
 		}
 		Account account = accountRMapper.selectById(id);
 		if (Account.isValidAccount(account)) {
 			return true;
 		}
-		redirectToLogin(request, response);
+		redirectToLogin(response);
 		return false;
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// no operations
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex)
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// no operations
 	}

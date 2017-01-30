@@ -11,11 +11,8 @@ public final class Sha2Encoder {
 		return DigestUtils.sha256Hex(rawPassword.trim()).toLowerCase();
 	}
 
-	public static final boolean matches(String rawPassword,
-			String encodedPassword) {
-		boolean b = DigestUtils.sha256Hex(rawPassword).compareTo(
-				encodedPassword) == 0;
-		return b;
+	public static final boolean matches(String rawPassword, String encodedPassword) {
+		return DigestUtils.sha256Hex(rawPassword).compareTo(encodedPassword) == 0;
 	}
 
 }

@@ -55,17 +55,7 @@ public class DownloadApi {
 	static final String FILE_ID = "fileId";
 	static final String UUID = "uuid";
 
-	static Result newStatusNgResult() {
-		Result ret = new Result();
-		ret.ok = false;
-		return ret;
-	}
-
-	static Result newStatusOkResult() {
-		Result ret = new Result();
-		ret.ok = true;
-		return ret;
-	}
+	private static final Logger logger = LoggerFactory.getLogger(DownloadApi.class);
 
 	private static class Result {
 		boolean ok = false;
@@ -94,7 +84,17 @@ public class DownloadApi {
 	@Autowired
 	private FileServiceRMapper fileServiceRMapper;
 
-	private static final Logger logger = LoggerFactory.getLogger(DownloadApi.class);
+	static Result newStatusNgResult() {
+		Result ret = new Result();
+		ret.ok = false;
+		return ret;
+	}
+
+	static Result newStatusOkResult() {
+		Result ret = new Result();
+		ret.ok = true;
+		return ret;
+	}
 
 	static final String xAccelRedirect(final String routePrefix, Production production, File file)
 			throws UnsupportedEncodingException {
@@ -258,7 +258,7 @@ public class DownloadApi {
 			HttpResponseTool.setStatusAsNotFound(response);
 			return newStatusNgResult();
 		}
-		
+
 		// success
 		result.ok = true;
 		result.file = file;
@@ -284,37 +284,5 @@ public class DownloadApi {
 			logger.warn(EMPTY, e);
 		}
 	}
-	
-/*
-	void downloadLocalFile(HttpServletRequest request, HttpServletResponse response) {
-		logger.debug(request.getRequestURI());
-		logger.debug(request.getRequestURL().toString());
-		try {
-			String path = "var/gopher.jpg";
-			// path 是指欲下载的文件的路径。
-			java.io.File file = new java.io.File(path);
-			logger.debug("file length: " + file.length());
-			// 取得文件名。
-			String filename = file.getName();
-			// 以流的形式下载文件。
-			InputStream fis = new BufferedInputStream(new FileInputStream(path));
-			byte[] buffer = new byte[fis.available()];
-			fis.read(buffer);
-			fis.close();
-			// 清空 response
-			response.reset();
-			// 设置 response 的 Header
-			response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
-			response.addHeader("Content-Length", "" + file.length());
-			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-			response.setContentType("application/octet-stream");
-			toClient.write(buffer);
-			toClient.flush();
-			toClient.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-*/
 
 }

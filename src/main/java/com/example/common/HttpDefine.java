@@ -2,9 +2,6 @@ package com.example.common;
 
 public final class HttpDefine {
 
-	private HttpDefine() {
-	}
-	
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
 
 	public static final String CONTENT_TYPE_KEY = "Content-Type";
@@ -18,5 +15,8 @@ public final class HttpDefine {
 	
 	public static final String XFF = "X-Forwarded-For";
 	public static final String XFF_SEPARATOR = ",";
+	
+	private HttpDefine() {
+	}
 
 }

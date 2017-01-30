@@ -42,8 +42,8 @@ public class IndexController {
 		if (Account.isAdmin(account)) {
 			return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_INDEX);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_INDEX);
-		return ret;
+		
+		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_INDEX);
 	}
 
 }

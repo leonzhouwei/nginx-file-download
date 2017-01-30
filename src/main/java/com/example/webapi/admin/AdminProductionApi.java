@@ -2,7 +2,6 @@ package com.example.webapi.admin;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -31,19 +30,19 @@ public class AdminProductionApi {
 	private ProductionWMapper wMapper;
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS, method = RequestMethod.GET)
-	public void getAll(HttpServletRequest request, HttpServletResponse response) {
+	public void getAll(HttpServletResponse response) {
 		List<Production> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}", method = RequestMethod.GET)
-	public void getById(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void getById(HttpServletResponse response, @PathVariable Long id) {
 		Production e = rMapper.selectById(id);
 		HttpResponseTool.writeResponse(response, e);
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/actions/disable", method = RequestMethod.POST)
-	public void disable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void disable(HttpServletResponse response, @PathVariable Long id) {
 		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));
 		if (e == null) {
@@ -56,7 +55,7 @@ public class AdminProductionApi {
 	}
 
 	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/actions/enable", method = RequestMethod.POST)
-	public void enable(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id) {
+	public void enable(HttpServletResponse response, @PathVariable Long id) {
 		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));
 		if (e == null) {

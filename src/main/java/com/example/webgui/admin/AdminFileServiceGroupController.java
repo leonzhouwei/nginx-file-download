@@ -56,8 +56,7 @@ public class AdminFileServiceGroupController {
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.POST)
-	public ModelAndView newOne(HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView newOne(HttpServletRequest request) {
 		String name = HttpRequestTool.extractName(request);
 		logger.debug("name: " + name);
 		FileServiceGroup e = new FileServiceGroup();

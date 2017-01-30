@@ -14,7 +14,7 @@ public class SqlSessionFactoryBeanInit {
 
 	@Autowired
 	private AppConfig appConfig;
-	
+
 	@Autowired
 	private DataSource dataSource;
 
@@ -23,14 +23,10 @@ public class SqlSessionFactoryBeanInit {
 		SqlSessionFactoryBean ret = new SqlSessionFactoryBean();
 		ret.setDataSource(dataSource);
 		String driverClassName = appConfig.getRdbmsDriverClassName();
-		String typeHandlersPackage = null;
 		if ("org.sqlite.JDBC".compareTo(driverClassName) == 0) {
-			typeHandlersPackage = "com.example.persist.typehandler.sqlite";
-		} else {
-			// TODO
+			ret.setTypeHandlersPackage("com.example.persist.typehandler.sqlite");
 		}
-		ret.setTypeHandlersPackage(typeHandlersPackage);
-		
+
 		return ret;
 	}
 

@@ -26,8 +26,8 @@ public final class MoneyTool {
 		} else {
 			lng = Long.parseLong(priceYuan) * 100;
 		}
-		final long totalFen = lng + decimal;
-		return totalFen;
+		
+		return lng + decimal;
 	}
 
 }

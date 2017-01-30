@@ -1,6 +1,5 @@
 package com.example.filter;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +16,7 @@ public class GlobalControllerExceptionHandler {
 	private static final Logger logger = LoggerFactory.getLogger(GlobalControllerExceptionHandler.class);
 
 	@ExceptionHandler(value = { Exception.class })
-	public void handle(HttpServletRequest request, HttpServletResponse response, Exception e) {
+	public void handle(HttpServletResponse response, Exception e) {	// "request" is unused
 		logger.warn(StringUtils.EMPTY, e);
 		String message = e.getMessage();
 		HttpResponseTool.writeInternalServerError(response, null, message, null);

@@ -2,9 +2,6 @@ package com.example.webapi;
 
 public final class RouteDefine {
 
-	private RouteDefine() {
-	}
-
 	// -------------------------------------------------------------------------
 	public static final String ROOT = "/";
 
@@ -76,5 +73,8 @@ public final class RouteDefine {
 	public static final String APP = ROOT + "app";
 	public static final String APP_UUID = APP + "/uuid";
 	public static final String APP_VERSION = APP + "/version";
+	
+	private RouteDefine() {
+	}
 
 }
