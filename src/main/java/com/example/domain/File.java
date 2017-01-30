@@ -50,7 +50,7 @@ public class File extends Base {
 
 	public void setDir(String dir) {
 		if (dir == null) {
-			this.dir = EMPTY_STRING;
+			dir = EMPTY_STRING;
 		}
 		dir = dir.trim();
 		this.dir = dir;
