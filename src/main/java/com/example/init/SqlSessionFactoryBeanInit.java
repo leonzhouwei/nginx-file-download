@@ -22,12 +22,12 @@ public class SqlSessionFactoryBeanInit {
 	public SqlSessionFactoryBean sqlSessionFactory() {
 		SqlSessionFactoryBean ret = new SqlSessionFactoryBean();
 		ret.setDataSource(dataSource);
-		String driverClassName = appConfig.getRdbmsDriverClassName();
-		if ("org.sqlite.JDBC".compareTo(driverClassName) == 0) {
+		String url = appConfig.getRdbmsUrl();
+		if (url.matches(".*sqlite:.*.sqlite")) {
 			ret.setTypeHandlersPackage("com.example.persist.typehandler.sqlite");
 		}
 
 		return ret;
 	}
-
+	
 }
