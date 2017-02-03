@@ -25,6 +25,11 @@ public class AccountPrevillegeInterceptor extends BaseInterceptor {
 		if (id == null) {
 			return false;
 		}
+		
+		return checkAccount(response, uri, id);
+	}
+	
+	private boolean checkAccount(HttpServletResponse response, String uri, long id) {
 		Account account = accountRMapper.selectById(id);
 		if (!Account.isValidAccount(account)) {
 			return false;
