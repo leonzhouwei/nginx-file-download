@@ -20,7 +20,7 @@ import com.google.common.io.Files;
 @EnableAutoConfiguration
 public class App {
 	
-	public static final String VERSION = "0.10.0";
+	public static final String VERSION = "0.10.1";
 
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 	private static ConfigurableApplicationContext cac;

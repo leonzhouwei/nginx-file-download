@@ -29,7 +29,7 @@
 	<update id="update" parameterType="com.example.domain.FileService">
 		UPDATE file_service
 		SET enabled=#{enabled},
-		updated_at=#{updatedAt}, host=#{host}, group_id=#{groupId}
+		updated_at=#{updatedAt}, host=#{host}, group_id=#{group.id}
 		WHERE id=#{id}
 	</update>
 

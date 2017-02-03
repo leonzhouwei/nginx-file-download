@@ -20,8 +20,8 @@
 		enabled=#{enabled},
 		updated_at=#{updatedAt}, dir=#{dir}, name=#{name},
 		size=#{size}, md=#{md},
-		production_id=#{productionId},
-		file_service_group_id=#{fileServiceGroupId}
+		production_id=#{production.id},
+		file_service_group_id=#{fileServiceGroup.id}
 		WHERE id=#{id}
 	</update>
 

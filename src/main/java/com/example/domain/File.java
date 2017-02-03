@@ -75,10 +75,6 @@ public class File extends Base {
 		this.size = size;
 	}
 
-	public void resetSizeMb(Long sizeMb) {
-		setSize(sizeMb * 1024 * 1024);
-	}
-
 	public String getMd() {
 		return md;
 	}
