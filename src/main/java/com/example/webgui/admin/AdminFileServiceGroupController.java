@@ -67,7 +67,7 @@ public class AdminFileServiceGroupController {
 				RouteDefine.ADMIN_FILE_SERVICE_GROUPS);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_EDIT, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS + "/edit", method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request,
 			HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
@@ -84,7 +84,7 @@ public class AdminFileServiceGroupController {
 		return ret;
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_EDIT, method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS + "/edit", method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request,
 			HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);

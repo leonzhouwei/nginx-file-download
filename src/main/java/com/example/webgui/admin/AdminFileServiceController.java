@@ -74,7 +74,7 @@ public class AdminFileServiceController {
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_FILE_SERVICES);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_EDIT, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES + "/edit", method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
@@ -87,7 +87,7 @@ public class AdminFileServiceController {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES_EDIT, method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICES + "/edit", method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {

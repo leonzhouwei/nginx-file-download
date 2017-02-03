@@ -134,7 +134,7 @@ public class DownloadApi {
 		return flg;
 	}
 
-	@RequestMapping(RouteDefine.API_FILE_SERVICE_GROUPS + "/{fsGroupId}/actions/download/**")
+	@RequestMapping(RouteDefine.API + "/fsgroups/{fsGroupId}/actions/download/**")
 	public void downloadWithAuth(HttpServletRequest request, HttpServletResponse response) {
 		Result result = check(request, response);
 		if (!result.ok) {

@@ -66,7 +66,7 @@ public class AdminAccountController {
 		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_ACCOUNTS);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_EDIT, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS + "/edit", method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
@@ -79,7 +79,7 @@ public class AdminAccountController {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, account);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_EDIT, method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS + "/edit", method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {

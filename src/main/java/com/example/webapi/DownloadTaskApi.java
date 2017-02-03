@@ -30,14 +30,14 @@ public class DownloadTaskApi {
 	@Autowired
 	private FileRMapper fileRMapper;
 
-	@RequestMapping(value = RouteDefine.API_I_DOWNLOAD_TASKS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API + "/i/dld-tasks", method = RequestMethod.GET)
 	public void getAll(HttpServletRequest request, HttpServletResponse response) {
 		Long userId = LoginInterceptor.getAccountId(request);
 		List<DownloadTask> tasks = rMapper.selectEnabledByUserId(userId);
 		HttpResponseTool.writeResponse(response, tasks);
 	}
 
-	@RequestMapping(value = RouteDefine.API_I_DOWNLOAD_TASKS, method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API + "/i/dld-tasks", method = RequestMethod.POST)
 	public void post(HttpServletRequest request, HttpServletResponse response)
 			throws UnknownHostException {
 		Long id = HttpRequestTool.extractId(request);

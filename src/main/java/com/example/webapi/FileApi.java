@@ -24,13 +24,13 @@ public class FileApi {
 	@Autowired
 	private FileRDao rDao;
 
-	@RequestMapping(value = RouteDefine.API_FILES, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API + "/files", method = RequestMethod.GET)
 	public void getAll(HttpServletResponse response) {
 		List<File> list = rDao.selectAllEnabled();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_FILES + "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API + "/files/{id}", method = RequestMethod.GET)
 	public void getById(@PathVariable Long id, HttpServletResponse response) {
 		File file = rDao.selectEnabledById(id);
 		HttpResponseTool.writeResponse(response, file);

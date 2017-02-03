@@ -24,13 +24,13 @@ public class AdminDownloadTaskApi {
 	@Autowired
 	private DownloadTaskWMapper wMapper;
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.API_ADMIN + "/dld-tasks", method = RequestMethod.GET)
 	public void getAll(HttpServletResponse response) {
 		List<DownloadTask> tasks = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, tasks);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/disable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN + "/dld-tasks/{id}/actions/disable", method = RequestMethod.POST)
 	public void disable(HttpServletResponse response, @PathVariable Long id) {
 		DownloadTask e = rMapper.selectById(id);
 		if (e == null) {
@@ -42,7 +42,7 @@ public class AdminDownloadTaskApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_DOWNLOAD_TASKS + "/{id}/actions/enable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.API_ADMIN + "/dld-tasks/{id}/actions/enable", method = RequestMethod.POST)
 	public void enable(HttpServletResponse response, @PathVariable Long id) {
 		DownloadTask e = rMapper.selectById(id);
 		if (e == null) {
