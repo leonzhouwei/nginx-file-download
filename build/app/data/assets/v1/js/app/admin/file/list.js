@@ -27,7 +27,11 @@ function initTable(result) {
 		buffer.push('<td>', elem['dir'], '</td>');
 		buffer.push('<td>', elem['name'], '</td>');
 		buffer.push('<td>', elem['production']['id'], '</td>');
-		var sizeInMB = parseInt(elem['size'] / 1024 / 1024);
+		var size = parseInt(elem['size']);
+		var sizeInMB = size / 1024 / 1024;
+		if (sizeInMB < 1.0) {
+			sizeInMB = 0.0;
+		}
 		buffer.push('<td style="text-align: right;">', sizeInMB, '</td>');
 		buffer.push('<td>', elem['md'], '</td>');
 		buffer.push('<td>', elem['fileServiceGroup']['id'], '</td>');
