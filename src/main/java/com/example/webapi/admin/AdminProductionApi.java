@@ -29,19 +29,19 @@ public class AdminProductionApi {
 	@Autowired
 	private ProductionWMapper wMapper;
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/productions", method = RequestMethod.GET)
 	public void getAll(HttpServletResponse response) {
 		List<Production> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/productions/{id}", method = RequestMethod.GET)
 	public void getById(HttpServletResponse response, @PathVariable Long id) {
 		Production e = rMapper.selectById(id);
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/actions/disable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/productions/{id}/actions/disable", method = RequestMethod.POST)
 	public void disable(HttpServletResponse response, @PathVariable Long id) {
 		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));
@@ -54,7 +54,7 @@ public class AdminProductionApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_PRODUCTIONS + "/{id}/actions/enable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/productions/{id}/actions/enable", method = RequestMethod.POST)
 	public void enable(HttpServletResponse response, @PathVariable Long id) {
 		Production e = rMapper.selectById(id);
 		logger.debug(JsonTool.toJson(e));

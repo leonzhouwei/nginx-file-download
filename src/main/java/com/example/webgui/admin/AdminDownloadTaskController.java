@@ -20,7 +20,7 @@ public class AdminDownloadTaskController {
 	@Autowired
 	private AppConfig appConfig;
 
-	@RequestMapping(value = RouteDefine.ADMIN_DOWNLOAD_TASKS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN + "/dld-tasks", method = RequestMethod.GET)
 	public ModelAndView get() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}

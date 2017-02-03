@@ -8,7 +8,7 @@ import com.example.config.AppConfig;
 @RestController
 public class AppUuidApi {
 	
-	@RequestMapping(RouteDefine.APP_UUID)
+	@RequestMapping(RouteDefine.API + "/uuid")
 	public String get() {
 		return AppConfig.APP_UUID;
 	}

@@ -56,7 +56,7 @@ public class LoginController {
 		e.setPassword(cypher);
 		Account account = rMapper.selectEnabledByNameAndPassword(e);
 		if (account == null) {
-			response.sendRedirect(RouteDefine.LOGIN);
+			response.sendRedirect(RouteDefine.ROOT + "login");
 			return;
 		}
 		LoginInterceptor.setSessionId(request, account.getId());

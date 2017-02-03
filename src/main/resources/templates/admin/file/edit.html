@@ -31,9 +31,9 @@
 					class="form-control" id="productionSelect" name="production"></select>
 			</div>
 			<div class="form-group">
-				<label for="sizeText">大小 (MB)</label> <input type="text"
+				<label for="sizeText">大小 (B)</label> <input type="text"
 					class="form-control" id="sizeText" name="size"
-					th:value="${size/1024/1024}" />
+					th:value="${size}" />
 			</div>
 			<div class="form-group">
 				<label for="mdText">消息摘要</label> <input type="text"

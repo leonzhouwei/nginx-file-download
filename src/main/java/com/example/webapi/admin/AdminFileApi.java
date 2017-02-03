@@ -24,13 +24,13 @@ public class AdminFileApi {
 	@Autowired
 	private FileWMapper wMapper;
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILES, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/files", method = RequestMethod.GET)
 	public void getAll(HttpServletResponse response) {
 		List<File> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/disable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/files/{id}/actions/disable", method = RequestMethod.POST)
 	public void disable(HttpServletResponse response, @PathVariable Long id) {
 		File e = rMapper.selectById(id);
 		if (e == null) {
@@ -42,7 +42,7 @@ public class AdminFileApi {
 		HttpResponseTool.writeResponse(response, e);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_FILES + "/{id}/actions/enable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/files/{id}/actions/enable", method = RequestMethod.POST)
 	public void enable(HttpServletResponse response, @PathVariable Long id) {
 		File e = rMapper.selectById(id);
 		if (e == null) {

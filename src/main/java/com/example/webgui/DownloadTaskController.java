@@ -19,7 +19,7 @@ public class DownloadTaskController {
 	@Autowired
 	private AppConfig appConfig;
 
-	@RequestMapping(value = RouteDefine.I_DOWNLOAD_TASKS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.I + "/dld-tasks", method = RequestMethod.GET)
 	public ModelAndView getAll() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}

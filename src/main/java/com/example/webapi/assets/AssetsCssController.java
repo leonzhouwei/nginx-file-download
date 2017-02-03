@@ -22,7 +22,7 @@ public class AssetsCssController {
 	@Autowired
 	private AppConfig appConfig;
 
-	@RequestMapping(value = RouteDefine.ASSETS_VERSION_CSS + "/**", method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ASSETS_VERSION + "/css/**", method = RequestMethod.GET)
 	public void get(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String uri = request.getRequestURI();

@@ -33,6 +33,8 @@ public class AdminAccountController {
 	
 	static final String PSWD = "password";
 	static final String ROLE = "role";
+	
+	static final String BASE_ROUTE = RouteDefine.ADMIN + "/accounts";
 
 	@Autowired
 	private AppConfig appConfig;
@@ -41,17 +43,17 @@ public class AdminAccountController {
 	@Autowired
 	private AccountWMapper wMapper;
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS, method = RequestMethod.GET)
+	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.GET)
 	public ModelAndView list() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_NEW, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/new", method = RequestMethod.GET)
 	public ModelAndView gotoNew() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS, method = RequestMethod.POST)
+	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request) {
 		String name = HttpRequestTool.extractName(request);
 		Long role = HttpRequestTool.extractLong(request, ROLE);
@@ -63,10 +65,10 @@ public class AdminAccountController {
 		account.setPassword(cipher);
 		account.getRole().setId(role);
 		wMapper.insert(account);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_ACCOUNTS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS + "/edit", method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/edit", method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
@@ -79,7 +81,7 @@ public class AdminAccountController {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, account);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS + "/edit", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/edit", method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
@@ -102,10 +104,10 @@ public class AdminAccountController {
 		account.resetUpdatedAt();
 		account.setEnabled(enabled);
 		wMapper.update(account);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_ACCOUNTS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_EDIT_PASSWORD, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/edit-pswd", method = RequestMethod.GET)
 	public ModelAndView gotoEditPassword(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
@@ -118,7 +120,7 @@ public class AdminAccountController {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_ACCOUNTS_EDIT_PASSWORD, account);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_ACCOUNTS_EDIT_PASSWORD, method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/edit-pswd", method = RequestMethod.POST)
 	public ModelAndView editPassword(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
@@ -133,7 +135,7 @@ public class AdminAccountController {
 		account.setPassword(newPassword);
 		account.resetUpdatedAt();
 		wMapper.updatePassword(account);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_ACCOUNTS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
 	}
 
 }

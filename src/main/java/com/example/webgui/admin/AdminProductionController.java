@@ -32,6 +32,8 @@ public class AdminProductionController {
 	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX + WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
+	
+	static final String BASE_ROUTE = RouteDefine.ADMIN + "/productions";
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminProductionController.class);
 
@@ -42,17 +44,17 @@ public class AdminProductionController {
 	@Autowired
 	private ProductionWMapper wMapper;
 
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.GET)
+	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.GET)
 	public ModelAndView list() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_NEW, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN + "/productions/new", method = RequestMethod.GET)
 	public ModelAndView gotoNew() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS, method = RequestMethod.POST)
+	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request) {
 		String dir = request.getParameter(DIR);
 		logger.debug("dir: " + dir);
@@ -68,10 +70,10 @@ public class AdminProductionController {
 		e.setDescription(description);
 		e.setEnabled(enabled);
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN + "/productions/edit", method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
@@ -84,7 +86,7 @@ public class AdminProductionController {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_PRODUCTIONS_EDIT, method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN + "/productions/edit", method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
@@ -104,7 +106,7 @@ public class AdminProductionController {
 		e.resetUpdatedAt();
 		e.setEnabled(enabled);
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, RouteDefine.ADMIN_PRODUCTIONS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
 	}
 
 }

@@ -25,18 +25,16 @@ import com.google.common.base.Strings;
 @Controller
 public class AdminFileServiceGroupController {
 
-	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN
-			+ "/file-service-group/";
-	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX
-			+ WebGuiDefine.DISABLE;
+	static final String VIEW_NAME_PREFIX = WebGuiDefine.ADMIN + "/file-service-group/";
+	static final String VIEW_NAME_DISABLE = VIEW_NAME_PREFIX + WebGuiDefine.DISABLE;
 	static final String VIEW_NAME_EDIT = VIEW_NAME_PREFIX + WebGuiDefine.EDIT;
-	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX
-			+ WebGuiDefine.ENABLE;
+	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX + WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
+	
+	static final String BASE_ROUTE = RouteDefine.ADMIN + "/fsgroups";
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AdminFileServiceGroupController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminFileServiceGroupController.class);
 
 	@Autowired
 	private AppConfig appConfig;
@@ -45,17 +43,17 @@ public class AdminFileServiceGroupController {
 	@Autowired
 	private FileServiceGroupWMapper wMapper;
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.GET)
+	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.GET)
 	public ModelAndView list() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS_NEW, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN + "/fsgroups/new", method = RequestMethod.GET)
 	public ModelAndView gotoNew() {
 		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS, method = RequestMethod.POST)
+	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.POST)
 	public ModelAndView newOne(HttpServletRequest request) {
 		String name = HttpRequestTool.extractName(request);
 		logger.debug("name: " + name);
@@ -63,13 +61,11 @@ public class AdminFileServiceGroupController {
 		e.reset();
 		e.setName(name);
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-				RouteDefine.ADMIN_FILE_SERVICE_GROUPS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS + "/edit", method = RequestMethod.GET)
-	public ModelAndView gotoEdit(HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(value = RouteDefine.ADMIN + "/fsgroups/edit", method = RequestMethod.GET)
+	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -78,15 +74,13 @@ public class AdminFileServiceGroupController {
 		if (e == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
 		}
-		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig,
-				VIEW_NAME_EDIT);
+		ModelAndView ret = ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT);
 		ret.getModel().putAll(ReflectTool.toMap(e));
 		return ret;
 	}
 
-	@RequestMapping(value = RouteDefine.ADMIN_FILE_SERVICE_GROUPS + "/edit", method = RequestMethod.POST)
-	public ModelAndView edit(HttpServletRequest request,
-			HttpServletResponse response) {
+	@RequestMapping(value = RouteDefine.ADMIN + "/fsgroups/edit", method = RequestMethod.POST)
+	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
 			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
@@ -105,8 +99,7 @@ public class AdminFileServiceGroupController {
 		}
 		e.resetUpdatedAt();
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig,
-						RouteDefine.ADMIN_FILE_SERVICE_GROUPS);
+		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
 	}
 
 }

@@ -24,13 +24,13 @@ public class AdminAccountApi {
 	@Autowired
 	private AccountWMapper wMapper;
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS, method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/accounts", method = RequestMethod.GET)
 	public void getAll(HttpServletResponse response) {
 		List<Account> list = rMapper.selectAll();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/actions/enable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/accounts/{id}/actions/enable", method = RequestMethod.POST)
 	public void enable(HttpServletResponse response, @PathVariable Long id) {
 		Account account = rMapper.selectById(id);
 		if (account == null) {
@@ -42,7 +42,7 @@ public class AdminAccountApi {
 		HttpResponseTool.writeResponse(response, account);
 	}
 
-	@RequestMapping(value = RouteDefine.API_ADMIN_ACCOUNTS + "/{id}/actions/disable", method = RequestMethod.POST)
+	@RequestMapping(value = RouteDefine.ADMIN_API + "/accounts/{id}/actions/disable", method = RequestMethod.POST)
 	public void disable(HttpServletResponse response, @PathVariable Long id) {
 		Account account = rMapper.selectById(id);
 		if (account == null) {

@@ -22,7 +22,7 @@ public class AssetsImageController {
 	@Autowired
 	private AppConfig appConfig;
 
-	@RequestMapping(value = RouteDefine.ASSETS_VERSION_IMAGES + "/**", method = RequestMethod.GET)
+	@RequestMapping(value = RouteDefine.ASSETS_VERSION + "/images/**", method = RequestMethod.GET)
 	public void get(HttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		String uri = request.getRequestURI();

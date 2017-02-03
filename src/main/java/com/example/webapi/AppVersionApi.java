@@ -8,7 +8,7 @@ import com.example.App;
 @RestController
 public class AppVersionApi {
 	
-	@RequestMapping(RouteDefine.APP_VERSION)
+	@RequestMapping(RouteDefine.API + "/version")
 	public String get() {
 		return App.VERSION;
 	}
