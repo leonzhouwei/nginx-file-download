@@ -54,7 +54,8 @@ public final class HttpResponseTool {
 
 	public static <T> void writeJson(HttpServletResponse response, T t) {
 		try {
-			String json = JSON.toJSONString(t, SerializerFeature.UseISO8601DateFormat);
+			String json = JSON.toJSONString(t, SerializerFeature.DisableCircularReferenceDetect,
+					SerializerFeature.UseISO8601DateFormat);
 			setDefaultContentType(response);
 			PrintWriter pw = response.getWriter();
 			pw.write(json);
