@@ -43,8 +43,6 @@ public class AppConfig implements InitializingBean {
 	private Boolean ignoreCustomizedInterceptors;
 	@Value("${app.data.dir}")
 	private String dataDir;
-	@Value("${app.download.history.disable}")
-	private Boolean disableDownloadHistory;
 
 	private String assetsHome;
 
@@ -80,20 +78,6 @@ public class AppConfig implements InitializingBean {
 	@Value("${app.nginx.xAccelPrefix}")
 	private String xAccelPrefix;
 
-	// ssdb --------------------------------------------------------------------
-	@Value("${app.ssdb.timeout}")
-	private int ssdbTimeoutMillis;
-	@Value("${app.ssdb.maxActive}")
-	private int ssdbMaxActive;
-	@Value("${app.ssdb.testWhileIdle}")
-	private boolean ssdbTestWhileIdle;
-	@Value("${app.ssdb.host}")
-	private String ssdbHost;
-	@Value("${app.ssdb.port}")
-	private int ssdbPort;
-	@Value("${app.ssdb.auth}")
-	private String ssdbAuth;
-
 	// app ---------------------------------------------------------------------
 	public String getWorkDirPath() {
 		return workDirPath;
@@ -105,10 +89,6 @@ public class AppConfig implements InitializingBean {
 
 	public String getAssetsHome() {
 		return assetsHome;
-	}
-
-	public Boolean getDisableDownloadHistory() {
-		return disableDownloadHistory;
 	}
 
 	// rdbms -------------------------------------------------------------------
@@ -167,31 +147,6 @@ public class AppConfig implements InitializingBean {
 	// nginx -------------------------------------------------------------------
 	public String getXAccelPrefix() {
 		return xAccelPrefix;
-	}
-
-	// ssdb --------------------------------------------------------------------
-	public int getSsdbTimeoutMillis() {
-		return ssdbTimeoutMillis;
-	}
-
-	public int getSsdbMaxActive() {
-		return ssdbMaxActive;
-	}
-
-	public boolean isSsdbTestWhileIdle() {
-		return ssdbTestWhileIdle;
-	}
-
-	public String getSsdbHost() {
-		return ssdbHost;
-	}
-
-	public int getSsdbPort() {
-		return ssdbPort;
-	}
-
-	public String getSsdbAuth() {
-		return ssdbAuth;
 	}
 
 	public Boolean getIgnoreCustomizedInterceptors() {

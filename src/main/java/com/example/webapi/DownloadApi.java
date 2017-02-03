@@ -22,7 +22,6 @@ import com.example.common.HttpRequestTool;
 import com.example.common.HttpResponseTool;
 import com.example.common.JsonTool;
 import com.example.config.AppConfig;
-import com.example.domain.DownloadHistory;
 import com.example.domain.DownloadTask;
 import com.example.domain.File;
 import com.example.domain.FileService;
@@ -61,7 +60,6 @@ public class DownloadApi {
 		boolean ok = false;
 		String clientIp;
 		String webServerHost;
-		String requestRoute;
 		String taskUuid;
 		String fileIdStr;
 		// --------------------
@@ -161,15 +159,12 @@ public class DownloadApi {
 		// respond
 		response.setContentType(HttpDefine.CONTENT_TYPE_VALUE_APP_OCTETSTREAM);
 		String xAccelRoutePrefix = appConfig.getXAccelPrefix();
-		String xAccelRedirect = "";
 		try {
-			xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, result.production, result.file);
+			String xAccelRedirect = xAccelRedirect(xAccelRoutePrefix, result.production, result.file);
 			logger.info(WEB_SERVER_X_ACCEL + ": " + xAccelRedirect);
 			response.setHeader(WEB_SERVER_X_ACCEL, xAccelRedirect);
 			response.addHeader(HttpDefine.CONTENT_DISPOSITION,
 					ATACHMENT_FILENAME + URLEncoder.encode(fileName, UTF_8_CHARSET_NAME));
-			// save the current download behavior
-			recordHistory(request, task, result);
 		} catch (UnsupportedEncodingException e) {
 			logger.warn(StringUtils.EMPTY, e);
 			HttpResponseTool.writeInternalServerError(response, e);
@@ -219,7 +214,6 @@ public class DownloadApi {
 		Result result = new Result();
 		result.clientIp = clientIp;
 		result.webServerHost = host;
-		result.requestRoute = route;
 		result.fileIdStr = fileIdStr;
 		result.taskUuid = uuid;
 		return deepCheck(response, result);
@@ -264,25 +258,6 @@ public class DownloadApi {
 		result.file = file;
 		result.production = production;
 		return result;
-	}
-
-	void recordHistory(HttpServletRequest request, DownloadTask task, Result result) {
-		try {
-			if (appConfig.getDisableDownloadHistory()) {
-				logger.info("download history disabled");
-				return;
-			}
-			DownloadHistory history = new DownloadHistory();
-			history.reset();
-			history.setTaskId(task.getId());
-			history.setClientIp(result.clientIp);
-			history.setWebServerHost(result.webServerHost);
-			history.setRequestRoute(result.requestRoute);
-			history.setRequestParameters(JsonTool.toJson(request.getParameterMap()));
-			logger.info("download history saved (" + JsonTool.toJson(history) + ")");
-		} catch (Exception e) {
-			logger.warn(EMPTY, e);
-		}
 	}
 
 }

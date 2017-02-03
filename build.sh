@@ -24,7 +24,7 @@ mkdir -p ${BUILD}/${CONFIG}
 cp -r ${APP}/data ${BUILD}/${APP}/
 cp -r ${CONFIG} ${BUILD}/
 
-cp sqlite.sqlite ${BUILD}/
+cp db.sqlite ${BUILD}/
 
 cp ${TARGET}/${JAR_NAME_PREFIX}*.jar ${BUILD}/
 

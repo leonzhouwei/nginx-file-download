@@ -26,7 +26,7 @@ mkdir -p ${BUILD}/${CONFIG}
 cp -r ${CONFIG}/application.properties ${BUILD}/${CONFIG}
 cp -r ${CONFIG}/logback.xml ${BUILD}/${CONFIG}
 
-cp sqlite.sqlite ${BUILD}/
+cp db.sqlite ${BUILD}/
 
 cp ${TARGET}/${JAR_NAME_PREFIX}*.jar ${BUILD}/
 

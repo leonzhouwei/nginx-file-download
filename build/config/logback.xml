@@ -44,5 +44,15 @@
 		<appender-ref ref="EXAMPLE_COM_APP_LOG_FILE_APPENDER" />
 		<appender-ref ref="EXAMPLE_COM_ERROR_LOG_FILE_APPENDER" />
 	</logger>
+	
+	<!-- ##### log4jdbc start ##### -->
+	<logger name="jdbc.sqltiming" level="INFO">
+		<appender-ref ref="EXAMPLE_COM_APP_LOG_FILE_APPENDER" />
+	</logger>
+	<logger name="jdbc.sqlonly" level="OFF" />
+	<logger name="jdbc.audit" level="OFF" />
+	<logger name="jdbc.resultset" level="OFF" />
+	<logger name="jdbc.connection" level="OFF" />
+	<!-- ##### log4jdbc  end ##### -->
 
 </configuration>

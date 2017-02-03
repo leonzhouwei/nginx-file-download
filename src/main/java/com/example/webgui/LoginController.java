@@ -46,8 +46,10 @@ public class LoginController {
 		if (LoginInterceptor.sessionIdExist(request)) {
 			response.sendRedirect(RouteDefine.FILES);
 			logger.info(LoginInterceptor.getSessionId(request) + " has already signed in");
+			response.sendRedirect(RouteDefine.ROOT);
 			return;
 		}
+		
 		String username = request.getParameter(USERNAME);
 		String plain = request.getParameter(PSWD);
 		String cypher = Sha2Encoder.encode(plain);
