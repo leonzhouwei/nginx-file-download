@@ -136,7 +136,7 @@ public class DownloadApi {
 
 	@RequestMapping(RouteDefine.API_FILE_SERVICE_GROUPS + "/{fsGroupId}/actions/download/**")
 	public void downloadWithAuth(HttpServletRequest request, HttpServletResponse response) {
-		Result result = logAndCheck(request, response);
+		Result result = check(request, response);
 		if (!result.ok) {
 			return;
 		}
@@ -176,7 +176,7 @@ public class DownloadApi {
 		}
 	}
 
-	Result logAndCheck(HttpServletRequest request, HttpServletResponse response) {
+	Result check(HttpServletRequest request, HttpServletResponse response) {
 		// extract request route
 		final String route = request.getRequestURI();
 		logger.info("route: " + route);
@@ -215,17 +215,17 @@ public class DownloadApi {
 			return newStatusNgResult();
 		}
 
-		// check with database
+		// check more
 		Result result = new Result();
 		result.clientIp = clientIp;
 		result.webServerHost = host;
 		result.requestRoute = route;
 		result.fileIdStr = fileIdStr;
 		result.taskUuid = uuid;
-		return logAndCheckWithDatabase(response, result);
+		return deepCheck(response, result);
 	}
 
-	Result logAndCheckWithDatabase(HttpServletResponse response, Result result) {
+	Result deepCheck(HttpServletResponse response, Result result) {
 		// find the file by id
 		final long fileId = Long.parseLong(result.fileIdStr);
 		File file = fileRMapper.selectEnabledById(fileId);
