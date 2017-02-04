@@ -2,7 +2,7 @@
 This is a large file downloading service based on Nginx, Spring Boot, SQLite(or MySQL). Dynamically adding more files and more Nginx nodes are supportive, which simply requires some registration steps on the administraion Web pages.
 
 ## Getting Started
-If this program runs in the default mode (SQLite is used), then two accounts already exist. One is ***admin***, whose password is ***changeme***. The other is ***alice***, whose password is ***test***.
+If this program runs in the default mode (SQLite is used), then two account already exist. One is ***admin***, whose password is ***changeme***. The other is ***alice***, whose password is ***test***.
 
 ### if you have Docker 
 ### {
@@ -42,6 +42,30 @@ sh startup.sh
 ```
 ### }
 
+## Screenshots of the Ordinary Users
+### Main
+![](doc/static/v0.10.1/images/ordinary/main.png)
+### File List
+![](doc/static/v0.10.1/images/ordinary/file_list.png)
+### Download Task List
+![](doc/static/v0.10.1/images/ordinary/download_task_list.png)
+
+## Screenshots of the Administrators
+### Main
+![](doc/static/v0.10.1/images/admin/main.png)
+### Account List
+![](doc/static/v0.10.1/images/admin/account_list.png)
+### Production List
+![](doc/static/v0.10.1/images/admin/production_list.png)
+### File List
+![](doc/static/v0.10.1/images/admin/file_list.png)
+### Download Task List
+![](doc/static/v0.10.1/images/admin/download_task_list.png)
+### File Service Group List
+![](doc/static/v0.10.1/images/admin/file_service_group_list.png)
+### File Service List
+![](doc/static/v0.10.1/images/admin/file_service_list.png)
+
 ## Technology Selections
 - Web Server: [Nginx](http://nginx.org/) v1.8.0
 - App Server: Embedded Tomcat v8.0.26
@@ -49,29 +73,9 @@ sh startup.sh
 - ORM for RDBMS: [MyBatis-Spring](http://mybatis.github.io/spring/) v1.1.1
 - RDBMS: SQLite(default) or MySQL
 
-## Some Screenshots of the Ordinary Users
-### Main
-![](doc/static/v0.10.0/images/ordinary/main.png)
-### File list
-![](doc/static/v0.10.0/images/ordinary/file_list.png)
-### Download task list
-![](doc/static/v0.10.0/images/ordinary/download_task_list.png)
+## Code Quality
+![](doc/static/v0.10.1/images/sonar_code_quality.png)
 
-## Some Screenshots of the Administrators
-### Main
-![](doc/static/v0.10.0/images/admin/main.png)
-### Account list
-![](doc/static/v0.10.0/images/admin/account_list.png)
-### Production list
-![](doc/static/v0.10.0/images/admin/production_list.png)
-### File list
-![](doc/static/v0.10.0/images/admin/file_list.png)
-### Download task list
-![](doc/static/v0.10.0/images/admin/download_task_list.png)
-### File service group list
-![](doc/static/v0.10.0/images/admin/file_service_group_list.png)
-### File service list
-![](doc/static/v0.10.0/images/admin/file_service_list.png)
 
 
 
