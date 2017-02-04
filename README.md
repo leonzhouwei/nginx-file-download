@@ -2,7 +2,7 @@
 This is a large file downloading service based on Nginx, Spring Boot, SQLite(or MySQL). Dynamically adding more files and more Nginx nodes are supportive, which simply requires some registration steps on the administraion Web pages.
 
 ## Getting Started
-If this program runs in the default mode (SQLite is used), then two account already exist. One is ***admin***, whose password is ***changeme***. The other is ***alice***, whose password is ***test***.
+If this program runs in the default mode (SQLite is used), then two accounts already exist. One is ***admin***, whose password is ***changeme***. The other is ***alice***, whose password is ***test***.
 
 ### if you have Docker 
 ### {
