@@ -160,9 +160,11 @@ public class AppConfig implements InitializingBean {
 		File dir = new File(assestsDir);
 		List<String> list = Lists.newArrayList();
 		String[] children = dir.list();
-		for (String e : children) {
-			if (e.matches("v\\d+")) {
-				list.add(e);
+		if (children != null) {
+			for (String e : children) {
+				if (e.matches("v\\d+")) {
+					list.add(e);
+				}
 			}
 		}
 		if (list.isEmpty()) {
