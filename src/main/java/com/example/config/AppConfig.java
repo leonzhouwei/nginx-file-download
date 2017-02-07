@@ -33,9 +33,6 @@ public class AppConfig implements InitializingBean {
 	public static final String CURRENT_WORKING_DIR = System.getProperty("user.dir");
 	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
-	static final String DEV_MODE = "dev";
-	static final String PROD_MODE = "prod";
-
 	// app ---------------------------------------------------------------------
 	@Value("${app.workDir}")
 	private String workDirPath;

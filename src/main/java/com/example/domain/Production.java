@@ -3,12 +3,18 @@ package com.example.domain;
 import org.apache.commons.lang3.StringUtils;
 
 public class Production extends Base {
-	
+
 	private Long id;
 	private String name = StringUtils.EMPTY;
 	private String description = StringUtils.EMPTY;
 	private String dir = StringUtils.EMPTY;
 	
+	@Override
+	public String toString() {
+		return super.toString() + " Production [id=" + id + ", name=" + name + ", description=" + description + ", dir="
+				+ dir + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -26,10 +32,10 @@ public class Production extends Base {
 			this.description = StringUtils.EMPTY;
 			return;
 		}
-		
+
 		this.description = description;
 	}
-	
+
 	public void resetDescription(String description) {
 		setDescription(description);
 		resetUpdatedAt();
@@ -44,10 +50,10 @@ public class Production extends Base {
 			this.name = StringUtils.EMPTY;
 			return;
 		}
-		
+
 		this.name = name;
 	}
-	
+
 	public void resetName(String name) {
 		setName(name);
 		resetUpdatedAt();
@@ -62,7 +68,7 @@ public class Production extends Base {
 			this.dir = StringUtils.EMPTY;
 			return;
 		}
-		
+
 		this.dir = dir;
 	}
 

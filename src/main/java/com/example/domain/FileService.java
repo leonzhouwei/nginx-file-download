@@ -7,6 +7,12 @@ public class FileService extends Base {
 	private FileServiceGroup group;
 	private String name;
 	
+	@Override
+	public String toString() {
+		return super.toString() + " FileService [id=" + id + ", host=" + host + ", group=" + group + ", name=" + name
+				+ "]";
+	}
+
 	public void reset() {
 		super.reset();
 		setGroup(new FileServiceGroup());

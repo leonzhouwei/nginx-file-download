@@ -6,7 +6,7 @@ public class Account extends Base {
 	private String name;
 	private String password;
 	private Role role;
-	
+
 	public static boolean isAdmin(Account account) {
 		return Role.isAdmin(account);
 	}
@@ -16,6 +16,12 @@ public class Account extends Base {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + " Account [id=" + id + ", name=" + name + ", password=" + password + ", role=" + role
+				+ "]";
 	}
 
 	public Long getId() {
@@ -45,12 +51,12 @@ public class Account extends Base {
 	public void resetRoleAsNormal() {
 		this.role.resetRoleAsNormal();
 	}
-	
+
 	public void reset() {
 		super.reset();
 		setRole(new Role());
 	}
-	
+
 	public Role getRole() {
 		return role;
 	}

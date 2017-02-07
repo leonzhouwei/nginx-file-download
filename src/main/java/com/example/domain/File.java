@@ -11,6 +11,12 @@ public class File extends Base {
 	private String md;
 	private Production production;
 	private FileServiceGroup fileServiceGroup;
+	
+	@Override
+	public String toString() {
+		return super.toString() + " File [id=" + id + ", dir=" + dir + ", name=" + name + ", size=" + size + ", md="
+				+ md + ", production=" + production + ", fileServiceGroup=" + fileServiceGroup + "]";
+	}
 
 	public void resetBy(File another) {
 		super.resetBy(another);
@@ -55,7 +61,7 @@ public class File extends Base {
 			this.dir = StringUtils.EMPTY;
 			return;
 		}
-		
+
 		this.dir = dir.trim();
 	}
 

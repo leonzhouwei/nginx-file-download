@@ -10,6 +10,11 @@ public class Role {
 	public static boolean isAdmin(Account account) {
 		return account.getRole().getId() == ADMIN;
 	}
+	
+	@Override
+	public String toString() {
+		return "Role [id=" + id + "]";
+	}
 
 	public Long getId() {
 		return id;

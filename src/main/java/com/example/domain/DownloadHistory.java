@@ -15,6 +15,14 @@ public class DownloadHistory extends Base {
 	private String appServerThreadName;
 	private String requestRoute;
 	private String requestParameters;
+	
+	@Override
+	public String toString() {
+		return super.toString() + " DownloadHistory [id=" + id + ", taskId=" + taskId + ", clientIp=" + clientIp
+				+ ", webServerHost=" + webServerHost + ", appServerUuid=" + appServerUuid + ", appServerThreadId="
+				+ appServerThreadId + ", appServerThreadName=" + appServerThreadName + ", requestRoute=" + requestRoute
+				+ ", requestParameters=" + requestParameters + "]";
+	}
 
 	public void reset() {
 		super.reset();
@@ -43,7 +51,7 @@ public class DownloadHistory extends Base {
 			this.clientIp = StringUtils.EMPTY;
 			return;
 		}
-		
+
 		this.clientIp = clientIp;
 	}
 
@@ -56,7 +64,7 @@ public class DownloadHistory extends Base {
 			this.webServerHost = StringUtils.EMPTY;
 			return;
 		}
-		
+
 		this.webServerHost = webServerHost;
 	}
 

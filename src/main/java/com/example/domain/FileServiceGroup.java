@@ -5,6 +5,11 @@ public class FileServiceGroup extends Base {
 	private Long id;
 	private String name;
 	
+	@Override
+	public String toString() {
+		return super.toString() + " FileServiceGroup [id=" + id + ", name=" + name + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}

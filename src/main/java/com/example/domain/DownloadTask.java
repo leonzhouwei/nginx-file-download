@@ -16,6 +16,13 @@ public class DownloadTask extends Base {
 	private Date lastDldedAt;
 	private String uuid;
 	
+	@Override
+	public String toString() {
+		return super.toString() + " DownloadTask [id=" + id + ", user=" + user + ", file=" + file + ", clientIp="
+				+ clientIp + ", expiredAt=" + expiredAt + ", timeCostMillis=" + timeCostMillis + ", lastDldedAt="
+				+ lastDldedAt + ", uuid=" + uuid + "]";
+	}
+
 	public void reset() {
 		super.reset();
 		DateTime dateTime = new DateTime(getCreatedAt());
@@ -36,7 +43,7 @@ public class DownloadTask extends Base {
 			this.clientIp = StringUtils.EMPTY;
 			return;
 		}
-		
+
 		this.clientIp = clientIp;
 	}
 
@@ -71,11 +78,11 @@ public class DownloadTask extends Base {
 	public void setLastDldedAt(Date lastDldedAt) {
 		this.lastDldedAt = lastDldedAt;
 	}
-	
+
 	public void resetLastDldedAt() {
 		setLastDldedAt(new Date());
 	}
-	
+
 	public void resetTimeCostMillis() {
 		setTimeCostMillis(lastDldedAt.getTime() - getCreatedAt().getTime());
 	}
@@ -103,5 +110,5 @@ public class DownloadTask extends Base {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	
+
 }
