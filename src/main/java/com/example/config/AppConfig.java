@@ -36,8 +36,8 @@ public class AppConfig implements InitializingBean {
 	// app ---------------------------------------------------------------------
 	@Value("${app.workDir}")
 	private String workDirPath;
-	@Value("${app.ignoreCustomizedInterceptors}")
-	private Boolean ignoreCustomizedInterceptors;
+	@Value("${app.ignoreCustomizedIntegererceptors}")
+	private Boolean ignoreCustomizedIntegererceptors;
 	@Value("${app.data.dir}")
 	private String dataDir;
 
@@ -47,23 +47,23 @@ public class AppConfig implements InitializingBean {
 	@Value("${app.db.driverClassName}")
 	private String rdbmsDriverClassName;
 	@Value("${app.db.initialSize}")
-	private int rdbmsInitialSize;
+	private Integer rdbmsInitialSize;
 	@Value("${app.db.maxActive}")
-	private int rdbmsMaxActive;
+	private Integer rdbmsMaxActive;
 	@Value("${app.db.minIdle}")
-	private int rdbmsMinIdle;
+	private Integer rdbmsMinIdle;
 	@Value("${app.db.maxIdle}")
-	private int rdbmsMaxIdle;
+	private Integer rdbmsMaxIdle;
 	@Value("${app.db.removeAbandoned}")
-	private boolean rdbmsRemoveAbandoned;
+	private Boolean rdbmsRemoveAbandoned;
 	@Value("${app.db.removeAbandonedTimeout}")
-	private int rdbmsRemoveAbandonedTimeout;
+	private Integer rdbmsRemoveAbandonedTimeout;
 	@Value("${app.db.maxWait}")
-	private int rdbmsMaxWait;
+	private Integer rdbmsMaxWait;
 	@Value("${app.db.validationQuery}")
 	private String rdbmsValidationQuery;
 	@Value("${app.db.testOnBorrow}")
-	private boolean rdbmsTestOnBorrow;
+	private Boolean rdbmsTestOnBorrow;
 	@Value("${app.db.url}")
 	private String rdbmsUrl;
 	@Value("${app.db.username}")
@@ -74,6 +74,19 @@ public class AppConfig implements InitializingBean {
 	// nginx -------------------------------------------------------------------
 	@Value("${app.nginx.xAccelPrefix}")
 	private String xAccelPrefix;
+
+	@Override
+	public String toString() {
+		return "AppConfig [workDirPath=" + workDirPath + ", ignoreCustomizedIntegererceptors="
+				+ ignoreCustomizedIntegererceptors + ", dataDir=" + dataDir + ", assetsHome=" + assetsHome
+				+ ", rdbmsDriverClassName=" + rdbmsDriverClassName + ", rdbmsInitialSize=" + rdbmsInitialSize
+				+ ", rdbmsMaxActive=" + rdbmsMaxActive + ", rdbmsMinIdle=" + rdbmsMinIdle + ", rdbmsMaxIdle="
+				+ rdbmsMaxIdle + ", rdbmsRemoveAbandoned=" + rdbmsRemoveAbandoned + ", rdbmsRemoveAbandonedTimeout="
+				+ rdbmsRemoveAbandonedTimeout + ", rdbmsMaxWait=" + rdbmsMaxWait + ", rdbmsValidationQuery="
+				+ rdbmsValidationQuery + ", rdbmsTestOnBorrow=" + rdbmsTestOnBorrow + ", rdbmsUrl=" + rdbmsUrl
+				+ ", rdbmsUsername=" + rdbmsUsername + ", rdbmsPassword=" + rdbmsPassword + ", xAccelPrefix="
+				+ xAccelPrefix + "]";
+	}
 
 	// app ---------------------------------------------------------------------
 	public String getWorkDirPath() {
@@ -93,31 +106,31 @@ public class AppConfig implements InitializingBean {
 		return rdbmsDriverClassName;
 	}
 
-	public int getRdbmsInitialSize() {
+	public Integer getRdbmsInitialSize() {
 		return rdbmsInitialSize;
 	}
 
-	public int getRdbmsMaxActive() {
+	public Integer getRdbmsMaxActive() {
 		return rdbmsMaxActive;
 	}
 
-	public int getRdbmsMinIdle() {
+	public Integer getRdbmsMinIdle() {
 		return rdbmsMinIdle;
 	}
 
-	public int getRdbmsMaxIdle() {
+	public Integer getRdbmsMaxIdle() {
 		return rdbmsMaxIdle;
 	}
 
-	public boolean isRdbmsRemoveAbandoned() {
+	public Boolean isRdbmsRemoveAbandoned() {
 		return rdbmsRemoveAbandoned;
 	}
 
-	public int getRdbmsRemoveAbandonedTimeout() {
+	public Integer getRdbmsRemoveAbandonedTimeout() {
 		return rdbmsRemoveAbandonedTimeout;
 	}
 
-	public int getRdbmsMaxWait() {
+	public Integer getRdbmsMaxWait() {
 		return rdbmsMaxWait;
 	}
 
@@ -125,7 +138,7 @@ public class AppConfig implements InitializingBean {
 		return rdbmsValidationQuery;
 	}
 
-	public boolean isRdbmsTestOnBorrow() {
+	public Boolean isRdbmsTestOnBorrow() {
 		return rdbmsTestOnBorrow;
 	}
 
@@ -146,8 +159,8 @@ public class AppConfig implements InitializingBean {
 		return xAccelPrefix;
 	}
 
-	public Boolean getIgnoreCustomizedInterceptors() {
-		return ignoreCustomizedInterceptors;
+	public Boolean getIgnoreCustomizedIntegererceptors() {
+		return ignoreCustomizedIntegererceptors;
 	}
 
 	@Override
