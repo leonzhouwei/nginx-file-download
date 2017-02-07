@@ -9,8 +9,8 @@ public class File extends Base {
 	private String name;
 	private Long size;
 	private String md;
-	private Production production = new Production();
-	private FileServiceGroup fileServiceGroup = new FileServiceGroup();
+	private Production production;
+	private FileServiceGroup fileServiceGroup;
 
 	public void resetBy(File another) {
 		super.resetBy(another);

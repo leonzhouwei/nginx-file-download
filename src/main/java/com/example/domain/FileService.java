@@ -4,7 +4,7 @@ public class FileService extends Base {
 
 	private Long id;
 	private String host;
-	private FileServiceGroup group = new FileServiceGroup();
+	private FileServiceGroup group;
 	private String name;
 	
 	public void reset() {

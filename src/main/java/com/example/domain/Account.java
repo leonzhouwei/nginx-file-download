@@ -5,7 +5,7 @@ public class Account extends Base {
 	private Long id;
 	private String name;
 	private String password;
-	private Role role = new Role();
+	private Role role;
 	
 	public static boolean isAdmin(Account account) {
 		return Role.isAdmin(account);

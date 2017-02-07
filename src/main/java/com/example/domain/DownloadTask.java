@@ -8,8 +8,8 @@ import org.joda.time.DateTime;
 public class DownloadTask extends Base {
 
 	private Long id;
-	private Account user = new Account();
-	private File file = new File();
+	private Account user;
+	private File file;
 	private String clientIp;
 	private Date expiredAt;
 	private Long timeCostMillis;

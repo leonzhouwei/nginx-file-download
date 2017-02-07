@@ -2,15 +2,11 @@ package com.example.domain;
 
 import java.util.Date;
 
-public class Base {
+public abstract class Base {
 	
 	private Date createdAt;
 	private Date updatedAt;
 	private Boolean enabled;
-	
-	public Base() {
-		// no operations here
-	}
 	
 	public void resetBy(Base another) {
 		setCreatedAt(another.getCreatedAt());
