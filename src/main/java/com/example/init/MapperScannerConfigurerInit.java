@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MapperScannerConfigurerInit {
 	
+	private static final String BASE_PACKAGE = "com.example.persist.must";
+	private static final String SQL_SESSION_FACTORY_BEAN_NAME = "sqlSessionFactory";
+	
 	@SuppressWarnings("unused")
 	@Autowired
 	private SqlSessionFactoryBean sqlSessioinFactoryBean;
@@ -16,8 +19,8 @@ public class MapperScannerConfigurerInit {
 	@Bean
 	public MapperScannerConfigurer mapperScannerConfigurer() {
 		MapperScannerConfigurer ret = new MapperScannerConfigurer();
-		ret.setBasePackage("com.example.persist.must");
-		ret.setSqlSessionFactoryBeanName("sqlSessionFactory");
+		ret.setBasePackage(BASE_PACKAGE);
+		ret.setSqlSessionFactoryBeanName(SQL_SESSION_FACTORY_BEAN_NAME);
 		return ret;
 	}
 

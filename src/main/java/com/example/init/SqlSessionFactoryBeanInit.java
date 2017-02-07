@@ -12,6 +12,9 @@ import com.example.config.AppConfig;
 @Configuration
 public class SqlSessionFactoryBeanInit {
 
+	private static final String SQLITE_REGEX = ".*sqlite:.*.sqlite";
+	private static final String SQLITE_TYPE_HANDLERS_PACKAGE = "com.example.persist.typehandler.sqlite";
+
 	@Autowired
 	private AppConfig appConfig;
 
@@ -23,11 +26,11 @@ public class SqlSessionFactoryBeanInit {
 		SqlSessionFactoryBean ret = new SqlSessionFactoryBean();
 		ret.setDataSource(dataSource);
 		String url = appConfig.getRdbmsUrl();
-		if (url.matches(".*sqlite:.*.sqlite")) {
-			ret.setTypeHandlersPackage("com.example.persist.typehandler.sqlite");
+		if (url.matches(SQLITE_REGEX)) {
+			ret.setTypeHandlersPackage(SQLITE_TYPE_HANDLERS_PACKAGE);
 		}
 
 		return ret;
 	}
-	
+
 }
