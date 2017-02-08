@@ -124,7 +124,7 @@ function doI18nInit(options) {
 	console.log("oops: final locale is " + lang);
 	jQuery.i18n.properties({
 	    name: options['name'], 
-	    path: '/assets/v1/i18n/', 
+	    path: '/assets/v1/i18n/app/', 
 	    mode: 'map',
 	    language: lang,
 	    checkAvailableLanguages: true,
