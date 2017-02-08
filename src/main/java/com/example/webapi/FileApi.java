@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.common.HttpResponseTool;
-import com.example.dao.FileRDao;
 import com.example.domain.File;
+import com.example.persist.must.FileRMapper;
 
 @RestController
 public class FileApi {
@@ -22,17 +22,17 @@ public class FileApi {
 	static final Logger logger = LoggerFactory.getLogger(FileApi.class);
 
 	@Autowired
-	private FileRDao rDao;
+	private FileRMapper rMapper;
 
 	@RequestMapping(value = RouteDefine.API + "/files", method = RequestMethod.GET)
 	public void getAll(HttpServletResponse response) {
-		List<File> list = rDao.selectAllEnabled();
+		List<File> list = rMapper.selectAllEnabled();
 		HttpResponseTool.writeResponse(response, list);
 	}
 
 	@RequestMapping(value = RouteDefine.API + "/files/{id}", method = RequestMethod.GET)
 	public void getById(@PathVariable Long id, HttpServletResponse response) {
-		File file = rDao.selectEnabledById(id);
+		File file = rMapper.selectEnabledById(id);
 		HttpResponseTool.writeResponse(response, file);
 	}
 
