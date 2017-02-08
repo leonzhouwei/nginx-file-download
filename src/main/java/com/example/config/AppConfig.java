@@ -36,8 +36,8 @@ public class AppConfig implements InitializingBean {
 	// app ---------------------------------------------------------------------
 	@Value("${app.workDir}")
 	private String workDirPath;
-	@Value("${app.ignoreCustomizedIntegererceptors}")
-	private Boolean ignoreCustomizedIntegererceptors;
+	@Value("${app.ignoreCustomizedInterceptors}")
+	private Boolean ignoreCustomizedInterceptors;
 	@Value("${app.data.dir}")
 	private String dataDir;
 
@@ -77,8 +77,8 @@ public class AppConfig implements InitializingBean {
 
 	@Override
 	public String toString() {
-		return "AppConfig [workDirPath=" + workDirPath + ", ignoreCustomizedIntegererceptors="
-				+ ignoreCustomizedIntegererceptors + ", dataDir=" + dataDir + ", assetsHome=" + assetsHome
+		return "AppConfig [workDirPath=" + workDirPath + ", ignoreCustomizedInterceptors="
+				+ ignoreCustomizedInterceptors + ", dataDir=" + dataDir + ", assetsHome=" + assetsHome
 				+ ", rdbmsDriverClassName=" + rdbmsDriverClassName + ", rdbmsInitialSize=" + rdbmsInitialSize
 				+ ", rdbmsMaxActive=" + rdbmsMaxActive + ", rdbmsMinIdle=" + rdbmsMinIdle + ", rdbmsMaxIdle="
 				+ rdbmsMaxIdle + ", rdbmsRemoveAbandoned=" + rdbmsRemoveAbandoned + ", rdbmsRemoveAbandonedTimeout="
@@ -159,8 +159,8 @@ public class AppConfig implements InitializingBean {
 		return xAccelPrefix;
 	}
 
-	public Boolean getIgnoreCustomizedIntegererceptors() {
-		return ignoreCustomizedIntegererceptors;
+	public Boolean getIgnoreCustomizedInterceptors() {
+		return ignoreCustomizedInterceptors;
 	}
 
 	@Override
