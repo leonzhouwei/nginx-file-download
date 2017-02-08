@@ -4,7 +4,7 @@
 <mapper namespace="com.example.persist.must.AccountRMapper">
 
 	<sql id="columns">created_at, updated_at, enabled, id, name,
-		role_id
+		role_id, locale_lang, locale_country
 	</sql>
 
 	<resultMap id="resultMap" type="com.example.domain.Account">
@@ -14,6 +14,8 @@
 		<!-- -->
 		<result property="id" column="id" />
 		<result property="name" column="name" />
+		<result property="localeLanguage" column="locale_lang" />
+		<result property="localeCountry" column="locale_country" />
 		<!-- -->
 		<association property="role" javaType="com.example.domain.Role">
 			<id property="id" column="role_id" />
@@ -44,7 +46,7 @@
 	</select>
 
 	<select id="selectEnabledByNameAndPassword" parameterType="com.example.domain.Account"
-		resultType="com.example.domain.Account">
+		resultMap="resultMap">
 		SELECT
 		<include refid="columns" />
 		FROM account

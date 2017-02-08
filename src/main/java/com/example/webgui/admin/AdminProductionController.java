@@ -32,7 +32,7 @@ public class AdminProductionController {
 	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX + WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
-	
+
 	static final String BASE_ROUTE = RouteDefine.ADMIN + "/productions";
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminProductionController.class);
@@ -45,13 +45,13 @@ public class AdminProductionController {
 	private ProductionWMapper wMapper;
 
 	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.GET)
-	public ModelAndView list() {
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+	public ModelAndView list(HttpServletRequest request) {
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/productions/new", method = RequestMethod.GET)
-	public ModelAndView gotoNew() {
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
+	public ModelAndView gotoNew(HttpServletRequest request) {
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_NEW);
 	}
 
 	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.POST)
@@ -70,31 +70,31 @@ public class AdminProductionController {
 		e.setDescription(description);
 		e.setEnabled(enabled);
 		wMapper.insert(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
+		return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, BASE_ROUTE);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/productions/edit", method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		Production e = rMapper.selectById(id);
 		if (e == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, e);
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_EDIT, e);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/productions/edit", method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		Production e = rMapper.selectById(id);
 		if (e == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		String name = HttpRequestTool.extractName(request);
 		if (!Strings.isNullOrEmpty(name)) {
@@ -106,7 +106,7 @@ public class AdminProductionController {
 		e.resetUpdatedAt();
 		e.setEnabled(enabled);
 		wMapper.update(e);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
+		return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, BASE_ROUTE);
 	}
 
 }

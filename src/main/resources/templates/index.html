@@ -4,21 +4,27 @@
 	layout:decorator="base/layout">
 
 <head>
-<title>主界面</title>
+<title>Main</title>
 <meta charset="utf-8" />
 </head>
 
 <body>
 	<div class="container" layout:fragment="content">
-		<a href="/files">文件列表</a>
+		<a id="filesHyperlink" href="/files">Files</a>
 		<hr />
-		<a href="/i/dld-tasks">我的下载任务列表</a>
+		<a id="downloadTasksHyperlink" href="/i/dld-tasks">My Download Tasks</a>
 		<hr />
+		
 		<!-- ===== vendor scripts ===== -->
 		<script
 			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/jquery.i18n.properties/1.2.2/jquery.i18n.properties-1.2.2.min.js'}"></script>
 
-		<!-- ===== application scripts ===== -->
+		<!--=================================================================-->
+		<!-- application scripts -->
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/common.js'}"></script>
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/index.js'}"></script>
 	</div>
 </body>
 

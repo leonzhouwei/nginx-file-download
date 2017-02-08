@@ -1,5 +1,7 @@
 package com.example.webgui;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,8 @@ public class DownloadTaskController {
 	private AppConfig appConfig;
 
 	@RequestMapping(value = RouteDefine.I + "/dld-tasks", method = RequestMethod.GET)
-	public ModelAndView getAll() {
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+	public ModelAndView getAll(HttpServletRequest request) {
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_LIST);
 	}
 
 }

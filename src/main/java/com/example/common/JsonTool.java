@@ -35,5 +35,5 @@ public final class JsonTool {
 	public static <T> List<T> parseList(String json, Class<T> clazz) {
 		return JSON.parseArray(json, clazz);
 	}
-
+	
 }

@@ -6,7 +6,9 @@ CREATE TABLE account
   updated_at datetime NOT NULL,
   name VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(256) NOT NULL,
-  role_id bigint NOT NULL
+  role_id bigint NOT NULL,
+  locale_lang VARCHAR(16) NOT NULL DEFAULT 'en',
+  locale_country VARCHAR(16) NOT NULL DEFAULT ''
 );
 create index idx_account_name_pswd on account (name, password);
 

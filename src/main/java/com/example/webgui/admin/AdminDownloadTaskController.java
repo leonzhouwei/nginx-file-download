@@ -1,5 +1,7 @@
 package com.example.webgui.admin;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,8 @@ public class AdminDownloadTaskController {
 	private AppConfig appConfig;
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/dld-tasks", method = RequestMethod.GET)
-	public ModelAndView get() {
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+	public ModelAndView get(HttpServletRequest request) {
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_LIST);
 	}
 
 }

@@ -8,6 +8,10 @@ public class Role {
 	private Long id;
 	
 	public static boolean isAdmin(Account account) {
+		if (account == null) {
+			return false;
+		}
+		
 		return account.getRole().getId() == ADMIN;
 	}
 	

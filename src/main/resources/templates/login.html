@@ -1,85 +1,42 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="base/layout">
 
 <head>
+<title>Login</title>
 <meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Large Files Downloading Service</title>
-<link rel="stylesheet"
-	th:href="@{${APP_ASSETS_HOME} + '/css/bootstrap/3.3.5/css/bootstrap.min.css'}" />
-<link rel="stylesheet"
-	th:href="@{${APP_ASSETS_HOME} + '/css/bootstrap/3.3.5/css/bootstrap-theme.min.css'}" />
-<link rel="stylesheet"
-	th:href="@{${APP_ASSETS_HOME} + '/css/theme.css'}" />
-<link rel="icon" type="image/png"
-	th:href="@{${APP_ASSETS_HOME} + '/images/favicon.ico'}" />
 </head>
 
-<body role="document">
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Project name</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Dropdown <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="dropdown-header">Nav header</li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul></li>
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
-		</div>
-	</nav>
-
-	<div class="container">
+<body>
+	<div class="container" layout:fragment="content">
 		<form action="/login" method="post">
 			<div class="form-inline">
-				<label for="usernameText">用户名: </label> <input type="text"
-					class="form-control" id="usernameText" name="username" />
+				<label id="usernameLabel" for="usernameText">Username: </label> <input
+					type="text" class="form-control" id="usernameText" name="username" />
 			</div>
 			<br />
 			<div class="form-inline">
-				<label for="passwordPassword">&nbsp;&nbsp;&nbsp;&nbsp;密码: </label> <input
+				<label id="passwordLabel" for="passwordPassword">Password: </label> <input
 					type="password" class="form-control" id="passwordPassword"
 					name="password" />
 			</div>
 			<br />
-			<button type="submit" class="btn btn-primary">登录</button>
+			<button id="loginButton" type="submit" class="btn btn-primary">Login</button>
 		</form>
+
+		<!--=================================================================-->
+		<!-- vendor scripts -->
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
+		<script
+			th:src="@{${APP_ASSETS_HOME} + '/js/jquery.i18n.properties/1.2.2/jquery.i18n.properties-1.2.2.min.js'}"></script>
+
+		<!--=================================================================-->
+		<!-- application scripts -->
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/common/common.js'}"></script>
+		<script th:src="@{${APP_ASSETS_HOME} + '/js/app/login.js'}"></script>
 	</div>
-
-
-
-	<!-- ===== vendor scripts ===== -->
-	<script
-		th:src="@{${APP_ASSETS_HOME} + '/js/jquery/2.1.4/jquery-2.1.4.min.js'}"></script>
-	<script
-		th:src="@{${APP_ASSETS_HOME} + '/css/bootstrap/3.3.5/js/bootstrap.min.js'}"></script>
-
-	<!-- ===== application scripts ===== -->
 </body>
 
 </html>

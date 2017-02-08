@@ -1,22 +1,31 @@
 package com.example.filter;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.example.domain.Account;
 import com.example.persist.must.AccountRMapper;
 import com.example.webapi.RouteDefine;
+import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 
 public class LoginInterceptor extends BaseInterceptor {
 
 	public static final String PREFIX = "example.com/";
-	public static final String SEESION_ID = PREFIX + "sessionId";
+	private static final String SESSION_ID = PREFIX + "sessionid";
+
+	public static final String LOCALE = "locale";
 
 	static final Set<String> unrestrictedRoutePatterns = Sets.newHashSet();
+
+	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
 	static {
 		unrestrictedRoutePatterns.add(RouteDefine.BASE_ASSETS + ".*");
@@ -30,17 +39,29 @@ public class LoginInterceptor extends BaseInterceptor {
 		response.sendRedirect(RouteDefine.LOGIN);
 	}
 
-	public static void setSessionId(HttpServletRequest request, Long userId) {
-		request.getSession().setAttribute(SEESION_ID, userId);
+	public static void initSession(HttpServletRequest request, Account account) {
+		if (sessionIdExist(request)) {
+			destroySession(request);
+		}
+		logger.debug("account: " + account);
+		request.getSession().setAttribute(SESSION_ID, account.getId());
+		String country = account.getLocaleCountry();
+		Locale locale;
+		if (Strings.isNullOrEmpty(country)) {
+			locale = new Locale(account.getLocaleLanguage());
+		} else {
+			locale = new Locale(account.getLocaleLanguage(), country);
+		}
+		request.getSession().setAttribute(LOCALE, locale.toString());
+	}
+
+	public static String getSessionLocale(HttpServletRequest request) {
+		return (String) request.getSession().getAttribute(LOCALE);
 	}
 
 	public static Long getSessionId(HttpServletRequest request) {
-		Object obj = request.getSession().getAttribute(SEESION_ID);
-		Long ret = null;
-		if (obj != null) {
-			ret = (Long) obj;
-		}
-		return ret;
+		Object obj = request.getSession().getAttribute(SESSION_ID);
+		return (Long) obj;
 	}
 
 	public static boolean sessionIdExist(HttpServletRequest request) {
@@ -48,11 +69,12 @@ public class LoginInterceptor extends BaseInterceptor {
 		return sessionId != null;
 	}
 
-	public static void removeSessionId(HttpServletRequest request) {
+	public static void destroySession(HttpServletRequest request) {
 		if (!sessionIdExist(request)) {
 			return;
 		}
-		request.getSession().removeAttribute(SEESION_ID);
+		request.getSession().removeAttribute(SESSION_ID);
+		request.getSession().removeAttribute(LOCALE);
 	}
 
 	public static Long getAccountId(HttpServletRequest request) {

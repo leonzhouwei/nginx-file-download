@@ -50,17 +50,13 @@
 							<li><a href="#">One more separated link</a></li>
 						</ul></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/logout">登出</a></li>
+				<ul id="appLogoutUl" class="nav navbar-nav navbar-right">
+					<li><a id="appLogoutButton" href="/logout">Logout</a></li>
 				</ul>
 			</div>
-			<!--/.nav-collapse -->
 		</div>
 	</nav>
 
-	<div class="container" layout:fragment="content"></div>
-
-	<!-- Modal -->
 	<div class="modal fade" id="appModalDiv" tabindex="-1" role="dialog"
 		aria-labelledby="appModalLabel">
 		<div class="modal-dialog" role="document">
@@ -70,21 +66,27 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="appModalTitle">系统提示</h4>
+					<h4 class="modal-title" id="appModalTitle">System Notification</h4>
 				</div>
 				<div class="modal-body" id="appModalBody">...</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
+		<input id="appLocaleHidden" type="hidden" value="en"
+			th:value="${locale}" />
 	</div>
+	
+	<div class="container" layout:fragment="content"></div>
 
-	<!-- ===== vendor scripts ===== -->
+	<!--=====================================================================-->
+	<!-- vendor scripts -->
 	<script
 		th:src="@{${APP_ASSETS_HOME} + '/css/bootstrap/3.3.5/js/bootstrap.min.js'}"></script>
-
-	<!-- ===== application scripts ===== -->
+	
+	<!--=====================================================================-->
+	<!-- application scripts -->
 </body>
 
 </html>

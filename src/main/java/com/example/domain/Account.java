@@ -6,6 +6,8 @@ public class Account extends Base {
 	private String name;
 	private String password;
 	private Role role;
+	private String localeLanguage;
+	private String localeCountry;
 
 	public static boolean isAdmin(Account account) {
 		return Role.isAdmin(account);
@@ -21,7 +23,7 @@ public class Account extends Base {
 	@Override
 	public String toString() {
 		return super.toString() + " Account [id=" + id + ", name=" + name + ", password=" + password + ", role=" + role
-				+ "]";
+				+ ", localeLanguage=" + localeLanguage + ", localeCountry=" + localeCountry + "]";
 	}
 
 	public Long getId() {
@@ -63,6 +65,22 @@ public class Account extends Base {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getLocaleLanguage() {
+		return localeLanguage;
+	}
+
+	public void setLocaleLanguage(String localeLanguage) {
+		this.localeLanguage = localeLanguage;
+	}
+
+	public String getLocaleCountry() {
+		return localeCountry;
+	}
+
+	public void setLocaleCountry(String localeCountry) {
+		this.localeCountry = localeCountry;
 	}
 
 }

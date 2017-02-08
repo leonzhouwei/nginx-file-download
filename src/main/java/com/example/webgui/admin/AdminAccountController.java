@@ -30,10 +30,10 @@ public class AdminAccountController {
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
 	static final String VIEW_NAME_ADMIN_ACCOUNTS_EDIT_PASSWORD = VIEW_NAME_PREFIX + "edit-pswd";
-	
+
 	static final String PSWD = "password";
 	static final String ROLE = "role";
-	
+
 	static final String BASE_ROUTE = RouteDefine.ADMIN + "/accounts";
 
 	@Autowired
@@ -44,13 +44,13 @@ public class AdminAccountController {
 	private AccountWMapper wMapper;
 
 	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.GET)
-	public ModelAndView list() {
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+	public ModelAndView list(HttpServletRequest request) {
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/new", method = RequestMethod.GET)
-	public ModelAndView gotoNew() {
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_NEW);
+	public ModelAndView gotoNew(HttpServletRequest request) {
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_NEW);
 	}
 
 	@RequestMapping(value = BASE_ROUTE, method = RequestMethod.POST)
@@ -65,31 +65,31 @@ public class AdminAccountController {
 		account.setPassword(cipher);
 		account.getRole().setId(role);
 		wMapper.insert(account);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
+		return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, BASE_ROUTE);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/edit", method = RequestMethod.GET)
 	public ModelAndView gotoEdit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		Account account = rMapper.selectById(id);
 		if (account == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_EDIT, account);
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_EDIT, account);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/edit", method = RequestMethod.POST)
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		Account account = rMapper.selectById(id);
 		if (account == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		String name = HttpRequestTool.extractName(request);
 		String rawPassword = request.getParameter(PSWD);
@@ -104,38 +104,38 @@ public class AdminAccountController {
 		account.resetUpdatedAt();
 		account.setEnabled(enabled);
 		wMapper.update(account);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
+		return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, BASE_ROUTE);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/edit-pswd", method = RequestMethod.GET)
 	public ModelAndView gotoEditPassword(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		Account account = rMapper.selectById(id);
 		if (account == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_ACCOUNTS_EDIT_PASSWORD, account);
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_ADMIN_ACCOUNTS_EDIT_PASSWORD, account);
 	}
 
 	@RequestMapping(value = RouteDefine.ADMIN + "/accounts/edit-pswd", method = RequestMethod.POST)
 	public ModelAndView editPassword(HttpServletRequest request, HttpServletResponse response) {
 		final Long id = HttpRequestTool.extractId(request);
 		if (id == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		Account account = rMapper.selectById(id);
 		if (account == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
 		String newRawPassword = request.getParameter(PSWD);
 		String newPassword = Sha2Encoder.encode(newRawPassword);
 		account.setPassword(newPassword);
 		account.resetUpdatedAt();
 		wMapper.updatePassword(account);
-		return ModelAndViewTool.newModelAndViewAndRedirect(appConfig, BASE_ROUTE);
+		return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, BASE_ROUTE);
 	}
 
 }

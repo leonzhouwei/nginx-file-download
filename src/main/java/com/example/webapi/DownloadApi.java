@@ -244,6 +244,7 @@ public class DownloadApi {
 		}
 		// check the file service
 		FileService params = new FileService();
+		params.reset();
 		params.getGroup().setId(fsg.getId());
 		params.setHost(result.webServerHost);
 		FileService fileService = fileServiceRMapper.selectEnabledByGroupIdAndHost(params);

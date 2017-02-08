@@ -37,19 +37,18 @@ public class LoginController {
 	private AccountRMapper rMapper;
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.GET)
-	public ModelAndView gotoLoginPage() {
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LOGIN);
+	public ModelAndView gotoLoginPage(HttpServletRequest request) {
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_LOGIN);
 	}
 
 	@RequestMapping(value = RouteDefine.LOGIN, method = RequestMethod.POST)
 	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		if (LoginInterceptor.sessionIdExist(request)) {
-			response.sendRedirect(RouteDefine.FILES);
 			logger.info(LoginInterceptor.getSessionId(request) + " has already signed in");
 			response.sendRedirect(RouteDefine.ROOT);
 			return;
 		}
-		
+
 		String username = request.getParameter(USERNAME);
 		String plain = request.getParameter(PSWD);
 		String cypher = Sha2Encoder.encode(plain);
@@ -61,16 +60,14 @@ public class LoginController {
 			response.sendRedirect(RouteDefine.ROOT + "login");
 			return;
 		}
-		LoginInterceptor.setSessionId(request, account.getId());
+		LoginInterceptor.initSession(request, account);
 		logger.info(username + " signed in OK");
 		response.sendRedirect(RouteDefine.ROOT);
 	}
 
 	@RequestMapping(value = RouteDefine.LOGOUT)
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		if (LoginInterceptor.sessionIdExist(request)) {
-			LoginInterceptor.removeSessionId(request);
-		}
+		LoginInterceptor.destroySession(request);
 		response.sendRedirect(RouteDefine.LOGIN);
 	}
 

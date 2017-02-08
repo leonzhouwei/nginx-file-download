@@ -1,5 +1,6 @@
 package com.example.webgui;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,17 @@ public class FileController {
 	private FileRMapper rMapper;
 
 	@RequestMapping(value = RouteDefine.FILES, method = RequestMethod.GET)
-	public ModelAndView list() {
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_LIST);
+	public ModelAndView list(HttpServletRequest request) {
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_LIST);
 	}
 
 	@RequestMapping(value = RouteDefine.FILES + "/{id}", method = RequestMethod.GET)
-	public ModelAndView getById(@PathVariable Long id, HttpServletResponse response) {
+	public ModelAndView getById(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
 		File file = rMapper.selectEnabledById(id);
 		if (file == null) {
-			return ModelAndViewTool.newModelAndViewFor404(appConfig, response);
+			return ModelAndViewTool.newModelAndViewFor404(request, response, appConfig);
 		}
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_DETAIL, file);
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_DETAIL, file);
 	}
-	
+
 }

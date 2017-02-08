@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ public class IndexController {
 	static final String VIEW_NAME_INDEX = "index";
 	static final String VIEW_NAME_ADMIN_INDEX = "admin/" + VIEW_NAME_INDEX;
 
+	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+
 	@Autowired
 	private AppConfig appConfig;
 	@Autowired
@@ -34,16 +38,27 @@ public class IndexController {
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Long id = LoginInterceptor.getAccountId(request);
 		if (id == null) {
-			response.sendRedirect(RouteDefine.FILES);
-			return null;
+			// TODO
+			logger.warn("no account id found in session");
+			return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, RouteDefine.FILES);
 		}
-		
+
 		Account account = accoutRMapper.selectEnabledById(id);
-		if (Account.isAdmin(account)) {
-			return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_ADMIN_INDEX);
+		if (account == null) {
+			// TODO
+			StringBuilder sb = new StringBuilder();
+			sb.append("account with id ");
+			sb.append(id);
+			sb.append(" does not exist");
+			logger.warn(sb.toString());
+			return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, RouteDefine.FILES);
 		}
-		
-		return ModelAndViewTool.newModelAndView(appConfig, VIEW_NAME_INDEX);
+
+		if (Account.isAdmin(account)) {
+			return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_ADMIN_INDEX);
+		}
+
+		return ModelAndViewTool.newModelAndView(request, appConfig, VIEW_NAME_INDEX);
 	}
 
 }
