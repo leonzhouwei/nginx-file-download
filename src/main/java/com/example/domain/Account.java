@@ -1,10 +1,15 @@
 package com.example.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Account extends Base {
 
 	private Long id;
 	private String name;
-	private String password;
+	
+	@JSONField(serialize=false)
+	private transient String password;
+	
 	private Role role;
 	private String localeLanguage;
 	private String localeCountry;
@@ -22,7 +27,7 @@ public class Account extends Base {
 
 	@Override
 	public String toString() {
-		return super.toString() + " Account [id=" + id + ", name=" + name + ", password=" + password + ", role=" + role
+		return super.toString() + " Account [id=" + id + ", name=" + name + ", role=" + role
 				+ ", localeLanguage=" + localeLanguage + ", localeCountry=" + localeCountry + "]";
 	}
 
