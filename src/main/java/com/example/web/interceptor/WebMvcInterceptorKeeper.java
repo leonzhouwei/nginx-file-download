@@ -24,7 +24,7 @@ public class WebMvcInterceptorKeeper extends WebMvcConfigurerAdapter implements
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		super.addInterceptors(registry);
-		if (appConfig.getIgnoreCustomizedInterceptors().equals(Boolean.FALSE)) {
+		if (Boolean.FALSE.equals(appConfig.getIgnoreCustomizedInterceptors())) {
 			return;
 		}
 		registry.addInterceptor(loginInterceptor);
