@@ -10,19 +10,19 @@
 
 <body>
 	<div class="container" layout:fragment="content">
-		<h4>文件列表</h4>
+		<h4 id="fileListH">文件列表</h4>
 		<hr />
 		<table id="table"
 			class="table table-striped table-bordered table-condensed">
 			<caption></caption>
 			<thead>
 				<tr>
-					<th>编号</th>
-					<th>名称</th>
-					<th>创建时间</th>
-					<th>大小 (MB)</th>
-					<th>消息摘要</th>
-					<th>操作</th>
+					<th id="numTh">编号</th>
+					<th id="nameTh">名称</th>
+					<th id="createdAtTh">创建时间</th>
+					<th id="sizeTh">大小 (MB)</th>
+					<th id="mdTh">消息摘要</th>
+					<th id="opTh">操作</th>
 				</tr>
 			</thead>
 			<tbody id="tbody">

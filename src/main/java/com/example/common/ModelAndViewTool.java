@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.config.AppConfig;
-import com.example.filter.LoginInterceptor;
+import com.example.web.interceptor.LoginInterceptor;
 
 
 public final class ModelAndViewTool {

@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.example.consts.HttpDefine;
 import com.google.common.base.Strings;
 
 public final class HttpRequestTool {
