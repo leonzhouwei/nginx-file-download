@@ -8,7 +8,7 @@ public class Account extends Base {
 	private String name;
 	
 	@JSONField(serialize=false)
-	private transient String password;
+	private String password;
 	
 	private Role role;
 	private String localeLanguage;
@@ -59,6 +59,7 @@ public class Account extends Base {
 		this.role.resetRoleAsNormal();
 	}
 
+	@Override
 	public void reset() {
 		super.reset();
 		setRole(new Role());

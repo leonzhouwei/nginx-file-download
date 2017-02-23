@@ -24,6 +24,7 @@ public class DownloadHistory extends Base {
 				+ ", requestParameters=" + requestParameters + "]";
 	}
 
+	@Override
 	public void reset() {
 		super.reset();
 		setWebServerHost(StringUtils.EMPTY);

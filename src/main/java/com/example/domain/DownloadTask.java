@@ -23,6 +23,7 @@ public class DownloadTask extends Base {
 				+ lastDldedAt + ", uuid=" + uuid + "]";
 	}
 
+	@Override
 	public void reset() {
 		super.reset();
 		DateTime dateTime = new DateTime(getCreatedAt());
