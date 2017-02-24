@@ -15,7 +15,8 @@ If this program runs in the default mode (SQLite is used), then two accounts alr
 
 ### 2. Prepare downloadable files under /usr/local/
 ```
-sudo cp -r ./app/external/var /usr/local/
+sudo mkdir -p /usr/local/var/www
+sudo cp -r ./app/external/var/www/protected /usr/local/var/www/
 ```
 
 ### 3. Configure your Nginx
