@@ -1,25 +1,25 @@
 # Nginx-based Large File Downloading Service
 This is a large file (typically GB in size) downloading service based on Nginx, Spring Boot, SQLite(or MySQL). Dynamically adding more files and more Nginx nodes are supportive, which simply requires some registration steps on the administraion Web pages. What's more, the fundamental support from Nginx is [X-accel](https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/).
 
-## Technology Stack
+## 1. Technology Stack
 - Web Server: [Nginx](http://nginx.org/) v1.8.0
 - App Server: Embedded Tomcat v8.0.26
 - Web Framework: [Spring Boot](https://github.com/spring-projects/spring-boot/)  v1.2.6
 - ORM for RDBMS: [MyBatis-Spring](http://mybatis.github.io/spring/) v1.1.1
 - RDBMS: SQLite(default) or MySQL
 
-## Getting Started
+## 2. Getting Started
 If this program runs in the default mode (SQLite is used), then two accounts already exist. One is ***admin***, whose password is ***changeme***. The other is ***alice***, whose password is ***test***.
 
-### 1. Enter the directory in which this project is located
+### 2.1. Enter the directory in which this project is located
 
-### 2. Prepare downloadable files under /usr/local/
+### 2.2. Prepare downloadable files under /usr/local/
 ```
 sudo mkdir -p /usr/local/var/www
 sudo cp -r ./app/external/var/www/protected /usr/local/var/www/
 ```
 
-### 3. Configure your Nginx
+### 2.3. Configure your Nginx
 The complete nginx.conf can be found [here](https://github.com/leonzhouwei/nginx-file-download/blob/master/app/external/conf/nginx/nginx.conf).
 
 ```
@@ -55,7 +55,7 @@ sendfile        on;
 ```
 
 
-### 4. Run this project
+### 2.4. Run this project
 #### if you have Docker 
 #### {
 ```
@@ -97,32 +97,40 @@ sh startup.sh
 ```
 ### }
 
-## Screenshots of the Ordinary Users
-### Main
-![](doc/static/v0.10.1/images/ordinary/main.png)
-### File List
-![](doc/static/v0.10.1/images/ordinary/file_list.png)
-### Download Task List
-![](doc/static/v0.10.1/images/ordinary/download_task_list.png)
+### 2.5. Login (alice:test)
+![](doc/static/v0.10.2/images/login.png)
 
-## Screenshots of the Administrators
-### Main
-![](doc/static/v0.10.1/images/admin/main.png)
-### Account List
-![](doc/static/v0.10.1/images/admin/account_list.png)
-### Production List
-![](doc/static/v0.10.1/images/admin/production_list.png)
-### File List
-![](doc/static/v0.10.1/images/admin/file_list.png)
-### Download Task List
-![](doc/static/v0.10.1/images/admin/download_task_list.png)
-### File Service Group List
-![](doc/static/v0.10.1/images/admin/file_service_group_list.png)
-### File Service List
-![](doc/static/v0.10.1/images/admin/file_service_list.png)
+### 2.6. Main page
+![](doc/static/v0.10.2/images/ordinary/main.png)
 
-## Code Quality
-![](doc/static/v0.10.1/images/sonar_code_quality.png)
+### 2.7. File list
+![](doc/static/v0.10.2/images/ordinary/file_list.png)
+
+### 2.8. Download gopher.jpg
+![](doc/static/v0.10.2/images/ordinary/download_action.png)
+
+### 2.9. Download task list
+Go back to main page, and click "My Download Task List".
+![](doc/static/v0.10.2/images/ordinary/download_task_list.png)
+
+## 3. Screenshots of the Administrator
+### 3.1. Main
+![](doc/static/v0.10.2/images/admin/main.png)
+### 3.2. Account List
+![](doc/static/v0.10.2/images/admin/account_list.png)
+### 3.3. Production List
+![](doc/static/v0.10.2/images/admin/production_list.png)
+### 3.4. File List
+![](doc/static/v0.10.2/images/admin/file_list.png)
+### 3.5. Download Task List
+![](doc/static/v0.10.2/images/admin/download_task_list.png)
+### 3.6. File Service Group List
+![](doc/static/v0.10.2/images/admin/file_service_group_list.png)
+### 3.7. File Service List
+![](doc/static/v0.10.2/images/admin/file_service_list.png)
+
+## 4. Code Quality
+![](doc/static/v0.10.2/images/sonar_code_quality.png)
 
 
 
