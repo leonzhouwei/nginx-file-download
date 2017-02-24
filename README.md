@@ -1,5 +1,5 @@
 # Nginx-based Large File Downloading Service
-This is a large file downloading service based on Nginx, Spring Boot, SQLite(or MySQL). Dynamically adding more files and more Nginx nodes are supportive, which simply requires some registration steps on the administraion Web pages.
+This is a large file (typically GB in size) downloading service based on Nginx, Spring Boot, SQLite(or MySQL). Dynamically adding more files and more Nginx nodes are supportive, which simply requires some registration steps on the administraion Web pages. What's more, the fundamental support from Nginx is [X-accel](https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/).
 
 ## Getting Started
 If this program runs in the default mode (SQLite is used), then two accounts already exist. One is ***admin***, whose password is ***changeme***. The other is ***alice***, whose password is ***test***.
