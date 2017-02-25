@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.example.domain.Account;
 import com.example.persist.must.AccountRMapper;
@@ -16,7 +17,7 @@ import com.example.web.consts.RouteDefine;
 import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 
-public class LoginInterceptor extends BaseInterceptor {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	public static final String PREFIX = "example.com/";
 	private static final String SESSION_ID = PREFIX + "sessionid";

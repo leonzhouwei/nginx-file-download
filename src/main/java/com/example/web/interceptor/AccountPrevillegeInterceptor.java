@@ -3,12 +3,14 @@ package com.example.web.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
 import com.example.common.HttpResponseTool;
 import com.example.domain.Account;
 import com.example.persist.must.AccountRMapper;
 import com.example.web.consts.RouteDefine;
 
-public class AccountPrevillegeInterceptor extends BaseInterceptor {
+public class AccountPrevillegeInterceptor extends HandlerInterceptorAdapter {
 
 	private AccountRMapper accountRMapper;
 
