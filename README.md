@@ -13,7 +13,7 @@ If this program runs in the default mode (SQLite is used), then two accounts alr
 
 ### 2.1. Enter the directory in which this project is located
 
-### 2.2. Prepare downloadable files under /usr/local/var/www/
+### 2.2. Prepare downloadable files under /usr/local/var/www/protected
 ```
 sudo mkdir -p /usr/local/var/www
 sudo cp -r ./app/external/var/www/protected /usr/local/var/www/
