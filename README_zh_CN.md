@@ -6,7 +6,7 @@
 - App Server: Embedded Tomcat v8.0.26
 - Web Framework: [Spring Boot](https://github.com/spring-projects/spring-boot/)  v1.2.6
 - ORM for RDBMS: [MyBatis-Spring](http://mybatis.github.io/spring/) v1.1.1
-- 关系型数据库: SQLite(default) or MySQL
+- 关系型数据库: SQLite(默认) or MySQL
 
 ## 2. 开始玩耍
 如果程序以默认模式运行（即使用的数据库为 SQLite，配置文件为 application.properties），那么有两个用户已经存在了。一个是***admin***, 其密码为 ***changeme***。另一个是 ***alice***， 其密码为 ***test***。
