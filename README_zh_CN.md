@@ -1,5 +1,5 @@
 # 基于 Nginx 的大文件下载服务
-This is a large file (typically GB in size) downloading service based on Nginx, Spring Boot and SQLite(or MySQL). Dynamically adding more files and more Nginx nodes are supportive, which simply requires some registration steps on the administraion Web pages. What's more, the fundamental support from Nginx is [X-Accel](https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/).
+本应用可以提供大文件下载服务，典型的文件大小是 GB。应用基于 Nginx、Spring Boot 和 SQLite(或者 MySQL) 开发。该应用支持动态地增加更多的文件和（或）更多的 Nginx，您只需要在管理员用户界面上做一些注册工作。此外，Nginx 提供的基础服务是 [X-Accel](https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/)。
 
 ## 1. Technology Stack
 - Web Server: [Nginx](http://nginx.org/) v1.8.0
