@@ -6,10 +6,10 @@
 - App Server: Embedded Tomcat v8.0.26
 - Web Framework: [Spring Boot](https://github.com/spring-projects/spring-boot/)  v1.2.6
 - ORM for RDBMS: [MyBatis-Spring](http://mybatis.github.io/spring/) v1.1.1
-- 关系型数据库: SQLite(默认) or MySQL
+- 关系型数据库: SQLite(默认) 或者 MySQL
 
 ## 2. 开始玩耍
-如果程序以默认模式运行（即使用的数据库为 SQLite，配置文件为 application.properties），那么有两个用户已经存在了。一个是***admin***, 其密码为 ***changeme***。另一个是 ***alice***， 其密码为 ***test***。
+如果程序以默认模式运行（所用数据库为 SQLite，配置文件为 application.properties），那么有两个用户已经存在了。一个是***admin***, 其密码为 ***changeme***。另一个是 ***alice***， 其密码为 ***test***。
 
 ### 2.1. 进入工程所在目录
 
@@ -70,7 +70,7 @@ docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
 
 #### 否则 
 #### {
-依赖
+需要
 
 - Java 8
 - Maven 3.x
@@ -89,7 +89,7 @@ sh startup.sh
 ```
 ### }
 
-### 2.5. 打开浏览器，输入 http://127.0.0.1/
+### 2.5. 打开浏览器，跳转到 http://127.0.0.1/
 
 ### 2.6. 登录 (alice:test)
 ![](doc/static/v0.10.2/images/login.png)
@@ -104,7 +104,7 @@ sh startup.sh
 ![](doc/static/v0.10.2/images/ordinary/download_action.png)
 
 ### 2.10. 下载任务列表
-Go back to main page, and click "My Download Task List".
+回到主界面，单击“我的下载任务列表”。
 ![](doc/static/v0.10.2/images/ordinary/download_task_list.png)
 
 ## 3. 管理员用户界面截图
