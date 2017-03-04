@@ -9,7 +9,7 @@ This is a large file (typically GB in size) downloading service based on Nginx, 
 - RDBMS: SQLite(default) or MySQL
 
 ## 2. Getting Started
-If this program runs in the default mode (SQLite is used), then two accounts already exist. One is ***admin***, whose password is ***changeme***. The other is ***alice***, whose password is ***test***.
+If this program runs in the default mode (SQLite and application.properties are used), then two accounts already exist. One is ***admin***, whose password is ***changeme***. The other is ***alice***, whose password is ***test***.
 
 ### 2.1. Enter the directory in which this project is located
 
@@ -59,16 +59,12 @@ sendfile        on;
 #### if you have Docker 
 #### {
 ```
-# install the image named 'localhost/nfd' into your local docker repo,
-# or you can type in shell docker build -t localhost/nfd . 
+# install the Docker image named 'localhost/nfd' into your local Docker repo,
+# or you can type in shell: docker build -t localhost/nfd 
 sh docker_daily_build.sh
 
 # run the program with default ports assignment
 docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
-
-# open your browser, and enter http://127.0.0.1/
-# DONE!
-# Have Fun!
 ```
 #### } 
 
@@ -90,26 +86,24 @@ Run
 ```
 cd build
 sh startup.sh
-
-# open your browser, and enter http://127.0.0.1/
-# DONE!
-# Have Fun!
 ```
 ### }
 
-### 2.5. Login (alice:test)
+### 2.5. Open your browser, and goto http://127.0.0.1/
+
+### 2.6. Login (alice:test)
 ![](doc/static/v0.10.2/images/login.png)
 
-### 2.6. Main page
+### 2.7. Main page
 ![](doc/static/v0.10.2/images/ordinary/main.png)
 
-### 2.7. File list
+### 2.8. File list
 ![](doc/static/v0.10.2/images/ordinary/file_list.png)
 
-### 2.8. Download gopher.jpg
+### 2.9. Download gopher.jpg
 ![](doc/static/v0.10.2/images/ordinary/download_action.png)
 
-### 2.9. Download task list
+### 2.10. Download task list
 Go back to main page, and click "My Download Task List".
 ![](doc/static/v0.10.2/images/ordinary/download_task_list.png)
 
