@@ -9,7 +9,7 @@
 - 关系型数据库: SQLite(默认) 或者 MySQL
 
 ## 2. 开始玩耍
-如果程序以默认模式运行（所用数据库为 SQLite，配置文件为 application.properties），那么有两个用户已经存在了。一个是***admin***, 其密码为 ***changeme***。另一个是 ***alice***， 其密码为 ***test***。
+如果程序以默认模式运行（所用数据库为 SQLite，配置文件为 application.properties），那么有两个用户已经存在了。一个是 ***admin***, 其密码为 ***changeme***。另一个是 ***alice***， 其密码为 ***test***。
 
 ### 2.1. 进入工程所在目录
 
@@ -60,10 +60,10 @@ sendfile        on;
 #### {
 ```
 # 将名为 'localhost/nfd' 的 Docker 镜像装入你本地的 Docker 仓库,
-# 或者你可以在终端中输入: docker build -t localhost/nfd . 
+# 或者你可以在终端中输入: docker build -t localhost/nfd
 sh docker_daily_build.sh
 
-# 配置端口
+# 配置端口并运行
 docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
 ```
 #### } 
