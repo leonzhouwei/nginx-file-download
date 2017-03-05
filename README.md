@@ -1,4 +1,4 @@
-# Nginx-based Large File Downloading Service &nbsp;| &nbsp;[简体中文](README_zh_CN.md)
+# Nginx-based Large File Downloading Service &nbsp;| &nbsp;[中文文档](README_zh_CN.md)
 This is a large file (typically GB in size) downloading service based on Nginx, Spring Boot and SQLite(or MySQL). Dynamically adding more files and more Nginx nodes are supportive, which simply requires some registration steps on the administraion Web pages. What's more, the fundamental support from Nginx is [X-Accel](https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/).
 
 ## 1. Technology Stack
