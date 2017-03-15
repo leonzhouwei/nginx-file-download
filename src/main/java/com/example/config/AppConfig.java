@@ -58,8 +58,8 @@ public class AppConfig implements InitializingBean {
 	private Boolean rdbmsRemoveAbandoned;
 	@Value("${app.db.removeAbandonedTimeout}")
 	private Integer rdbmsRemoveAbandonedTimeout;
-	@Value("${app.db.maxWait}")
-	private Integer rdbmsMaxWait;
+	@Value("${app.db.maxWaitMillis}")
+	private Integer rdbmsMaxWaitMillis;
 	@Value("${app.db.validationQuery}")
 	private String rdbmsValidationQuery;
 	@Value("${app.db.testOnBorrow}")
@@ -82,7 +82,7 @@ public class AppConfig implements InitializingBean {
 				+ ", rdbmsDriverClassName=" + rdbmsDriverClassName + ", rdbmsInitialSize=" + rdbmsInitialSize
 				+ ", rdbmsMaxActive=" + rdbmsMaxActive + ", rdbmsMinIdle=" + rdbmsMinIdle + ", rdbmsMaxIdle="
 				+ rdbmsMaxIdle + ", rdbmsRemoveAbandoned=" + rdbmsRemoveAbandoned + ", rdbmsRemoveAbandonedTimeout="
-				+ rdbmsRemoveAbandonedTimeout + ", rdbmsMaxWait=" + rdbmsMaxWait + ", rdbmsValidationQuery="
+				+ rdbmsRemoveAbandonedTimeout + ", rdbmsMaxWaitMillis=" + rdbmsMaxWaitMillis + ", rdbmsValidationQuery="
 				+ rdbmsValidationQuery + ", rdbmsTestOnBorrow=" + rdbmsTestOnBorrow + ", rdbmsUrl=" + rdbmsUrl
 				+ ", rdbmsUsername=" + rdbmsUsername + ", rdbmsPassword=" + rdbmsPassword + ", xAccelPrefix="
 				+ xAccelPrefix + "]";
@@ -130,8 +130,8 @@ public class AppConfig implements InitializingBean {
 		return rdbmsRemoveAbandonedTimeout;
 	}
 
-	public Integer getRdbmsMaxWait() {
-		return rdbmsMaxWait;
+	public Integer getRdbmsMaxWaitMillis() {
+		return rdbmsMaxWaitMillis;
 	}
 
 	public String getRdbmsValidationQuery() {

@@ -20,14 +20,18 @@ public class DataSourceInit {
 		ds.setUrl(appConfig.getRdbmsUrl());
 		ds.setUsername(appConfig.getRdbmsPassword());
 		ds.setPassword(appConfig.getRdbmsPassword());
+		
 		ds.setDriverClassName(appConfig.getRdbmsDriverClassName());
 		ds.setInitialSize(appConfig.getRdbmsInitialSize());
 		ds.setMinIdle(appConfig.getRdbmsMinIdle());
+		ds.setMaxIdle(appConfig.getRdbmsMaxIdle());
 		ds.setMaxActive(appConfig.getRdbmsMaxActive());
+		ds.setMaxWait(appConfig.getRdbmsMaxWaitMillis());
 		ds.setRemoveAbandoned(appConfig.isRdbmsRemoveAbandoned());
 		ds.setRemoveAbandonedTimeout(appConfig.getRdbmsRemoveAbandonedTimeout());
 		ds.setTestOnBorrow(appConfig.isRdbmsTestOnBorrow());
 		ds.setValidationQuery(appConfig.getRdbmsValidationQuery());
+		
 		ds.setDefaultAutoCommit(false);
 		return ds;
 	}
