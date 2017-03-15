@@ -5,25 +5,50 @@ const
 CONTENT = 'content';
 
 const
+APP_LOGOUT_UL_ID = 'appLogoutUl';
+const
+APP_LOCALE_HIDDEN_ID = 'appLocaleHidden';
+const
 APP_MODEL_DIV_ID = 'appModalDiv';
 const
 APP_MODEL_TITLE_ID = 'appModalTitle';
 const
 APP_MODEL_BODY_ID = 'appModalBody';
+
 const
-APP_MODEL_DIV_JQ = '#' + APP_MODEL_DIV_ID;
+APP_LOCALE_HIDDEN_JQ = '#' + APP_LOCALE_HIDDEN_ID;
 const
 APP_MODEL_TITLE_JQ = '#' + APP_MODEL_TITLE_ID;
 const
 APP_MODEL_BODY_JQ = '#' + APP_MODEL_BODY_ID;
 
-// -----------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// i18n
+const
+COMMON_I18N_KEY__CREATED_AT = 'common__created_at';
+const
+COMMON_I18N_KEY__NAME = 'common__name';
+const
+COMMON_I18N_KEY__NUMBER = 'common__number';
+const
+COMMON_I18N_KEY__OPERATION = 'common__operation';
+
+// ==============================================================================
+function isNullOrEmpty(str) {
+	return str == undefined || str == null || str == "";
+}
+
+// ------------------------------------------------------------------------------
+function showElement(id) {
+	var str = '#' + id;
+	$(str).modal('show');
+}
 
 // options { title,body }
 function showAppModel(options) {
 	$(APP_MODEL_TITLE_JQ).html(options['title']);
 	$(APP_MODEL_BODY_JQ).html(options['body']);
-	$(APP_MODEL_DIV_JQ).modal('show');
+	showElement(APP_MODEL_DIV_ID);
 }
 
 function showAppModelForOk() {
@@ -41,6 +66,10 @@ function showAppModelForJqError(obj) {
 	showAppModelForNg(msg);
 }
 
+function hideAppModel() {
+	hideElement(APP_MODEL_DIV_ID);
+}
+
 function showAppModelForNg(msg) {
 	showAppModel({
 		title : '<font color="red">失败!</font>',
@@ -48,8 +77,10 @@ function showAppModelForNg(msg) {
 	});
 }
 
-function hideAppModel() {
-	$(APP_MODEL_DIV_JQ).modal('hide');
+function hideElement(id) {
+	console.log("oops: hide " + id);
+	var str = '#' + id;
+	$(str).modal('hide');
 }
 
 // extract the content field from a JSON string
@@ -66,4 +97,50 @@ function extractError(jqErr) {
 
 function apiRoutePrefixNoSlash() {
 	return API_ROUTE_PREFIX;
+}
+
+// ==============================================================================
+// i18n
+function i18nInit(options) {
+	console.log(options);
+	doI18nInit({
+		name : options['name'],
+		language : options['lang'],
+		callback : function() {
+			var props = options['props'];
+			for (var i = 0; i < props.length; ++i) {
+				var prop = props[i];
+				var key = prop['k'];
+				var value = prop['v'];
+				console.log("k: " + key + ", v" + value);
+				$('#' + key).html(jQuery.i18n.prop(value));
+			}
+		}
+	});
+}
+
+function doI18nInit(options) {
+	var lang = options['lang'];
+	if (isNullOrEmpty(lang)) {
+		lang = navigator.language || navigator.userLanguage;
+		console.log("oops: browser locale is " + lang);
+		lang = lang.replace("-", "_");
+	}
+	if (isNullOrEmpty(lang)) {
+		lang = $(APP_LOCALE_HIDDEN_JQ).val();
+	}
+	if (isNullOrEmpty(lang)) {
+		lang = "en";
+	}
+	console.log("oops: final locale is " + lang);
+	jQuery.i18n.properties({
+		name : options['name'],
+		path : '/assets/v1/i18n/app/',
+		mode : 'map',
+		language : lang,
+		checkAvailableLanguages : true,
+		encoding : 'UTF-8',
+		async : false,
+		callback : options['callback']
+	});
 }
