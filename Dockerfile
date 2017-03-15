@@ -37,7 +37,7 @@ CMD [  \
 	"-XX:HeapDumpPath=./var/log/",  \
 	"-Dspring.profiles.active=prod",  \
 	"-jar",  \
-	"nginx-file-download-0.10.1.jar",  \
+	"nginx-file-download-0.10.2.jar",  \
 	">/dev/null",  \
 	"2>./var/log/startup.err.log",  \
 	"&"  \

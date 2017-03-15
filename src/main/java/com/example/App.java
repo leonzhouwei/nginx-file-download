@@ -17,7 +17,7 @@ import com.example.config.AppConfig;
 @EnableAutoConfiguration
 public class App {
 	
-	public static final String VERSION = "0.10.1";
+	public static final String VERSION = "0.10.2";
 
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
 	private static ConfigurableApplicationContext cac;
