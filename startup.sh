@@ -22,6 +22,7 @@ if [ ! -d "${GC_LOG_DIR}" ]; then
 fi
 
 java -server  \
+	-XX:-UseBiasedLocking  \
 	-XX:AutoBoxCacheMax=20000  \
 	-XX:+AlwaysPreTouch  \
 	-XX:+UseConcMarkSweepGC  \

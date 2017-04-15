@@ -12,6 +12,7 @@ EXPOSE 10101 10102
 
 CMD [  \
 	"java",  \
+	"-XX:-UseBiasedLocking",  \
 	"-XX:AutoBoxCacheMax=20000",  \
 	"-XX:+AlwaysPreTouch",  \
 	"-XX:+UseConcMarkSweepGC",  \

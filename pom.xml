@@ -111,7 +111,6 @@
 	<!-- BEGIN: Specific to mapping unit tests and covered code -->
 	<profiles>
 		<profile>
-			<id>coverage-per-test</id>
 			<build>
 				<plugins>
 					<plugin>
