@@ -16,6 +16,7 @@ CMD [  \
 	"-XX:AutoBoxCacheMax=20000",  \
 	"-XX:+AlwaysPreTouch",  \
 	"-XX:+UseConcMarkSweepGC",  \
+	"-XX:+CMSScavengeBeforeRemark",  \
 	"-XX:+UseCMSInitiatingOccupancyOnly",  \
 	"-XX:CMSInitiatingOccupancyFraction=75",  \
 	"-XX:MaxTenuringThreshold=6",  \
