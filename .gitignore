@@ -27,3 +27,5 @@ var/app.pid
 var/log
 .DS_Store
 .sonar/
+.scannerwork
+
