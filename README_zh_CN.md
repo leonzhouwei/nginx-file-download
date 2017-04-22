@@ -61,7 +61,7 @@ sendfile        on;
 ```
 # 将名为 'localhost/nfd' 的 Docker 镜像装入你本地的 Docker 仓库,
 # 或者你可以在终端中输入: docker build -t localhost/nfd
-sh docker_daily_build.sh
+sh docker_build_daily.sh
 
 # 配置端口并运行
 docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
@@ -78,7 +78,7 @@ docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
 编译
 
 ```
-sh daily_build.sh
+sh build_daily.sh
 ```
 
 运行

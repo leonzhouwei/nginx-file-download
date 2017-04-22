@@ -61,7 +61,7 @@ sendfile        on;
 ```
 # install the Docker image named 'localhost/nfd' into your local Docker repo,
 # or you can type in shell: docker build -t localhost/nfd 
-sh docker_daily_build.sh
+sh docker_build_daily.sh
 
 # run the program with default ports assignment
 docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
@@ -78,7 +78,7 @@ Requirements
 Build
 
 ```
-sh daily_build.sh
+sh build_daily.sh
 ```
 
 Run
