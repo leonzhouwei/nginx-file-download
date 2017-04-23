@@ -1,6 +1,6 @@
 #!/bin/bash
 
-######################################################################
+################################################################################
 # editable variables
 CONFIG="config"
 BUILD="build"
@@ -18,11 +18,13 @@ mvn clean
 mvn package
 
 rm -rf ${BUILD}
-mkdir -p {$BUILD}/${APP}
-mkdir -p ${BUILD}/${CONFIG}
+mkdir -p ${BUILD}/${APP}
 
 cp -r ${APP}/data ${BUILD}/${APP}/
-cp -r ${CONFIG} ${BUILD}/
+
+mkdir -p ${BUILD}/${CONFIG}
+cp -r ${CONFIG}/application.properties ${BUILD}/${CONFIG}
+cp -r ${CONFIG}/logback.xml ${BUILD}/${CONFIG}
 
 cp db.sqlite ${BUILD}/
 

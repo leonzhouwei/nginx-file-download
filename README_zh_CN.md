@@ -34,7 +34,7 @@ sendfile        on;
     	}
     	
     	location / {
-    	    proxy_pass  http://127.0.0.1:10101/;  
+    	    proxy_pass  http://127.0.0.1:58080/;  
                 proxy_redirect     off;  
                 proxy_set_header   Host             $host;  
                 proxy_set_header   X-Real-IP        $remote_addr;  
@@ -61,10 +61,10 @@ sendfile        on;
 ```
 # 将名为 'localhost/nfd' 的 Docker 镜像装入你本地的 Docker 仓库,
 # 或者你可以在终端中输入: docker build -t localhost/nfd
-sh docker_build_daily.sh
+sh docker_build.sh
 
 # 配置端口并运行
-docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
+docker run -d -p 58080:58080 -p 58081:58081 localhost/nfd
 ```
 #### } 
 
@@ -78,7 +78,7 @@ docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
 编译
 
 ```
-sh build_daily.sh
+sh build.sh
 ```
 
 运行

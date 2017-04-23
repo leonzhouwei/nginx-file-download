@@ -8,7 +8,7 @@ COPY build ./
 
 RUN mkdir -p ./var/log
 
-EXPOSE 10101 10102
+EXPOSE 58080 58081
 
 CMD [  \
 	"java",  \

@@ -34,7 +34,7 @@ sendfile        on;
     	}
     	
     	location / {
-    	    proxy_pass  http://127.0.0.1:10101/;  
+    	    proxy_pass  http://127.0.0.1:58080/;  
                 proxy_redirect     off;  
                 proxy_set_header   Host             $host;  
                 proxy_set_header   X-Real-IP        $remote_addr;  
@@ -61,10 +61,10 @@ sendfile        on;
 ```
 # install the Docker image named 'localhost/nfd' into your local Docker repo,
 # or you can type in shell: docker build -t localhost/nfd 
-sh docker_build_daily.sh
+sh docker_build.sh
 
 # run the program with default ports assignment
-docker run -d -p 10101:10101 -p 10102:10102 localhost/nfd
+docker run -d -p 58080:58080 -p 58081:58081 localhost/nfd
 ```
 #### } 
 
@@ -78,7 +78,7 @@ Requirements
 Build
 
 ```
-sh build_daily.sh
+sh build.sh
 ```
 
 Run
