@@ -14,10 +14,6 @@ import org.joda.time.format.DateTimeFormat;
 
 public class DateTypeHandler extends BaseTypeHandler<Date> {
 	
-	public static void main(String[] args) {
-		System.out.println(toString(new Date()));
-	}
-
 	private static final String PATTERN = "yyyy-MM-dd HH:mm:ss.SSS";
 
 	static String toString(Date date) {

@@ -20,16 +20,14 @@ public class App {
 	public static final String VERSION = "0.10.2";
 
 	private static final Logger logger = LoggerFactory.getLogger(App.class);
-	private static ConfigurableApplicationContext cac;
-	private static App app;
 
 	@Autowired
 	private AppConfig appConfig;
 
 	public static void main(String[] args) {
 		try {
-			cac = SpringApplication.run(App.class, args);
-			app = cac.getBean(App.class);
+			ConfigurableApplicationContext cac = SpringApplication.run(App.class, args);
+			App app = cac.getBean(App.class);
 			app.logStatus();
 		} catch (Exception e) {
 			logger.warn(StringUtils.EMPTY, e);
