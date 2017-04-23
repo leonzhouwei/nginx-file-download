@@ -15,7 +15,6 @@ public final class DateTimeTool {
 			return null;
 		}
 		DateTime dt = new DateTime(date, DateTimeZone.UTC);
-//		return dt.toString("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		return dt.toString();
 	}
 
