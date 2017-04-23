@@ -13,7 +13,4 @@ mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
 # when running the instrumented tests:
 mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test
 
-# Analyze the project with SonarQube using Maven:
-mvn sonar:sonar
-
 exit 0
