@@ -37,14 +37,12 @@ public class IndexController {
 	public ModelAndView index(HttpServletRequest request) throws IOException {
 		Long id = LoginInterceptor.getAccountId(request);
 		if (id == null) {
-			// TODO
 			logger.warn("no account id found in session");
 			return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, RouteDefine.FILES);
 		}
 
 		Account account = accoutRMapper.selectEnabledById(id);
 		if (account == null) {
-			// TODO
 			StringBuilder sb = new StringBuilder();
 			sb.append("account with id ");
 			sb.append(id);
