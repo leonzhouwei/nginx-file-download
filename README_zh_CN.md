@@ -3,9 +3,9 @@
 
 ## 1. 技术栈
 - Web Server: [Nginx](http://nginx.org/) v1.8.0
-- App Server: Embedded Tomcat v8.0.26
-- Web Framework: [Spring Boot](https://github.com/spring-projects/spring-boot/)  v1.2.6
-- ORM for RDBMS: [MyBatis-Spring](http://mybatis.github.io/spring/) v1.1.1
+- App Server: Embedded Tomcat 
+- Web Framework: [Spring Boot 1.3.8.RELEASE](https://github.com/spring-projects/spring-boot/)
+- ORM for RDBMS: [MyBatis-Spring 1.3.0](http://mybatis.github.io/spring/)
 - 关系型数据库: SQLite(默认) 或者 MySQL
 
 ## 2. 开始玩耍
