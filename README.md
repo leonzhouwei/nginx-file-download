@@ -2,9 +2,9 @@
 This is a large file (typically GB in size) downloading service based on Nginx, Spring Boot and SQLite(or MySQL). Dynamically adding more files and more Nginx nodes are supportive, which simply requires some registration steps on the administraion Web pages. What's more, the fundamental support from Nginx is [X-Accel](https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/).
 
 ## 1. Technology Stack
-- Web Server: [Nginx](http://nginx.org/) v1.8.0
+- Web Server: [Nginx v1.8.0](http://nginx.org/)
 - App Server: Embedded Tomcat
-- Web Framework: [Spring Boot](https://github.com/spring-projects/spring-boot/)  1.3.8.RELEASE
+- Web Framework: [Spring Boot 1.3.8.RELEASE](https://github.com/spring-projects/spring-boot/)  
 - ORM for RDBMS: [MyBatis-Spring 1.3.0](http://mybatis.github.io/spring/)
 - RDBMS: SQLite(default) or MySQL
 
