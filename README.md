@@ -3,9 +3,9 @@ This is a large file (typically GB in size) downloading service based on Nginx, 
 
 ## 1. Technology Stack
 - Web Server: [Nginx](http://nginx.org/) v1.8.0
-- App Server: Embedded Tomcat v8.0.26
-- Web Framework: [Spring Boot](https://github.com/spring-projects/spring-boot/)  v1.2.6
-- ORM for RDBMS: [MyBatis-Spring](http://mybatis.github.io/spring/) v1.1.1
+- App Server: Embedded Tomcat
+- Web Framework: [Spring Boot](https://github.com/spring-projects/spring-boot/)  1.3.8.RELEASE
+- ORM for RDBMS: [MyBatis-Spring 1.3.0](http://mybatis.github.io/spring/)
 - RDBMS: SQLite(default) or MySQL
 
 ## 2. Getting Started
