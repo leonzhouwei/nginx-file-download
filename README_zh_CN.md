@@ -2,7 +2,7 @@
 本应用可以提供大文件下载服务，典型的文件大小是 GB。应用基于 Nginx、Spring Boot 和 SQLite(或者 MySQL) 开发。该应用支持动态地增加更多的文件和（或）更多的 Nginx，你只需要在管理员用户界面上做一些注册工作。此外，Nginx 提供的基础服务是 [X-Accel](https://www.nginx.com/resources/wiki/start/topics/examples/x-accel/)。
 
 ## 1. 技术栈
-- Web Server: [Nginx](http://nginx.org/) v1.8.0
+- Web Server: [Nginx 1.8.0](http://nginx.org/) 
 - App Server: Embedded Tomcat 
 - Web Framework: [Spring Boot 1.3.8.RELEASE](https://github.com/spring-projects/spring-boot/)
 - ORM for RDBMS: [MyBatis-Spring 1.3.0](http://mybatis.github.io/spring/)
