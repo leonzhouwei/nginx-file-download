@@ -28,4 +28,5 @@ var/log
 .DS_Store
 .sonar/
 .scannerwork
+infer-out/
 
