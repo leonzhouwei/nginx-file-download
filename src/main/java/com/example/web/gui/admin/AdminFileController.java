@@ -39,7 +39,7 @@ public class AdminFileController {
 	static final String VIEW_NAME_ENABLE = VIEW_NAME_PREFIX + WebGuiDefine.ENABLE;
 	static final String VIEW_NAME_LIST = VIEW_NAME_PREFIX + WebGuiDefine.LIST;
 	static final String VIEW_NAME_NEW = VIEW_NAME_PREFIX + WebGuiDefine.NEW;
-	
+
 	static final String BASE_ROUTE = RouteDefine.ADMIN + "/files";
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminFileController.class);
@@ -82,11 +82,15 @@ public class AdminFileController {
 		file.reset();
 		file.setDir(request.getParameter(DIR));
 		file.setName(name);
-		file.getProduction().setId(productionId);
+		Production production = new Production();
+		production.setId(productionId);
+		file.setProduction(production);
 		file.setSize(size);
 		file.setMd(md);
 		file.setEnabled(enabled);
-		file.getFileServiceGroup().setId(fsgId);
+		FileServiceGroup fsGroup = new FileServiceGroup();
+		fsGroup.setId(fsgId);
+		file.setFileServiceGroup(fsGroup);
 		wMapper.insert(file);
 		return ModelAndViewTool.newModelAndViewAndRedirect(request, appConfig, BASE_ROUTE);
 	}
