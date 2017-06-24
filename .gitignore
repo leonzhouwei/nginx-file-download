@@ -25,7 +25,7 @@ config/*.production
 daily_build/
 var/app.pid
 var/log
-.DS_Store
+*.DS_Store
 .sonar/
 .scannerwork
 infer-out/
