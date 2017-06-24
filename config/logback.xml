@@ -2,37 +2,34 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 
-	<property name="EXAMPLE_COM_APP_LOG_FILE" value="var/log/app.log" />
-	<property name="EXAMPLE_COM_ERROR_LOG_FILE" value="var/log/error.log" />
+	<property name="APP_LOG_FILE" value="var/log/app.log" />
+	<property name="APP_ERROR_LOG_FILE" value="var/log/error.log" />
 
-	<appender name="EXAMPLE_COM_APP_LOG_FILE_APPENDER"
+	<appender name="APP_LOG_FILE_APPENDER"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [%t] --- %-40.40logger{39} [%file:%line] : %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID} [%t] [%file:%line] : %msg%n</pattern>
 		</encoder>
-		<file>${EXAMPLE_COM_APP_LOG_FILE}</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${EXAMPLE_COM_APP_LOG_FILE}.%i.gz</fileNamePattern>
+		<file>${APP_LOG_FILE}</file>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${APP_LOG_FILE}.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>30</maxHistory>
 		</rollingPolicy>
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<MaxFileSize>10MB</MaxFileSize>
-		</triggeringPolicy>
 	</appender>
 
-	<appender name="EXAMPLE_COM_ERROR_LOG_FILE_APPENDER"
+	<appender name="APP_ERROR_LOG_FILE_APPENDER"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [%t] --- %-40.40logger{39} [%file:%line] : %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID} [%t] [%file:%line] : %msg%n</pattern>
 		</encoder>
-		<file>${EXAMPLE_COM_ERROR_LOG_FILE}</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${EXAMPLE_COM_ERROR_LOG_FILE}.%i.gz</fileNamePattern>
+		<file>${APP_ERROR_LOG_FILE}</file>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${APP_ERROR_LOG_FILE}.%d{yyyy-MM-dd}
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
 		</rollingPolicy>
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<MaxFileSize>10MB</MaxFileSize>
-		</triggeringPolicy>
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>WARN</level>
 			<onMatch>ACCEPT</onMatch>
@@ -41,18 +38,18 @@
 	</appender>
 
 	<logger name="com.example" level="DEBUG">
-		<appender-ref ref="EXAMPLE_COM_APP_LOG_FILE_APPENDER" />
-		<appender-ref ref="EXAMPLE_COM_ERROR_LOG_FILE_APPENDER" />
+		<appender-ref ref="APP_LOG_FILE_APPENDER" />
+		<appender-ref ref="APP_ERROR_LOG_FILE_APPENDER" />
 	</logger>
-	
+
 	<!-- ##### log4jdbc start ##### -->
 	<logger name="jdbc.sqltiming" level="INFO">
-		<appender-ref ref="EXAMPLE_COM_APP_LOG_FILE_APPENDER" />
+		<appender-ref ref="APP_LOG_FILE_APPENDER" />
 	</logger>
 	<logger name="jdbc.sqlonly" level="OFF" />
 	<logger name="jdbc.audit" level="OFF" />
 	<logger name="jdbc.resultset" level="OFF" />
 	<logger name="jdbc.connection" level="OFF" />
-	<!-- ##### log4jdbc  end ##### -->
+	<!-- ##### log4jdbc end ##### -->
 
 </configuration>
